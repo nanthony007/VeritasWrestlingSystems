@@ -26,7 +26,7 @@ SECRET_KEY = 'mysecretkey007'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritas-wrestling.herokuapp.com']
 
 
 # Application definition
