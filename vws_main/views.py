@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-def index(request):
+
+def home(request):
     return render(request, 'vws_main/home.html')
 
 def contact(request):
