@@ -1,0 +1,58 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+
+<table class="table table-dark table-striped table-hover table-sm">
+  <thead>
+    <caption>Complete data for match '{{object.matchID}}'</caption>
+    <tr>
+      <th>MatchID</th>
+      <th>Date</th>
+      <th>Blue</th>
+      <th>Red</th>
+      <th>Blue Score</th>
+      <th>Red Score</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{object.matchID}}</td>
+      <td>{{object.date}}</td>
+      <td>{{object.blue}}</td>
+      <td>{{object.red}}</td>
+      <td>{{object.blue_score}}</td>
+      <td>{{object.red_score}}</td>
+      <td>{{object.result}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<table class="table table-hover table-sm">
+  <caption>Timeseries for match '{{object.matchID}}'</caption>
+  <thead>
+    <tr>
+      <th>MatchID</th>
+      <th>Event_Num</th>
+      <th>Event_Label</th>
+      <th>Event_Time</th>
+      <th>Blue</th>
+      <th>Red</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in matchdata.events.all %}
+    <tr>
+      <td>{{row.matchID_id}}</td>
+      <td>{{row.event_num}}</td>
+      <td>{{row.event_lab}}</td>
+      <td>{{row.event_time}}</td>
+      <td>{{row.blue}}</td>
+      <td>{{row.red}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
