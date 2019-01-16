@@ -1,23 +1,53 @@
 import csv, time
-from vws_main.models import Wrestler, Timeseries, Matchdata
+from vws_main.models import Wrestler, Timeseries, Matchdata, Team
+from django.template.defaultfilters import slugify
+
+
+""" Use this file to upload csv files to django database"""
+
+
+# team table, delete and rewrite
+#print('Stage 0')
+#Team.objects.all().delete()
+
+#with open('C:\\Users\HotRod\wrestling_app\collector_files\\rosters_teams.csv') as f:
+#    reader = csv.DictReader(f)
+#    for row in reader:
+#        p = Team(
+#            name=row['TeamName'],
+#            abbreviation=row['Abbreviation']
+#            )
+#        p.save()
+
+#for obj in Team.objects.all():
+#    obj.slug = slugify(obj.abbreviation)
+#    obj.save()
+
+#print(time.perf_counter())
+
 
 # wrestlers table, delete and rewrite
-print('Stage 1')
-Wrestler.objects.all().delete()
+#print('Stage 1')
+#Wrestler.objects.all().delete()
 
-with open('C:\\Users\HotRod\wrestling_app\collector_files\wrestlers.csv') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        p = Wrestler(
-            name=row['WrestlerName'],
-            team=row['Team'],
-            eligibility=row['Eligibility'],
-            rating=row['EloRating'],
-            competitions=row['Matches']
-            )
-        p.save()
+#with open('C:\\Users\HotRod\wrestling_app\collector_files\wrestlers.csv') as f:
+#    reader = csv.DictReader(f)
+#    for row in reader:
+#        p = Wrestler(
+#            name=row['WrestlerName'],
+#            team=Team.objects.get(name=row['Team']),
+#            eligibility=row['Eligibility'],
+#            rating=row['EloRating'],
+#            competitions=row['Matches'],
+#            )
+#        p.save()
 
-print(time.perf_counter())
+#for obj in Wrestler.objects.all():
+#    obj.slug = slugify(obj.name)
+#    obj.save()
+
+#print(time.perf_counter())
+
 
 # matchdata table, delete and rewrite
 print('Stage 2')
@@ -29,8 +59,10 @@ with open('C:\\Users\HotRod\wrestling_app\collector_files\matchdata.csv') as f:
         p = Matchdata(
             matchID=row['MatchID'],
             date=row['Date'],
-            blue=row['BlueWrestler'],
-            red=row['RedWrestler'],
+            blue=Wrestler.objects.get(name=row['BlueWrestler']),
+            blue_team=Team.objects.get(name=row['BlueTeam']),
+            red=Wrestler.objects.get(name=row['RedWrestler']),
+            red_team=Team.objects.get(name=row['RedTeam']),
             blue_score=row['BluePoints'],
             red_score=row['RedPoints'],
             result=row['Result']
@@ -55,4 +87,5 @@ with open('C:\\Users\HotRod\wrestling_app\collector_files\match_timeseries.csv')
             red=row['Red']
             )
         p.save()
+
 print(time.perf_counter())

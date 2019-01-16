@@ -1,23 +1,25 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
-<h1>Hiya there</h1>
-<table class="table table-dark table-striped" style="width:100%">
+<h1>Wrestler Table</h1>
+<table class="table table-dark table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
       <th>Team</th>
       <th>Eligibility</th>
       <th>EloRating</th>
+      <th>slugs</th>
     </tr>
   </thead>
   <tbody>
     {% for wrestler in object_list %}
     <tr>
-      <td>{{wrestler.name}}</td>
+      <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
       <td>{{wrestler.team}}</td>
       <td>{{wrestler.eligibility}}</td>
       <td>{{wrestler.rating}}</td>
+      <td>{{wrestler.slug}}</td>
     </tr>
     {% endfor %}
   </tbody>

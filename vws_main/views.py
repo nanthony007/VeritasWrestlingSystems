@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from vws_main.models import Matchdata, Wrestler
+from vws_main.models import Matchdata, Wrestler, Team
 from django.views.generic import DetailView, ListView
 
 def home(request):
@@ -13,9 +13,22 @@ class MatchDetailView(DetailView):
     template_name = "vws_main/match_detail.html"
 
 class MatchTableView(ListView):
-    queryset = Matchdata.objects.all().order_by('-matchID')
+    queryset = Matchdata.objects.order_by('-matchID')
     template_name = "vws_main/matchdata_table.html"
 
 class WrestlerTableView(ListView):
-    queryset = Wrestler.objects.all().order_by('-rating')
+    queryset = Wrestler.objects.values('name', 'team', 'rating').order_by('-rating')
     template_name = "vws_main/wrestler_table.html"
+
+class WrestlerDetailView(DetailView):
+    queryset = Wrestler.objects.filter()
+    template_name = "vws_main/wrestler_detail.html"
+    slug_field = 'slug'
+
+class TeamListView(ListView):
+    queryset = Team.objects.all()
+    template_name = 'vws_main/team_table.html'
+
+class TeamDetailView(DetailView):
+    queryset = Team.objects.filter()
+    template_name = 'vws_main/team_detail.html'

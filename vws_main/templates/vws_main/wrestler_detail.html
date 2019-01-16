@@ -1,0 +1,21 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+
+<h1>Wrestler Profile: {{object.name}}</h1>
+<ul>
+  <li>Wrestler: {{object.name}}</li>
+  <li>Team: {{object.team_id}}</li>
+  <li>Year: {{object.eligibility}}</li>
+  <li>Rating: {{object.rating}}</li>
+</ul>
+
+
+<h3>Matches:</h3>
+      <ul>
+        {% for i in object.competitions.split %}
+          <li><a href="/matchdata/{{i}}/">{{i}}</a></li>
+        {% endfor %}
+      </ul>
+
+{% endblock %}
