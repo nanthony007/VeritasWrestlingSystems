@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vws_main.models import Wrestler, Timeseries, Matchdata, Team
+from vws_main.models import Wrestler, Timeseries, Matchdata, Team, Event
 
 # Register your models here.
 class WrestlerAdmin(admin.ModelAdmin):
@@ -14,7 +14,11 @@ class MatchdataAdmin(admin.ModelAdmin):
 class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'abbreviation', 'slug')
 
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+
 admin.site.register(Wrestler, WrestlerAdmin)
 admin.site.register(Matchdata, MatchdataAdmin)
 admin.site.register(Timeseries, TimeseriesAdmin)
 admin.site.register(Team, TeamAdmin)
+admin.site.register(Event, EventAdmin)

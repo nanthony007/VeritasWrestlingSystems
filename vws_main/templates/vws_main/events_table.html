@@ -1,0 +1,19 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+<h1>List of Events</h1>
+<table class="table table-striped table-hover table-sm">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <td><a href="/events/{{object.slug}}/">{{object.name}}</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

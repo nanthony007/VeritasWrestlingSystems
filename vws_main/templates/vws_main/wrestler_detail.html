@@ -5,17 +5,17 @@
 <h1>Wrestler Profile: {{object.name}}</h1>
 <ul>
   <li>Wrestler: {{object.name}}</li>
-  <li>Team: {{object.team_id}}</li>
+  <li>Team: <a href="/teams/{{object.team.slug}}/">{{wrestler.team.name}}</a></li>
   <li>Year: {{object.eligibility}}</li>
   <li>Rating: {{object.rating}}</li>
 </ul>
 
 
 <h3>Matches:</h3>
-      <ul>
+      <ol>
         {% for i in object.competitions.split %}
           <li><a href="/matchdata/{{i}}/">{{i}}</a></li>
         {% endfor %}
-      </ul>
+      </ol>
 
 {% endblock %}

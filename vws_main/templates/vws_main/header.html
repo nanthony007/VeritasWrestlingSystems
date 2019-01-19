@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-	<title>Veritas Wrestling Systems</title>
+	<title>VWS</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'vws_main/css/bootstrap.min.css' %}" type = "text/css"/>
+	<link rel="shortcut icon" href="{% static 'vws_main/img/mini.png' %}" type="image/png" />
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
 
 	<style type="text/css">
@@ -20,26 +21,28 @@
 		<div>
 				  <center>
 					<a href='/'>
-						<img src="{% static 'vws_main/img/VWShighmini.png' %}" style="width:100%"; alt="logo">
+						<img src="{% static 'vws_main/img/VWShighmini.png' %}" style="width:50%"; alt="logo">
 					</a>
-				  <h3>Programming, Teaching, Entrepreneurship</h3>
 				  </center>
 		</div>
 		<ul class="nav justify-content-center" style="background-color:#f6f6f6">
 		  <li class="nav-item">
 		    <a class="nav-link active" href="/">Home</a>
 		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="/contact">Contact</a>
-		  </li>
 			<li class="nav-item">
-				<a class="nav-link" href="/wrestlers">Wrestlers</a>
+				<a class="nav-link" href="/events">Events</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="/matchdata">Matches</a>
 			</li>
 			<li class="nav-item">
+				<a class="nav-link" href="/wrestlers">Wrestlers</a>
+			</li>
+			<li class="nav-item">
 				<a class="nav-link" href="/teams">Teams</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/contact">Contact</a>
 			</li>
 		</ul>
 

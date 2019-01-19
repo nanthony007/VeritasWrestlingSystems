@@ -15,7 +15,7 @@
   <tbody>
     {% for row in object.team_name.all %}
       <tr>
-        <td>{{row.name}}</td>
+        <td><a href="/wrestlers/{{row.slug}}">{{row.name}}</a></td>
         <td>{{row.eligibility}}</td>
         <td>{{row.rating}}</td>
       </tr>

@@ -39,7 +39,7 @@ class Matchdata(models.Model):
 
 
 class Timeseries(models.Model):
-    matchID = models.ForeignKey(Matchdata, on_delete=models.CASCADE, related_name='events')
+    matchID = models.ForeignKey(Matchdata, on_delete=models.CASCADE, related_name='actions')
     event_num = models.IntegerField()
     event_lab = models.CharField(max_length=140)
     event_time = models.DecimalField(max_digits=10, decimal_places=2)
@@ -48,3 +48,12 @@ class Timeseries(models.Model):
 
     def __str_(self):
         return self.matchID
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=140)
+    matches = models.ManyToManyField(Matchdata, related_name='events')
+    slug = models.SlugField(default=name)
+
+    def __str_(self):
+        return self.name

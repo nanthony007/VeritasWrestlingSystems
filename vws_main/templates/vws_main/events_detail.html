@@ -1,8 +1,7 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
-<h1>List of matches</h1>
-
+<h1>List of matches for "{{event.name}}"</h1>
 <table class="table table-dark table-striped table-hover table-sm">
   <thead>
     <tr>
@@ -16,9 +15,9 @@
     </tr>
   </thead>
   <tbody>
-    {% for match in object_list %}
+    {% for match in object.matches.all %}
     <tr>
-      <td><a href="{{match.matchID}}/">{{match.matchID}}</a></td>
+      <td><a href="/matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
       <td>{{match.date}}</td>
       <td><a href="/wrestlers/{{match.blue.slug}}/">{{match.blue.name}}</a></td>
       <td><a href="/wrestlers/{{match.red.slug}}/">{{match.red.name}}</a></td>

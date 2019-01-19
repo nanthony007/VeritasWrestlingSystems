@@ -20,8 +20,8 @@
     <tr>
       <td>{{object.matchID}}</td>
       <td>{{object.date}}</td>
-      <td>{{object.blue}}</td>
-      <td>{{object.red}}</td>
+      <td><a href="/wrestlers/{{object.blue.slug}}/">{{object.blue.name}}</a></td>
+      <td><a href="/wrestlers/{{object.red.slug}}/">{{object.red.name}}</a></td>
       <td>{{object.blue_score}}</td>
       <td>{{object.red_score}}</td>
       <td>{{object.result}}</td>
@@ -44,7 +44,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for row in matchdata.events.all %}
+    {% for row in matchdata.actions.all %}
     <tr>
       <td>{{row.matchID_id}}</td>
       <td>{{row.event_num}}</td>

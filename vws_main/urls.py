@@ -13,4 +13,7 @@ urlpatterns = [
     path('wrestlers/<slug>/', views.WrestlerDetailView.as_view(), name='wrestler_detail_view'),
     path('teams/', views.TeamListView.as_view(), name='team_list'),
     path('teams/<slug>/', views.TeamDetailView.as_view(), name='team_roster'),
+    path('events/', views.EventsListView.as_view(), name='events_list'),
+    path('events/<slug>/', views.EventsDetailView.as_view(), name='events_detail_view'),
+
 ]

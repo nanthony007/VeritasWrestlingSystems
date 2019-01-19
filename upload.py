@@ -20,7 +20,7 @@ from django.template.defaultfilters import slugify
 #        p.save()
 
 #for obj in Team.objects.all():
-#    obj.slug = slugify(obj.abbreviation)
+#    obj.slug = slugify(obj.name)
 #    obj.save()
 
 #print(time.perf_counter())
