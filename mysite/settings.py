@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritas-wrestling.herokuapp.com']
 
 INSTALLED_APPS = [
     'vws_main',
+    'django_tables2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -3,37 +3,179 @@
 {% block content %}
 <h1>Match Info</h1>
 
-<table class="table table-dark table-striped table-hover table-sm">
-  <thead>
-    <caption>Complete data for match '{{object.matchID}}'</caption>
-    <tr>
-      <th>MatchID</th>
-      <th>Date</th>
-      <th>Blue</th>
-      <th>Red</th>
-      <th>Blue Score</th>
-      <th>Red Score</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{object.matchID}}</td>
-      <td>{{object.date}}</td>
-      <td><a href="/wrestlers/{{object.blue.slug}}/">{{object.blue.name}}</a></td>
-      <td><a href="/wrestlers/{{object.red.slug}}/">{{object.red.name}}</a></td>
-      <td>{{object.blue_score}}</td>
-      <td>{{object.red_score}}</td>
-      <td>{{object.result}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered table-sm">
+    <caption>Match info for match '{{object.matchID}}'</caption>
+    <thead class="table-primary">
+      <tr>
+        <th>MatchID</th>
+        <th>Date</th>
+        <th>Weight</th>
+        <th>Blue</th>
+        <th>Red</th>
+        <th>Blue Score</th>
+        <th>Red Score</th>
+        <th>Result</th>
+        <th>Duration</th>
+        <th>Blue HIa</th>
+        <th>Blue HIc</th>
+        <th>Blue HOa</th>
+        <th>Blue HOc</th>
+        <th>Blue Da</th>
+        <th>Blue Dc</th>
+        <th>Blue LSa</th>
+        <th>Blue LSc</th>
+        <th>Blue GBa</th>
+        <th>Blue GBc</th>
+        <th>Blue Ta</th>
+        <th>Blue Tc</th>
+        <th>Blue SU</th>
+        <th>Blue E</th>
+        <th>Blue R</th>
+        <th>Blue Cut</th>
+        <th>Blue BD</th>
+        <th>Blue MR</th>
+        <th>Blue NF2</th>
+        <th>Blue NF4</th>
+        <th>Blue Caution</th>
+        <th>Blue TV</th>
+        <th>Blue RT</th>
+        <th>Red HIa</th>
+        <th>Red HIc</th>
+        <th>Red HOa</th>
+        <th>Red HOc</th>
+        <th>Red Da</th>
+        <th>Red Dc</th>
+        <th>Red LSa</th>
+        <th>Red LSc</th>
+        <th>Red GBa</th>
+        <th>Red GBc</th>
+        <th>Red Ta</th>
+        <th>Red Tc</th>
+        <th>Red SU</th>
+        <th>Red E</th>
+        <th>Red R</th>
+        <th>Red Cut</th>
+        <th>Red BD</th>
+        <th>Red MR</th>
+        <th>Red NF2</th>
+        <th>Red NF4</th>
+        <th>Red Caution</th>
+        <th>Red TV</th>
+        <th>Red RT</th>
+        <th>Blue HI%</th>
+        <th>Blue HO%</th>
+        <th>Blue D%</th>
+        <th>Blue LS%</th>
+        <th>Blue GB%</th>
+        <th>Blue Throw%</th>
+        <th>Blue TD%</th>
+        <th>Blue E%</th>
+        <th>Blue Ride%</th>
+        <th>Blue APM</th>
+        <th>Blue VS</th>
+        <th>Red HI%</th>
+        <th>Red HO%</th>
+        <th>Red D%</th>
+        <th>Red LS%</th>
+        <th>Red GB%</th>
+        <th>Red Throw%</th>
+        <th>Red TD%</th>
+        <th>Red E%</th>
+        <th>Red Ride%</th>
+        <th>Red APM</th>
+        <th>Red VS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{object.matchID}}</td>
+        <td>{{object.date}}</td>
+        <td>{{object.weight}}</td>
+        <td><a href="/wrestlers/{{object.blue.slug}}/">{{object.blue.name}}</a></td>
+        <td><a href="/wrestlers/{{object.red.slug}}/">{{object.red.name}}</a></td>
+        <td>{{object.blue_score}}</td>
+        <td>{{object.red_score}}</td>
+        <td>{{object.result}}</td>
+        <td>{{object.duration}}</td>
+        <td>{{object.blue_hia}}</td>
+        <td>{{object.blue_hic}}</td>
+        <td>{{object.blue_hoa}}</td>
+        <td>{{object.blue_hoc}}</td>
+        <td>{{object.blue_da}}</td>
+        <td>{{object.blue_dc}}</td>
+        <td>{{object.blue_lsa}}</td>
+        <td>{{object.blue_lsc}}</td>
+        <td>{{object.blue_gba}}</td>
+        <td>{{object.blue_gbc}}</td>
+        <td>{{object.blue_ta}}</td>
+        <td>{{object.blue_tc}}</td>
+        <td>{{object.blue_su}}</td>
+        <td>{{object.blue_e}}</td>
+        <td>{{object.blue_r}}</td>
+        <td>{{object.blue_cut}}</td>
+        <td>{{object.blue_bd}}</td>
+        <td>{{object.blue_mr}}</td>
+        <td>{{object.blue_nf2}}</td>
+        <td>{{object.blue_nf4}}</td>
+        <td>{{object.blue_caution}}</td>
+        <td>{{object.blue_tv}}</td>
+        <td>{{object.blue_rt}}</td>
+        <td>{{object.red_hia}}</td>
+        <td>{{object.red_hic}}</td>
+        <td>{{object.red_hoa}}</td>
+        <td>{{object.red_hoc}}</td>
+        <td>{{object.red_da}}</td>
+        <td>{{object.red_dc}}</td>
+        <td>{{object.red_lsa}}</td>
+        <td>{{object.red_lsc}}</td>
+        <td>{{object.red_gba}}</td>
+        <td>{{object.red_gbc}}</td>
+        <td>{{object.red_ta}}</td>
+        <td>{{object.red_tc}}</td>
+        <td>{{object.red_su}}</td>
+        <td>{{object.red_e}}</td>
+        <td>{{object.red_r}}</td>
+        <td>{{object.red_cut}}</td>
+        <td>{{object.red_bd}}</td>
+        <td>{{object.red_mr}}</td>
+        <td>{{object.red_nf2}}</td>
+        <td>{{object.red_nf4}}</td>
+        <td>{{object.red_caution}}</td>
+        <td>{{object.red_tv}}</td>
+        <td>{{object.red_rt}}</td>
+        <td>{{object.blue_hi_rate}}</td>
+        <td>{{object.blue_ho_rate}}</td>
+        <td>{{object.blue_d_rate}}</td>
+        <td>{{object.blue_ls_rate}}</td>
+        <td>{{object.blue_gb_rate}}</td>
+        <td>{{object.blue_t_rate}}</td>
+        <td>{{object.blue_td_rate}}</td>
+        <td>{{object.blue_e_rate}}</td>
+        <td>{{object.blue_ride_rate}}</td>
+        <td>{{object.blue_apm}}</td>
+        <td>{{object.blue_vs}}</td>
+        <td>{{object.red_hi_rate}}</td>
+        <td>{{object.red_ho_rate}}</td>
+        <td>{{object.red_d_rate}}</td>
+        <td>{{object.red_ls_rate}}</td>
+        <td>{{object.red_gb_rate}}</td>
+        <td>{{object.red_t_rate}}</td>
+        <td>{{object.red_td_rate}}</td>
+        <td>{{object.red_e_rate}}</td>
+        <td>{{object.red_ride_rate}}</td>
+        <td>{{object.red_apm}}</td>
+        <td>{{object.red_vs}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
 <table class="table table-hover table-sm">
   <caption>Timeseries for match '{{object.matchID}}'</caption>
-  <thead>
+  <thead class="table-primary">
     <tr>
       <th>MatchID</th>
       <th>Event_Num</th>
