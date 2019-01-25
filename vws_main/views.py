@@ -14,7 +14,7 @@ class MatchDetailView(DetailView):
     template_name = "vws_main/match_detail.html"
 
 class MatchTableView(ListView):
-    queryset = Matchdata.objects.values('matchID', 'date', 'blue', 'red', 'blue_score', 'red_score', 'result').order_by('-date')
+    queryset = Matchdata.objects.exclude(matchID__endswith='_').values('matchID', 'date', 'focus', 'opponent', 'focus_score', 'opp_score', 'result').order_by('-date')
     template_name = "vws_main/matchdata_table.html"
 
 class WrestlerTableView(ListView):
