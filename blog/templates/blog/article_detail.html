@@ -1,0 +1,13 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+
+<h1>{{object.title}}</h1>
+<h6>{{object.date}}</h6>
+
+
+<embed height="500px" width="100%" type="text/html" src="{{object.content.url}}" align="middle">
+
+<br><hr><br>
+
+{% endblock %}

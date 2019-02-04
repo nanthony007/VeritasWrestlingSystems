@@ -1,0 +1,445 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+
+<h1>Ratings</h1>
+<p>Use the navigation menu below to view athletes in each tier</p>
+
+<div class="btn-group" role="group">
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Tier 1</button>
+    <div class="dropdown-menu">
+      <a id="levelgm" class="dropdown-item" href="#">Grandmaster</a>
+      <a id="levelm" class="dropdown-item" href="#">Master</a>
+    </div>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 2</button>
+    <div class="dropdown-menu">
+      <a id="levelex" class="dropdown-item" href="#">Expert</a>
+      <a id="levela" class="dropdown-item" href="#">Class A</a>
+      <a id="levelb" class="dropdown-item" href="#">Class B</a>
+    </div>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 3</button>
+    <div class="dropdown-menu">
+      <a id="levelc" class="dropdown-item" href="#">Class C</a>
+      <a id="leveld" class="dropdown-item" href="#">Class D</a>
+      <a id="levele" class="dropdown-item" href="#">Class E</a>
+    </div>
+  </div>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 4</button>
+    <div class="dropdown-menu">
+      <a id="levelam" class="dropdown-item" href="#">Amateur</a>
+      <a id="leveln" class="dropdown-item" href="#">Novice</a>
+    </div>
+  </div>
+</div>
+
+<div id="level-gm" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Grandmaster Class</h3>
+    <h5>2501+</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Grandmaster' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-m" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Master Class</h3>
+    <h5>2301 - 2500</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Master' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-ex" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Expert Class</h3>
+    <h5>2001 - 2300</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Expert' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-a" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Class A</h3>
+    <h5>1801 - 2000</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Class A' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-b" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Class B</h3>
+    <h5>1601 - 1800</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Class B' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-c" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Class C</h3>
+    <h5>1401 - 1600</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Class C' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-d" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Class D</h3>
+    <h5>1201 - 1400</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Class D' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-e" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Class E</h3>
+    <h5>1001 - 1200</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Class E' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-am" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Amateur</h3>
+    <h5>701 - 1000</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Amateur' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div id="level-n" class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <h3>Novice</h3>
+    <h5>0 - 700</h5>
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>EloRating</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+        {% if wrestler.level == 'Novice' %}
+        <tr>
+          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td>{{wrestler.rating}}</td>
+          <td>{{wrestler.level}}</td>
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  var gm = document.getElementById("level-gm");
+  var m = document.getElementById("level-m");
+  var ex = document.getElementById("level-ex");
+  var a = document.getElementById("level-a");
+  var b = document.getElementById("level-b");
+  var c = document.getElementById("level-c");
+  var d = document.getElementById("level-d");
+  var e = document.getElementById("level-e");
+  var am = document.getElementById("level-am");
+  var n = document.getElementById("level-n");
+  gm.style.display = "none";
+  m.style.display = "none";
+  ex.style.display = "none";
+  a.style.display = "none";
+  b.style.display = "none";
+  c.style.display = "none";
+  d.style.display = "none";
+  e.style.display = "none";
+  am.style.display = "none";
+  n.style.display = "none";
+
+  document.getElementById("levelgm").onclick = function () {
+    gm.style.display = "table";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levelm").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "table";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levelex").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "table";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levela").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "table";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levelb").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "table";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levelc").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "table";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("leveld").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "table";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levele").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "table";
+    am.style.display = "none";
+    n.style.display = "none";
+  };
+
+  document.getElementById("levelam").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "table";
+    n.style.display = "none";
+  };
+
+  document.getElementById("leveln").onclick = function () {
+    gm.style.display = "none";
+    m.style.display = "none";
+    ex.style.display = "none";
+    a.style.display = "none";
+    b.style.display = "none";
+    c.style.display = "none";
+    d.style.display = "none";
+    e.style.display = "none";
+    am.style.display = "none";
+    n.style.display = "table";
+  };
+</script>
+
+{% endblock %}

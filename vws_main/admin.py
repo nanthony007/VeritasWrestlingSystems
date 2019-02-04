@@ -15,7 +15,7 @@ class TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'abbreviation', 'slug')
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
+    list_display = ('name', 'date')
 
 admin.site.register(Wrestler, WrestlerAdmin)
 admin.site.register(Matchdata, MatchdataAdmin)

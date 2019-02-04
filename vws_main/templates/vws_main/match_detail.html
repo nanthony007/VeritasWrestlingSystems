@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1>Match {{object.matchID}} Info</h1>
+<h3>Match Stats</h3>
 <div class="table-responsive">
   <table class="table table-striped table-hover table-bordered table-sm">
     <caption>Match info for match '{{object.matchID}}'</caption>
@@ -11,10 +12,10 @@
         <th>Date</th>
         <th>Weight</th>
         <th>Focus</th>
+        <th>Result</th>
         <th>Opponent</th>
         <th>Focus Score</th>
         <th>Opp Score</th>
-        <th>Result</th>
         <th>Duration</th>
         <th>HIa</th>
         <th>HIc</th>
@@ -92,10 +93,10 @@
         <td>{{object.date}}</td>
         <td>{{object.weight}}</td>
         <td><a href="/wrestlers/{{object.focus.slug}}/">{{object.focus.name}}</a></td>
+        <td>{{object.result}}</td>
         <td><a href="/wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
         <td>{{object.focus_score}}</td>
         <td>{{object.opp_score}}</td>
-        <td>{{object.result}}</td>
         <td>{{object.duration}}</td>
         <td>{{object.hia}}</td>
         <td>{{object.hic}}</td>
@@ -169,7 +170,10 @@
     </tbody>
   </table>
 </div>
+
 <br>
+
+<h3>Match Timeseries</h3>
 <div class="table-responsive">
   <table class="table table-hover table-sm">
     <caption>Timeseries for match '{{object.matchID}}'</caption>

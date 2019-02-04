@@ -8,11 +8,11 @@
       <tr>
         <th>MatchID</th>
         <th>Date</th>
-        <th>Blue</th>
-        <th>Red</th>
-        <th>Blue Score</th>
-        <th>Red Score</th>
+        <th>Focus</th>
         <th>Result</th>
+        <th>Opponent</th>
+        <th>Focus Score</th>
+        <th>Opponent Score</th>
       </tr>
     </thead>
     <tbody>
@@ -21,10 +21,10 @@
         <td><a href="{{match.matchID}}/">{{match.matchID}}</a></td>
         <td>{{match.date}}</td>
         <td><a href="/wrestlers/{{match.focus | slugify}}/">{{match.focus}}</a></td>
+        <td>{{match.result}}</td>
         <td><a href="/wrestlers/{{match.opponent | slugify}}/">{{match.opponent}}</a></td>
         <td>{{match.focus_score}}</td>
         <td>{{match.opp_score}}</td>
-        <td>{{match.result}}</td>
       </tr>
       {% endfor %}
     </tbody>
