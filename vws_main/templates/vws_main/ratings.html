@@ -3,38 +3,41 @@
 {% block content %}
 
 <h1>Ratings</h1>
-<p>Use the navigation menu below to view athletes in each tier</p>
+<p>Use the navigation menu below to view athletes in each tier.<br>
+<!-- Looking for weight-class rankings?  Click <a href="/weight_classes/"><em>HERE</em></a></p> -->
 
-<div class="btn-group" role="group">
+<div class="nav justify-content-center">
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Tier 1</button>
-    <div class="dropdown-menu">
-      <a id="levelgm" class="dropdown-item" href="#">Grandmaster</a>
-      <a id="levelm" class="dropdown-item" href="#">Master</a>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Tier 1</button>
+      <div class="dropdown-menu">
+        <a id="levelgm" class="dropdown-item" href="#">Grandmaster</a>
+        <a id="levelm" class="dropdown-item" href="#">Master</a>
+      </div>
     </div>
-  </div>
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 2</button>
-    <div class="dropdown-menu">
-      <a id="levelex" class="dropdown-item" href="#">Expert</a>
-      <a id="levela" class="dropdown-item" href="#">Class A</a>
-      <a id="levelb" class="dropdown-item" href="#">Class B</a>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 2</button>
+      <div class="dropdown-menu">
+        <a id="levelex" class="dropdown-item" href="#">Expert</a>
+        <a id="levela" class="dropdown-item" href="#">Class A</a>
+        <a id="levelb" class="dropdown-item" href="#">Class B</a>
+      </div>
     </div>
-  </div>
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 3</button>
-    <div class="dropdown-menu">
-      <a id="levelc" class="dropdown-item" href="#">Class C</a>
-      <a id="leveld" class="dropdown-item" href="#">Class D</a>
-      <a id="levele" class="dropdown-item" href="#">Class E</a>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 3</button>
+      <div class="dropdown-menu">
+        <a id="levelc" class="dropdown-item" href="#">Class C</a>
+        <a id="leveld" class="dropdown-item" href="#">Class D</a>
+        <a id="levele" class="dropdown-item" href="#">Class E</a>
+      </div>
     </div>
-  </div>
 
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 4</button>
-    <div class="dropdown-menu">
-      <a id="levelam" class="dropdown-item" href="#">Amateur</a>
-      <a id="leveln" class="dropdown-item" href="#">Novice</a>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tier 4</button>
+      <div class="dropdown-menu">
+        <a id="levelam" class="dropdown-item" href="#">Amateur</a>
+        <a id="leveln" class="dropdown-item" href="#">Novice</a>
+      </div>
     </div>
   </div>
 </div>
@@ -54,7 +57,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Grandmaster' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -79,7 +82,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Master' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -104,7 +107,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Expert' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -129,7 +132,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Class A' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers//wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -154,7 +157,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Class B' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -179,7 +182,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Class C' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -204,7 +207,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Class D' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -229,7 +232,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Class E' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -254,7 +257,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Amateur' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -279,7 +282,7 @@
       {% for wrestler in object_list %}
         {% if wrestler.level == 'Novice' %}
         <tr>
-          <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+          <td><a href="/wrestlers/{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
           <td>{{wrestler.rating}}</td>
           <td>{{wrestler.level}}</td>
         </tr>
@@ -300,7 +303,7 @@
   var e = document.getElementById("level-e");
   var am = document.getElementById("level-am");
   var n = document.getElementById("level-n");
-  gm.style.display = "none";
+  gm.style.display = "table";
   m.style.display = "none";
   ex.style.display = "none";
   a.style.display = "none";

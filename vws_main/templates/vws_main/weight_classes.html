@@ -1,0 +1,259 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+<h2>Rankings by Weight-Class</h2>
+<h6>Last updated: </h6>
+
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a id="w-125" class="nav-link" href="#">125</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-133" class="nav-link" href="#">133</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-141" class="nav-link" href="#">141</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-149" class="nav-link" href="#">149</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-157" class="nav-link" href="#">157</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-165" class="nav-link" href="#">165</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-174" class="nav-link" href="#">174</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-184" class="nav-link" href="#">184</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-197" class="nav-link" href="#">197</a>
+  </li>
+  <li class="nav-item">
+    <a id="w-285" class="nav-link" href="#">285</a>
+  </li>
+</ul>
+
+
+<div id="w125" class="table-responsive">
+  {% include "vws_main/includes/tabled_125.html" %}
+</div>
+
+
+
+<div id="w133" class="table-responsive">
+  {% include "vws_main/includes/tabled_133.html" %}
+</div>
+
+
+
+<div id="w141" class="table-responsive" style="float:right">
+  {% include "vws_main/includes/tabled_141.html" %}
+</div>
+
+
+
+<div id="w149" class="table-responsive">
+  {% include "vws_main/includes/tabled_149.html" %}
+</div>
+
+
+
+<div id="w157" class="table-responsive">
+  {% include "vws_main/includes/tabled_157.html" %}
+</div>
+
+
+
+<div id="w165" class="table-responsive">
+  {% include "vws_main/includes/tabled_165.html" %}
+</div>
+
+
+
+<div id="w174" class="table-responsive">
+  {% include "vws_main/includes/tabled_174.html" %}
+</div>
+
+
+
+<div id="w184" class="table-responsive">
+  {% include "vws_main/includes/tabled_184.html" %}
+</div>
+
+
+
+<div id="w197" class="table-responsive">
+  <table>
+    {% include "vws_main/includes/tabled_197.html" %}
+  </table>
+</div>
+
+
+
+<div id="w285" class="table-responsive">
+  {% include "vws_main/includes/tabled_285.html" %}
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+  var w125 = document.getElementById("w125");
+  var w133 = document.getElementById("w133");
+  var w141 = document.getElementById("w141");
+  var w149 = document.getElementById("w149");
+  var w157 = document.getElementById("w157");
+  var w165 = document.getElementById("w165");
+  var w174 = document.getElementById("w174");
+  var w184 = document.getElementById("w184");
+  var w197 = document.getElementById("w197");
+  var w285 = document.getElementById("w285");
+  w125.style.display = "none";
+  w133.style.display = "none";
+  w141.style.display = "table";
+  w149.style.display = "none";
+  w157.style.display = "none";
+  w165.style.display = "none";
+  w174.style.display = "none";
+  w184.style.display = "none";
+  w197.style.display = "none";
+  w285.style.display = "none";
+
+  document.getElementById("w-125").onclick = function () {
+    w125.style.display = "table";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-133").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "table";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-141").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "table";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-149").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "table";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-157").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "table";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-165").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "table";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-174").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "table";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-184").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "table";
+    w197.style.display = "none";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-197").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "table";
+    w285.style.display = "none";
+  };
+
+  document.getElementById("w-285").onclick = function () {
+    w125.style.display = "none";
+    w133.style.display = "none";
+    w141.style.display = "none";
+    w149.style.display = "none";
+    w157.style.display = "none";
+    w165.style.display = "none";
+    w174.style.display = "none";
+    w184.style.display = "none";
+    w197.style.display = "none";
+    w285.style.display = "table";
+  };
+</script>
+
+{% endblock %}

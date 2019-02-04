@@ -7,8 +7,8 @@ from django.views.generic import DetailView, ListView
 def home(request):
     return render(request, 'vws_main/home.html')
 
-def contact(request):
-    return render(request, 'vws_main/contact.html')
+def weightclasses(request):
+    return render(request, 'vws_main/weight_classes.html')
 
 class MatchDetailView(DetailView):
     queryset = Matchdata.objects.all().filter()
@@ -32,7 +32,7 @@ class TeamListView(ListView):
     template_name = 'vws_main/team_table.html'
 
 class TeamDetailView(DetailView):
-    queryset = Team.objects.all()
+    queryset = Team.objects.all().order_by('-team_name.all.rating')
     template_name = 'vws_main/team_detail.html'
 
 class EventsListView(ListView):
@@ -48,14 +48,14 @@ class RatingView(ListView):
     queryset = Wrestler.objects.annotate(
         level=Case(
             When(rating__gte=2500, then=Value('Grandmaster')),
-            When(Q(rating__lt=2500) & Q(rating__gte=2300), then=Value('Master')),
-            When(Q(rating__lt=2300) & Q(rating__gte=2000), then=Value('Expert')),
-            When(Q(rating__lt=2000) & Q(rating__gte=1800), then=Value('Class A')),
-            When(Q(rating__lt=1800) & Q(rating__gte=1600), then=Value('Class B')),
-            When(Q(rating__lt=1600) & Q(rating__gte=1400), then=Value('Class C')),
-            When(Q(rating__lt=1400) & Q(rating__gte=1200), then=Value('Class D')),
-            When(Q(rating__lt=1200) & Q(rating__gte=1000), then=Value('Class E')),
-            When(Q(rating__lt=1000) & Q(rating__gte=800), then=Value('Amateur')),
+            When(Q(rating__lte=2500) & Q(rating__gt=2300), then=Value('Master')),
+            When(Q(rating__lte=2300) & Q(rating__gt=2000), then=Value('Expert')),
+            When(Q(rating__lte=2000) & Q(rating__gt=1800), then=Value('Class A')),
+            When(Q(rating__lte=1800) & Q(rating__gt=1600), then=Value('Class B')),
+            When(Q(rating__lte=1600) & Q(rating__gt=1400), then=Value('Class C')),
+            When(Q(rating__lte=1400) & Q(rating__gt=1200), then=Value('Class D')),
+            When(Q(rating__lte=1200) & Q(rating__gt=1000), then=Value('Class E')),
+            When(Q(rating__lte=1000) & Q(rating__gt=700), then=Value('Amateur')),
             When(rating__lte=700, then=Value('Novice')),
             output_field=CharField(),
         )
