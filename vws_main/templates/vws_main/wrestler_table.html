@@ -2,22 +2,24 @@
 
 {% block content %}
 <h1>Wrestler Table</h1>
-<table class="table table-dark table-striped table-hover table-sm">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Team</th>
-      <th>EloRating</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for wrestler in object_list %}
-    <tr>
-      <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
-      <td><a href="/teams/{{wrestler.team | slugify}}/">{{wrestler.team}}</a></td>
-      <td>{{wrestler.rating}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-sm">
+    <thead class="table-primary">
+      <tr>
+        <th>Name</th>
+        <th>Team</th>
+        <th>EloRating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wrestler in object_list %}
+      <tr>
+        <td><a href="{{wrestler.name | slugify}}/">{{wrestler.name}}</a></td>
+        <td><a href="/teams/{{wrestler.team | slugify}}/">{{wrestler.team}}</a></td>
+        <td>{{wrestler.rating}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

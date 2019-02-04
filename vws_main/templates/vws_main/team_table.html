@@ -2,18 +2,18 @@
 
 {% block content %}
 <h1>List of Teams</h1>
-<table class="table table-striped table-hover table-sm">
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for object in object_list %}
-    <tr>
-      <td><a href="{{object.slug}}/">{{object.name}}</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table class="table table-striped table-hover table-sm">
+    <thead class="table-primary]">
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+      <tr>
+        <td><a href="{{object.slug}}/">{{object.name}}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

@@ -15,6 +15,7 @@ import psycopg2
 import dj_database_url
 import django_heroku
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,12 +36,14 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritas-wrestling.herokuapp.com']
 
 INSTALLED_APPS = [
     'vws_main',
+    'blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -125,5 +128,9 @@ DATETIME_INPUT_FORMATS = ['%m/%d/%Y']
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 django_heroku.settings(locals())
