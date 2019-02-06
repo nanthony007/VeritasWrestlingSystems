@@ -16,7 +16,6 @@ class Wrestler(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_name')
     eligibility = models.CharField(max_length=140)
     rating = models.IntegerField()
-    competitions = models.CharField(max_length=500, default=' ')
     slug = models.SlugField(default=name)
 
     def __str_(self):
