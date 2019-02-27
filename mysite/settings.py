@@ -37,6 +37,8 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritas-wrestling.herokuapp.com']
 INSTALLED_APPS = [
     'vws_main',
     'blog',
+    'django_tables2',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -127,7 +129,11 @@ DATETIME_INPUT_FORMATS = ['%m/%d/%Y']
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = 'media'
 
 MEDIA_URL = '/media/'
 

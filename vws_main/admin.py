@@ -3,7 +3,7 @@ from vws_main.models import Wrestler, Timeseries, Matchdata, Team, Event
 
 # Register your models here.
 class WrestlerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'eligibility', 'rating', 'slug')
+    list_display = ('name', 'team_id', 'eligibility', 'rating')
 
 class TimeseriesAdmin(admin.ModelAdmin):
     list_display = ('matchID', 'event_num', 'event_lab', 'event_time', 'red', 'blue')

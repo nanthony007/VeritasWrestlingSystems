@@ -7,7 +7,6 @@
     <thead class="table-primary">
       <tr>
         <th>MatchID</th>
-        <th>Date</th>
         <th>Focus</th>
         <th>Result</th>
         <th>Opponent</th>
@@ -19,7 +18,6 @@
       {% for match in object.matches.all %}
       <tr>
         <td><a href="/matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
-        <td>{{match.date}}</td>
         <td><a href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
         <td>{{match.result}}</td>
         <td><a href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>

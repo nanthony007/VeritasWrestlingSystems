@@ -16,7 +16,6 @@ class Wrestler(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_name')
     eligibility = models.CharField(max_length=140)
     rating = models.IntegerField()
-    competitions = models.CharField(max_length=500, default=' ')
     slug = models.SlugField(default=name)
 
     def __str_(self):
@@ -56,6 +55,7 @@ class Matchdata(models.Model):
     mr = models.IntegerField(null=True)
     nf2 = models.IntegerField(null=True)
     nf4 = models.IntegerField(null=True)
+    stalling = models.IntegerField(null=True)
     caution = models.IntegerField(null=True)
     tv = models.IntegerField(null=True)
     rt = models.IntegerField(null=True)
@@ -79,6 +79,7 @@ class Matchdata(models.Model):
     opp_mr = models.IntegerField(null=True)
     opp_nf2 = models.IntegerField(null=True)
     opp_nf4 = models.IntegerField(null=True)
+    opp_stalling = models.IntegerField(null=True)
     opp_caution = models.IntegerField(null=True)
     opp_tv = models.IntegerField(null=True)
     opp_rt = models.IntegerField(null=True)

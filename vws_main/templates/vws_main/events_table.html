@@ -1,23 +1,11 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
+{% load render_table from django_tables2 %}
+
 <h1>List of Events</h1>
 <div class="table-responsive">
-  <table class="table table-striped table-hover table-sm">
-    <thead class="table-primary">
-      <tr>
-        <th>Name</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for object in object_list %}
-      <tr>
-        <td><a href="/events/{{object.slug}}/">{{object.name}}</a></td>
-        <td>{{object.date}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% render_table table %}
 </div>
+
 {% endblock %}
