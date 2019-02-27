@@ -17,6 +17,8 @@ seconds = 1
 
 K = 40
 
+"TODO: 1. Secure code to start program!"
+
 # safe division
 def safe_div(x, y):
     if y == 0:
@@ -78,6 +80,7 @@ class Events(ColorData):
     def __init__(self):
         super(Events, self).__init__()
         while True:
+            global b
             b = input('Blue Wrestler: ')
             try:
                 w_blue = Wrestler.objects.get(name=b)
@@ -87,6 +90,7 @@ class Events(ColorData):
                 continue
 
         while True:
+            global r
             r = input('Red Wrestler: ')
             try:
                 w_red = Wrestler.objects.get(name=r)
@@ -107,6 +111,10 @@ class Events(ColorData):
 
         self.match_id =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
         m1 = Matchdata(matchID=self.match_id)
+        m1.focus = Wrestler.objects.get(name=b)
+        m1.focus_team = m1.focus.team
+        m1.opponent = Wrestler.objects.get(name=r)
+        m1.opp_team = m1.opponent.team
         m1.save()
         self.blue = ColorData()
         self.red = ColorData()
@@ -1010,7 +1018,7 @@ class Events(ColorData):
     def close_fun(self):
         # prepping matchdata model
 
-        data1 = [self.match_id, self.blue.name, self.red.name, self.blue.team, self.red.team, self.weight, datetime.datetime.today().strftime('%Y-%m-%d'), self.result, self.scores()[0], self.scores()[1], (self.scores()[0] - self.scores()[1]),
+        data1 = [self.match_id, self.blue.name, self.red.name, self.blue.team, self.red.team, self.weight, str(datetime.date.today()), self.result, self.scores()[0], self.scores()[1], (self.scores()[0] - self.scores()[1]),
                 seconds, self.blue.head_inside_attempt, self.blue.head_inside_conversion, self.blue.head_outside_attempt, self.blue.head_outside_conversion, self.blue.double_attempt, self.blue.double_conversion, self.blue.low_shot_attempt, self.blue.low_shot_conversion,
                 self.blue.go_behind_attempt, self.blue.go_behind_conversion, self.blue.throw_attempt, self.blue.throw_conversion, self.blue.stand_up, self.blue.escape, self.blue.reversal, self.blue.cut, self.blue.breakdown, self.blue.mat_return, self.blue.near_fall_2, self.blue.near_fall_4, self.blue.caution,
                 self.blue.stalling, self.blue.technical_violation, self.blue.riding_time, self.red.head_inside_attempt, self.red.head_inside_conversion, self.red.head_outside_attempt, self.red.head_outside_conversion, self.red.double_attempt, self.red.double_conversion,
@@ -1030,108 +1038,161 @@ class Events(ColorData):
                 self.scores()[9], self.scores()[3], self.scores()[5], self.scores()[-1], self.blue.comp()[0], self.blue.comp()[1], self.blue.comp()[2], self.blue.comp()[3], self.blue.comp()[4], self.blue.comp()[5], self.blue.comp()[6], self.scores()[6], self.scores()[7], self.scores()[2],
                 self.scores()[4], self.scores()[-2]]
 
-        match_obj = Matchdata.objects.filter(matchID=data1[0]).update(
-            date = data1[6],
-            focus = data1[1],
-            focus_team = data1[3],
-            opponent = data1[2],
-            opp_team = data1[4],
-            focus_score = data1[8],
-            opp_score = data1[9],
-            result = data1[7],
-            weight = data1[5],
-            mov = data1[10],
-            duration = data1[11],
-            hia = data1[12],
-            hic = data1[13],
-            hoa = data1[14],
-            hoc = data1[15],
-            da = data1[16],
-            dc = data1[17],
-            lsa = data1[18],
-            lsc = data1[19],
-            gba = data1[20],
-            gbc = data1[21],
-            ta = data1[22],
-            tc = data1[22],
-            su = data1[24],
-            e = data1[25],
-            r = data1[26],
-            cut = data1[27],
-            bd = data1[28],
-            mr = data1[29],
-            nf2 = data1[30],
-            nf4 = data1[31],
-            caution = data1[32],
-            tv = data1[33],
-            rt = data1[34],
-            opp_hia = data1[35],
-            opp_hic = data1[36],
-            opp_hoa = data1[37],
-            opp_hoc = data1[38],
-            opp_da = data1[39],
-            opp_dc = data1[40],
-            opp_lsa = data1[41],
-            opp_lsc = data1[42],
-            opp_gba = data1[43],
-            opp_gbc = data1[44],
-            opp_ta = data1[45],
-            opp_tc = data1[46],
-            opp_su = data1[47],
-            opp_e = data1[48],
-            opp_r = data1[49],
-            opp_cut = data1[50],
-            opp_bd = data1[51],
-            opp_mr = data1[52],
-            opp_nf2 = data1[53],
-            opp_nf4 = data1[54],
-            opp_caution = data1[55],
-            opp_tv = data1[56],
-            opp_rt = data1[57],
-            hi_rate = data1[58],
-            ho_rate = data1[59],
-            d_rate = data1[60],
-            ls_rate = data1[61],
-            gb_rate = data1[62],
-            t_rate = data1[63],
-            td_rate = data1[64],
-            e_rate = data1[65],
-            ride_rate = data1[66],
-            apm = data1[66],
-            vs = data1[67],
-            opp_hi_rate = data1[68],
-            opp_ho_rate = data1[69],
-            opp_d_rate = data1[70],
-            opp_ls_rate = data1[71],
-            opp_gb_rate = data1[72],
-            opp_t_rate = data1[73],
-            opp_td_rate = data1[74],
-            opp_e_rate = data1[75],
-            opp_ride_rate = data1[76],
-            opp_apm = data1[77],
-            opp_vs = data1[78],
-        )
-
-        # to csv in collector directory
-        rawcolumns = ['MatchID', 'Focus', 'Opponent', 'FocusTeam', 'OppTeam', 'Weight', 'Date', 'Result', 'FocusPoints', 'OppPoints', 'MoV', 'Time', 'HIa', 'HIc', 'HOa', 'HOc', 'Da', 'Dc', 'LSa', 'LSc', 'GBa', 'GBc', 'Ta',
-                      'Tc', 'SU', 'E', 'R', 'Cut', 'BD', 'MR', 'NF2', 'NF4', 'Caution', 'S', 'TV', 'RT', 'oHIa', 'oHIc', 'oHOa', 'oHOc', 'oDa', 'oDc', 'oLSa', 'oLSc', 'oGBa', 'oGBc', 'oTa', 'oTc',
-                      'oSU', 'oE', 'oR', 'oCut', 'oBD', 'oMR', 'oNF2', 'oNF4', 'oCaution', 'oS', 'oTV', 'oRT', 'HIrate', 'HOrate', 'Drate', 'LSrate', 'GBrate', 'Trate', 'TDrate', 'Erate', 'Riderate', 'NPF', 'APM', 'VS',
-                      'oHIrate', 'oHOrate', 'oDrate', 'oLSrate', 'oGBrate', 'oTrate', 'oTDrate', 'oErate', 'oRiderate', 'oNPF', 'oAPM', 'oVS']
-
-        matchdata = pd.DataFrame(columns=rawcolumns)
-        matchdata = matchdata.append(pd.Series(data1, index=rawcolumns), ignore_index=True)
-        matchdata = matchdata.append(pd.Series(data2, index=rawcolumns), ignore_index=True)
-        matchdata = matchdata.set_index('MatchID')
-
-        if not os.path.isfile('matchdata.csv'):
-            matchdata.to_csv('matchdata.csv', mode='w', header=True)
-        else:
-            matchdata.to_csv('matchdata.csv', mode='a', header=False)
-
-        if not os.path.isfile('match_timeseries.csv'):
-            match_timeseries.to_csv('match_timeseries.csv', mode='w', header=True)
-        else:
-            match_timeseries.to_csv('match_timeseries.csv', mode='a', header=False)
+        match_obj = Matchdata.objects.get(matchID=data1[0])
+        match_obj.date = data1[6]
+        match_obj.save()
+        match_obj.focus_score = data1[8]
+        match_obj.save()
+        match_obj.opp_score = data1[9]
+        match_obj.save()
+        match_obj.result = data1[7]
+        match_obj.save()
+        match_obj.weight = data1[5]
+        match_obj.save()
+        match_obj.mov = data1[10]
+        match_obj.save()
+        match_obj.duration = data1[11]
+        match_obj.save()
+        match_obj.hia = data1[12]
+        match_obj.save()
+        match_obj.hic = data1[13]
+        match_obj.save()
+        match_obj.hoa = data1[14]
+        match_obj.save()
+        match_obj.hoc = data1[15]
+        match_obj.save()
+        match_obj.da = data1[16]
+        match_obj.save()
+        match_obj.dc = data1[17]
+        match_obj.save()
+        match_obj.lsa = data1[18]
+        match_obj.save()
+        match_obj.lsc = data1[19]
+        match_obj.save()
+        match_obj.gba = data1[20]
+        match_obj.save()
+        match_obj.gbc = data1[21]
+        match_obj.save()
+        match_obj.tc = data1[22]
+        match_obj.save()
+        match_obj.su = data1[24]
+        match_obj.save()
+        match_obj.ta = data1[22]
+        match_obj.save()
+        match_obj.r = data1[26]
+        match_obj.save()
+        match_obj.e = data1[25]
+        match_obj.save()
+        match_obj.bd = data1[28]
+        match_obj.save()
+        match_obj.mr = data1[29]
+        match_obj.save()
+        match_obj.cut = data1[27]
+        match_obj.save()
+        match_obj.nf2 = data1[30]
+        match_obj.save()
+        match_obj.nf4 = data1[31]
+        match_obj.save()
+        match_obj.caution = data1[32]
+        match_obj.save()
+        match_obj.stalling = data1[33]
+        match_obj.save()
+        match_obj.tv = data1[34]
+        match_obj.save()
+        match_obj.rt = data1[35]
+        match_obj.save()
+        match_obj.opp_hia = data1[36]
+        match_obj.save()
+        match_obj.opp_hoa = data1[38]
+        match_obj.save()
+        match_obj.opp_hic = data1[37]
+        match_obj.save()
+        match_obj.opp_hoc = data1[39]
+        match_obj.save()
+        match_obj.opp_da = data1[41]
+        match_obj.save()
+        match_obj.opp_dc = data1[41]
+        match_obj.opp_lsa = data1[42]
+        match_obj.save()
+        match_obj.save()
+        match_obj.opp_lsc = data1[43]
+        match_obj.save()
+        match_obj.opp_gba = data1[44]
+        match_obj.save()
+        match_obj.opp_gbc = data1[45]
+        match_obj.save()
+        match_obj.opp_ta = data1[46]
+        match_obj.save()
+        match_obj.opp_tc = data1[47]
+        match_obj.save()
+        match_obj.opp_su = data1[48]
+        match_obj.save()
+        match_obj.opp_e = data1[49]
+        match_obj.save()
+        match_obj.opp_r = data1[50]
+        match_obj.save()
+        match_obj.opp_cut = data1[51]
+        match_obj.save()
+        match_obj.opp_bd = data1[52]
+        match_obj.save()
+        match_obj.opp_mr = data1[53]
+        match_obj.save()
+        match_obj.opp_nf2 = data1[54]
+        match_obj.save()
+        match_obj.opp_caution = data1[56]
+        match_obj.save()
+        match_obj.opp_nf4 = data1[57]
+        match_obj.save()
+        match_obj.opp_tv = data1[58]
+        match_obj.save()
+        match_obj.opp_rt = data1[59]
+        match_obj.save()
+        match_obj.hi_rate = data1[60]
+        match_obj.save()
+        match_obj.ho_rate = data1[61]
+        match_obj.save()
+        match_obj.opp_stalling = data1[61]
+        match_obj.save()
+        match_obj.d_rate = data1[62]
+        match_obj.save()
+        match_obj.ls_rate = data1[63]
+        match_obj.save()
+        match_obj.gb_rate = data1[64]
+        match_obj.save()
+        match_obj.t_rate = data1[65]
+        match_obj.save()
+        match_obj.td_rate = data1[66]
+        match_obj.save()
+        match_obj.e_rate = data1[67]
+        match_obj.save()
+        match_obj.ride_rate = data1[68]
+        match_obj.save()
+        match_obj.apm = data1[69]
+        match_obj.save()
+        match_obj.vs = data1[70]
+        match_obj.save()
+        match_obj.opp_hi_rate = data1[71]
+        match_obj.save()
+        match_obj.opp_ho_rate = data1[72]
+        match_obj.save()
+        match_obj.opp_d_rate = data1[73]
+        match_obj.save()
+        match_obj.opp_ls_rate = data1[74]
+        match_obj.save()
+        match_obj.opp_gb_rate = data1[75]
+        match_obj.save()
+        match_obj.opp_t_rate = data1[76]
+        match_obj.save()
+        match_obj.opp_td_rate = data1[77]
+        match_obj.save()
+        match_obj.opp_e_rate = data1[78]
+        match_obj.save()
+        match_obj.opp_ride_rate = data1[79]
+        match_obj.save()
+        match_obj.opp_apm = data1[80]
+        match_obj.save()
+        match_obj.opp_vs = data1[81]
+        match_obj.save()
 
 
 # main call
