@@ -1,7 +1,12 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
-<h1>List of matches for "{{event.name}}"</h1>
+<div class="container">
+    <div class="page-header">
+        <h2>{{object.name}}<small> Matches: </small> </h2>
+        <hr>
+    </div>
+
 <div class="table-responsive">
   <table class="table table-striped table-hover table-sm">
     <thead class="table-primary">
@@ -21,11 +26,12 @@
         <td><a href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
         <td>{{match.result}}</td>
         <td><a href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
-        <td>{{match.blue_score}}</td>
-        <td>{{match.red_score}}</td
+        <td>{{match.focus_score}}</td>
+        <td>{{match.opp_score}}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+  </div>
 {% endblock %}

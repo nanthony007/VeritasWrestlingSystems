@@ -1,6 +1,5 @@
 from django.db import models
-from django.conf import settings
-from django.template.defaultfilters import slugify
+
 
 class Team(models.Model):
     name = models.CharField(max_length=250, primary_key=True, unique=True)

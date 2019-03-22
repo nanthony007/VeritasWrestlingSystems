@@ -1,6 +1,12 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome!</h1>
+        <hr>
+    </div>
+
 <p>Veritas Wrestling Systems is a dedicated open-source statistics provider. <br>
     You can find our website and collector program on GitHub at:</p>
       <ul>
@@ -10,8 +16,10 @@
 
 <br>
 
-<h6>Contact:</h6>
+<h4>Contact:</h4>
 <p>If you would like to contact me please email me at: {% include "vws_main/includes/htmlsnippet.html" %} </p>
 <br>
 <p>Built using Python and Django | Powered by Heroku | Developed and maintained by Nicholas Anthony</p>
+
+</div>
 {% endblock %}

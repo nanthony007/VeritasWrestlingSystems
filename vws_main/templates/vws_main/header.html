@@ -5,7 +5,7 @@
 	<title>VWS</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static 'vws_main/css/bootstrap.css' %}" type="text/css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<link rel="shortcut icon" href="{% static 'vws_main/img/mini.png' %}" type="image/png" />
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
 </head>
@@ -13,7 +13,7 @@
 <body class="container-fluid" style="background-color:#ffffff">
   <center>
 	<a href='/'>
-		<img src="{% static 'vws_main/img/VWShighmini.png' %}" style="width:80%"; alt="logo">
+		<img src="{% static 'vws_main/img/VWShighmini.png' %}" style="width:80%" alt="logo">
 	</a>
   </center>
 
@@ -23,9 +23,6 @@
 	  </li>
 		<li>
 			<a class="nav-link" href="/events">Events</a>
-		</li>
-		<li>
-			<a class="nav-link" href="/wrestlers">Wrestlers</a>
 		</li>
 		<li>
 			<a class="nav-link" href="/ratings">Ratings</a>
@@ -45,9 +42,11 @@
 		</div>
 	</footer>
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <!-- this are JS libraries eventually needed?
+  	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	-->
 
 </body>
 </html>

@@ -4,13 +4,11 @@ import time
 import datetime
 import string
 import random
-from sqlalchemy import create_engine
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
 from vws_main.models import Wrestler, Matchdata, Timeseries
-
 pd.options.mode.chained_assignment = None
 
 seconds = 1
@@ -18,6 +16,7 @@ seconds = 1
 K = 40
 
 "TODO: 1. Secure code to start program!"
+
 
 # safe division
 def safe_div(x, y):
@@ -108,14 +107,15 @@ class Events(ColorData):
                 print('Invalid weight class, please try again.')
                 continue
 
-
-        self.match_id =  ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+        self.match_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
         m1 = Matchdata(matchID=self.match_id)
         m1.focus = Wrestler.objects.get(name=b)
         m1.focus_team = m1.focus.team
         m1.opponent = Wrestler.objects.get(name=r)
         m1.opp_team = m1.opponent.team
         m1.save()
+        match2_obj = Matchdata(matchID=self.match_id + '*')
+        match2_obj.save()
         self.blue = ColorData()
         self.red = ColorData()
 
@@ -133,7 +133,6 @@ class Events(ColorData):
         self.scores()
         self.ranking_fun(self.match_id)
         self.close_fun()
-
 
     def raw(self):
 
@@ -154,7 +153,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -183,7 +184,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -208,7 +211,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -221,7 +226,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -235,7 +242,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -247,7 +256,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -261,7 +272,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -273,7 +286,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -287,7 +302,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -299,7 +316,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -313,7 +332,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -325,7 +346,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -339,7 +362,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -351,7 +376,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -365,7 +392,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -377,7 +406,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -389,7 +420,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -403,7 +436,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -415,7 +450,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -427,7 +464,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -439,7 +478,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -451,7 +492,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -463,7 +506,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -475,7 +520,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -487,7 +534,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -499,7 +548,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -511,7 +562,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -524,7 +577,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -538,7 +593,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -550,7 +607,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -564,7 +623,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -576,7 +637,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -590,7 +653,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -602,7 +667,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -616,7 +683,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -628,7 +697,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -642,7 +713,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -654,7 +727,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -668,7 +743,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -680,7 +757,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -692,7 +771,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -706,7 +787,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -718,7 +801,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -730,7 +815,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -742,7 +829,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -754,7 +843,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -766,7 +857,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -778,7 +871,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -790,7 +885,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -802,7 +899,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -814,7 +913,9 @@ class Events(ColorData):
                 event_time = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -829,7 +930,9 @@ class Events(ColorData):
                 seconds = round((time.time()-start), 2)
 
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
+                ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
+                ts2.save()
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)
@@ -1194,6 +1297,169 @@ class Events(ColorData):
         match_obj.opp_vs = data1[81]
         match_obj.save()
 
+        # "match2"
+        match2_obj = Matchdata.objects.get(matchID=self.match_id + '*')
+        match2_obj.focus = Wrestler.objects.get(name=r)
+        match2_obj.focus_team = match2_obj.focus.team
+        match2_obj.opponent = Wrestler.objects.get(name=b)
+        match2_obj.opp_team = match2_obj.opponent.team
+        match2_obj.save()
+        match2_obj.date = data2[6]
+        match2_obj.save()
+        match2_obj.focus_score = data2[8]
+        match2_obj.save()
+        match2_obj.opp_score = data2[9]
+        match2_obj.save()
+        match2_obj.result = data2[7]
+        match2_obj.save()
+        match2_obj.weight = data2[5]
+        match2_obj.save()
+        match2_obj.mov = data2[10]
+        match2_obj.save()
+        match2_obj.duration = data2[11]
+        match2_obj.save()
+        match2_obj.hia = data2[12]
+        match2_obj.save()
+        match2_obj.hic = data2[13]
+        match2_obj.save()
+        match2_obj.hoa = data2[14]
+        match2_obj.save()
+        match2_obj.hoc = data2[15]
+        match2_obj.save()
+        match2_obj.da = data2[16]
+        match2_obj.save()
+        match2_obj.dc = data2[17]
+        match2_obj.save()
+        match2_obj.lsa = data2[18]
+        match2_obj.save()
+        match2_obj.lsc = data2[19]
+        match2_obj.save()
+        match2_obj.gba = data2[20]
+        match2_obj.save()
+        match2_obj.gbc = data2[21]
+        match2_obj.save()
+        match2_obj.tc = data2[22]
+        match2_obj.save()
+        match2_obj.su = data2[24]
+        match2_obj.save()
+        match2_obj.ta = data2[22]
+        match2_obj.save()
+        match2_obj.r = data2[26]
+        match2_obj.save()
+        match2_obj.e = data2[25]
+        match2_obj.save()
+        match2_obj.bd = data2[28]
+        match2_obj.save()
+        match2_obj.mr = data2[29]
+        match2_obj.save()
+        match2_obj.cut = data2[27]
+        match2_obj.save()
+        match2_obj.nf2 = data2[30]
+        match2_obj.save()
+        match2_obj.nf4 = data2[31]
+        match2_obj.save()
+        match2_obj.caution = data2[32]
+        match2_obj.save()
+        match2_obj.stalling = data2[33]
+        match2_obj.save()
+        match2_obj.tv = data2[34]
+        match2_obj.save()
+        match2_obj.rt = data2[35]
+        match2_obj.save()
+        match2_obj.opp_hia = data2[36]
+        match2_obj.save()
+        match2_obj.opp_hoa = data2[38]
+        match2_obj.save()
+        match2_obj.opp_hic = data2[37]
+        match2_obj.save()
+        match2_obj.opp_hoc = data2[39]
+        match2_obj.save()
+        match2_obj.opp_da = data2[41]
+        match2_obj.save()
+        match2_obj.opp_dc = data2[41]
+        match2_obj.opp_lsa = data2[42]
+        match2_obj.save()
+        match2_obj.save()
+        match2_obj.opp_lsc = data2[43]
+        match2_obj.save()
+        match2_obj.opp_gba = data2[44]
+        match2_obj.save()
+        match2_obj.opp_gbc = data2[45]
+        match2_obj.save()
+        match2_obj.opp_ta = data2[46]
+        match2_obj.save()
+        match2_obj.opp_tc = data2[47]
+        match2_obj.save()
+        match2_obj.opp_su = data2[48]
+        match2_obj.save()
+        match2_obj.opp_e = data2[49]
+        match2_obj.save()
+        match2_obj.opp_r = data2[50]
+        match2_obj.save()
+        match2_obj.opp_cut = data2[51]
+        match2_obj.save()
+        match2_obj.opp_bd = data2[52]
+        match2_obj.save()
+        match2_obj.opp_mr = data2[53]
+        match2_obj.save()
+        match2_obj.opp_nf2 = data2[54]
+        match2_obj.save()
+        match2_obj.opp_caution = data2[56]
+        match2_obj.save()
+        match2_obj.opp_nf4 = data2[57]
+        match2_obj.save()
+        match2_obj.opp_tv = data2[58]
+        match2_obj.save()
+        match2_obj.opp_rt = data2[59]
+        match2_obj.save()
+        match2_obj.hi_rate = data2[60]
+        match2_obj.save()
+        match2_obj.ho_rate = data2[61]
+        match2_obj.save()
+        match2_obj.opp_stalling = data2[61]
+        match2_obj.save()
+        match2_obj.d_rate = data2[62]
+        match2_obj.save()
+        match2_obj.ls_rate = data2[63]
+        match2_obj.save()
+        match2_obj.gb_rate = data2[64]
+        match2_obj.save()
+        match2_obj.t_rate = data2[65]
+        match2_obj.save()
+        match2_obj.td_rate = data2[66]
+        match2_obj.save()
+        match2_obj.e_rate = data2[67]
+        match2_obj.save()
+        match2_obj.ride_rate = data2[68]
+        match2_obj.save()
+        match2_obj.apm = data2[69]
+        match2_obj.save()
+        match2_obj.vs = data2[70]
+        match2_obj.save()
+        match2_obj.opp_hi_rate = data2[71]
+        match2_obj.save()
+        match2_obj.opp_ho_rate = data2[72]
+        match2_obj.save()
+        match2_obj.opp_d_rate = data2[73]
+        match2_obj.save()
+        match2_obj.opp_ls_rate = data2[74]
+        match2_obj.save()
+        match2_obj.opp_gb_rate = data2[75]
+        match2_obj.save()
+        match2_obj.opp_t_rate = data2[76]
+        match2_obj.save()
+        match2_obj.opp_td_rate = data2[77]
+        match2_obj.save()
+        match2_obj.opp_e_rate = data2[78]
+        match2_obj.save()
+        match2_obj.opp_ride_rate = data2[79]
+        match2_obj.save()
+        match2_obj.opp_apm = data2[80]
+        match2_obj.save()
+        match2_obj.opp_vs = data2[81]
+        match2_obj.save()
+
 
 # main call
-Events()
+if __name__ == '__main__':
+    Events()

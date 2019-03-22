@@ -2,7 +2,11 @@
 
 {% block content %}
 
-<h1>Wrestler Profile: {{object.name}}</h1>
+<div class="container">
+    <div class="page-header">
+        <h1>{{object.name}}<small> Profile: </small></h1>
+        <hr>
+    </div>
 <ul>
   <li>Name: {{object.name}}</li>
   <li>Team: <a href="/teams/{{object.team.slug}}/">{{wrestler.team.name}}</a></li>
@@ -36,18 +40,8 @@
               <td>{{match.opp_score}}</td>
             </tr>
         {% endfor %}
-        {% for match in object.opp_wrestler.all %}
-          <tr>
-            <td><a href="/matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
-            <td>{{match.date}}</td>
-            <td><a href="/wrestlers/{{match.focus.name | slugify}}/">{{match.focus.name}}</a></td>
-            <td>{{match.result}}</td>
-            <td><a href="/wrestlers/{{match.opponent.name | slugify}}/">{{match.opponent.name}}</a></td>
-            <td>{{match.focus_score}}</td>
-            <td>{{match.opp_score}}</td>
-          </tr>
-        {% endfor %}
       </tbody>
     </table>
+  </div>
   </div>
 {% endblock %}

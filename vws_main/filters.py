@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
 import django_filters
-from vws_main.models import Wrestler, Team, Matchdata
-from django_filters import rest_framework as filters
+from vws_main.models import Wrestler, Team, Event
 
 TIERS = (
     ('Grandmaster', 'Grandmaster (2500+)'),
@@ -29,19 +27,22 @@ WEIGHTCLASSES = (
     (285, 285),
 )
 
+
 class RatingsFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains')
     team = django_filters.ModelChoiceFilter(queryset=Team.objects.values_list('name', flat=True))
+    weight = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='WeightClass')
     tier = django_filters.ChoiceFilter(choices=TIERS, label='Tier')
 
     class Meta:
         model = Wrestler
-        fields = ['name', 'team', 'tier',]
+        fields = ['name', 'team', 'tier', 'weight']
 
 
-class WeightClassFilter(django_filters.FilterSet):
-    weight_classes = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='Weight Classes')
+class EventsFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains')
+    date = django_filters.DateFromToRangeFilter()
 
     class Meta:
-        model = Matchdata
-        fields = ['weight_classes',]
+        model = Event
+        fields = ['name', 'date']
