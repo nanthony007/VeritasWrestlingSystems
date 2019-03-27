@@ -4,15 +4,67 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>{{object.name}}<small> Profile: </small></h1>
+        <h1>{{object.name}}</h1>
         <hr>
     </div>
-<ul>
-  <li>Name: {{object.name}}</li>
-  <li>Team: <a href="/teams/{{object.team.slug}}/">{{wrestler.team.name}}</a></li>
-  <li>Year: {{object.eligibility}}</li>
-  <li>Rating: {{object.rating}}</li>
-</ul>
+
+    <div class="well">
+      <div class="row">
+        <div class="col-sm">
+          <h5>Profile:</h5>
+        </div>
+        <div class="col-sm">
+          <h5>Base Stats:</h5>
+        </div>
+        <div class="col-sm">
+          <h5>Advanced Stats:</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p>Name | {{object.name}}</p>
+        </div>
+        <div class="col-sm">
+          <p>Matches | {{object.match_count}}</p>
+        </div>
+        <div class="col-sm">
+          <p>Avg. NPF | {{object.npf}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p>Team | <a href="/teams/{{object.team.slug}}/">{{wrestler.team.name}}</a></p>
+        </div>
+        <div class="col-sm">
+          <p>Points Earned | {{object.points_earned}}</p>
+        </div>
+        <div class="col-sm">
+          <p>Veritas Points | {{object.vp}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p>Year | {{object.eligibility}}</p>
+        </div>
+        <div class="col-sm">
+          <p>Points Allowed | {{object.points_allowed}}</p>
+        </div>
+        <div class="col-sm">
+          <p>APM | {{object.apm}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <p>Rating | {{object.rating}}</p>
+        </div>
+        <div class="col-sm">
+          <p>Avg. Result | {{object.avg_result|floatformat:2}}</p>
+        </div>
+        <div class="col-sm">
+          <p>oAPM | {{object.oapm}}</p>
+        </div>
+      </div>
+    </div>
 
 <h3>Matches:</h3>
   <div class="table-responsive">

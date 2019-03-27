@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Q, Case, When, CharField, Value, FloatField
+from django.db.models import Q, F, Avg, Sum, Count, Case, When, CharField, Value, FloatField
 from vws_main.models import Matchdata, Wrestler, Team, Event
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
@@ -21,9 +21,27 @@ class MatchTableView(ListView):
 
 
 class WrestlerDetailView(DetailView):
-    queryset = Wrestler.objects.filter()
     template_name = "vws_main/wrestler_detail.html"
     slug_field = 'slug'
+    queryset = Wrestler.objects.filter().annotate(
+        match_count=Count('focus_wrestler'),
+        points_earned=Sum('focus_wrestler__focus_score'),
+        points_allowed=Sum('focus_wrestler__opp_score'),
+        vp=Sum('focus_wrestler__vs'),
+        apm=Avg('focus_wrestler__apm'),
+        oapm=Avg('focus_wrestler__opp_apm'),
+        #npf=Avg('focus_wrestler__')
+        avg_result=Avg(Case(
+            When(focus_wrestler__result='WinF', then=Value(1.75)),
+            When(focus_wrestler__result='WinTF', then=Value(1.50)),
+            When(focus_wrestler__result='WinMD', then=Value(1.25)),
+            When(focus_wrestler__result='WinD', then=Value(1.10)),
+            When(focus_wrestler__result='LossD', then=Value(0.90)),
+            When(focus_wrestler__result='LossMD', then=Value(0.75)),
+            When(focus_wrestler__result='LossTF', then=Value(0.50)),
+            When(focus_wrestler__result='LossF', then=Value(0.25)),
+                output_field=FloatField()))
+    )
 
 
 class TeamListView(ListView):

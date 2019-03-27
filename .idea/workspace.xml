@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/events_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/events_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/match_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/match_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/weight_classes.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,46 +13,40 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
+        <entry file="file://$PROJECT_DIR$/vws_main/filters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="10" />
+            <state>
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vws_main/tables.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vws_main/tests.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html">
+        <entry file="file://$PROJECT_DIR$/collector.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="739">
-              <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+            <state relative-caret-position="11002">
+              <caret line="1449" column="25" lean-forward="true" selection-start-line="1449" selection-start-column="25" selection-end-line="1449" selection-end-column="25" />
+              <folding>
+                <element signature="e#17#36#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,6 +99,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,10 +129,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../collector_files" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RunDashboard">
@@ -223,7 +199,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16859852" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -236,7 +211,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2611051" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3954496" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -276,43 +251,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/weight_classes.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_table.html" />
-    <entry file="file://$PROJECT_DIR$/collector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="1449" column="25" lean-forward="true" selection-start-line="1449" selection-start-column="25" selection-end-line="1449" selection-end-column="25" />
-          <folding>
-            <element signature="e#17#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/tables.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="43" column="69" selection-start-line="43" selection-start-column="69" selection-end-line="43" selection-end-column="69" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/filters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-267">
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -373,24 +317,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="739">
           <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -405,6 +335,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/apps.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="43" selection-start-line="19" selection-start-column="43" selection-end-line="19" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/tables.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11002">
+          <caret line="1449" column="25" lean-forward="true" selection-start-line="1449" selection-start-column="25" selection-end-line="1449" selection-end-column="25" />
+          <folding>
+            <element signature="e#17#36#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
