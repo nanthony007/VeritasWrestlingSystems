@@ -1,50 +1,44 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
-{% load render_table from django_tables2 %}
-{% load widget_tweaks %}
 
 <div class="container">
-    <div class="page-header">
-        <h1>List of Events</h1>
-        <hr>
-    </div>
-
-<form method="get">
-  <div class="well">
-    <div class="row">
-      <div class="form-group col-md-2">
-        {{ filter.form.name.label_tag }}
-        {% render_field filter.form.name class="form-control" %}
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">
-      <span class="glyphicon glyphicon-search"></span> Search
-    </button>
+  <div class="page-header">
+      <h2>Events</h2>
+      <hr>
   </div>
-</form>
-
-<br>
-
-<div>
-  <table class="table table-sm">
-    <thead class="table-primary">
+  <p>Events are listed in chronological order.</p>
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <table class="table table-striped">
+    <thead class="table table-primary">
       <tr>
-        <th>Name</th>
+        <th>Event</th>
         <th>Date</th>
         <th>Result</th>
       </tr>
     </thead>
-    <tbody>
-      {% for event in filter.qs %}
-        <tr>
-          <td><a href="/events/{{event.name|slugify}}">{{ event.name }}</a></td>
-          <td>{{event.date}}</td>
-          <td>{{event.result}}</td>
-        </tr>
+    <tbody id="myTable">
+      {% for event in object_list %}
+      <tr>
+        <td><a href="{{event.name|slugify}}">{{event.name}}</a></td>
+        <td>{{event.date}}</td>
+        <td>{{event.result}}</td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 {% endblock %}

@@ -1,4 +1,5 @@
 import django_filters
+from django.forms.widgets import TextInput
 from vws_main.models import Wrestler, Team, Event
 
 TIERS = (
@@ -29,7 +30,7 @@ WEIGHTCLASSES = (
 
 
 class RatingsFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains')
+    name = django_filters.CharFilter(lookup_expr='icontains', widget=TextInput(attrs={'placeholder': 'Name...'}))
     team = django_filters.ModelChoiceFilter(queryset=Team.objects.values_list('name', flat=True))
     weight = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='WeightClass')
     tier = django_filters.ChoiceFilter(choices=TIERS, label='Tier')

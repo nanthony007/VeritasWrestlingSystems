@@ -55,8 +55,8 @@ class TeamDetailView(DetailView):
     template_name = 'vws_main/team_detail.html'
 
 
-class EventsFilterView(FilterView):
-    filterset_class = EventsFilter
+class EventsListView(ListView):
+    queryset = Event.objects.all()
     template_name = 'vws_main/events_table.html'
 
     def get_queryset(self):
