@@ -89,8 +89,7 @@ class Matchdata(models.Model):
     gb_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     t_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     td_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    e_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    ride_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
+    npf = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     apm = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     vs = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_hi_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
@@ -100,8 +99,7 @@ class Matchdata(models.Model):
     opp_gb_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_t_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_td_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_e_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_ride_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
+    opp_npf = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_apm = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_vs = models.DecimalField(max_digits=15, decimal_places=2, null=True)
 
@@ -126,6 +124,7 @@ class Event(models.Model):
     name = models.CharField(max_length=140)
     matches = models.ManyToManyField(Matchdata, related_name='events')
     date = models.DateField(null=True)
+    result = models.CharField(max_length=140, null=True)
     slug = models.SlugField(default=name)
 
     def __str_(self):

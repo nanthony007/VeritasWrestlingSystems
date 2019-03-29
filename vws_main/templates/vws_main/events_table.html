@@ -32,13 +32,15 @@
       <tr>
         <th>Name</th>
         <th>Date</th>
+        <th>Result</th>
       </tr>
     </thead>
     <tbody>
       {% for event in filter.qs %}
         <tr>
-          <td><a href="/events/{{event.name | slugify}}">{{ event.name }}</a></td>
-          <td>{{ event.date }}</td>
+          <td><a href="/events/{{event.name|slugify}}">{{ event.name }}</a></td>
+          <td>{{event.date}}</td>
+          <td>{{event.result}}</td>
         </tr>
       {% endfor %}
     </tbody>

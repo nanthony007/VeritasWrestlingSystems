@@ -27,6 +27,7 @@ class WrestlerDetailView(DetailView):
         match_count=Count('focus_wrestler'),
         points_earned=Sum('focus_wrestler__focus_score'),
         points_allowed=Sum('focus_wrestler__opp_score'),
+        npf=Avg('focus_wrestler__npf'),
         vp=Sum('focus_wrestler__vs'),
         apm=Avg('focus_wrestler__apm'),
         oapm=Avg('focus_wrestler__opp_apm'),
@@ -59,7 +60,7 @@ class EventsFilterView(FilterView):
     template_name = 'vws_main/events_table.html'
 
     def get_queryset(self):
-        return Event.objects.values('name', 'date').distinct().order_by('-date')
+        return Event.objects.values('name', 'date', 'result').distinct().order_by('-date')
 
 
 class EventsDetailView(DetailView):

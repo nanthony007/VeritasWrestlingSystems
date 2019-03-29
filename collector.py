@@ -11,15 +11,16 @@ django.setup()
 from vws_main.models import Wrestler, Matchdata, Timeseries
 pd.options.mode.chained_assignment = None
 
-seconds = 1
+seconds = 1  #universal declaration, value updated later before upload
 
-K = 40
-
-"TODO: 1. Secure code to start program!"
-
+K = 40  #universal constant for EloRating system
 
 # safe division
 def safe_div(x, y):
+    """
+    Accepts two numeric parameters.
+    Safely divide first by second, even if second value is zero.
+    """
     if y == 0:
         return x / (y + 1)
     else:
@@ -27,8 +28,15 @@ def safe_div(x, y):
 
 
 class ColorData(object):
+    """
+    Sub-class declares specific raw data for each athlete in the match.
+    Used later in Events superclass to instantiaze Red/Blue values.
+    """
 
     def __init__(self):
+        """
+        Initializes raw values
+        """
         self.weight = None
         self.result = 0
         self.head_inside_attempt = 0
@@ -61,6 +69,9 @@ class ColorData(object):
         self.top_chances = 0
 
     def comp(self):
+        """
+        Calculates basic metrics possibly with exculisvely raw data.
+        """
         head_inside_rate = safe_div(self.head_inside_conversion, self.head_inside_attempt)
         head_outside_rate = safe_div(self.head_outside_conversion, self.head_outside_attempt)
         double_rate = safe_div(self.double_conversion, self.double_attempt)
@@ -75,8 +86,22 @@ class ColorData(object):
 
 
 class Events(ColorData):
+    """
+    Main class for program.
+    Superclass of ColorData.
+    Used to record entire match.
+    """
 
     def __init__(self):
+        """
+        Gets user input on each wrestler (names must match those in official system).
+        Gets user input for weight class.
+        Creates database instance for match.
+        Initializes various match global variables such as team-names.
+        Calls Colordata sub=class to initialize variables for Red/Blue athletes.
+        Ends by calling raw method (main collection method) followed by
+        result method.
+        """
         super(Events, self).__init__()
         while True:
             global b
@@ -130,12 +155,18 @@ class Events(ColorData):
         self.raw()
         self.opp_result = 0
         self.result = self.result_value()
-        self.scores()
-        self.ranking_fun(self.match_id)
-        self.close_fun()
 
     def raw(self):
-
+        """
+        Main collection method.
+        Takes conditional user input for each match event.
+        Outputs running 'table' of match events.
+        Saves and outputs this temp-table as Timeseries.
+        MUST start with 'START' and end with 'END'.
+        All input should follow recording manual procedures highlighted in the
+        Recording Manual documentation found here:
+        https://github.com/nanthony007/VeritasWrestling-DataCollector
+        """
         event_num = 0
         df2 = pd.DataFrame(columns=['Event_Number', 'Event_Label', 'Event_Time'])
         print('Blue: ', self.blue.name, self.blue.team, Wrestler.objects.get(name=self.blue.name).rating, '\nRed: ', self.red.name, self.red.team, Wrestler.objects.get(name=self.red.name).rating, '\nMatch: ', self.match_id)
@@ -945,6 +976,12 @@ class Events(ColorData):
                 print('Invalid command, try again')
 
     def result_value(self):
+        """
+        Gets result of match from user.
+        Input should be lowercase following Recording procedures.
+        Saves result as numeric value for red/blue instances of ColorData.
+        Returns Result abbreviation and saves opposite abbreviation for oppponent.
+        """
         value = str(input('Result: '))
         if value == 'blue fall':
             self.blue.result = 1.75
@@ -989,6 +1026,10 @@ class Events(ColorData):
         return zz
 
     def scores(self):
+        """
+        Calcualtes metrics for each athlete for the match including:
+        Points, NPF, APM, EscapeRate, RideRate, VS, and WeightedResult.
+        """
         blue_points = (self.blue.comp()[-1] + self.blue.reversal + self.blue.near_fall_2) * 2 + (self.blue.near_fall_4 * 4) + self.blue.escape
 
         if self.red.caution == 3:
@@ -1060,17 +1101,28 @@ class Events(ColorData):
 
     # adapted MoV for pinfalls
     def pins(self):
+        """
+        Adjust margin of victory to unrealistic/impossible value for pinfalls
+        to adjust EloRating formula accordingly.
+        Returns adjusted MOV.
+        """
         mov = self.scores()[0] - self.scores()[1]
         result = self.result
 
         if result == 'WinF':
-            mov = 25
+            mov = 20
         elif result == 'LossF':
-            mov = 25
+            mov = 20
         return mov
 
 
     def ranking_fun(self, x):
+        """
+        EloRating rating formula adjuster.
+        Takes match_id variable of Events class instance as paramter.
+        Calculates and saves new ratings in database.
+        Returns nothing.
+        """
         Ra1 = Wrestler.objects.get(name=self.blue.name)
         Rb1 = Wrestler.objects.get(name=self.red.name)
 
@@ -1119,182 +1171,161 @@ class Events(ColorData):
 
 
     def close_fun(self):
-        # prepping matchdata model
-
-        data1 = [self.match_id, self.blue.name, self.red.name, self.blue.team, self.red.team, self.weight, str(datetime.date.today()), self.result, self.scores()[0], self.scores()[1], (self.scores()[0] - self.scores()[1]),
-                seconds, self.blue.head_inside_attempt, self.blue.head_inside_conversion, self.blue.head_outside_attempt, self.blue.head_outside_conversion, self.blue.double_attempt, self.blue.double_conversion, self.blue.low_shot_attempt, self.blue.low_shot_conversion,
-                self.blue.go_behind_attempt, self.blue.go_behind_conversion, self.blue.throw_attempt, self.blue.throw_conversion, self.blue.stand_up, self.blue.escape, self.blue.reversal, self.blue.cut, self.blue.breakdown, self.blue.mat_return, self.blue.near_fall_2, self.blue.near_fall_4, self.blue.caution,
-                self.blue.stalling, self.blue.technical_violation, self.blue.riding_time, self.red.head_inside_attempt, self.red.head_inside_conversion, self.red.head_outside_attempt, self.red.head_outside_conversion, self.red.double_attempt, self.red.double_conversion,
-                self.red.low_shot_attempt, self.red.low_shot_conversion,
-                self.red.go_behind_attempt, self.red.go_behind_conversion, self.red.throw_attempt, self.red.throw_conversion, self.red.stand_up, self.red.escape, self.red.reversal, self.red.cut, self.red.breakdown, self.red.mat_return, self.red.near_fall_2, self.red.near_fall_4,
-                self.red.caution, self.red.stalling, self.red.technical_violation, self.red.riding_time, self.blue.comp()[0], self.blue.comp()[1], self.blue.comp()[2], self.blue.comp()[3], self.blue.comp()[4], self.blue.comp()[5], self.blue.comp()[6], self.scores()[6],
-                self.scores()[7], self.scores()[2], self.scores()[4], self.scores()[-2], self.red.comp()[0], self.red.comp()[1], self.red.comp()[2], self.red.comp()[3], self.red.comp()[4], self.red.comp()[5], self.red.comp()[6], self.scores()[8], self.scores()[9], self.scores()[3],
-                self.scores()[5], self.scores()[-1]]
-
-        data2 = [self.match_id + '_', self.red.name, self.blue.name, self.red.team, self.blue.team, self.weight, datetime.datetime.today().strftime('%Y-%m-%d'), self.opp_result, self.scores()[1], self.scores()[0], (self.scores()[1] - self.scores()[0]),
-                seconds, self.red.head_inside_attempt, self.red.head_inside_conversion, self.red.head_outside_attempt, self.red.head_outside_conversion, self.red.double_attempt, self.red.double_conversion, self.red.low_shot_attempt, self.red.low_shot_conversion,
-                self.red.go_behind_attempt, self.red.go_behind_conversion, self.red.throw_attempt, self.red.throw_conversion, self.red.stand_up, self.red.escape, self.red.reversal, self.red.cut, self.red.breakdown, self.red.mat_return, self.red.near_fall_2, self.red.near_fall_4, self.red.caution,
-                self.red.stalling, self.red.technical_violation, self.red.riding_time, self.blue.head_inside_attempt, self.blue.head_inside_conversion, self.blue.head_outside_attempt, self.blue.head_outside_conversion, self.blue.double_attempt, self.blue.double_conversion,
-                self.blue.low_shot_attempt, self.blue.low_shot_conversion,
-                self.blue.go_behind_attempt, self.blue.go_behind_conversion, self.blue.throw_attempt, self.blue.throw_conversion, self.blue.stand_up, self.blue.escape, self.blue.reversal, self.blue.cut, self.blue.breakdown, self.blue.mat_return, self.blue.near_fall_2, self.blue.near_fall_4,
-                self.blue.caution, self.blue.stalling, self.blue.technical_violation, self.blue.riding_time, self.red.comp()[0], self.red.comp()[1], self.red.comp()[2], self.red.comp()[3], self.red.comp()[4], self.red.comp()[5], self.red.comp()[6], self.scores()[8],
-                self.scores()[9], self.scores()[3], self.scores()[5], self.scores()[-1], self.blue.comp()[0], self.blue.comp()[1], self.blue.comp()[2], self.blue.comp()[3], self.blue.comp()[4], self.blue.comp()[5], self.blue.comp()[6], self.scores()[6], self.scores()[7], self.scores()[2],
-                self.scores()[4], self.scores()[-2]]
-
-        match_obj = Matchdata.objects.get(matchID=data1[0])
-        match_obj.date = data1[6]
+        """
+        Uploads all data to database instances of Matchdata.
+        This includes two uploads, one for the main match and a secondary one
+        for the opponent version of the match. The second match has and '*' suffix.
+        """
+        match_obj = Matchdata.objects.get(matchID=self.match_id)
+        match_obj.date = str(datetime.date.today())
         match_obj.save()
-        match_obj.focus_score = data1[8]
+        match_obj.focus_score = self.scores()[0]
         match_obj.save()
-        match_obj.opp_score = data1[9]
+        match_obj.opp_score = self.scores()[1]
         match_obj.save()
-        match_obj.result = data1[7]
+        match_obj.result = self.result
         match_obj.save()
-        match_obj.weight = data1[5]
+        match_obj.weight = self.weight
         match_obj.save()
-        match_obj.mov = data1[10]
+        match_obj.mov = (self.scores()[0] - self.scores()[1])
         match_obj.save()
-        match_obj.duration = data1[11]
+        match_obj.duration = seconds
         match_obj.save()
-        match_obj.hia = data1[12]
+        match_obj.hia = self.blue.head_inside_attempt
         match_obj.save()
-        match_obj.hic = data1[13]
+        match_obj.hic = self.blue.head_inside_conversion
         match_obj.save()
-        match_obj.hoa = data1[14]
+        match_obj.hoa = self.blue.head_outside_attempt
         match_obj.save()
-        match_obj.hoc = data1[15]
+        match_obj.hoc = self.blue.head_outside_conversion
         match_obj.save()
-        match_obj.da = data1[16]
+        match_obj.da = self.blue.double_attempt
         match_obj.save()
-        match_obj.dc = data1[17]
+        match_obj.dc = self.blue.double_conversion
         match_obj.save()
-        match_obj.lsa = data1[18]
+        match_obj.lsa = self.blue.low_shot_attempt
         match_obj.save()
-        match_obj.lsc = data1[19]
+        match_obj.lsc = self.blue.low_shot_conversion
         match_obj.save()
-        match_obj.gba = data1[20]
+        match_obj.gba = self.blue.go_behind_attempt
         match_obj.save()
-        match_obj.gbc = data1[21]
+        match_obj.gbc = self.blue.go_behind_conversion
         match_obj.save()
-        match_obj.tc = data1[22]
+        match_obj.ta = self.blue.throw_attempt
         match_obj.save()
-        match_obj.su = data1[24]
+        match_obj.tc = self.blue.throw_conversion
         match_obj.save()
-        match_obj.ta = data1[22]
+        match_obj.su = self.blue.stand_up
         match_obj.save()
-        match_obj.r = data1[26]
+        match_obj.r = self.blue.reversal
         match_obj.save()
-        match_obj.e = data1[25]
+        match_obj.e = self.blue.escape
         match_obj.save()
-        match_obj.bd = data1[28]
+        match_obj.bd = self.blue.breakdown
         match_obj.save()
-        match_obj.mr = data1[29]
+        match_obj.mr = self.blue.mat_return
         match_obj.save()
-        match_obj.cut = data1[27]
+        match_obj.cut = self.blue.cut
         match_obj.save()
-        match_obj.nf2 = data1[30]
+        match_obj.nf2 = self.blue.near_fall_2
         match_obj.save()
-        match_obj.nf4 = data1[31]
+        match_obj.nf4 = self.blue.near_fall_4
         match_obj.save()
-        match_obj.caution = data1[32]
+        match_obj.caution = self.blue.caution
         match_obj.save()
-        match_obj.stalling = data1[33]
+        match_obj.stalling = self.blue.stalling
         match_obj.save()
-        match_obj.tv = data1[34]
+        match_obj.tv = self.blue.technical_violation
         match_obj.save()
-        match_obj.rt = data1[35]
+        match_obj.rt = self.blue.riding_time
         match_obj.save()
-        match_obj.opp_hia = data1[36]
+        match_obj.opp_hia = self.red.head_inside_attempt
         match_obj.save()
-        match_obj.opp_hoa = data1[38]
+        match_obj.opp_hic = self.red.head_inside_conversion
         match_obj.save()
-        match_obj.opp_hic = data1[37]
+        match_obj.opp_hoa = self.red.head_outside_attempt
         match_obj.save()
-        match_obj.opp_hoc = data1[39]
+        match_obj.opp_hoc = self.red.head_outside_conversion
         match_obj.save()
-        match_obj.opp_da = data1[41]
+        match_obj.opp_da = self.red.double_attempt
         match_obj.save()
-        match_obj.opp_dc = data1[41]
-        match_obj.opp_lsa = data1[42]
+        match_obj.opp_dc = self.red.double_conversion
         match_obj.save()
+        match_obj.opp_lsa = self.red.low_shot_attempt
         match_obj.save()
-        match_obj.opp_lsc = data1[43]
+        match_obj.opp_lsc = self.red.low_shot_conversion
         match_obj.save()
-        match_obj.opp_gba = data1[44]
+        match_obj.opp_gba = self.red.go_behind_attempt
         match_obj.save()
-        match_obj.opp_gbc = data1[45]
+        match_obj.opp_gbc = self.red.go_behind_conversion
         match_obj.save()
-        match_obj.opp_ta = data1[46]
+        match_obj.opp_ta = self.red.throw_attempt
         match_obj.save()
-        match_obj.opp_tc = data1[47]
+        match_obj.opp_tc = self.red.throw_conversion
         match_obj.save()
-        match_obj.opp_su = data1[48]
+        match_obj.opp_su = self.red.stand_up
         match_obj.save()
-        match_obj.opp_e = data1[49]
+        match_obj.opp_e = self.red.escape
         match_obj.save()
-        match_obj.opp_r = data1[50]
+        match_obj.opp_r = self.red.reversal
         match_obj.save()
-        match_obj.opp_cut = data1[51]
+        match_obj.opp_cut = self.red.cut
         match_obj.save()
-        match_obj.opp_bd = data1[52]
+        match_obj.opp_bd = self.red.breakdown
         match_obj.save()
-        match_obj.opp_mr = data1[53]
+        match_obj.opp_mr = self.red.mat_return
         match_obj.save()
-        match_obj.opp_nf2 = data1[54]
+        match_obj.opp_nf2 = self.red.near_fall_2
         match_obj.save()
-        match_obj.opp_caution = data1[56]
+        match_obj.opp_nf4 = self.red.near_fall_4
         match_obj.save()
-        match_obj.opp_nf4 = data1[57]
+        match_obj.opp_caution = self.red.caution
         match_obj.save()
-        match_obj.opp_tv = data1[58]
+        match_obj.opp_stalling = self.red.stalling
         match_obj.save()
-        match_obj.opp_rt = data1[59]
+        match_obj.opp_tv = self.red.technical_violation
         match_obj.save()
-        match_obj.hi_rate = data1[60]
+        match_obj.opp_rt = self.red.riding_time
         match_obj.save()
-        match_obj.ho_rate = data1[61]
+        match_obj.hi_rate = self.blue.comp()[0]
         match_obj.save()
-        match_obj.opp_stalling = data1[61]
+        match_obj.ho_rate = self.blue.comp()[1]
         match_obj.save()
-        match_obj.d_rate = data1[62]
+        match_obj.d_rate = self.blue.comp()[2]
         match_obj.save()
-        match_obj.ls_rate = data1[63]
+        match_obj.ls_rate = self.blue.comp()[3]
         match_obj.save()
-        match_obj.gb_rate = data1[64]
+        match_obj.gb_rate = self.blue.comp()[4]
         match_obj.save()
-        match_obj.t_rate = data1[65]
+        match_obj.t_rate = self.blue.comp()[5]
         match_obj.save()
-        match_obj.td_rate = data1[66]
+        match_obj.td_rate = self.blue.comp()[-3]
         match_obj.save()
-        match_obj.e_rate = data1[67]
+        match_obj.npf = self.scores()[2]
         match_obj.save()
-        match_obj.ride_rate = data1[68]
+        match_obj.apm = self.scores()[-4]
         match_obj.save()
-        match_obj.apm = data1[69]
+        match_obj.vs = self.scores()[-2]
         match_obj.save()
-        match_obj.vs = data1[70]
+        match_obj.opp_hi_rate = self.red.comp()[0]
         match_obj.save()
-        match_obj.opp_hi_rate = data1[71]
+        match_obj.opp_ho_rate = self.red.comp()[1]
         match_obj.save()
-        match_obj.opp_ho_rate = data1[72]
+        match_obj.opp_d_rate = self.red.comp()[2]
         match_obj.save()
-        match_obj.opp_d_rate = data1[73]
+        match_obj.opp_ls_rate = self.red.comp()[3]
         match_obj.save()
-        match_obj.opp_ls_rate = data1[74]
+        match_obj.opp_gb_rate = self.red.comp()[4]
         match_obj.save()
-        match_obj.opp_gb_rate = data1[75]
+        match_obj.opp_t_rate = self.red.comp()[5]
         match_obj.save()
-        match_obj.opp_t_rate = data1[76]
+        match_obj.opp_td_rate = self.red.comp()[-3]
         match_obj.save()
-        match_obj.opp_td_rate = data1[77]
+        match_obj.opp_npf = self.scores()[3]
         match_obj.save()
-        match_obj.opp_e_rate = data1[78]
+        match_obj.opp_apm = self.scores()[-3]
         match_obj.save()
-        match_obj.opp_ride_rate = data1[79]
-        match_obj.save()
-        match_obj.opp_apm = data1[80]
-        match_obj.save()
-        match_obj.opp_vs = data1[81]
+        match_obj.opp_vs = self.scores()[-1]
         match_obj.save()
 
         # "match2"
@@ -1304,162 +1335,168 @@ class Events(ColorData):
         match2_obj.opponent = Wrestler.objects.get(name=b)
         match2_obj.opp_team = match2_obj.opponent.team
         match2_obj.save()
-        match2_obj.date = data2[6]
+        match2_obj.date = str(datetime.date.today())
         match2_obj.save()
-        match2_obj.focus_score = data2[8]
+        match2_obj.focus_score = self.scores()[1]
         match2_obj.save()
-        match2_obj.opp_score = data2[9]
+        match2_obj.opp_score = self.scores()[0]
         match2_obj.save()
-        match2_obj.result = data2[7]
+        match2_obj.result = self.opp_result
         match2_obj.save()
-        match2_obj.weight = data2[5]
+        match2_obj.weight = self.weight
         match2_obj.save()
-        match2_obj.mov = data2[10]
+        match2_obj.mov = (self.scores()[1] - self.scores()[0])
         match2_obj.save()
-        match2_obj.duration = data2[11]
+        match2_obj.duration = seconds
         match2_obj.save()
-        match2_obj.hia = data2[12]
+        match2_obj.hia = self.red.head_inside_attempt
         match2_obj.save()
-        match2_obj.hic = data2[13]
+        match2_obj.hic = self.red.head_inside_conversion
         match2_obj.save()
-        match2_obj.hoa = data2[14]
+        match2_obj.hoa = self.red.head_outside_attempt
         match2_obj.save()
-        match2_obj.hoc = data2[15]
+        match2_obj.hoc = self.red.head_outside_conversion
         match2_obj.save()
-        match2_obj.da = data2[16]
+        match2_obj.da = self.red.double_attempt
         match2_obj.save()
-        match2_obj.dc = data2[17]
+        match2_obj.dc = self.red.double_conversion
         match2_obj.save()
-        match2_obj.lsa = data2[18]
+        match2_obj.lsa = self.red.low_shot_attempt
         match2_obj.save()
-        match2_obj.lsc = data2[19]
+        match2_obj.lsc = self.red.low_shot_conversion
         match2_obj.save()
-        match2_obj.gba = data2[20]
+        match2_obj.gba = self.red.go_behind_attempt
         match2_obj.save()
-        match2_obj.gbc = data2[21]
+        match2_obj.gbc = self.red.go_behind_conversion
         match2_obj.save()
-        match2_obj.tc = data2[22]
+        match2_obj.ta = self.red.throw_attempt
         match2_obj.save()
-        match2_obj.su = data2[24]
+        match2_obj.tc = self.red.throw_conversion
         match2_obj.save()
-        match2_obj.ta = data2[22]
+        match2_obj.su = self.red.stand_up
         match2_obj.save()
-        match2_obj.r = data2[26]
+        match2_obj.r = self.red.reversal
         match2_obj.save()
-        match2_obj.e = data2[25]
+        match2_obj.e = self.red.escape
         match2_obj.save()
-        match2_obj.bd = data2[28]
+        match2_obj.bd = self.red.breakdown
         match2_obj.save()
-        match2_obj.mr = data2[29]
+        match2_obj.mr = self.red.mat_return
         match2_obj.save()
-        match2_obj.cut = data2[27]
+        match2_obj.cut = self.red.cut
         match2_obj.save()
-        match2_obj.nf2 = data2[30]
+        match2_obj.nf2 = self.red.near_fall_2
         match2_obj.save()
-        match2_obj.nf4 = data2[31]
+        match2_obj.nf4 = self.red.near_fall_4
         match2_obj.save()
-        match2_obj.caution = data2[32]
+        match2_obj.caution = self.red.caution
         match2_obj.save()
-        match2_obj.stalling = data2[33]
+        match2_obj.stalling = self.red.stalling
         match2_obj.save()
-        match2_obj.tv = data2[34]
+        match2_obj.tv = self.red.technical_violation
         match2_obj.save()
-        match2_obj.rt = data2[35]
+        match2_obj.rt = self.red.riding_time
         match2_obj.save()
-        match2_obj.opp_hia = data2[36]
+        match2_obj.opp_hia = self.blue.head_inside_attempt
         match2_obj.save()
-        match2_obj.opp_hoa = data2[38]
+        match2_obj.opp_hic = self.blue.head_inside_conversion
         match2_obj.save()
-        match2_obj.opp_hic = data2[37]
+        match2_obj.opp_hoa = self.blue.head_outside_attempt
         match2_obj.save()
-        match2_obj.opp_hoc = data2[39]
+        match2_obj.opp_hoc = self.blue.head_outside_conversion
         match2_obj.save()
-        match2_obj.opp_da = data2[41]
+        match2_obj.opp_da = self.blue.double_attempt
         match2_obj.save()
-        match2_obj.opp_dc = data2[41]
-        match2_obj.opp_lsa = data2[42]
+        match2_obj.opp_dc = self.blue.double_conversion
         match2_obj.save()
+        match2_obj.opp_lsa = self.blue.low_shot_attempt
         match2_obj.save()
-        match2_obj.opp_lsc = data2[43]
+        match2_obj.opp_lsc = self.blue.low_shot_conversion
         match2_obj.save()
-        match2_obj.opp_gba = data2[44]
+        match2_obj.opp_gba = self.blue.go_behind_attempt
         match2_obj.save()
-        match2_obj.opp_gbc = data2[45]
+        match2_obj.opp_gbc = self.blue.go_behind_conversion
         match2_obj.save()
-        match2_obj.opp_ta = data2[46]
+        match2_obj.opp_ta = self.blue.throw_attempt
         match2_obj.save()
-        match2_obj.opp_tc = data2[47]
+        match2_obj.opp_tc = self.blue.throw_conversion
         match2_obj.save()
-        match2_obj.opp_su = data2[48]
+        match2_obj.opp_su = self.blue.stand_up
         match2_obj.save()
-        match2_obj.opp_e = data2[49]
+        match2_obj.opp_e = self.blue.escape
         match2_obj.save()
-        match2_obj.opp_r = data2[50]
+        match2_obj.opp_r = self.blue.reversal
         match2_obj.save()
-        match2_obj.opp_cut = data2[51]
+        match2_obj.opp_cut = self.blue.cut
         match2_obj.save()
-        match2_obj.opp_bd = data2[52]
+        match2_obj.opp_bd = self.blue.breakdown
         match2_obj.save()
-        match2_obj.opp_mr = data2[53]
+        match2_obj.opp_mr = self.blue.mat_return
         match2_obj.save()
-        match2_obj.opp_nf2 = data2[54]
+        match2_obj.opp_nf2 = self.blue.near_fall_2
         match2_obj.save()
-        match2_obj.opp_caution = data2[56]
+        match2_obj.opp_nf4 = self.blue.near_fall_4
         match2_obj.save()
-        match2_obj.opp_nf4 = data2[57]
+        match2_obj.opp_caution = self.blue.caution
         match2_obj.save()
-        match2_obj.opp_tv = data2[58]
+        match2_obj.opp_stalling = self.blue.stalling
         match2_obj.save()
-        match2_obj.opp_rt = data2[59]
+        match2_obj.opp_tv = self.blue.technical_violation
         match2_obj.save()
-        match2_obj.hi_rate = data2[60]
+        match2_obj.opp_rt = self.blue.riding_time
         match2_obj.save()
-        match2_obj.ho_rate = data2[61]
+        match2_obj.hi_rate = self.red.comp()[0]
         match2_obj.save()
-        match2_obj.opp_stalling = data2[61]
+        match2_obj.ho_rate = self.red.comp()[1]
         match2_obj.save()
-        match2_obj.d_rate = data2[62]
+        match2_obj.d_rate = self.red.comp()[2]
         match2_obj.save()
-        match2_obj.ls_rate = data2[63]
+        match2_obj.ls_rate = self.red.comp()[3]
         match2_obj.save()
-        match2_obj.gb_rate = data2[64]
+        match2_obj.gb_rate = self.red.comp()[4]
         match2_obj.save()
-        match2_obj.t_rate = data2[65]
+        match2_obj.t_rate = self.red.comp()[5]
         match2_obj.save()
-        match2_obj.td_rate = data2[66]
+        match2_obj.td_rate = self.red.comp()[-3]
         match2_obj.save()
-        match2_obj.e_rate = data2[67]
+        match2_obj.npf = self.scores()[3]
         match2_obj.save()
-        match2_obj.ride_rate = data2[68]
+        match2_obj.apm = self.scores()[-3]
         match2_obj.save()
-        match2_obj.apm = data2[69]
+        match2_obj.vs = self.scores()[-1]
         match2_obj.save()
-        match2_obj.vs = data2[70]
+        match2_obj.opp_hi_rate = self.blue.comp()[0]
         match2_obj.save()
-        match2_obj.opp_hi_rate = data2[71]
+        match2_obj.opp_ho_rate = self.blue.comp()[1]
         match2_obj.save()
-        match2_obj.opp_ho_rate = data2[72]
+        match2_obj.opp_d_rate = self.blue.comp()[2]
         match2_obj.save()
-        match2_obj.opp_d_rate = data2[73]
+        match2_obj.opp_ls_rate = self.blue.comp()[3]
         match2_obj.save()
-        match2_obj.opp_ls_rate = data2[74]
+        match2_obj.opp_gb_rate = self.blue.comp()[4]
         match2_obj.save()
-        match2_obj.opp_gb_rate = data2[75]
+        match2_obj.opp_t_rate = self.blue.comp()[5]
         match2_obj.save()
-        match2_obj.opp_t_rate = data2[76]
+        match2_obj.opp_td_rate = self.blue.comp()[-3]
         match2_obj.save()
-        match2_obj.opp_td_rate = data2[77]
+        match2_obj.opp_npf = self.scores()[2]
         match2_obj.save()
-        match2_obj.opp_e_rate = data2[78]
+        match2_obj.opp_apm = self.scores()[-4]
         match2_obj.save()
-        match2_obj.opp_ride_rate = data2[79]
-        match2_obj.save()
-        match2_obj.opp_apm = data2[80]
-        match2_obj.save()
-        match2_obj.opp_vs = data2[81]
+        match2_obj.opp_vs = self.scores()[-2]
         match2_obj.save()
 
+
+def main():
+    """
+    Instantiaizes main class.
+    Calls methods to calcualte composite metrics, update ratings, and upload the data.
+    """
+    match = Events()
+    match.scores()
+    match.ranking_fun(match.match_id)
+    match.close_fun()
 
 # main call
 if __name__ == '__main__':
-    Events()
+    main()
