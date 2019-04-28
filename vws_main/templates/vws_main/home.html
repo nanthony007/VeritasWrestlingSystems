@@ -6,33 +6,26 @@
 <div class="container">
     <div class="page-header">
         <h2>Welcome!</h2>
-        <hr>
+        <hr />
     </div>
     <div class="row">
-      <div class="col">
-        <center>
-        <img src="{% static 'vws_main/img/newlogo.jpg' %}" style="width:300px;height:300px" alt="logo">
-        </center>
+      <div class="col col-sm-4 d-flex justify-content-center">
+        <img src="{% static 'vws_main/img/newlogo.jpg' %}"
+        style="width:300px;height:300px" alt="logo">
       </div>
-      <div class="col align-self-center">
+      <div class="col col-lg-6 align-self-center">
         <p>Veritas Wrestling Systems is a dedicated open-source statistics provider for the sport of wrestling.
-          <br>
+          <br />
           You can find our website and distributable collector program on GitHub at:</p>
               <li><a href="https://github.com/nanthony007/VeritasAnalytics-Website">
                 VeritasWrestling-Website</a></li>
               <li><a href="https://github.com/nanthony007/VeritasAnalytics-DataCollector">
                 VeritasWrestling-DataCollector</a></li>
 
-        <br>
+        <br />
         <p>There is an abbreviations file with explantions and formulas in the collector repository.</p>
       </div>
     </div>
-
-
-
-<p>Contact at: nanthony007@gmail.com
-<br>
-Built using Python and Django | Powered by Heroku | Developed and maintained by Nicholas Anthony</p>
 
 </div>
 {% endblock %}

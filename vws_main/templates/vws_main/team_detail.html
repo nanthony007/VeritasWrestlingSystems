@@ -4,27 +4,27 @@
 <div class="container">
     <div class="page-header">
         <h2>{{object.name}} <small> Roster: </small></h2>
-        <hr>
+        <hr />
     </div>
-<div class="table-responsive">
-  <table class="table table-striped table-sm table-bordered table-hover">
-    <thead class="table-primary">
-      <tr>
-        <th>Name</th>
-        <th>Eligibility</th>
-        <th>EloRating</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in object.team_name.all %}
+  <div class="table-responsive">
+    <table class="table table-striped table-sm table-bordered table-hover">
+      <thead class="table-primary">
         <tr>
-          <td><a href="/wrestlers/{{row.slug}}">{{row.name}}</a></td>
-          <td>{{row.eligibility}}</td>
-          <td>{{row.rating}}</td>
+          <th>Name</th>
+          <th>Eligibility</th>
+          <th>EloRating</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        {% for row in object.team_name.all %}
+          <tr>
+            <td><a href="/wrestlers/{{row.slug}}">{{row.name}}</a></td>
+            <td>{{row.eligibility}}</td>
+            <td>{{row.rating}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+</div>
 {% endblock %}

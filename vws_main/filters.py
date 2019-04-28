@@ -30,9 +30,9 @@ WEIGHTCLASSES = (
 
 
 class RatingsFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains', widget=TextInput(attrs={'placeholder': 'Name...'}))
+    name = django_filters.CharFilter(lookup_expr='icontains', label="Name", widget=TextInput(attrs={'placeholder': 'Name...'}))
     team = django_filters.ModelChoiceFilter(queryset=Team.objects.values_list('name', flat=True))
-    weight = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='WeightClass')
+    weight = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='Weight')
     tier = django_filters.ChoiceFilter(choices=TIERS, label='Tier')
 
     class Meta:

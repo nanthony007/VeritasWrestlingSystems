@@ -6,43 +6,47 @@
 	<meta charset="utf-8" />
 	{% load staticfiles %}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<link rel="shortcut icon" href="{% static 'vws_main/img/newlogo.jpg' %}" type="image/png" />
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		body {
+			background-color: #f6f6f6;
+		}
+		footer {
+			color:#ffffff;
+			background-color: #7abaff;
+		}
+		nav {
+			background-color: #f6f6f6;
+		}
+	</style>
 </head>
 
-<body class="container-fluid" style="background-color:#ffffff">
+<div class="container-fluid">
 
-	<ul class="nav justify-content-center" style="background-color:#f6f6f6">
-	  <li>
-	    <h3><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></h3>
-	  </li>
-		<li>
-			<h3><a class="nav-link" href="/events"><i class="fas fa-calendar-check"></i> Events</a></h3>
-		</li>
-		<li>
-			<h3><a class="nav-link" href="/ratings"><i class="fas fa-list-ol"></i> Ratings</a></h3>
-		</li>
-	</ul>
+	<nav class="nav justify-content-center">
+	  <h1><a class="nav-link" href="/">Home</a></h1>
+		<h1><a class="nav-link" href="/events">Events</a></h1>
+		<h1><a class="nav-link" href="/ratings">Ratings</a></h1>
+	</nav>
+	<br />
 
-	<div>
-		<body>
+	<body>
 			{% block content %}
 			{% endblock %}
-		</body>
-	</div>
+	</body>
+	<br />
 
-
-
-	<footer>
-		<div class="container-fluid" align="center">
-			<p style="color:#ffff; background-color:#7abaff">“Scientia potentia est. | Knowing is power.”</p>
-		</div>
+	<footer align="center">
+			<p>“Scientia potentia est. | Knowing is power.”
+			<br />Contact: nanthony007@gmail.com
+			<br />Built using Python and Django | Powered by Heroku
+			<br />Developed and maintained by Nicholas Anthony</p>
 	</footer>
 
 
-</body>
+</div>
 </html>

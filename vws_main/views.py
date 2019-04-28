@@ -99,4 +99,7 @@ class RatingsFilterView(FilterView):
                 When(focus_wrestler__weight=197, then=Value(197)),
                 When(focus_wrestler__weight=285, then=Value(285)),
                 output_field=FloatField(),
-            )).values('name', 'team', 'rating', 'tier', 'weight', 'slug').distinct().order_by('-rating')
+            ),
+            match_count=Count('focus_wrestler__matchID')
+            ).values('name', 'team', 'rating', 'tier', 'weight', 'slug', 'match_count'
+            ).filter(match_count__gt=0).distinct().order_by('-rating')
