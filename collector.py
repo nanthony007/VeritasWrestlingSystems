@@ -834,7 +834,7 @@ class Events(ColorData):
                 ts = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts2 = Timeseries(matchID=Matchdata.objects.get(matchID=self.match_id+"*"), event_num=event_num, event_lab=event_label, event_time=event_time, blue=self.scores()[0], red=self.scores()[1])
                 ts.save()
-                ts2.save()
+                ts2.save()`
                 datatemp = {'Event_Number': event_num, 'Event_Label': event_label, 'Event_Time': event_time, 'Blue': self.scores()[0], 'Red': self.scores()[1]}
                 df2 = df2.append(datatemp, ignore_index=True)
                 print(df2)

@@ -13,7 +13,7 @@ class Team(models.Model):
 class Wrestler(models.Model):
     name = models.CharField(max_length=140, primary_key=True, unique=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_name')
-    eligibility = models.CharField(max_length=140)
+    eligibility = models.CharField(max_length=140, blank=True)
     rating = models.IntegerField()
     slug = models.SlugField(default=name)
 
