@@ -207,7 +207,7 @@ class StartPage(tk.Frame):
         self.intro.pack(side=tk.TOP, pady='20px')
 
         db_wrestlers = FS_Wrestler.objects.values_list(
-            'name', 'team', 'rating').order_by('-name')
+            'name', 'team', 'rating').order_by('name')
         wrestler_list = []
         for i in db_wrestlers:
             wrestler_list.append(i[0])
