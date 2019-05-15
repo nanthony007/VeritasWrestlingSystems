@@ -1,6 +1,11 @@
 import pandas as pd
 import tkinter as tk
 import inspect
+import os
+import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+django.setup()
+from vws_main.models import FS_Wrestler, FS_Match, FS_TS
 
 K = 40
 
@@ -10,6 +15,11 @@ wrestlers = wrestlers.set_index('Name')
 
 # adapted MoV for pin falls
 def pins(self):
+    """
+    Adjust margin of victory to unrealistic/impossible value for pinfalls
+    to adjust EloRating formula accordingly.
+    Returns adjusted MOV.
+    """
     mov = self.x.blue_score.get() - self.x.red_score.get()
 
     if self.x.result.get() == 'Blue Fall':
@@ -21,8 +31,17 @@ def pins(self):
 
 # ranking function using Elo system
 def ranking_function(self):
-    Ra = wrestlers.loc[self.controller.shared_data['blue_name'].get()].Rating
-    Rb = wrestlers.loc[self.controller.shared_data['red_name'].get()].Rating
+    """
+    EloRating rating formula adjuster.
+    Takes match_id variable of Events class instance as paramter.
+    Calculates and saves new ratings in database.
+    Returns nothing.
+    """
+    Ra1 = FS_Wrestler.objects.get(name=self.controller.shared_data['blue_name'].get())
+    Rb1 = FS_Wrestler.objects.get(name=self.controller.shared_data['red_name'].get())
+
+    Ra = Ra1.rating
+    Rb = Rb1.rating
 
     # sets binary result
     Sa = 0
@@ -60,20 +79,28 @@ def ranking_function(self):
 
     nRa = round(Ra + change, 0)
     wrestlers.Rating[self.controller.shared_data['blue_name'].get()] = int(nRa)
+    Ra1.rating = int(nRa)
+    Ra1.save()
     nRb = round(Rb - change, 0)
     wrestlers.Rating[self.controller.shared_data['red_name'].get()] = int(nRb)
+    Rb1.rating = int(nRb)
+    Rb1.save()
 
     print('New Blue Rating =', round(nRa, 0))
     print('New Red Rating =', round(nRb, 0))
     self.textbox.insert(tk.END, 'New Blue Rating = ' + str(round(nRa, 0)) + '\n', 'center-tag')
     self.textbox.insert(tk.END, 'New Red Rating = ' + str(round(nRb, 0)) + '\n', 'center-tag')
     self.textbox.configure(state=tk.DISABLED)
-    wrestlers.to_csv('stats\wrestlers.csv')
+    wrestlers.to_csv("collection\stats\\wrestlers.csv", mode="w")
     return
 
 
 # allows two functions
 def combine_funcs(*funcs):
+    """
+    Allows use of two functions inside one button call.
+    Takes functions as parameters.
+    """
     def combined_func(*args, **kwargs):
         for f in funcs:
             f(*args, **kwargs)
@@ -82,6 +109,12 @@ def combine_funcs(*funcs):
 
 # numeric result calculator, provides string version of result for display in tables
 def num_result(self):
+    """
+    Gets result of match from user.
+    Input should be CamelCase with spaces following Recording procedures.
+    Saves result as numeric value for red/blue instances of Match.
+    Returns Result abbreviation and saves opposite abbreviation for oppponent.
+    """
     if self.result.get() == 'Blue Fall':
         self.b_result.set(1.75)
         self.r_result.set(0.25)
@@ -114,13 +147,47 @@ def num_result(self):
         self.result_opp_abb.set('WinF')
 
 
+
+"""
+The following functions are used in buttons on the MatchPage.
+Each button increametns its value by one, appends a row to the TS dataframe,
+adds a new FS_TS instance for each Match, and redraws the displayed table.
+"""
+
 # blue and red button functions
 def bhia(self):
     self.bhia += 1
-    datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    datatemp = pd.DataFrame(
+        {'EventNum': self.event_lab.get() + 1,
+        'EventLabel': inspect.stack()[0][3],
+        'EventTime': self.main_clock.timestr.get(),
+        'Blue': self.blue_score.get(),
+        'Red': self.red_score.get(),
+        'matchID': self.matchID_value},
+        index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
-    self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
+    self.display_df = pd.concat(
+        [datatemp.drop(['Blue', 'Red', 'matchID'], axis=1),
+        self.display_df.iloc[:]]).reset_index(drop=True)
     self.pbp.model.df = self.display_df
     self.pbp.redraw()
     print(self.bhia)
@@ -129,6 +196,24 @@ def bhia(self):
 def bhoa(self):
     self.bhoa += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -140,6 +225,24 @@ def bhoa(self):
 def bda(self):
     self.bda += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -151,6 +254,24 @@ def bda(self):
 def blsa(self):
     self.blsa += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -162,6 +283,24 @@ def blsa(self):
 def bgba(self):
     self.bgba += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -173,6 +312,24 @@ def bgba(self):
 def bta(self):
     self.bta += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -185,6 +342,24 @@ def bhic2(self):
     self.bhic2 += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -197,6 +372,24 @@ def bhic4(self):
     self.bhic4 += 1
     self.blue_score.set(self.blue_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -209,6 +402,24 @@ def bhoc2(self):
     self.bhoc2 += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -221,6 +432,24 @@ def bhoc4(self):
     self.bhoc4 += 1
     self.blue_score.set(self.blue_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -233,6 +462,24 @@ def bdc2(self):
     self.bdc2 += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -245,6 +492,24 @@ def bdc4(self):
     self.bdc4 += 1
     self.blue_score.set(self.blue_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -257,6 +522,24 @@ def blsc2(self):
     self.blsc2 += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -269,6 +552,24 @@ def blsc4(self):
     self.blsc4 += 1
     self.blue_score.set(self.blue_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -281,6 +582,24 @@ def bgbc(self):
     self.bgbc += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -293,6 +612,24 @@ def btc2(self):
     self.btc2 += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -305,6 +642,24 @@ def btc4(self):
     self.btc4 += 1
     self.blue_score.set(self.blue_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -317,6 +672,24 @@ def bexposure(self):
     self.bexposure += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -329,6 +702,24 @@ def bgut(self):
     self.bgut += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -341,6 +732,24 @@ def bleglace(self):
     self.bleglace += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -353,6 +762,24 @@ def bturn(self):
     self.bturn += 1
     self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -365,6 +792,24 @@ def brecovery(self):
     self.brecovery += 1
     self.blue_score.set(self.blue_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -377,6 +822,24 @@ def bpushout(self):
     self.bpushout += 1
     self.blue_score.set(self.blue_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -388,6 +851,24 @@ def bpushout(self):
 def bpassive(self):
     self.bpassive += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -400,18 +881,54 @@ def btv1(self):
     self.btv += 1
     self.red_score.set(self.red_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
     self.pbp.model.df = self.display_df
     self.pbp.redraw()
-    print(self.btv1)
+    print(self.btv)
 
 
 def btv2(self):
     self.btv += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -423,6 +940,24 @@ def btv2(self):
 def rhia(self):
     self.rhia += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -434,6 +969,24 @@ def rhia(self):
 def rhoa(self):
     self.rhoa += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -445,6 +998,24 @@ def rhoa(self):
 def rda(self):
     self.rda += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -456,6 +1027,24 @@ def rda(self):
 def rlsa(self):
     self.rlsa += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -467,6 +1056,24 @@ def rlsa(self):
 def rgba(self):
     self.rgba += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -478,6 +1085,24 @@ def rgba(self):
 def rta(self):
     self.rta += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -490,6 +1115,24 @@ def rhic2(self):
     self.rhic2 += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -502,6 +1145,24 @@ def rhic4(self):
     self.rhic4 += 1
     self.red_score.set(self.red_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -514,6 +1175,24 @@ def rhoc2(self):
     self.rhoc2 += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -526,6 +1205,24 @@ def rhoc4(self):
     self.rhoc4 += 1
     self.red_score.set(self.red_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -538,6 +1235,24 @@ def rdc2(self):
     self.rdc2 += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -550,6 +1265,24 @@ def rdc4(self):
     self.rdc4 += 1
     self.red_score.set(self.red_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -562,6 +1295,24 @@ def rlsc2(self):
     self.rlsc2 += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -574,6 +1325,24 @@ def rlsc4(self):
     self.rlsc4 += 1
     self.red_score.set(self.red_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -586,6 +1355,24 @@ def rgbc(self):
     self.rgbc += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -598,6 +1385,24 @@ def rtc2(self):
     self.rtc2 += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -610,6 +1415,24 @@ def rtc4(self):
     self.rtc4 += 1
     self.red_score.set(self.red_score.get() + 4)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -622,6 +1445,24 @@ def rexposure(self):
     self.rexposure += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -634,6 +1475,24 @@ def rgut(self):
     self.rgut += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -646,6 +1505,24 @@ def rleglace(self):
     self.rleglace += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -658,6 +1535,24 @@ def rturn(self):
     self.rturn += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -670,6 +1565,24 @@ def rrecovery(self):
     self.rrecovery += 1
     self.red_score.set(self.red_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -682,6 +1595,24 @@ def rpushout(self):
     self.rpushout += 1
     self.red_score.set(self.red_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -693,6 +1624,24 @@ def rpushout(self):
 def rpassive(self):
     self.rpassive += 1
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -705,6 +1654,24 @@ def rtv1(self):
     self.rtv += 1
     self.red_score.set(self.red_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)
@@ -717,6 +1684,24 @@ def rtv2(self):
     self.rtv += 1
     self.red_score.set(self.red_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
+    ts1 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts2 = FS_TS(
+        matchID=FS_Match.objects.get(matchID=self.matchID_value + '*'),
+        event_num=self.event_lab.get() + 1,
+        event_lab=inspect.stack()[0][3],
+        event_time=self.main_clock.timestr.get(),
+        blue=self.blue_score.get(),
+        red=self.red_score.get()
+    )
+    ts1.save()
+    ts2.save()
     self.event_lab.set(self.event_lab.get() + 1)
     self.ts_df = self.ts_df.append(datatemp, ignore_index=True)
     self.display_df = pd.concat([datatemp.drop(['Blue', 'Red', 'matchID'], axis=1), self.display_df.iloc[:]]).reset_index(drop=True)

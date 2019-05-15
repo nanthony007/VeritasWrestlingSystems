@@ -1,0 +1,115 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart','bar']});
+  google.charts.setOnLoadCallback(drawShotChart);
+  google.charts.setOnLoadCallback(drawOppShotChart);
+  google.charts.setOnLoadCallback(drawResultsChart);
+  google.charts.setOnLoadCallback(drawNPFChart);
+  function drawNPFChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Match', 'NPF'],
+      [1, 1.5],
+      [2, 1.6],
+      [3, 1.2],
+      [4, 1.7],
+    ]);
+
+    var options = {
+      title: 'NPF over Time',
+      curveType: 'function',
+      legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('npf_chart'));
+
+    chart.draw(data, options);
+  }
+
+  function drawResultsChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Result', 'Focus', 'Opponent'],
+    ['Fall', {{object.pin_count}}, {{object.fall_loss_count}}],
+    ['Tech', {{object.tech_count}}, {{object.tech_loss_count}}],
+    ['Decision', {{object.win_count}}, {{object.loss_count}}],
+  ]);
+
+  var options = {
+    chart: {
+      title: 'Results',
+    },
+    bars: 'horizontal' // Required for Material Bar Charts.
+  };
+
+  var chart = new google.charts.Bar(document.getElementById('result_barchart'));
+
+  chart.draw(data, google.charts.Bar.convertOptions(options));
+}
+  function drawShotChart() {
+  // Create the data table.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'ShotType');
+  data.addColumn('number', 'ConversionRate');
+  data.addRows([
+    ['Head Inside', {{object.hi_rate}}],
+    ['Head Outside', {{object.ho_rate}}],
+    ['Double', {{object.d_rate}}],
+    ['Low Shot', {{object.ls_rate}}],
+    ['Go Behind/Counter', {{object.gb_rate}}],
+    ['Throw', {{object.t_rate}}],
+  ]);
+  // Set chart options
+  var options = {'title':'Shot Chart'};
+  // Instantiate and draw our chart, passing in some options.
+  var chart = new google.visualization.BarChart(document.getElementById('shot_chart_div'));
+  chart.draw(data, options);
+  }
+  function drawOppShotChart() {
+  // Create the data table.
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'ShotType');
+  data.addColumn('number', 'ConversionRate');
+  data.addRows([
+    ['Opp Head Inside', {{object.opp_hi_rate}}],
+    ['Opp Head Outside', {{object.opp_ho_rate}}],
+    ['Opp Double', {{object.opp_d_rate}}],
+    ['Opp Low Shot', {{object.opp_ls_rate}}],
+    ['Opp Go Behind/Counter', {{object.opp_gb_rate}}],
+    ['Opp Throw', {{object.opp_t_rate}}],
+  ]);
+  // Set chart options
+  var options = {'title':'Opponent Shot Chart'};
+  // Instantiate and draw our chart, passing in some options.
+  var chart = new google.visualization.BarChart(document.getElementById('opp_shot_chart_div'));
+  chart.draw(data, options);
+  }
+</script>
+
+<div class="container">
+  <div class="page-header">
+      <h2>Report for {{object.name}}</h2>
+      <hr />
+  </div>
+  <p>Reports are generated based on selected athlete.</p>
+  <br />
+  <div class="well">
+    <div class="row">
+      <div class="col" id="result_barchart" style="width: 700px; height: 500px"></div>
+      <p></p>
+      <div class="col" id="npf_chart" style="width: 700px; height: 500px"></div>
+    </div>
+    <div class="row">
+      <p></p>
+    </div>
+    <div class="row">
+      <div class="col" id="shot_chart_div" style="width: 700px; height: 500px"></div>
+      <p></p>
+      <div class="col" id="opp_shot_chart_div" style="width: 700px; height: 500px"></div>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 import django_filters
 from django.forms.widgets import TextInput
-from vws_main.models import Wrestler, Team, Event
+from vws_main.models import FS_Wrestler, FS_Team, FS_Event
 
 TIERS = (
     ('Grandmaster', 'Grandmaster (2500+)'),
@@ -15,7 +15,7 @@ TIERS = (
     ('Novice', 'Novice (0-699)'),
 )
 
-WEIGHTCLASSES = (
+FOLK_WEIGHTCLASSES = (
     (125, 125),
     (133, 133),
     (141, 141),
@@ -28,22 +28,37 @@ WEIGHTCLASSES = (
     (285, 285),
 )
 
+FREE_WEIGHTCLASSES = (
+    (57, 57),
+    (61, 61),
+    (65, 65),
+    (70, 70),
+    (74, 74),
+    (79, 79),
+    (86, 86),
+    (92, 92),
+    (97, 97),
+    (125, 125),
+)
 
-class RatingsFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains', label="Name", widget=TextInput(attrs={'placeholder': 'Name...'}))
-    team = django_filters.ModelChoiceFilter(queryset=Team.objects.values_list('name', flat=True))
-    weight = django_filters.ChoiceFilter(choices=WEIGHTCLASSES, label='Weight')
+
+class FS_RatingsFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains', label="Name",
+        widget=TextInput(attrs={'placeholder': 'Name...'}))
+    club = django_filters.ModelChoiceFilter(queryset=FS_Team.objects.values_list('abbreviation', flat=True),
+        label='Club')
+    weight = django_filters.ChoiceFilter(choices=FREE_WEIGHTCLASSES, label='Weight (kgs)')
     tier = django_filters.ChoiceFilter(choices=TIERS, label='Tier')
 
     class Meta:
-        model = Wrestler
-        fields = ['name', 'team', 'tier', 'weight']
+        model = FS_Wrestler
+        fields = ['name', 'club', 'tier', 'weight']
 
 
-class EventsFilter(django_filters.FilterSet):
+class FS_EventsFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains')
     date = django_filters.DateFromToRangeFilter()
 
     class Meta:
-        model = Event
+        model = FS_Event
         fields = ['name', 'date']

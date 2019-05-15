@@ -1,0 +1,208 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2>Match {{object.matchID}}<small> Info: </small></h2>
+        <hr />
+    </div>
+
+<h3>Match Stats</h3>
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered table-sm">
+    <caption>Match info for match '{{object.matchID}}'</caption>
+    <thead class="table-primary">
+      <tr>
+        <th>MatchID</th>
+        <th>Date</th>
+        <th>Weight</th>
+        <th>Focus</th>
+        <th>Result</th>
+        <th>Opponent</th>
+        <th>Focus Score</th>
+        <th>Opp Score</th>
+        <th>Duration</th>
+        <th>HIa</th>
+        <th>HIc2</th>
+        <th>HIc4</th>
+        <th>HOa</th>
+        <th>HOc2</th>
+        <th>HOc4</th>
+        <th>Da</th>
+        <th>Dc2</th>
+        <th>Dc4</th>
+        <th>LSa</th>
+        <th>LSc2</th>
+        <th>LSc4</th>
+        <th>GBa</th>
+        <th>GBc2</th>
+        <th>Ta</th>
+        <th>Tc2</th>
+        <th>Tc4</th>
+        <th>Exposure</th>
+        <th>Gut</th>
+        <th>LegLace</th>
+        <th>Turn</th>
+        <th>Recovery</th>
+        <th>Pushout</th>
+        <th>Passive</th>
+        <th>Violation</th>
+        <th>oHIa</th>
+        <th>oHIc2</th>
+        <th>oHIc4</th>
+        <th>oHOa</th>
+        <th>oHOc2</th>
+        <th>oHOc4</th>
+        <th>oDa</th>
+        <th>oDc2</th>
+        <th>oDc4</th>
+        <th>oLSa</th>
+        <th>oLSc2</th>
+        <th>oLSc4</th>
+        <th>oGBa</th>
+        <th>oGBc2</th>
+        <th>oTa</th>
+        <th>oTc2</th>
+        <th>oTc4</th>
+        <th>oExposure</th>
+        <th>oGut</th>
+        <th>oLegLace</th>
+        <th>oTurn</th>
+        <th>oRecovery</th>
+        <th>oPushout</th>
+        <th>oPassive</th>
+        <th>oViolation</th>
+        <th>HI%</th>
+        <th>HO%</th>
+        <th>D%</th>
+        <th>LS%</th>
+        <th>GB%</th>
+        <th>Throw%</th>
+        <th>NPF</th>
+        <th>APM</th>
+        <th>VS</th>
+        <th>oHI%</th>
+        <th>oHO%</th>
+        <th>oD%</th>
+        <th>oLS%</th>
+        <th>oGB%</th>
+        <th>oThrow%</th>
+        <th>oNPF</th>
+        <th>oAPM</th>
+        <th>oVS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{object.matchID}}</td>
+        <td>{{object.date}}</td>
+        <td>{{object.weight}}</td>
+        <td><a href="/fs_wrestlers/{{object.focus.slug}}/">{{object.focus.name}}</a></td>
+        <td>{{object.result}}</td>
+        <td><a href="/fs_wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
+        <td>{{object.focus_score}}</td>
+        <td>{{object.opp_score}}</td>
+        <td>{{object.duration}}</td>
+        <td>{{object.hia}}</td>
+        <td>{{object.hic2}}</td>
+        <td>{{object.hic4}}</td>
+        <td>{{object.hoa}}</td>
+        <td>{{object.hoc2}}</td>
+        <td>{{object.hoc4}}</td>
+        <td>{{object.da}}</td>
+        <td>{{object.dc2}}</td>
+        <td>{{object.dc4}}</td>
+        <td>{{object.lsa}}</td>
+        <td>{{object.lsc2}}</td>
+        <td>{{object.lsc4}}</td>
+        <td>{{object.gba}}</td>
+        <td>{{object.gbc2}}</td>
+        <td>{{object.ta}}</td>
+        <td>{{object.tc2}}</td>
+        <td>{{object.tc4}}</td>
+        <td>{{object.exposure}}</td>
+        <td>{{object.gut}}</td>
+        <td>{{object.leg_lace}}</td>
+        <td>{{object.turn}}</td>
+        <td>{{object.recovery}}</td>
+        <td>{{object.pushout}}</td>
+        <td>{{object.passive}}</td>
+        <td>{{object.violation}}</td>
+        <td>{{object.ohia}}</td>
+        <td>{{object.ohic2}}</td>
+        <td>{{object.ohic4}}</td>
+        <td>{{object.ohoa}}</td>
+        <td>{{object.ohoc2}}</td>
+        <td>{{object.ohoc4}}</td>
+        <td>{{object.oda}}</td>
+        <td>{{object.odc2}}</td>
+        <td>{{object.odc4}}</td>
+        <td>{{object.olsa}}</td>
+        <td>{{object.olsc2}}</td>
+        <td>{{object.olsc4}}</td>
+        <td>{{object.ogba}}</td>
+        <td>{{object.ogbc2}}</td>
+        <td>{{object.ota}}</td>
+        <td>{{object.otc2}}</td>
+        <td>{{object.otc4}}</td>
+        <td>{{object.oexposure}}</td>
+        <td>{{object.ogut}}</td>
+        <td>{{object.oleg_lace}}</td>
+        <td>{{object.oturn}}</td>
+        <td>{{object.orecovery}}</td>
+        <td>{{object.opushout}}</td>
+        <td>{{object.opassive}}</td>
+        <td>{{object.oviolation}}</td>
+        <td>{{object.hi_rate}}</td>
+        <td>{{object.ho_rate}}</td>
+        <td>{{object.d_rate}}</td>
+        <td>{{object.ls_rate}}</td>
+        <td>{{object.gb_rate}}</td>
+        <td>{{object.t_rate}}</td>
+        <td>{{object.npf}}</td>
+        <td>{{object.apm}}</td>
+        <td>{{object.vs}}</td>
+        <td>{{object.opp_hi_rate}}</td>
+        <td>{{object.opp_ho_rate}}</td>
+        <td>{{object.opp_d_rate}}</td>
+        <td>{{object.opp_ls_rate}}</td>
+        <td>{{object.opp_gb_rate}}</td>
+        <td>{{object.opp_t_rate}}</td>
+        <td>{{object.opp_npf}}</td>
+        <td>{{object.opp_apm}}</td>
+        <td>{{object.opp_vs}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br />
+
+<h3>Match Timeseries</h3>
+  <div class="table-responsive">
+    <table class="table table-hover table-sm">
+      <caption>Timeseries for match '{{object.matchID}}'</caption>
+      <thead class="table-primary">
+        <tr>
+          <th>Event_Num</th>
+          <th>Event_Label</th>
+          <th>Event_Time</th>
+          <th>Blue</th>
+          <th>Red</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in object.actions2.all %}
+        <tr>
+          <td>{{row.event_num}}</td>
+          <td>{{row.event_lab}}</td>
+          <td>{{row.event_time}}</td>
+          <td>{{row.blue}}</td>
+          <td>{{row.red}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

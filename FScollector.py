@@ -4,15 +4,17 @@ from tkinter import ttk as ttk
 import pandas as pd
 import time
 import sys
-import os
 import datetime
 from pandastable import Table
 from PIL import ImageTk, Image
 import string
 import random
+import os
+import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+django.setup()
+from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Team
 from collection import backend
-
-
 pd.options.mode.chained_assignment = None
 
 wrestlers = pd.read_csv("collection\stats\wrestlers.csv")
@@ -21,6 +23,10 @@ wrestlers = wrestlers.set_index('Name')
 
 # safe division
 def safe_div(x, y):
+    """
+    Accepts two numeric parameters.
+    Safely divide first by second, even if second value is zero.
+    """
     if y == 0:
         return x / (y + 1)
     else:
@@ -29,6 +35,10 @@ def safe_div(x, y):
 
 # allows two functions
 def combine_funcs(*funcs):
+    """
+    Allows use of two functions inside one button call.
+    Takes functions as parameters.
+    """
     def combined_func(*args, **kwargs):
         for f in funcs:
             f(*args, **kwargs)
@@ -97,8 +107,16 @@ class StopWatch(tk.Frame):
 
 
 class Collector(tk.Tk):
+    """
+    Main application.  Used to collect data for Veritas Wrestling Systems.
+    """
 
     def __init__(self, *args, **kwargs):
+        """
+        Starts by calling StartPage.
+        Then by calling MatchPage (main collection screen) followed by
+        ConfirmationPage.
+        """
         tk.Tk.__init__(self, *args, **kwargs)
         tk.Tk.wm_title(self, "Veritas Analytics")
         self._geom = '1400+800+0+0'
@@ -116,8 +134,6 @@ class Collector(tk.Tk):
             'red_score': tk.IntVar(),
             'result': tk.StringVar(),
         }
-
-        self.shared_data['blue_name'].set('Nick')
 
         container = ttk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -137,21 +153,37 @@ class Collector(tk.Tk):
         self.show_frame(StartPage)
 
     def show_frame(self, cont):
+        """
+        Shows frame that is passed as argument.
+        """
         frame = self.frames[cont]
         frame.tkraise()
 
     def get_page(self, page_class):
+        """
+        Gets data from page as argument.
+        """
         return self.frames[page_class]
 
     def toggle_geom(self, event):
+        """
+        Toggles full-screen or windowed geometry.
+        """
         geom = tk.Tk.winfo_geometry(self)
         tk.Tk.wm_geometry(self, self._geom)
         self._geom = geom
 
 
 class StartPage(tk.Frame):
+    """
+    Initial page.
+    User selects wrestlers and weight class.
+    """
 
     def __init__(self, parent, controller):
+        """
+        Initializes frames for window and wrestler names based on dropdown.
+        """
         tk.Frame.__init__(self, parent, bg='slate gray')
         self.controller = controller
         self.blue_frame = tk.LabelFrame(self, text='Blue Info', fg='blue', bg='slate gray')
@@ -174,7 +206,11 @@ class StartPage(tk.Frame):
         self.intro.config(anchor=tk.CENTER)
         self.intro.pack(side=tk.TOP, pady='20px')
 
-        wrestler_list = sorted(list(wrestlers.index), reverse=False)  # all wrestlers
+        db_wrestlers = FS_Wrestler.objects.values_list(
+            'name', 'team', 'rating').order_by('-name')
+        wrestler_list = []
+        for i in db_wrestlers:
+            wrestler_list.append(i[0])
         self.blue_wrestler_dropdown = ttk.Combobox(self.blue_frame, state='readonly', font='Helvetica 12')
         self.blue_wrestler_dropdown.set('Select Wrestler:')
         self.blue_wrestler_dropdown.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
@@ -188,46 +224,66 @@ class StartPage(tk.Frame):
         self.weight_class_dropdown = ttk.Combobox(self, state='readonly', values=[57, 61, 65, 70, 74, 79, 86, 92, 97, 125], font='Helvetica 12')
         self.weight_class_dropdown.set('Select Weight Class:')
         self.weight_class_dropdown.pack(side=tk.TOP, padx='50px', pady='20px')
-        self.red_wrestler_dropdown.config(values=wrestler_list)
 
         self.start_new_match_button = tk.Button(self, text="Start New Match", command=combine_funcs(self.start_match, lambda: controller.show_frame(MatchPage)), bg='slate gray', font='Helvetica 12')
         self.start_new_match_button.pack(side=tk.TOP, padx='50px', pady='20px')
 
-    def start_match(self):  # add blue name, red team and red name
-        # save all global values
+    def start_match(self):
+        """
+        Loads blue/red wrestlers from database.
+        Opens MatchPage.
+        """
+        # intitializes wrestlers and global values
+        blue = FS_Wrestler.objects.get(name=self.blue_wrestler_dropdown.get())
+        red = FS_Wrestler.objects.get(name=self.red_wrestler_dropdown.get())
+
         bt1 = self.controller.shared_data['blue_name']
-        bt1.set(self.blue_wrestler_dropdown.get())
+        bt1.set(blue.name)
         bt2 = self.controller.get_page(MatchPage)
-        bt2.bluename.set(self.controller.shared_data['blue_name'].get())
+        bt2.bluename.set(blue.name)
 
         bt3 = self.controller.shared_data['red_name']
-        bt3.set(self.red_wrestler_dropdown.get())
-        bt4 = self.controller.get_page(MatchPage)
-        bt4.redname.set(self.controller.shared_data['red_name'].get())
+        bt3.set(red.name)
+        bt2.redname.set(red.name)
 
         bt5 = self.controller.shared_data['blue_team']
-        bt5.set(wrestlers.loc[self.blue_wrestler_dropdown.get()].Team)
-        bt6 = self.controller.get_page(MatchPage)
-        bt6.blueteam.set(self.controller.shared_data['blue_team'].get())
+        bt5.set(blue.team.abbreviation)
+        bt2.blueteam.set(blue.team.abbreviation)
 
         bt7 = self.controller.shared_data['red_team']
-        bt7.set(wrestlers.loc[self.red_wrestler_dropdown.get()].Team)
-        bt8 = self.controller.get_page(MatchPage)
-        bt8.redteam.set(self.controller.shared_data['red_team'].get())
+        bt7.set(red.team.abbreviation)
+        bt2.redteam.set(red.team.abbreviation)
 
-        bt9 = self.controller.get_page(MatchPage)
-        bt9.blue_elo.set(wrestlers.loc[self.blue_wrestler_dropdown.get()].Rating)
-
-        bt10 = self.controller.get_page(MatchPage)
-        bt10.red_elo.set(wrestlers.loc[self.red_wrestler_dropdown.get()].Rating)
+        bt2.blue_elo.set(blue.rating)
+        bt2.red_elo.set(red.rating)
 
         bt11 = self.controller.shared_data['weight_class']
         bt11.set(self.weight_class_dropdown.get())
-        b12 = self.controller.get_page(MatchPage)
-        b12.weight_class_value.set(str(self.controller.shared_data['weight_class'].get()) + 'kgs')
+        bt2.weight_class_value.set(str(self.controller.shared_data['weight_class'].get()) + 'kgs')
+
+        global m1
+        m1 = FS_Match(matchID=bt2.matchID_value)
+        m1.focus = blue
+        m1.focus_team = m1.focus.team
+        m1.opponent = red
+        m1.opp_team = m1.opponent.team
+        m1.save()
+        global m2
+        m2 = FS_Match(matchID=bt2.matchID_value + '*')
+        m2.save()
 
 
 class MatchPage(tk.Frame):
+    """
+    Main page for data collection.
+    Constitutes frames for each wrestler.
+    Buttons inside frames append data to dataframes before upload to database.
+    Real-time updates for timeseries.
+    Table in center contains play-by-play for instant validation.
+    Creates two match instances.
+    Initializes two timeseries instances.
+    # soon will include windowed video.
+    """
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -629,10 +685,15 @@ class ConfirmationPage(tk.Frame):
         self.restart_button = tk.Button(self.below_frame, text="Start a New Match", command=restart_program, fg='white', bg='slate gray', font='Helvetica 20')
         self.restart_button.pack(side=tk.BOTTOM, fill=tk.BOTH, expand=1)
 
-    def upload(self):
         self.textbox = tk.Text(self.text_frame, background='slate gray', foreground='white', relief=tk.SUNKEN, font='Helvetica 12')
         self.textbox.tag_config('center-tag', justify=tk.CENTER)
         self.textbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+        self.textbox.config(state=tk.NORMAL)
+        self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+        self.textbox.insert(tk.END,
+            'The upload process may take a few moments', 'center-tag')
+
+    def upload(self):
         self.x = self.controller.get_page(MatchPage)
 
         # matchdata stuff
@@ -664,12 +725,331 @@ class ConfirmationPage(tk.Frame):
                  self.x.rhi_rate.get(), self.x.rho_rate.get(), self.x.rd_rate.get(), self.x.rls_rate.get(), self.x.rgb_rate.get(), self.x.rt_rate.get(), self.x.r_npf.get(), self.x.r_action.get(), self.x.r_vs.get(),
                  self.x.bhi_rate.get(), self.x.bho_rate.get(), self.x.bd_rate.get(), self.x.bls_rate.get(), self.x.bgb_rate.get(), self.x.bt_rate.get(), self.x.b_npf.get(), self.x.b_action.get(), self.x.b_vs.get()]
 
+
+        """
+        Uploads all data to database instances of Matches.
+        This includes two uploads, one for the main match and a secondary one
+        for the opponent version of the match. The second match has and '*' suffix.
+        """
+        self.textbox.config(state=tk.NORMAL)
+
+        m1 = FS_Match.objects.get(matchID=data[0])
+        m1.weight = data[5]
+        m1.save()
+        m1.date = data[6]
+        m1.save()
+        m1.result = data[7]
+        m1.save()
+        m1.focus_score = data[8]
+        m1.save()
+        m1.opp_score = data[9]
+        m1.save()
+        m1.mov = data[10]
+        m1.save()
+        m1.duration = data[11]
+        m1.save()
+        m1.hia = data[12]
+        m1.save()
+        m1.hic2 = data[13]
+        m1.save()
+        m1.hic4 = data[14]
+        m1.save()
+        m1.hoa = data[15]
+        m1.save()
+        m1.hoc2 = data[16]
+        m1.save()
+        m1.hoc4 = data[17]
+        m1.save()
+        m1.da = data[18]
+        m1.save()
+        m1.dc2 = data[19]
+        m1.save()
+        m1.dc4 = data[20]
+        m1.save()
+        m1.lsa = data[21]
+        m1.save()
+        m1.lsc2 = data[22]
+        m1.save()
+        m1.lsc4 = data[23]
+        m1.save()
+        m1.gba = data[24]
+        m1.save()
+        m1.gbc2 = data[25]
+        m1.save()
+        m1.ta = data[26]
+        m1.save()
+        m1.tc2 = data[27]
+        m1.save()
+        m1.tc4 = data[28]
+        m1.save()
+        m1.exposure = data[29]
+        m1.save()
+        m1.gut = data[30]
+        m1.save()
+        m1.leg_lace = data[31]
+        m1.save()
+        m1.turn = data[32]
+        m1.save()
+        m1.recovery = data[33]
+        m1.save()
+        m1.pushout = data[34]
+        m1.save()
+        m1.passive = data[35]
+        m1.save()
+        m1.violation = data[36]
+        m1.save()
+        m1.opp_hia = data[37]
+        m1.save()
+        m1.opp_hic2 = data[38]
+        m1.save()
+        m1.opp_hic4 = data[39]
+        m1.save()
+        m1.opp_hoa = data[40]
+        m1.save()
+        m1.opp_hoc2 = data[41]
+        m1.save()
+        m1.opp_hoc4 = data[42]
+        m1.save()
+        m1.opp_da = data[43]
+        m1.save()
+        m1.opp_dc2 = data[44]
+        m1.save()
+        m1.opp_dc4 = data[45]
+        m1.save()
+        m1.opp_lsa = data[46]
+        m1.save()
+        m1.opp_lsc2 = data[47]
+        m1.save()
+        m1.opp_lsc4 = data[48]
+        m1.save()
+        m1.opp_gba = data[49]
+        m1.save()
+        m1.opp_gbc2 = data[50]
+        m1.save()
+        m1.opp_ta = data[51]
+        m1.save()
+        m1.opp_tc2 = data[52]
+        m1.save()
+        m1.opp_tc4 = data[53]
+        m1.save()
+        m1.opp_exposure = data[54]
+        m1.save()
+        m1.opp_gut = data[55]
+        m1.save()
+        m1.opp_leg_lace = data[56]
+        m1.save()
+        m1.opp_turn = data[57]
+        m1.save()
+        m1.opp_recovery = data[58]
+        m1.save()
+        m1.opp_pushout = data[59]
+        m1.save()
+        m1.opp_passive = data[60]
+        m1.save()
+        m1.opp_violation = data[61]
+        m1.save()
+        m1.hi_rate = data[62]
+        m1.save()
+        m1.ho_rate = data[63]
+        m1.save()
+        m1.d_rate = data[64]
+        m1.save()
+        m1.ls_rate = data[65]
+        m1.save()
+        m1.gb_rate = data[66]
+        m1.save()
+        m1.t_rate = data[67]
+        m1.save()
+        m1.npf = data[68]
+        m1.save()
+        m1.apm = data[69]
+        m1.save()
+        m1.vs = data[70]
+        m1.save()
+        m1.opp_hi_rate = data[71]
+        m1.save()
+        m1.opp_ho_rate = data[72]
+        m1.save()
+        m1.opp_d_rate = data[73]
+        m1.save()
+        m1.opp_ls_rate = data[74]
+        m1.save()
+        m1.opp_gb_rate = data[75]
+        m1.save()
+        m1.opp_t_rate = data[76]
+        m1.save()
+        m1.opp_npf = data[77]
+        m1.save()
+        m1.opp_apm = data[78]
+        m1.save()
+        m1.opp_vs = data[79]
+        m1.save()
+
+        # "match2"
+        m2 = FS_Match.objects.get(matchID=data2[0])
+        m2.focus = FS_Wrestler.objects.get(name=data2[1])
+        m2.opponent = FS_Wrestler.objects.get(name=data2[2])
+        m2.focus_team = m2.focus.team
+        m2.opp_team = m2.opponent.team
+        m2.weight = data2[5]
+        m2.save()
+        m2.date = data2[6]
+        m2.save()
+        m2.result = data2[7]
+        m2.save()
+        m2.focus_score = data2[8]
+        m2.save()
+        m2.opp_score = data2[9]
+        m2.save()
+        m2.mov = data2[10]
+        m2.save()
+        m2.duration = data2[11]
+        m2.save()
+        m2.hia = data2[12]
+        m2.save()
+        m2.hic2 = data2[13]
+        m2.save()
+        m2.hic4 = data2[14]
+        m2.save()
+        m2.hoa = data2[15]
+        m2.save()
+        m2.hoc2 = data2[16]
+        m2.save()
+        m2.hoc4 = data2[17]
+        m2.save()
+        m2.da = data2[18]
+        m2.save()
+        m2.dc2 = data2[19]
+        m2.save()
+        m2.dc4 = data2[20]
+        m2.save()
+        m2.lsa = data2[21]
+        m2.save()
+        m2.lsc2 = data2[22]
+        m2.save()
+        m2.lsc4 = data2[23]
+        m2.save()
+        m2.gba = data2[24]
+        m2.save()
+        m2.gbc2 = data2[25]
+        m2.save()
+        m2.ta = data2[26]
+        m2.save()
+        m2.tc2 = data2[27]
+        m2.save()
+        m2.tc4 = data2[28]
+        m2.save()
+        m2.exposure = data2[29]
+        m2.save()
+        m2.gut = data2[30]
+        m2.save()
+        m2.leg_lace = data2[31]
+        m2.save()
+        m2.turn = data2[32]
+        m2.save()
+        m2.recovery = data2[33]
+        m2.save()
+        m2.pushout = data2[34]
+        m2.save()
+        m2.passive = data2[35]
+        m2.save()
+        m2.violation = data2[36]
+        m2.save()
+        m2.opp_hia = data2[37]
+        m2.save()
+        m2.opp_hic2 = data2[38]
+        m2.save()
+        m2.opp_hic4 = data2[39]
+        m2.save()
+        m2.opp_hoa = data2[40]
+        m2.save()
+        m2.opp_hoc2 = data2[41]
+        m2.save()
+        m2.opp_hoc4 = data2[42]
+        m2.save()
+        m2.opp_da = data2[43]
+        m2.save()
+        m2.opp_dc2 = data2[44]
+        m2.save()
+        m2.opp_dc4 = data2[45]
+        m2.save()
+        m2.opp_lsa = data2[46]
+        m2.save()
+        m2.opp_lsc2 = data2[47]
+        m2.save()
+        m2.opp_lsc4 = data2[48]
+        m2.save()
+        m2.opp_gba = data2[49]
+        m2.save()
+        m2.opp_gbc2 = data2[50]
+        m2.save()
+        m2.opp_ta = data2[51]
+        m2.save()
+        m2.opp_tc2 = data2[52]
+        m2.save()
+        m2.opp_tc4 = data2[53]
+        m2.save()
+        m2.opp_exposure = data2[54]
+        m2.save()
+        m2.opp_gut = data2[55]
+        m2.save()
+        m2.opp_leg_lace = data2[56]
+        m2.save()
+        m2.opp_turn = data2[57]
+        m2.save()
+        m2.opp_recovery = data2[58]
+        m2.save()
+        m2.opp_pushout = data2[59]
+        m2.save()
+        m2.opp_passive = data2[60]
+        m2.save()
+        m2.opp_violation = data2[61]
+        m2.save()
+        m2.hi_rate = data2[62]
+        m2.save()
+        m2.ho_rate = data2[63]
+        m2.save()
+        m2.d_rate = data2[64]
+        m2.save()
+        m2.ls_rate = data2[65]
+        m2.save()
+        m2.gb_rate = data2[66]
+        m2.save()
+        m2.t_rate = data2[67]
+        m2.save()
+        m2.npf = data2[68]
+        m2.save()
+        m2.apm = data2[69]
+        m2.save()
+        m2.vs = data2[70]
+        m2.save()
+        m2.opp_hi_rate = data2[71]
+        m2.save()
+        m2.opp_ho_rate = data2[72]
+        m2.save()
+        m2.opp_d_rate = data2[73]
+        m2.save()
+        m2.opp_ls_rate = data2[74]
+        m2.save()
+        m2.opp_gb_rate = data2[75]
+        m2.save()
+        m2.opp_t_rate = data2[76]
+        m2.save()
+        m2.opp_npf = data2[77]
+        m2.save()
+        m2.opp_apm = data2[78]
+        m2.save()
+        m2.opp_vs = data2[79]
+        m2.save()
+
+        self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+        self.textbox.insert(tk.END, 'Matches uploaded to database', 'center-tag')
+
         matchdata = pd.DataFrame(columns=rawcolumns)
         matchdata = matchdata.append(pd.Series(data, index=rawcolumns), ignore_index=True)
         matchdata = matchdata.append(pd.Series(data2, index=rawcolumns), ignore_index=True)
         matchdata = matchdata.set_index('MatchID')
 
-        self.textbox.config(state=tk.NORMAL)
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
         backend.ranking_function(self)
         self.textbox.insert(tk.END, 'Wrestlers rating updated in csv', 'center-tag')
@@ -678,13 +1058,16 @@ class ConfirmationPage(tk.Frame):
         matchdata.to_csv('collection\stats\matchdata.csv', mode='a', header=False)
         self.textbox.insert(tk.END, 'Matchdata saved to csv', 'center-tag')
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
-        self.x.ts_df.to_csv('collection\stats\timeseries.csv', mode='a', header=False)
+        self.x.ts_df.to_csv('collection\\stats\\timeseries.csv', mode='a', header=False)
         self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
         self.textbox.insert(tk.END, '\n---------', 'center-tag')
         self.textbox.configure(state=tk.DISABLED)
 
 
 def main():
+    """
+    Instantiaizes main app class.
+    """
     app = Collector()
     app.mainloop()
 

@@ -1,0 +1,28 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h2>{{object.name}} <small> Roster: </small></h2>
+        <hr />
+    </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm table-bordered table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th>Name</th>
+          <th>EloRating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in object.team_name2.all %}
+          <tr>
+            <td><a href="/fs_wrestlers/{{row.slug}}">{{row.name}}</a></td>
+            <td>{{row.rating}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends "vws_main/header.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="page-header">
+        <h2>{{object.name}}</h2>
+        <hr />
+    </div>
+    <div class="well">
+      <div class="row">
+        <div class="col-sm-4">
+          <h5>Name: </h5><p> {{object.name}}</p>
+        </div>
+        <div class="col-sm-4">
+          <h5>Team: </h5><p><a href="/fs_teams/{{object.team.slug}}/">{{object.team.abbreviation}}</a></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h5><a href="#matches-table">Matches:</a></h5><p> {{object.match_count}}</p>
+        </div>
+        <div class="col-sm-4">
+          <h5>Avg. Result: </h5><p> {{object.avg_result|floatformat:2}}</p>
+        </div>
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-lg btn-link btn-outline-secondary">
+            <a href="/reports/{{object.slug}}">View Report</a>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h5>Elo Rating: </h5><p> {{object.rating}}</p>
+        </div>
+        <div class="col-sm-4">
+          <h5>Veritas Points: </h5><p> {{object.vs|floatformat:2}}</p>
+        </div>
+      </div>
+    </div>
+  <hr id="base-stats-table" />
+  <h3>Base Stats <small>(sum)</small>:</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>HIa</th>
+          <th>HIc2</th>
+          <th>HIc4</th>
+          <th>HOa</th>
+          <th>HOc2</th>
+          <th>HOc4</th>
+          <th>Da</th>
+          <th>Dc2</th>
+          <th>Dc4</th>
+          <th>LSa</th>
+          <th>LSc2</th>
+          <th>LSc4</th>
+          <th>GBa</th>
+          <th>GBc2</th>
+          <th>Ta</th>
+          <th>Tc2</th>
+          <th>Tc4</th>
+          <th>Exposure</th>
+          <th>Gut</th>
+          <th>LegLace</th>
+          <th>Turn</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{object.hia}}</td>
+          <td>{{object.hic2}}</td>
+          <td>{{object.hic4}}</td>
+          <td>{{object.hoa}}</td>
+          <td>{{object.hoc2}}</td>
+          <td>{{object.hoc4}}</td>
+          <td>{{object.da}}</td>
+          <td>{{object.dc2}}</td>
+          <td>{{object.dc4}}</td>
+          <td>{{object.lsa}}</td>
+          <td>{{object.lsc2}}</td>
+          <td>{{object.lsc4}}</td>
+          <td>{{object.gba}}</td>
+          <td>{{object.gbc2}}</td>
+          <td>{{object.ta}}</td>
+          <td>{{object.tc2}}</td>
+          <td>{{object.tc4}}</td>
+          <td>{{object.exposure}}</td>
+          <td>{{object.gut}}</td>
+          <td>{{object.leg_lace}}</td>
+          <td>{{object.turn}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <hr id="adv-stats-table" />
+  <h3>Advanced Stats <small>(avg)</small>:</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>HI%</th>
+          <th>HO%</th>
+          <th>D%</th>
+          <th>LS%</th>
+          <th>GB%</th>
+          <th>Throw%</th>
+          <th>NPF</th>
+          <th>APM</th>
+          <th>VS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{object.hi_rate|floatformat:2}}</td>
+          <td>{{object.ho_rate|floatformat:2}}</td>
+          <td>{{object.d_rate|floatformat:2}}</td>
+          <td>{{object.ls_rate|floatformat:2}}</td>
+          <td>{{object.gb_rate|floatformat:2}}</td>
+          <td>{{object.t_rate|floatformat:2}}</td>
+          <td>{{object.npf|floatformat:2}}</td>
+          <td>{{object.apm|floatformat:2}}</td>
+          <td>{{object.vs|floatformat:2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <hr id="opp-base-stats-table" />
+  <h3>Opponent Base Stats <small>(sum)</small>:</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>oHIa</th>
+          <th>oHIc2</th>
+          <th>oHIc4</th>
+          <th>oHOa</th>
+          <th>oHOc2</th>
+          <th>oHOc4</th>
+          <th>oDa</th>
+          <th>oDc2</th>
+          <th>oDc4</th>
+          <th>oLSa</th>
+          <th>oLSc2</th>
+          <th>oLSc4</th>
+          <th>oGBa</th>
+          <th>oGBc2</th>
+          <th>oTa</th>
+          <th>oTc2</th>
+          <th>oTc4</th>
+          <th>oExposure</th>
+          <th>oGut</th>
+          <th>oLegLace</th>
+          <th>oTurn</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{object.opp_hia}}</td>
+          <td>{{object.opp_hic2}}</td>
+          <td>{{object.opp_hic4}}</td>
+          <td>{{object.opp_hoa}}</td>
+          <td>{{object.opp_hoc2}}</td>
+          <td>{{object.opp_hoc4}}</td>
+          <td>{{object.opp_da}}</td>
+          <td>{{object.opp_dc2}}</td>
+          <td>{{object.opp_dc4}}</td>
+          <td>{{object.opp_lsa}}</td>
+          <td>{{object.opp_lsc2}}</td>
+          <td>{{object.opp_lsc4}}</td>
+          <td>{{object.opp_gba}}</td>
+          <td>{{object.opp_gbc2}}</td>
+          <td>{{object.opp_ta}}</td>
+          <td>{{object.opp_tc2}}</td>
+          <td>{{object.opp_tc4}}</td>
+          <td>{{object.opp_exposure}}</td>
+          <td>{{object.opp_gut}}</td>
+          <td>{{object.opp_leg_lace}}</td>
+          <td>{{object.opp_turn}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <hr id="opp-adv-stats-table" />
+  <h3>Opponent Advanced Stats <small>(avg)</small>:</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>oHI%</th>
+          <th>oHO%</th>
+          <th>oD%</th>
+          <th>oLS%</th>
+          <th>oGB%</th>
+          <th>oThrow%</th>
+          <th>oNPF</th>
+          <th>oAPM</th>
+          <th>oVS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{object.opp_hi_rate|floatformat:2}}</td>
+          <td>{{object.opp_ho_rate|floatformat:2}}</td>
+          <td>{{object.opp_d_rate|floatformat:2}}</td>
+          <td>{{object.opp_ls_rate|floatformat:2}}</td>
+          <td>{{object.opp_gb_rate|floatformat:2}}</td>
+          <td>{{object.opp_t_rate|floatformat:2}}</td>
+          <td>{{object.opp_npf|floatformat:2}}</td>
+          <td>{{object.opp_apm|floatformat:2}}</td>
+          <td>{{object.opp_vs|floatformat:2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr id="misc-stats-table" />
+  <h3>Misc: <small>(sum)</small></h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>Points Earned</th>
+          <th>Points Allowed</th>
+          <th>Recovery</th>
+          <th>Pushout</th>
+          <th>Passive</th>
+          <th>Violation</th>
+          <th>oRecovery</th>
+          <th>oPushout</th>
+          <th>oPassive</th>
+          <th>oViolation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{object.points_earned}}</td>
+          <td>{{object.points_allowed}}</td>
+          <td>{{object.recovery}}</td>
+          <td>{{object.pushout}}</td>
+          <td>{{object.passive}}</td>
+          <td>{{object.violation}}</td>
+          <td>{{object.opp_recovery}}</td>
+          <td>{{object.opp_pushout}}</td>
+          <td>{{object.opp_passive}}</td>
+          <td>{{object.opp_violation}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <hr id="matches-table" />
+  <h3>Matches: <small>({{object.match_count}})</small></h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover table-sm">
+      <thead class="table-primary">
+        <tr>
+          <th>MatchID</th>
+          <th>Date</th>
+          <th>Focus</th>
+          <th>Result</th>
+          <th>Opponnent</th>
+          <th>Focus Score</th>
+          <th>Opp Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for match in object.focus_wrestler2.all %}
+            <tr>
+              <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
+              <td>{{match.date}}</td>
+              <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
+              <td>{{match.result}}</td>
+              <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
+              <td>{{match.focus_score}}</td>
+              <td>{{match.opp_score}}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
