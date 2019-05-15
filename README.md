@@ -5,7 +5,7 @@ This website was developed to display advanced analytics for the sport of wrestl
 
 Official data is collected via running:
 ```python
-python collector.py
+python FScollector.py
 ```
 
 For more information on the collector, see the GitHub repo at: VeritasWrestling-Collector.
@@ -27,3 +27,4 @@ There you can download the free GUI version of the collector to use with your te
 3.  HTML forms
     -adding records to a live database from an outside script
     -html tabling and styling
+4. Google Charts API
