@@ -174,7 +174,7 @@ class FS_Team(models.Model):
         verbose_name_plural = 'FreeStyle Teams'
 
     def __str_(self):
-        return self.name
+        return self.abbreviation
 
 
 class FS_Wrestler(models.Model):

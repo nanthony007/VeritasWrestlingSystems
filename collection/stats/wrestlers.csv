@@ -1,14 +1,48 @@
-Name,Team,Rating,Status
-Yianni Diakomihalis,TMWC/FLWC,1075,FinalX
-Jordan Oliver,Sunkist Kids Wrestling Club,982,WTT
-Jaydin Eirman,TMWC,1000,WTT
-Zain Retherford,NLWC,1065,
-Tristan Moran,UW,981,
-Peter Lipari,NJRTC,979,
-Nicholas Dardanes,IRTC,980,
-Mitchell Mckee,Minnesota Storm,982,
-Joey McKenna,ORTC,1000,
-Jason Ness,Minnesota Storm,983,
-Frank Molinaro,OKRTC,984,
-Corey Shie,WPRTC,989,
-Chase Farr,X-factor Elite,1000,
+﻿name,team_id,rating,slug
+Colby Duncan,Western Colorado Wrestling Club,1000,colby-duncan
+Graham Shore,Air Force RTC,1000,graham-shore
+Ian Timmins,Navy/Marine Corps RTC,1000,ian-timmins
+Daton Fix,TMWC/Cowboy RTC,1000,daton-fix
+Timothy Romero,Colorado Mesa,987,timothy-romero
+Shane Kim,KWIK WC,1013,shane-kim
+Joey McKenna,Titan Mercury Wrestling Club/Ohio Regional Training Center,1000,joey-mckenna
+Chase Farr,X-Factor Elite,1000,chase-farr
+Jaydin Eierman,TMWC,1000,jaydin-eierman
+Corey Shie,West Point Regional Training Center,1000,corey-shie
+Peter Lipari,NJRTC,1000,peter-lipari
+Tristan Moran,University of Wisconsin,1000,tristan-moran
+Nicholas Dardanes,Titan Mercury Wrestling Club/Illinois Regional Training Center,1000,nicholas-dardanes
+Mitchell Mckee,Minnesota Storm,1000,mitchell-mckee
+Frank Molinaro,TMWC/OKRTC,1000,frank-molinaro
+Jason Ness,Minnesota Storm,1000,jason-ness
+Jordan Oliver,Sunkist Kids Wrestling Club,1000,jordan-oliver
+Zain Retherford,Nitanny Lion Wrestling Club,1000,zain-retherford
+Yianni Diakomihalis,Finger Lakes Wrestling Club/Titan Mercury Wrestling Club,1000,yianni-diakomihalis
+Thomas Gilman,TMWC,1000,thomas-gilman
+Joshua Portillo,Nebraska Golden Eagles Wrestling Club,1000,joshua-portillo
+Seth Lisowski,Western Colorado Wrestling Club,1000,seth-lisowski
+Zane Richards,TMWC,1000,zane-richards
+Bernardino Gomez,Blue Chip Wrestling Club,1000,bernardino-gomez
+Joshua Rodriguez,Nitanny Lion Wrestling Club,1000,joshua-rodriguez
+Frank Perrelli,TMWC,1000,frank-perrelli
+Jarrod Patterson,TMWC,1000,jarrod-patterson
+Luke Welch,Boilermaker RTC,1000,luke-welch
+Austin Miller,New York Athletic Club,1000,austin-miller
+Edward Klimara,TMWC/Cowboy RTC,1000,edward-klimara
+Jesus Rosado,Unattached,1000,jesus-rosado
+Nicolas Aguilar,NJRTC,1000,nicolas-aguilar
+Skyler Petry,Minnesota Storm,1000,skyler-petry
+Nathan Tomasello,TMWC,1000,nathan-tomasello
+Zach Sanders,Minnesota Storm,1000,zach-sanders
+Ryan Evans,Idaho,1000,ryan-evans
+Robert Garcia Iv,Valley RTC,1000,robert-garcia-iv
+Justin Portillo,Viking Wrestling Club,1000,justin-portillo
+Nick Piccininni,TMWC/Cowboy RTC,1000,nick-piccininni
+Christian Sharp,Legends of Gold,1000,christian-sharp
+Kyle Waldo,Unattached,1000,kyle-waldo
+Zachary Whitsel,Texas Techfall,1000,zachary-whitsel
+Darian Cruz,NYAC/Lehigh Valley Wrestling Club,1000,darian-cruz
+Vitali Arujau,TMWC,1000,vitali-arujau
+Britain Longmire,Team Nevada,1000,britain-longmire
+David White,Athens,1000,david-white
+Jesse Delgado,Titan Mercury Wrestling Club/Illinois Regional Training Center,1000,jesse-delgado

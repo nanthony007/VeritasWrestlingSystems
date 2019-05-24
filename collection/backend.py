@@ -9,8 +9,8 @@ from vws_main.models import FS_Wrestler, FS_Match, FS_TS
 
 K = 40
 
-wrestlers = pd.read_csv("collection\stats\wrestlers.csv")
-wrestlers = wrestlers.set_index('Name')
+# wrestlers = pd.read_csv("collection/stats/wrestlers.csv")
+# wrestlers = wrestlers.set_index('Name')
 
 
 # adapted MoV for pin falls
@@ -78,11 +78,11 @@ def ranking_function(self):
     self.textbox.insert(tk.END, 'Change: ' + str(abs(round(change, 0))) + '\n','center-tag')
 
     nRa = round(Ra + change, 0)
-    wrestlers.Rating[self.controller.shared_data['blue_name'].get()] = int(nRa)
+    #wrestlers.Rating[self.controller.shared_data['blue_name'].get()] = int(nRa)
     Ra1.rating = int(nRa)
     Ra1.save()
     nRb = round(Rb - change, 0)
-    wrestlers.Rating[self.controller.shared_data['red_name'].get()] = int(nRb)
+    #wrestlers.Rating[self.controller.shared_data['red_name'].get()] = int(nRb)
     Rb1.rating = int(nRb)
     Rb1.save()
 
@@ -91,7 +91,7 @@ def ranking_function(self):
     self.textbox.insert(tk.END, 'New Blue Rating = ' + str(round(nRa, 0)) + '\n', 'center-tag')
     self.textbox.insert(tk.END, 'New Red Rating = ' + str(round(nRb, 0)) + '\n', 'center-tag')
     self.textbox.configure(state=tk.DISABLED)
-    wrestlers.to_csv("collection\stats\\wrestlers.csv", mode="w")
+    #wrestlers.to_csv("collection\stats\\wrestlers.csv", mode="w")
     return
 
 
@@ -1652,7 +1652,7 @@ def rpassive(self):
 
 def rtv1(self):
     self.rtv += 1
-    self.red_score.set(self.red_score.get() + 1)
+    self.blue_score.set(self.blue_score.get() + 1)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
     ts1 = FS_TS(
         matchID=FS_Match.objects.get(matchID=self.matchID_value),
@@ -1682,7 +1682,7 @@ def rtv1(self):
 
 def rtv2(self):
     self.rtv += 1
-    self.red_score.set(self.red_score.get() + 2)
+    self.blue_score.set(self.blue_score.get() + 2)
     datatemp = pd.DataFrame({'EventNum': self.event_lab.get() + 1, 'EventLabel': inspect.stack()[0][3], 'EventTime': self.main_clock.timestr.get(), 'Blue': self.blue_score.get(), 'Red': self.red_score.get(), 'matchID': self.matchID_value}, index=[0])
     ts1 = FS_TS(
         matchID=FS_Match.objects.get(matchID=self.matchID_value),

@@ -17,8 +17,8 @@ from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Team
 from collection import backend
 pd.options.mode.chained_assignment = None
 
-wrestlers = pd.read_csv("collection\stats\wrestlers.csv")
-wrestlers = wrestlers.set_index('Name')
+# wrestlers = pd.read_csv("collection/stats/wrestlers.csv")
+# wrestlers = wrestlers.set_index('Name')
 
 
 # safe division
@@ -120,7 +120,7 @@ class Collector(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         tk.Tk.wm_title(self, "Veritas Analytics")
         self._geom = '1400+800+0+0'
-        img = tk.PhotoImage(file='collection\logo.png')
+        img = tk.PhotoImage(file='collection/logo.png')
         self.tk.call('wm', 'iconphoto', self._w, img)
         self.bind('<Escape>', self.toggle_geom)
 
@@ -187,11 +187,11 @@ class StartPage(tk.Frame):
         tk.Frame.__init__(self, parent, bg='slate gray')
         self.controller = controller
         self.blue_frame = tk.LabelFrame(self, text='Blue Info', fg='blue', bg='slate gray')
-        self.blue_frame.pack(side=tk.LEFT, anchor=tk.NW, padx='50px', pady='50px')
+        self.blue_frame.pack(side=tk.RIGHT, anchor=tk.NW, padx='50px', pady='50px')
         self.red_frame = tk.LabelFrame(self, text='Red Info', fg='red', bg='slate gray')
-        self.red_frame.pack(side=tk.RIGHT, anchor=tk.NE, padx='50px', pady='50px')
+        self.red_frame.pack(side=tk.LEFT, anchor=tk.NE, padx='50px', pady='50px')
 
-        image = Image.open("collection\logo.png")
+        image = Image.open("collection/logo.png")
         image = image.resize((400,300), Image.ANTIALIAS)
         photo = ImageTk.PhotoImage(image)
         label = tk.Label(self, image=photo)
@@ -291,21 +291,21 @@ class MatchPage(tk.Frame):
 
         # initializing primary frames
         self.blue_info = tk.LabelFrame(self, text='Blue Info:', fg='white', bg='blue')
-        self.blue_info.grid(row=0, column=0, sticky=tk.NSEW)
+        self.blue_info.grid(row=0, column=2, sticky=tk.NSEW)
         self.time_info = tk.Frame(self, bg='slate gray')
         self.time_info.grid(row=0, column=1, sticky=tk.NSEW)
         self.red_info = tk.LabelFrame(self, text='Red Info:', fg='white', bg='firebrick1')
-        self.red_info.grid(row=0, column=2, sticky=tk.NSEW)
+        self.red_info.grid(row=0, column=0, sticky=tk.NSEW)
         self.play_by_play_frame = tk.LabelFrame(self, text='Play-by-Play:', fg='white', bg='slate gray')
         self.play_by_play_frame.grid(row=1, column=1, sticky=tk.NSEW)  # going to have timeseries table AND video view? --packed
         self.blue_buttons_frame = tk.LabelFrame(self, text='Blue Events:', fg='white', bg='blue')
-        self.blue_buttons_frame.grid(row=1, column=0, sticky=tk.NSEW)
+        self.blue_buttons_frame.grid(row=1, column=2, sticky=tk.NSEW)
         self.blue_buttons_frame.grid_columnconfigure(0, weight=1)
         self.blue_buttons_frame.grid_columnconfigure(4, weight=1)
         self.blue_buttons_frame.grid_rowconfigure(0, weight=1)
         self.blue_buttons_frame.grid_rowconfigure(12, weight=1)
         self.red_buttons_frame = tk.LabelFrame(self, text='Red Events:', fg='white', bg='firebrick1')
-        self.red_buttons_frame.grid(row=1, column=2, sticky=tk.NSEW)
+        self.red_buttons_frame.grid(row=1, column=0, sticky=tk.NSEW)
         self.red_buttons_frame.grid_columnconfigure(0, weight=1)
         self.red_buttons_frame.grid_columnconfigure(4, weight=1)
         self.red_buttons_frame.grid_rowconfigure(0, weight=1)
@@ -314,12 +314,12 @@ class MatchPage(tk.Frame):
         self.ending_frame.grid(row=2, column=0, columnspan=3, sticky=tk.NSEW)
         self.match_info = tk.Frame(self.time_info, bg='slate gray')
         self.match_info.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-        self.blue_clock = tk.Frame(self.time_info, bg='slate gray')
-        self.blue_clock.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+        #self.blue_clock = tk.Frame(self.time_info, bg='slate gray')
+        #self.blue_clock.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
         self.clock_info = tk.Frame(self.time_info, bg='slate gray')
         self.clock_info.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
-        self.red_clock = tk.Frame(self.time_info, bg='slate gray')
-        self.red_clock.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+        #self.red_clock = tk.Frame(self.time_info, bg='slate gray')
+        #self.red_clock.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
         # self.video_frame = tk.Frame(self.play_by_play_frame, bg='slate gray')
         # self.video_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
         self.pbp_frame = tk.Frame(self.play_by_play_frame, bg='slate gray')
@@ -450,7 +450,7 @@ class MatchPage(tk.Frame):
         # self.red_pass_clock = StopWatch(self.red_clock)
         # self.red_pass_clock.timer.config(fg='firebrick1')
         # self.red_pass_clock.pack(side=tk.RIGHT, expand=1)
-        self.matchID_value = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+        self.matchID_value = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(4))
         self.matchID_label = tk.Label(self.match_info, text='MatchID: ' + self.matchID_value, font='Helvetica 12 italic', fg='white', bg='slate gray', padx='25px', pady='10px')
         self.matchID_label.pack(side=tk.LEFT, expand=1)
         self.weight_class_value = tk.IntVar()
@@ -559,7 +559,7 @@ class MatchPage(tk.Frame):
         self.controller.shared_data['result'].set(self.result.get())
         backend.num_result(self)  # calculates numeric result for use in below composite scores, provides string version of result for display in tables
 
-        self.total_tda = self.bhia + self.bhoa + self.bda + self.blsa + self.bgba + self.bta + self.rhia + self.rhoa + self.rda + self.rlsa + self.rgba + self.rta
+        self.total_tda = self.bhia + self.bhoa + self.bda + self.blsa + self.bta + self.rhia + self.rhoa + self.rda + self.rlsa + self.rta
         self.total_tdc = self.bhic2 + self.bhoc2 + self.bdc2 + self.blsc2 + self.bgbc + self.btc2 + self.rhic2 + self.rhoc2 + self.rdc2 + self.rlsc2 + self.rgbc + self.rtc2 + \
                          self.bhic4 + self.bhoc4 + self.bdc4 + self.blsc4 + self.btc4 + self.rhic4 + self.rhoc4 + self.rdc4 + \
                          self.rlsc4 + self.rtc4
@@ -571,9 +571,9 @@ class MatchPage(tk.Frame):
         self.bls_rate.set(round(safe_div(self.blsc2 + self.blsc4, self.blsa) * 100, 2))
         self.bgb_rate.set(round(safe_div(self.bgbc, self.bgba) * 100, 2))
         self.bt_rate.set(round(safe_div(self.btc2 + self.btc4, self.bta) * 100, 2))
-        self.bweighted_result.set(round(self.b_result.get() * (wrestlers.loc[self.controller.shared_data['red_name'].get()].Rating / 100), 2))
+        self.bweighted_result.set(round(self.b_result.get() * (FS_Wrestler.objects.get(name=self.controller.shared_data['red_name'].get()).rating / 100), 2))
         self.b_npf.set(round(safe_div((self.bhia + self.bhoa + self.bda + self.blsa + self.bta), self.total_tda) +
-                             safe_div((self.bhic2 + self.bhoc2 + self.bdc2 + self.blsc2 + self.btc2 + self.bhic4 + self.bhoc4 + self.bdc4 + self.blsc4 + self.btc4), self.total_tdc), 2))
+                             safe_div((self.bhic2 + self.bhoc2 + self.bdc2 + self.blsc2 + self.bgbc + self.btc2 + self.bhic4 + self.bhoc4 + self.bdc4 + self.blsc4 + self.btc4), self.total_tdc), 2))
         self.b_action.set(round(self.bhia + self.bhoa + self.bda + self.blsa + self.bgba + self.bta + self.bpushout + self.brecovery +
                                 (self.bhic2 + self.bhoc2 + self.bdc2 + self.blsc2 + self.bgbc + self.btc2 + + self.bexposure + self.bturn + self.bleglace + self.bgut) * 2 +
                                 (self.bhic4 + self.bhoc4 + self.bdc4 + self.blsc4 + self.btc4) * 4 - self.bpassive - self.btv, 2))
@@ -586,9 +586,9 @@ class MatchPage(tk.Frame):
         self.rls_rate.set(round(safe_div(self.rlsc2 + self.rlsc4, self.rlsa) * 100, 2))
         self.rgb_rate.set(round(safe_div(self.rgbc, self.rgba) * 100, 2))
         self.rt_rate.set(round(safe_div(self.rtc2 + self.rtc4, self.rta) * 100, 2))
-        self.rweighted_result.set(round(self.r_result.get() * (wrestlers.loc[self.controller.shared_data['blue_name'].get()].Rating / 100), 2))
+        self.rweighted_result.set(round(self.r_result.get() * (FS_Wrestler.objects.get(name=self.controller.shared_data['blue_name'].get()).rating / 100), 2))
         self.r_npf.set(round(safe_div((self.rhia + self.rhoa + self.rda + self.rlsa + self.rta), self.total_tda) +
-                             safe_div((self.rhic2 + self.rhoc2 + self.rdc2 + self.rlsc2 + self.rtc2 + self.rhic4 + self.rhoc4 + self.rdc4 + self.rlsc4 + self.rtc4), self.total_tdc), 2))
+                             safe_div((self.rhic2 + self.rhoc2 + self.rdc2 + self.rlsc2 + self.rgbc + self.rtc2 + self.rhic4 + self.rhoc4 + self.rdc4 + self.rlsc4 + self.rtc4), self.total_tdc), 2))
         self.r_action.set(round(self.rhia + self.rhoa + self.rda + self.rlsa + self.rgba + self.rta + self.rpushout + self.rrecovery +
                                 (self.rhic2 + self.rhoc2 + self.rdc2 + self.rlsc2 + self.rgbc + self.rtc2 + + self.rexposure + self.rturn + self.rleglace + self.rgut) * 2 +
                                 (self.rhic4 + self.rhoc4 + self.rdc4 + self.rlsc4 + self.rtc4) * 4 - self.rpassive - self.rtv, 2))
@@ -611,9 +611,9 @@ class ConfirmationPage(tk.Frame):
         self.red_comp_frame = tk.LabelFrame(self, text='Red Stats:', fg='white', bg='slate gray')
         self.below_frame = tk.LabelFrame(self, text='Restart:', fg='white', bg='slate gray')
         self.above_frame.grid(row=0, column=1, sticky=tk.NSEW)
-        self.blue_comp_frame.grid(row=1, column=0, sticky=tk.NSEW)
+        self.blue_comp_frame.grid(row=1, column=2, sticky=tk.NSEW)
         self.text_frame.grid(row=1, column=1, sticky=tk.NSEW)
-        self.red_comp_frame.grid(row=1, column=2, sticky=tk.NSEW)
+        self.red_comp_frame.grid(row=1, column=0, sticky=tk.NSEW)
         self.below_frame.grid(row=2, column=1, sticky=tk.NSEW)
 
         # formatting
@@ -1044,23 +1044,24 @@ class ConfirmationPage(tk.Frame):
 
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
         self.textbox.insert(tk.END, 'Matches uploaded to database', 'center-tag')
-
-        matchdata = pd.DataFrame(columns=rawcolumns)
-        matchdata = matchdata.append(pd.Series(data, index=rawcolumns), ignore_index=True)
-        matchdata = matchdata.append(pd.Series(data2, index=rawcolumns), ignore_index=True)
-        matchdata = matchdata.set_index('MatchID')
-
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+
+        # matchdata = pd.DataFrame(columns=rawcolumns)
+        # matchdata = matchdata.append(pd.Series(data, index=rawcolumns), ignore_index=True)
+        # matchdata = matchdata.append(pd.Series(data2, index=rawcolumns), ignore_index=True)
+        # matchdata = matchdata.set_index('MatchID')
+
         backend.ranking_function(self)
-        self.textbox.insert(tk.END, 'Wrestlers rating updated in csv', 'center-tag')
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+        # self.textbox.insert(tk.END, 'Wrestlers rating updated in csv', 'center-tag')
+        # self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
         # matchdata save
-        matchdata.to_csv('collection\stats\matchdata.csv', mode='a', header=False)
-        self.textbox.insert(tk.END, 'Matchdata saved to csv', 'center-tag')
-        self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
-        self.x.ts_df.to_csv('collection\\stats\\timeseries.csv', mode='a', header=False)
-        self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
-        self.textbox.insert(tk.END, '\n---------', 'center-tag')
+        # matchdata.to_csv('collection/stats/matchdata.csv', mode='a', header=False)
+        # self.textbox.insert(tk.END, 'Matchdata saved to csv', 'center-tag')
+        # self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+        # self.x.ts_df.to_csv('collection/stats/timeseries.csv', mode='a', header=False)
+        # self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
+        # self.textbox.insert(tk.END, '\n---------', 'center-tag')
         self.textbox.configure(state=tk.DISABLED)
 
 
