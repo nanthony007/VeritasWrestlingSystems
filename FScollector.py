@@ -270,6 +270,10 @@ class StartPage(tk.Frame):
         m1.save()
         global m2
         m2 = FS_Match(matchID=bt2.matchID_value + '*')
+        m2.focus = red
+        m2.focus_team = m2.focus.team
+        m2.opponent = blue
+        m2.opp_team = m2.opponent.team
         m2.save()
 
 
@@ -887,10 +891,6 @@ class ConfirmationPage(tk.Frame):
 
         # "match2"
         m2 = FS_Match.objects.get(matchID=data2[0])
-        m2.focus = FS_Wrestler.objects.get(name=data2[1])
-        m2.opponent = FS_Wrestler.objects.get(name=data2[2])
-        m2.focus_team = m2.focus.team
-        m2.opp_team = m2.opponent.team
         m2.weight = data2[5]
         m2.save()
         m2.date = data2[6]
