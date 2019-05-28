@@ -208,18 +208,9 @@ class StartPage(tk.Frame):
 
         db_wrestlers = FS_Wrestler.objects.values_list(
             'name', 'team', 'rating').order_by('name')
-        wrestler_list = []
+        self.wrestler_list = []
         for i in db_wrestlers:
-            wrestler_list.append(i[0])
-        self.blue_wrestler_dropdown = ttk.Combobox(self.blue_frame, state='readonly', font='Helvetica 12')
-        self.blue_wrestler_dropdown.set('Select Wrestler:')
-        self.blue_wrestler_dropdown.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
-        self.blue_wrestler_dropdown.config(values=wrestler_list)
-
-        self.red_wrestler_dropdown = ttk.Combobox(self.red_frame, state='readonly', font='Helvetica 12')
-        self.red_wrestler_dropdown.set('Select Wrestler:')
-        self.red_wrestler_dropdown.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
-        self.red_wrestler_dropdown.config(values=wrestler_list)
+            self.wrestler_list.append(i[0])
 
         self.weight_class_dropdown = ttk.Combobox(self, state='readonly', values=[57, 61, 65, 70, 74, 79, 86, 92, 97, 125], font='Helvetica 12')
         self.weight_class_dropdown.set('Select Weight Class:')
@@ -227,6 +218,56 @@ class StartPage(tk.Frame):
 
         self.start_new_match_button = tk.Button(self, text="Start New Match", command=combine_funcs(self.start_match, lambda: controller.show_frame(MatchPage)), bg='slate gray', font='Helvetica 12')
         self.start_new_match_button.pack(side=tk.TOP, padx='50px', pady='20px')
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.blue_search = tk.StringVar()
+        self.blue_search.trace("w", lambda name, index, mode: self.update_list_blue())
+        self.blue_entry = tk.Entry(self.blue_frame, textvariable=self.blue_search, font='Helvetica 16')
+        self.blue_lbox = tk.Listbox(self.blue_frame, font='Helvetica 16')
+        self.blue_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+        self.blue_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+
+        self.red_search = tk.StringVar()
+        self.red_search.trace("w", lambda name, index, mode: self.update_list_red())
+        self.red_entry = tk.Entry(self.red_frame, textvariable=self.red_search, font='Helvetica 16')
+        self.red_lbox = tk.Listbox(self.red_frame, font='Helvetica 16')
+        self.red_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+        self.red_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+
+        # Function for updating the list/doing the search.
+        # It needs to be called here to populate the listbox.
+        self.update_list_blue()
+        self.update_list_red()
+
+    def update_list_blue(self):
+        search_term = self.blue_search.get()
+        # Just a generic list to populate the listbox
+        lbox_list = self.wrestler_list
+
+        self.blue_lbox.delete(0, tk.END)
+
+        for item in lbox_list:
+            if search_term.lower() in item.lower():
+                self.blue_lbox.insert(tk.END, item)
+
+        self.blue_search.set(self.blue_search.get())
+        print(self.blue_search.get())
+
+    def update_list_red(self):
+        search_term = self.red_search.get()
+        # Just a generic list to populate the listbox
+        lbox_list =self.wrestler_list
+
+        self.red_lbox.delete(0, tk.END)
+
+        for item in lbox_list:
+            if search_term.lower() in item.lower():
+                self.red_lbox.insert(tk.END, item)
+
+        self.red_search.set(self.red_search.get())
+        print(self.red_search.get())
+
 
     def start_match(self):
         """
@@ -234,8 +275,8 @@ class StartPage(tk.Frame):
         Opens MatchPage.
         """
         # intitializes wrestlers and global values
-        blue = FS_Wrestler.objects.get(name=self.blue_wrestler_dropdown.get())
-        red = FS_Wrestler.objects.get(name=self.red_wrestler_dropdown.get())
+        blue = FS_Wrestler.objects.get(name=self.blue_search.get())
+        red = FS_Wrestler.objects.get(name=self.red_search.get())
 
         bt1 = self.controller.shared_data['blue_name']
         bt1.set(blue.name)
