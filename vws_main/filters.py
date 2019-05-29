@@ -45,14 +45,14 @@ FREE_WEIGHTCLASSES = (
 class FS_RatingsFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr='icontains', label="Name",
         widget=TextInput(attrs={'placeholder': 'Name...'}))
-    club = django_filters.ModelChoiceFilter(queryset=FS_Team.objects.values_list('abbreviation', flat=True),
-        label='Club')
+    team = django_filters.ModelChoiceFilter(queryset=FS_Team.objects.values_list('abbreviation', flat=True),
+        label='Team')
     weight = django_filters.ChoiceFilter(choices=FREE_WEIGHTCLASSES, label='Weight (kgs)')
     tier = django_filters.ChoiceFilter(choices=TIERS, label='Tier')
 
     class Meta:
         model = FS_Wrestler
-        fields = ['name', 'club', 'tier', 'weight']
+        fields = ['name', 'team', 'tier', 'weight']
 
 
 class FS_EventsFilter(django_filters.FilterSet):

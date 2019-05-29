@@ -220,20 +220,32 @@ class StartPage(tk.Frame):
         self.start_new_match_button.pack(side=tk.TOP, padx='50px', pady='20px')
         self.create_widgets()
 
+    def blue_CurSelect(self, event):
+        value = self.blue_lbox.get(self.blue_lbox.curselection())
+        self.blue_search.set(value)
+        print(self.blue_search.get())
+
+    def red_CurSelect(self, event):
+        value = self.red_lbox.get(self.red_lbox.curselection())
+        self.red_search.set(value)
+        print(self.search.get())
+
     def create_widgets(self):
         self.blue_search = tk.StringVar()
         self.blue_search.trace("w", lambda name, index, mode: self.update_list_blue())
         self.blue_entry = tk.Entry(self.blue_frame, textvariable=self.blue_search, font='Helvetica 16')
-        self.blue_lbox = tk.Listbox(self.blue_frame, font='Helvetica 16')
-        self.blue_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
-        self.blue_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+        self.blue_lbox = tk.Listbox(self.blue_frame, font='Helvetica 14')
+        self.blue_lbox.bind('<<ListboxSelect>>', self.blue_CurSelect)
+        self.blue_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='25px', pady='25px')
+        self.blue_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='25px', pady='25px')
 
         self.red_search = tk.StringVar()
         self.red_search.trace("w", lambda name, index, mode: self.update_list_red())
         self.red_entry = tk.Entry(self.red_frame, textvariable=self.red_search, font='Helvetica 16')
-        self.red_lbox = tk.Listbox(self.red_frame, font='Helvetica 16')
-        self.red_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
-        self.red_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='50px', pady='50px')
+        self.red_lbox = tk.Listbox(self.red_frame, font='Helvetica 12')
+        self.red_lbox.bind('<<ListboxSelect>>', self.red_CurSelect)
+        self.red_entry.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='25px', pady='25px')
+        self.red_lbox.pack(side=tk.TOP, fill=tk.BOTH, expand=1, padx='25px', pady='25px')
 
         # Function for updating the list/doing the search.
         # It needs to be called here to populate the listbox.
@@ -252,7 +264,6 @@ class StartPage(tk.Frame):
                 self.blue_lbox.insert(tk.END, item)
 
         self.blue_search.set(self.blue_search.get())
-        print(self.blue_search.get())
 
     def update_list_red(self):
         search_term = self.red_search.get()
@@ -266,7 +277,6 @@ class StartPage(tk.Frame):
                 self.red_lbox.insert(tk.END, item)
 
         self.red_search.set(self.red_search.get())
-        print(self.red_search.get())
 
 
     def start_match(self):

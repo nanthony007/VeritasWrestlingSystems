@@ -5,7 +5,7 @@
     <div class="page-header">
         <h2>{{object.name}}</h2>
         <hr />
-        <h5>{{object.result}}</h5>
+        <h5>20 most recent matches</h5>
     </div>
 
   <div class="table-responsive">
@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for match in object.matches.all %}
+        {% for match in object.matches.all|slice:":20" %}
         <tr>
           <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
           <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>

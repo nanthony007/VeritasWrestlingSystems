@@ -28,7 +28,7 @@ class FS_TeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'abbreviation', 'slug')
 
 class FS_WrestlerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'team_id', 'rating')
+    list_display = ('name', 'rating')
 
 class FS_EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date')
