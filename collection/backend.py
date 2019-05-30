@@ -65,10 +65,10 @@ def ranking_function(self):
     elo_dif = Ra - Rb
 
     Ea = 1 / (1 + 10 ** ((Rb - Ra) / 400))
-    print('Blue chance to win:', round(Ea, 2), '\nResult:', Sa)
     print('Red chance to win:', round(1-Ea, 2), '\nResult:', 1-Sa)
-    self.textbox.insert(tk.END, 'Blue chance to win: ' + str(round(Ea, 2)) + '\n', 'center-tag')
+    print('Blue chance to win:', round(Ea, 2), '\nResult:', Sa)
     self.textbox.insert(tk.END, 'Red chance to win: ' + str(round(1-Ea, 2)) + '\n', 'center-tag')
+    self.textbox.insert(tk.END, 'Blue chance to win: ' + str(round(Ea, 2)) + '\n', 'center-tag')
 
     potential = K * (Sa - Ea)
 
@@ -86,10 +86,10 @@ def ranking_function(self):
     Rb1.rating = int(nRb)
     Rb1.save()
 
-    print('New Blue Rating =', round(nRa, 0))
     print('New Red Rating =', round(nRb, 0))
-    self.textbox.insert(tk.END, 'New Blue Rating = ' + str(round(nRa, 0)) + '\n', 'center-tag')
+    print('New Blue Rating =', round(nRa, 0))
     self.textbox.insert(tk.END, 'New Red Rating = ' + str(round(nRb, 0)) + '\n', 'center-tag')
+    self.textbox.insert(tk.END, 'New Blue Rating = ' + str(round(nRa, 0)) + '\n', 'center-tag')
     self.textbox.configure(state=tk.DISABLED)
     #wrestlers.to_csv("collection\stats\\wrestlers.csv", mode="w")
     return

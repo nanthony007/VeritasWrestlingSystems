@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for match in object.matches.all|slice:":20" %}
+        {% for match in object.matches.all %}
         <tr>
           <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
           <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
