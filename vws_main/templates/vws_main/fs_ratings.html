@@ -10,8 +10,7 @@
     </div>
 
 <p>Use the navigation menu below to search/view athletes in each tier.<br />
-  There is a one match minimum requirement to be listed in the ratings. <br />
-  Displays top 20 wrestlers based on search criteria.</p>
+  There is a one match minimum requirement to be listed in the ratings. <br /></p>
 
 <form method="get">
   <div class="container">
@@ -49,7 +48,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for wrestler in filter.qs %}
+    {% for wrestler in object_list %}
       <tr>
         <td><a href="/fs_wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
         <td><a href="/fs_teams/{{wrestler.team.slug}}">{{ wrestler.team.abbreviation }}</a></td>

@@ -228,7 +228,7 @@ class StartPage(tk.Frame):
     def red_CurSelect(self, event):
         value = self.red_lbox.get(self.red_lbox.curselection())
         self.red_search.set(value)
-        print(self.search.get())
+        print(self.red_search.get())
 
     def create_widgets(self):
         self.blue_search = tk.StringVar()

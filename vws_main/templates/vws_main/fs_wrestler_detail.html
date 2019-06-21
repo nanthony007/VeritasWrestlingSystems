@@ -270,7 +270,9 @@
         {% for match in object.focus_wrestler2.all %}
             <tr>
               <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
-              <td>{{match.date}}</td>
+              {% for thing in match.events2.all %}
+              <td>{{thing.name}}</td>
+              {% endfor %}
               <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
               <td>{{match.result}}</td>
               <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>

@@ -1,48 +1,339 @@
-﻿name,team_id,rating,slug
-Colby Duncan,Western Colorado Wrestling Club,1000,colby-duncan
-Graham Shore,Air Force RTC,1000,graham-shore
-Ian Timmins,Navy/Marine Corps RTC,1000,ian-timmins
-Daton Fix,TMWC/Cowboy RTC,1000,daton-fix
-Timothy Romero,Colorado Mesa,987,timothy-romero
-Shane Kim,KWIK WC,1013,shane-kim
-Joey McKenna,Titan Mercury Wrestling Club/Ohio Regional Training Center,1000,joey-mckenna
-Chase Farr,X-Factor Elite,1000,chase-farr
-Jaydin Eierman,TMWC,1000,jaydin-eierman
-Corey Shie,West Point Regional Training Center,1000,corey-shie
-Peter Lipari,NJRTC,1000,peter-lipari
-Tristan Moran,University of Wisconsin,1000,tristan-moran
-Nicholas Dardanes,Titan Mercury Wrestling Club/Illinois Regional Training Center,1000,nicholas-dardanes
-Mitchell Mckee,Minnesota Storm,1000,mitchell-mckee
-Frank Molinaro,TMWC/OKRTC,1000,frank-molinaro
-Jason Ness,Minnesota Storm,1000,jason-ness
-Jordan Oliver,Sunkist Kids Wrestling Club,1000,jordan-oliver
-Zain Retherford,Nitanny Lion Wrestling Club,1000,zain-retherford
-Yianni Diakomihalis,Finger Lakes Wrestling Club/Titan Mercury Wrestling Club,1000,yianni-diakomihalis
-Thomas Gilman,TMWC,1000,thomas-gilman
-Joshua Portillo,Nebraska Golden Eagles Wrestling Club,1000,joshua-portillo
-Seth Lisowski,Western Colorado Wrestling Club,1000,seth-lisowski
-Zane Richards,TMWC,1000,zane-richards
-Bernardino Gomez,Blue Chip Wrestling Club,1000,bernardino-gomez
-Joshua Rodriguez,Nitanny Lion Wrestling Club,1000,joshua-rodriguez
-Frank Perrelli,TMWC,1000,frank-perrelli
-Jarrod Patterson,TMWC,1000,jarrod-patterson
-Luke Welch,Boilermaker RTC,1000,luke-welch
-Austin Miller,New York Athletic Club,1000,austin-miller
-Edward Klimara,TMWC/Cowboy RTC,1000,edward-klimara
-Jesus Rosado,Unattached,1000,jesus-rosado
-Nicolas Aguilar,NJRTC,1000,nicolas-aguilar
-Skyler Petry,Minnesota Storm,1000,skyler-petry
-Nathan Tomasello,TMWC,1000,nathan-tomasello
-Zach Sanders,Minnesota Storm,1000,zach-sanders
-Ryan Evans,Idaho,1000,ryan-evans
-Robert Garcia Iv,Valley RTC,1000,robert-garcia-iv
-Justin Portillo,Viking Wrestling Club,1000,justin-portillo
-Nick Piccininni,TMWC/Cowboy RTC,1000,nick-piccininni
-Christian Sharp,Legends of Gold,1000,christian-sharp
-Kyle Waldo,Unattached,1000,kyle-waldo
-Zachary Whitsel,Texas Techfall,1000,zachary-whitsel
-Darian Cruz,NYAC/Lehigh Valley Wrestling Club,1000,darian-cruz
-Vitali Arujau,TMWC,1000,vitali-arujau
-Britain Longmire,Team Nevada,1000,britain-longmire
-David White,Athens,1000,david-white
-Jesse Delgado,Titan Mercury Wrestling Club/Illinois Regional Training Center,1000,jesse-delgado
+name,rating,slug,team_id
+Robert Rehm,968,robert-rehm,USA
+Paul Glynn,984,paul-glynn,USA
+Blaize Cabell,959,blaize-cabell,USA
+Ben Whitford,1038,ben-whitford,USA
+Johnni DiJulius,993,johnni-dijulius,USA
+Monte Britton,980,monte-britton,USA
+Donald Mcneil,994,donald-mcneil,USA
+Beau Bartlett,1018,beau-bartlett,USA
+Brian Alonzo,940,brian-alonzo,USA
+Kyle Jennings,942,kyle-jennings,USA
+Phillip Landis,981,phillip-landis,USA
+Ty Lydic,991,ty-lydic,USA
+James Steerman,958,james-steerman,USA
+Denzel Hawkins,926,denzel-hawkins,USA
+Brandon Metz,980,brandon-metz,USA
+Wyatt Gerl,972,wyatt-gerl,USA
+Kyle Matthews,928,kyle-matthews-2,USA
+Angel Soto,961,angel-soto,USA
+Michael Thelen,973,michael-thelen,USA
+Josh Reyes,963,josh-reyes,USA
+Morgan Fuenffinger,981,morgan-fuenffinger,USA
+Zach Schrader,983,zach-schrader,USA
+Jordan Karst,998,jordan-karst,USA
+Jeren Glosser,1011,jeren-glosser,USA
+Jake Keating,1060,jake-keating,USA
+AJ Nevills,994,aj-nevills,USA
+Kevin Jack,1056,kevin-jack,USA
+Elroy Perkin,1061,elroy-perkin,USA
+CJ Brucki,1023,cj-brucki,USA
+Ceron Francisco,999,ceron-francisco,USA
+Christian Lance,1025,christian-lance,USA
+Tanner Hall,1016,tanner-hall,USA
+Patrick Rhoads,970,patrick-rhoads,USA
+Gabriel Camarillo,941,gabriel-camarillo,USA
+Morgan Smith,977,morgan-smith,USA
+Trenton Allen,993,trenton-allen,USA
+James Romero,1002,james-romero,USA
+Jonathan Graziane,982,jonathan-graziane,USA
+Devan Turner,1013,devan-turner,USA
+Jamarcus Grant,946,jamarcus-grant,USA
+Timothy Smith,1009,timothy-smith,USA
+Wynn Michalak,1075,wynn-michalak,USA
+Conrad Cole,993,conrad-cole,USA
+Trevor Rasmussen,959,trevor-rasmussen,USA
+Juan Vallejo,972,juan-vallejo,USA
+Carlos Herrera,957,carlos-herrera,USA
+Renaldo Rodriguez Spencer,989,renaldo-rodriguez-spencer,USA
+Russell Rohlfing,956,russell-rohlfing,USA
+Jordan Eley,957,jordan-eley,USA
+Sam Martino,967,sam-martino,USA
+Noel Orozco,1023,noel-orozco,USA
+Kyle Kintz,999,kyle-kintz,USA
+Eric Schwark,958,eric-schwark,USA
+Max Thomsen,979,max-thomsen,USA
+Lavion Mayes,1011,lavion-mayes,USA
+Jarrod Snyder,959,jarrod-snyder,USA
+Connor Keating,962,connor-keating,USA
+Jarod Verkleeren,988,jarod-verkleeren,USA
+Justin Deangelis,1033,justin-deangelis,USA
+J Benton,978,j-benton,USA
+Daniel Curran,988,daniel-curran,USA
+Chance Goodman,993,chance-goodman,USA
+Rulin Pederson,966,rulin-pederson,USA
+Mauro Correnti,977,mauro-correnti,USA
+Shabaka Johns,1010,shabaka-johns,USA
+Imani Heslop,994,imani-heslop,USA
+Muhamed Mcbryde,1002,muhamed-mcbryde,USA
+Joshua Lopez,976,joshua-lopez,USA
+Matthew Voss,1030,matthew-voss,USA
+Andrew Morgan,961,andrew-morgan,USA
+Haszell West,969,haszell-west,USA
+Nicholas Nottingham,901,nicholas-nottingham,USA
+Jackson Striggow,983,jackson-striggow,USA
+Fernando Serje,993,fernando-serje,USA
+Austin Assad,1018,austin-assad,USA
+Luakas Poloncic,974,luakas-poloncic,USA
+David Richardson,999,david-richardson,USA
+Ruger Wyneken,1002,ruger-wyneken,USA
+Andrew Mitchell,958,andrew-mitchell,USA
+Tanner Orndorff,1010,tanner-orndorff,USA
+Kevin Johnson,994,kevin-johnson,USA
+Bracken Lovell,961,bracken-lovell,USA
+Joshua Asper,1086,joshua-asper,USA
+Dominic Ducharme,991,dominic-ducharme,USA
+Jordan Conaway,973,jordan-conaway,USA
+Kevin Radford,991,kevin-radford,USA
+Artie Bess,993,artie-bess,USA
+Brett Hochstaetter,958,brett-hochstaetter,USA
+Austin Farbaugh,941,austin-farbaugh,USA
+Micah Arakawa,958,micah-arakawa,USA
+Evan Hansen,1014,evan-hansen,USA
+Anthony Nelson,1069,anthony-nelson,USA
+Nikko Reyes,1007,nikko-reyes,USA
+Patrick Brucki,1019,patrick-brucki,USA
+Kollin Moore,1030,kollin-moore,USA
+Hayden Zillmer,1063,hayden-zillmer,USA
+Derek White,1050,derek-white,USA
+Shelton Mack,1010,shelton-mack,USA
+Garrett Ryan,1105,garrett-ryan,USA
+Ben Honis,1047,ben-honis,USA
+Timothy Dudley,1032,timothy-dudley,USA
+Kyven Gadson,1068,kyven-gadson,USA
+Kevin Beazley,1073,kevin-beazley,USA
+Ty Walz,1040,ty-walz,USA
+Bo Nickal,1161,bo-nickal,USA
+Alec Pantaleo,1062,alec-pantaleo,USA
+James Green,1140,james-green,USA
+Jason Chamberlain,1091,jason-chamberlain,USA
+Joey Palmer,1018,joey-palmer,USA
+Tyler Graff,1160,tyler-graff,USA
+Earl Hall,997,earl-hall,USA
+Anthony Ramos,991,anthony-ramos,USA
+Nicholas Dardanes,1027,nicholas-dardanes,USA
+Mitchell Mckee,1011,mitchell-mckee,USA
+Quinton Godley,1026,quinton-godley,USA
+Daniel Ownbey,957,daniel-ownbey,USA
+Michael Seijo,957,michael-seijo,USA
+Joey McKenna,998,joey-mckenna,USA
+Timothy Romero,1018,timothy-romero,USA
+Jason Ness,1142,jason-ness,USA
+Ian Timmins,999,ian-timmins,USA
+Edward Klimara,1032,edward-klimara,USA
+Shane Kim,943,shane-kim,USA
+Kyle Waldo,1002,kyle-waldo,USA
+Jarrod Patterson,1050,jarrod-patterson,USA
+Jesus Rosado,960,jesus-rosado,USA
+Bernardino Gomez,1000,bernardino-gomez,USA
+Corey Shie,978,corey-shie,USA
+Zachary Whitsel,979,zachary-whitsel,USA
+Chase Farr,976,chase-farr,USA
+Peter Lipari,960,peter-lipari,USA
+Daton Fix,1115,daton-fix,USA
+David White,971,david-white,USA
+Christian Sharp,958,christian-sharp,USA
+Austin Miller,1020,austin-miller,USA
+Ryan Evans,974,ryan-evans,USA
+Tristan Moran,982,tristan-moran,USA
+Nicolas Aguilar,959,nicolas-aguilar,USA
+Luke Welch,965,luke-welch,USA
+Seth Lisowski,959,seth-lisowski,USA
+Colby Duncan,985,colby-duncan,USA
+Britain Longmire,1004,britain-longmire,USA
+Joshua Portillo,986,joshua-portillo,USA
+Nick Piccininni,1028,nick-piccininni,USA
+Skyler Petry,990,skyler-petry,USA
+Justin Portillo,964,justin-portillo,USA
+Graham Shore,962,graham-shore,USA
+Robert Garcia Iv,954,robert-garcia-iv,USA
+Nathan Tomasello,954,nathan-tomasello,USA
+Vitali Arujau,1066,vitali-arujau,USA
+Ryan Rochford,994,ryan-rochford,USA
+Austin Kraisser,999,austin-kraisser,USA
+Tanner Skidgel,992,tanner-skidgel,USA
+Dillion Ulrey,989,dillion-ulrey,USA
+Patrick Romero,1000,patrick-romero,USA
+Matthew Malcom,1046,matthew-malcom,USA
+Yianni Diakomihalis,1083,yianni-diakomihalis,USA
+Steven Pami,999,steven-pami,USA
+Darius Pittman,991,darius-pittman,USA
+Hicks James,961,hicks-james,USA
+Ethan Vistro,967,ethan-vistro,USA
+Erik Hinckley,942,erik-hinckley,USA
+Donald Negus,1012,donald-negus,USA
+Hunter Mooring,961,hunter-mooring,USA
+Leonel Perez,943,leonel-perez,USA
+Emmanuel Cabello,980,emmanuel-cabello,USA
+Marco Retano,994,marco-retano,USA
+Jake Lanning,958,jake-lanning,USA
+Ernesto Garcia,945,ernesto-garcia,USA
+Kizhan Clarke,994,kizhan-clarke,USA
+Drew Mandell,958,drew-mandell,USA
+Deondre Wilson,1003,deondre-wilson,USA
+Wyatt Sheets,1013,wyatt-sheets,USA
+DeLonn Eatmon,965,delonn-eatmon,USA
+Chayse Jackson,965,chayse-jackson,USA
+Ryan Deakin,1097,ryan-deakin,USA
+Joshua Kindig,938,joshua-kindig,USA
+Anthony Collica,1012,anthony-collica,USA
+Ryan Cone,974,ryan-cone,USA
+Spencer Carey,1024,spencer-carey,USA
+Hayden Harris,995,hayden-harris,USA
+Chance Marsteller,1044,chance-marsteller,USA
+Quentin Perez,990,quentin-perez,USA
+Gunnar Woodburn,959,gunnar-woodburn,USA
+Cody Trybus,971,cody-trybus,USA
+Jesse Delgado,1008,jesse-delgado,USA
+Noah Blakley-Beanes,962,noah-blakley-beanes,USA
+Alec Opsal,990,alec-opsal,USA
+Ben Freeman,981,ben-freeman,USA
+Montell Marion,1009,montell-marion,USA
+Daniel Weiner,941,daniel-weiner,USA
+Joshua Brown,979,joshua-brown,USA
+Taylor Summers,991,taylor-summers,USA
+Josh Anis,1001,josh-anis,USA
+Bryce Meredith,1024,bryce-meredith,USA
+Evan Henderson,978,evan-henderson,USA
+Jacob Ferris,941,jacob-ferris,USA
+Melik Jimenez,962,melik-jimenez,USA
+Bernard Futrell,1001,bernard-futrell,USA
+Zachary Sherman,943,zachary-sherman,USA
+Chris Deloza,957,chris-deloza,USA
+Jesse Vasquez,992,jesse-vasquez,USA
+Joshua Shields,997,joshua-shields,USA
+Jacob Thalin,998,jacob-thalin,USA
+Michael Macchiavello,1086,michael-macchiavello,USA
+Brett Pfarr,1121,brett-pfarr,USA
+Nino Bonaccorsi,977,nino-bonaccorsi,USA
+Kenneth Courts,1030,kenneth-courts,USA
+Isaiah Martinez,1108,isaiah-martinez,USA
+Pat Downey,1136,pat-downey,USA
+Thomas Gilman,1128,thomas-gilman,USA
+Mario Mason,976,mario-mason,USA
+Brandon Sorensen,1047,brandon-sorensen,USA
+Jaydin Eierman,1105,jaydin-eierman,USA
+Jordan Oliver,980,jordan-oliver,USA
+Frank Molinaro,1077,frank-molinaro,USA
+Dean Heil,978,dean-heil,USA
+Kanen Storr,1055,kanen-storr,USA
+Domonick Demas,1037,domonick-demas,USA
+Zain Retherford,1128,zain-retherford,USA
+Frank Perrelli,967,frank-perrelli,USA
+Zach Sanders,944,zach-sanders,USA
+Zane Richards,1074,zane-richards,USA
+Joshua Rodriguez,1073,joshua-rodriguez,USA
+Cody Brewer,1043,cody-brewer,USA
+Darian Cruz,1055,darian-cruz,USA
+David Kerr,958,david-kerr,USA
+Marshall Keller,968,marshall-keller,USA
+Blake McNall,994,blake-mcnall,USA
+Robbie Mathers,964,robbie-mathers,USA
+Joey Lazor,1039,joey-lazor,USA
+Joey Ward,991,joey-ward,USA
+Seth Seneca,964,seth-seneca,USA
+Joseph Castellino,962,joseph-castellino,USA
+Patrick D'Arcy,966,patrick-darcy,USA
+Dylan Schuck,991,dylan-schuck,USA
+Kyle Todrank,995,kyle-todrank,USA
+Benjamin Forsman,957,benjamin-forsman,USA
+Denton Spencer,964,denton-spencer,USA
+Tony Rupp,1011,tony-rupp,USA
+Grant Aronoff,970,grant-aronoff,USA
+Brandon Wright,970,brandon-wright,USA
+Evan Wick,996,evan-wick,USA
+Joshua Finesilver,1018,joshua-finesilver,USA
+Joshua Dziewa,1005,joshua-dziewa,USA
+Jared Frayer,1111,jared-frayer,USA
+Colby Huynh,961,colby-huynh,USA
+Jake Posey,943,jake-posey,USA
+Brandon Supernaw,971,brandon-supernaw,USA
+Skyler Gonzalez,1008,skyler-gonzalez,USA
+Christopher Weiler,984,christopher-weiler,USA
+Hunter Bolen,1006,hunter-bolen,USA
+Cameron Caffey,1048,cameron-caffey,USA
+Keegan Hessler,959,keegan-hessler,USA
+Casey Cobb,984,casey-cobb,USA
+Dylan Keeney,999,dylan-keeney,USA
+Maxwell Dean,967,maxwell-dean,USA
+Jeffrey Fisk,957,jeffrey-fisk,USA
+Ronnie Caudill,957,ronnie-caudill,USA
+Travis Stefanik,961,travis-stefanik,USA
+Roy Galvan,957,roy-galvan,USA
+Adam Rateb,957,adam-rateb,USA
+Anthony Bontempo,926,anthony-bontempo,USA
+Daniel Deshazer,969,daniel-deshazer,USA
+Daniel Van Hoose,958,daniel-van-hoose,USA
+Aaron Trygstad,994,aaron-trygstad,USA
+Destin McCauley,1013,destin-mccauley,USA
+Martin Verhaeghe,972,martin-verhaeghe,USA
+Andrew Longmore,958,andrew-longmore,USA
+Zehlin Storr,978,zehlin-storr,USA
+Diante Cooper,1011,diante-cooper,USA
+Justin Davis,962,justin-davis,USA
+AJ Jaffe,1033,aj-jaffe,USA
+Vincent Washington,953,vincent-washington,USA
+Jacob Wright,958,jacob-wright,USA
+Matthew Alejando,971,matthew-alejando,USA
+Mitchell Finesilver,1007,mitchell-finesilver,USA
+Mike Deangelo,1003,mike-deangelo,USA
+Jessy Diaz,958,jessy-diaz,USA
+Bennett Paulson,979,bennett-paulson,USA
+John Halajian,958,john-halajian,USA
+Jamal Lewis,925,jamal-lewis,USA
+Juan Durazo,960,juan-durazo,USA
+Cornelius Putnam,955,cornelius-putnam,USA
+Phil Rasmussen,979,phil-rasmussen,USA
+Christian Robertson,958,christian-robertson,USA
+Juan Junior Perez,942,juan-junior-perez,USA
+Jarrod Hinrichs,1021,jarrod-hinrichs,USA
+Brian Burns,971,brian-burns,USA
+Kyle La Fritz,926,kyle-la-fritz,USA
+Robert Clark,960,robert-clark,USA
+Johnathan Aiello,998,johnathan-aiello,USA
+Kadeem Samuels,989,kadeem-samuels,USA
+Joey Lavalle,988,joey-lavalle,USA
+Gable Steveson,1090,gable-steveson,USA
+Cody Walters,1007,cody-walters,USA
+Cory Clark,960,cory-clark,USA
+J.T. Brown,995,jt-brown,USA
+Joshua Manu,1011,joshua-manu,USA
+Nick Nevills,969,nick-nevills,USA
+Timmy McCall,1043,timmy-mccall,USA
+Riley Lefever,1047,riley-lefever,USA
+Adam Coon,1026,adam-coon,USA
+Drew Foster,973,drew-foster,USA
+Mark Hall,1023,mark-hall,USA
+Nazar Kulchytskyy,950,nazar-kulchytskyy,USA
+Danny Chaid,1049,danny-chaid,USA
+Nico Megaludis,1079,nico-megaludis,USA
+Jeremiah Imonode,938,jeremiah-imonode,USA
+Tate Orndorff,977,tate-orndorff,USA
+Michael Kosoy,981,michael-kosoy,USA
+Michael Boykin,1007,michael-boykin,USA
+Nathan Jackson,1108,nathan-jackson,USA
+Dom Bradley,1098,dom-bradley,USA
+Youssif Hemida,1108,youssif-hemida,USA
+Stacey Davis,975,stacey-davis,USA
+Myles Martin,1052,myles-martin,USA
+Nicholas Heflin,1076,nicholas-heflin,USA
+Scottie Boykin,988,scottie-boykin,USA
+Samuel Brooks,1111,samuel-brooks,USA
+Matthew Finesilver,1024,matthew-finesilver,USA
+Geno Morelli,1025,geno-morelli,USA
+Ben Harvey,1050,ben-harvey,USA
+Nick Becker,1118,nick-becker,USA
+Alex Dieringer,1114,alex-dieringer,USA
+Zahid Valencia,1003,zahid-valencia,USA
+Logan Massa,1063,logan-massa,USA
+Brian Murphy,978,brian-murphy,USA
+Dan Vallimont,995,dan-vallimont,USA
+Anthony Valencia,1039,anthony-valencia,USA
+Richie Lewis,1003,richie-lewis,USA
+Thomas Gantt,1092,thomas-gantt,USA
+Jason Nolf,1130,jason-nolf,USA
+Hayden Hidlay,982,hayden-hidlay,USA
+Anthony Ashnault,975,anthony-ashnault,USA
+Colton McCrystal,975,colton-mccrystal,USA
+Jack Mueller,1034,jack-mueller,USA
+Sean Fausz,1048,sean-fausz,USA

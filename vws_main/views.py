@@ -19,7 +19,7 @@ class FS_ReportsDetailView(DetailView):
     slug_field = 'slug'
 
     def get_queryset(request):
-        return FS_Wrestler.objects.filter().annotate(
+        return FS_Wrestler.objects.all().annotate(
             hi_rate=Avg('focus_wrestler2__hi_rate'),
             ho_rate=Avg('focus_wrestler2__ho_rate'),
             d_rate=Avg('focus_wrestler2__d_rate'),
@@ -166,7 +166,6 @@ class FS_TeamDetailView(DetailView):
 
 
 class FS_EventsListView(ListView):
-    queryset = FS_Event.objects.all()
     template_name = 'vws_main/fs_events_table.html'
 
     def get_queryset(self):
@@ -174,8 +173,10 @@ class FS_EventsListView(ListView):
 
 
 class FS_EventsDetailView(DetailView):
-    queryset = FS_Event.objects.all().order_by('-date')
     template_name = 'vws_main/fs_events_detail.html'
+
+    def get_queryset(self):
+        return FS_Event.objects.filter()
 
 
 class FS_RatingsFilterView(FilterView):

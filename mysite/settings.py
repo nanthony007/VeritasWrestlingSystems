@@ -28,7 +28,7 @@ SECRET_KEY = 'mysecretkey007'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritas-wrestling.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com']
 
 
 # Application definition
@@ -82,14 +82,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.path.join(BASE_DIR, 'postgresql-fluffy-20323')
-    }
+    'default': dj_database_url.config(
+        default='postgres://ibpfcwfnmikxmw:5f6f81e84894399cc02a1ad09a6a663d21d448e9b4cbe2897d5fc75817818d3a@ec2-54-83-9-36.compute-1.amazonaws.com:5432/dfh945lu8avc08'
+    )
 }
-
-DATABASES['default'].update(dj_database_url.config(conn_max_age=600))
-DATABASES['default'] = dj_database_url.config(default='postgres://oobyddalruvbus:343f0b15bccf26d8cb172517540382db684ac2f3a2a6716733934848810c77db@ec2-174-129-25-182.compute-1.amazonaws.com:5432/d7ckkefqc2gmg')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

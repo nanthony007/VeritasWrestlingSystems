@@ -5,7 +5,6 @@
     <div class="page-header">
         <h2>{{object.name}}</h2>
         <hr />
-        <h5>20 most recent matches</h5>
     </div>
 
   <div class="table-responsive">
@@ -22,14 +21,16 @@
       </thead>
       <tbody>
         {% for match in object.matches.all %}
-        <tr>
-          <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
-          <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
-          <td>{{match.result}}</td>
-          <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
-          <td>{{match.focus_score}}</td>
-          <td>{{match.opp_score}}</td>
-        </tr>
+          {% if "*" not in match.matchID %}
+            <tr>
+              <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
+              <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
+              <td>{{match.result}}</td>
+              <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
+              <td>{{match.focus_score}}</td>
+              <td>{{match.opp_score}}</td>
+            </tr>
+          {% endif %}
         {% endfor %}
       </tbody>
     </table>
