@@ -1,6 +1,7 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 
+"""Start of Folkstyle stuff, saved for potential later use...
 
 class Team(models.Model):
     name = models.CharField(max_length=250, primary_key=True, unique=True)
@@ -161,6 +162,7 @@ class Event(models.Model):
 
     def __str_(self):
         return self.name
+"""
 
 
 class FS_Team(models.Model):

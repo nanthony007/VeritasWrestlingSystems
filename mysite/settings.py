@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com']
 
 INSTALLED_APPS = [
     'vws_main',
-    'blog',
     'django_tables2',
     'widget_tweaks',
     'django.contrib.admin',

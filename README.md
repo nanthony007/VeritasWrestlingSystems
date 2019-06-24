@@ -18,11 +18,13 @@ Clone the repository: `git clone https://github.com/nanthony007/VeritasAnalytics
 It is recommended to activate a virtual environment using 
 [virtualenv](https://virtualenv.pypa.io/en/latest/) `virtualenv venv`  
   
-Then run `$python3 FScollector.py`  
+Download and use the [Recording manual](collection/Recording_Manual.docx) for operationalization of match scenarios. 
+Utilize the [Abbreviations file](collection/VWSabbreviations.xlsx) to familiarize yourself with data abbreviations.
+  
+Run `$python3 FScollector.py`  
 This will write to the site database and the local files in the [stats](collection/stats) directory.  
   
 Analysis can be found in the series of Jupyter Notebooks located in the [analysis](collection/analysis) directory.
-
 
 ## Features
 #### In Development

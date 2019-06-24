@@ -1,0 +1,36 @@
+,Veritas Wrestling Systems,,,
+,Abbreviations,,,
+,Full Name,Abbreviation,Definition,Type of Data
+,Focus,none,Prefix for primary wrestler,Identifier
+,Opponent  ,opp,Prefix for opposing wrestler,Identifier
+,Weight Class,Weight,Weight for competition in kilograms,Identifier
+,Match ID,matchID,Randomly generated unique 4 digit code,Identifier
+,Effective Wins,EW,Number of wins factored by result,Secondary | Statistic
+,Attempt,a ,"Attempting techniques.  Applies to the neutral position.  Determined by forward motion, knee-ground contact, and/or grabbing an opponent’s leg",Modifier
+,Conversion,c ,Converted attempts.  Awarded when the official rewards 2 points for a takedown,Modifier
+,Efficiency,%,Efficiency at performing a specific technique.,Modifier | Statistic
+,Match,match,"Totals, a variable for the match... uses both primary and opponent statistics.",Modifier | Statistic
+,Head Inside,HI,Neutral technique when the head remains inside the body area whilst attacking one leg,Primary
+,Head Outside,HO,Neutral technique whereby the head falls outside the body area while attacking one leg,Primary
+,Double,D,Neutral technique in which both legs are attacked,Primary
+,Low Shot,LS,Neutral technique in which one or two legs are attacked below the knee,Primary
+,Counter,GB,Neutral technique for countering an opponent’s technique.  Occurs after the opposing wrestler attempts a technique. ,Primary
+,Throw,Throw,Neutral technique for lifting an opponent and bringing him forcefully to the mat.,Primary
+,Exposure,Expo,Neutral technique for forcing another wrestler to expose their back,Primary
+,Recovery,Recovery,Recovering action after being exposed,Primary
+,Gut,Gut,Top technique focuses on torso,Primary
+,LegLace,LegLace,Top technique focuses on legs,Primary
+,Turn,Turn,Alternative top techniques,Primary
+,Passive,Passive,Passivity of one wrestler,Primary
+,Result,Result,Result of the match.  Recorded at the completion of the competition. ,Primary
+,Seconds,Seconds,Match time in seconds,Primary
+,Weighted Result,wResult | weightedResult,Result factoring in the strength of the opponent,Secondary | Statistic
+,Opponent Strength,oStrength | oppStrength,Ranking of the opponent in their weight class utilizing VP,Primary
+,Offensive Action per Minute,OPM,Offensive techniques performed during the match,Secondary | Statistic
+,Defensive Action per Minute,DPM,Defensive techniques performed during the match,Secondary | Statistic
+,Action per Minute,APM,Total techniques performed during the match compared to penalties incurred.,Composite
+,Net Action per Minute,NAPM,Net action comparing the primary wrestler and his opponent,Composite
+,Margin of Victory,MOV,Difference in match points between focus and opponent,Composite
+,Neutral Pace Factor,NPF,Contribution to neutral action,Composite
+,Rating,EloRating,EloRating System,Composite
+,Veritas Points/Score,VP/VS,Total performance measure.  Primary stat for Fantasy (points),Composite

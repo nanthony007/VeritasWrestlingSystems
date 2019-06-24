@@ -2,58 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLI_folk_collector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FScollector.spec" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Recording_Manual.docx" beforeDir="false" afterPath="$PROJECT_DIR$/collection/Recording_Manual.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VWSabbreviations.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/collection/VWSabbreviations.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/img/VWShighmini.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/img/mini.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/Analysis-00.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/EXE-00.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/PKG-00.pkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/PKG-00.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/PYZ-00.pyz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/PYZ-00.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/Tree-00.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/Tree-01.toc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/base_library.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/warn-FScollector.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/FScollector/xref-FScollector.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/FScollector" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,15 +16,27 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="175">
-                <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+              <first_editor relative-caret-position="675">
+                <caret line="27" selection-start-line="27" selection-end-line="27" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vws_main/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="700">
+              <caret line="166" selection-start-line="166" selection-end-line="166" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -93,8 +59,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mysite/settings.py" />
-        <option value="$PROJECT_DIR$/vws_main/models.py" />
         <option value="$PROJECT_DIR$/vws_main/filters.py" />
         <option value="$PROJECT_DIR$/vws_main/urls.py" />
         <option value="$PROJECT_DIR$/vws_main/views.py" />
@@ -115,13 +79,15 @@
         <option value="$PROJECT_DIR$/collection/video2.py" />
         <option value="$PROJECT_DIR$/collection/video.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/collection/VWSabbreviations.csv" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/mysite/settings.py" />
+        <option value="$PROJECT_DIR$/vws_main/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="y" value="88" />
     <option name="width" value="2400" />
     <option name="height" value="1424" />
   </component>
@@ -142,6 +108,11 @@
               <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
               <item name="collection" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
+              <item name="vws_main" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -152,7 +123,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -313,7 +284,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2400" height="1424" extended-state="0" />
+    <frame x="0" y="88" width="2400" height="1424" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16822034" />
@@ -326,9 +297,9 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.0807537" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32985553" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.21589085" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32985553" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -374,13 +345,6 @@
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
@@ -444,26 +408,7 @@
     <entry file="file://$PROJECT_DIR$/vws_main/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="37" column="11" lean-forward="true" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
-          <folding>
-            <element signature="e#307#316#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1530">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="e#17#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/collector.py" />
     <entry file="file://$PROJECT_DIR$/collection/backend.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -502,13 +447,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/collection/rosters_teams.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collection/VWSabbreviations.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="24" column="82" selection-start-line="24" selection-start-column="82" selection-end-line="24" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mysite/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+          <folding>
+            <element signature="e#307#316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="175">
-            <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          <first_editor relative-caret-position="675">
+            <caret line="27" selection-start-line="27" selection-end-line="27" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="166" selection-start-line="166" selection-end-line="166" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
