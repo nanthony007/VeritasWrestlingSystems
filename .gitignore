@@ -1,13 +1,4 @@
 venv
-collector.spec
-.idea
 __pycache__
 .ipynb_checkpoints
-blog
-build
-dist
-CLI_folk_collector.py
-FScollector.spec
-Reports.ipynb
 .gitignore
-staticfiles

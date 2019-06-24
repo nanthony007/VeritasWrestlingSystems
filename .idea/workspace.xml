@@ -2,43 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.ipynb_checkpoints/Untitled-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FScollector.py" beforeDir="false" afterPath="$PROJECT_DIR$/FScollector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collection/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/collection/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collection/stats/matchdata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/collection/stats/matchdata.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collection/stats/timeseries.csv" beforeDir="false" afterPath="$PROJECT_DIR$/collection/stats/timeseries.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collection/stats/wrestlers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/collection/stats/wrestlers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collector.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0002_team_slug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0003_auto_20190115_2248.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0004_auto_20190116_0112.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0005_auto_20190117_1152.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0006_event_slug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0007_auto_20190120_1920.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0008_auto_20190124_2242.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0009_auto_20190201_2226.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0010_auto_20190201_2227.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0011_event_date.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0012_remove_wrestler_competitions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0013_auto_20190226_1153.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0014_auto_20190328_1234.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0015_event_result.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/migrations/0016_auto_20190430_1929.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/events_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/match_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CLI_folk_collector.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FScollector.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Recording_Manual.docx" beforeDir="false" afterPath="$PROJECT_DIR$/collection/Recording_Manual.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VWSabbreviations.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/collection/VWSabbreviations.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-grid.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap-reboot.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/css/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/img/VWShighmini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/img/mini.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/static/blog/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/Analysis-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/EXE-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/PKG-00.pkg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/PKG-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/PYZ-00.pyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/PYZ-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/Tree-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/Tree-01.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/base_library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/warn-FScollector.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/FScollector/xref-FScollector.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/FScollector" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +62,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="175">
+                <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -86,46 +114,49 @@
         <option value="$PROJECT_DIR$/collection/stats/video2.py" />
         <option value="$PROJECT_DIR$/collection/video2.py" />
         <option value="$PROJECT_DIR$/collection/video.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="2400" />
+    <option name="height" value="1424" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
+              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="site" type="b2602c69:ProjectViewProjectNode" />
-              <item name="site" type="462c0819:PsiDirectoryNode" />
+              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
               <item name="collection" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../collector_files" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/collection" />
       <recent name="C:\Users\HotRod\Desktop\site\collection\videos" />
       <recent name="C:\Users\HotRod\Desktop\site" />
       <recent name="C:\Users\HotRod\Desktop\site\collection" />
@@ -282,9 +313,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="2400" height="1424" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16859852" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16822034" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -363,62 +395,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/events_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/match_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="60" column="6" selection-start-line="60" selection-start-column="6" selection-end-line="60" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/events_detail.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/match_detail.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/ratings.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_detail.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/team_table.html" />
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_detail.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -510,6 +494,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Reports.ipynb">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="175">
+            <caret line="7" column="33" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
