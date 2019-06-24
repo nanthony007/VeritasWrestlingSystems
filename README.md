@@ -18,8 +18,10 @@ Clone the repository: `git clone https://github.com/nanthony007/VeritasAnalytics
 It is recommended to activate a virtual environment using 
 [virtualenv](https://virtualenv.pypa.io/en/latest/) `virtualenv venv`  
   
-Download and use the [Recording manual](collection/Recording_Manual.docx) for operationalization of match scenarios. 
-Utilize the [Abbreviations file](collection/VWSabbreviations.xlsx) to familiarize yourself with data abbreviations.
+Utilize the [Abbreviations file](collection/VWSabbreviations.xlsx) 
+to familiarize yourself with Veritas data abbreviations.
+United World Wrestling (UWW) rules and language 
+can be found [here(rules)](collection/uww_wrestling_rules.pdf) and [here(language)](collection/uww_basic_vocabulary.pdf).
   
 Run `$python3 FScollector.py`  
 This will write to the site database and the local files in the [stats](collection/stats) directory.  
