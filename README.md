@@ -3,10 +3,10 @@
 - [Purpose](#Purpose)
 - [Usage](#Usage)
 - [Features](#Features)
-  * [In Development](#In Development)
+  * [In Development](#In-Development)
   * [Released](#Released)
-- [Abandoned Features](#Abandoned Features)
-- [Learning](#What I learned)
+- [Abandoned Features](#Abandoned-Features)
+- [Skills Learned](#Skills)
 
 ## Purpose
 This website was developed to display advanced analytics for the sport of wrestling. 
@@ -29,7 +29,7 @@ This will write to the site database and the local files in the [stats](collecti
 Analysis can be found in the series of Jupyter Notebooks located in the [analysis](collection/analysis) directory.
 
 ## Features
-#### In Development
+#### In-Development
 - [ ] Fantasy user app (building on coaches portal)
 - [ ] Live fantasy draft
 - [ ] Coaches portal to analyze wrestlers strengths/weaknesses
@@ -39,10 +39,10 @@ Analysis can be found in the series of Jupyter Notebooks located in the [analysi
 - [x] Events Result field
 - [x] Wrestlers Reports
 
-## Abandoned Features
+## Abandoned-Features
 1. Blog/articles app that utilizes .ipynb files as field
 
-## What I learned
+## Skills
 1.  Django web framework including ORM
 2.  SQL and PostgreSQL connections with django models
 3.  HTML forms
