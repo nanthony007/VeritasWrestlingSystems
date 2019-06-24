@@ -1,12 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Q, F, Avg, Sum, Count, Case, When, CharField, IntegerField, Value, FloatField, Func
-from vws_main.models import Matchdata, Wrestler, Team, Event, FS_Event, FS_Wrestler, FS_Team, FS_Match
+from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
+from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
-from vws_main.filters import FS_RatingsFilter, FS_EventsFilter
-from graphos.sources.model import ModelDataSource, SimpleDataSource
-from graphos.renderers.gchart import LineChart
-import pandas as pd
+from vws_main.filters import FS_RatingsFilter
 
 
 class Round(Func):
