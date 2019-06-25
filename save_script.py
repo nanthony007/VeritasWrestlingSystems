@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import datetime
+import numpy as np
 import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
@@ -45,7 +45,7 @@ events = FS_Event.objects.values()
 events_df = pd.DataFrame(list(events))
 
 # wrestlers last
-wrestlers = FS_Wrestler.objects.values()
+wrestlers = FS_Wrestler.objects.values('name', 'team_id', 'rating')
 wrestlers_df = pd.DataFrame(list(wrestlers))
 
 # write dataframes to csv files
