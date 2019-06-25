@@ -180,11 +180,18 @@ class FS_Team(models.Model):
 
 
 class FS_Wrestler(models.Model):
+    LEVELS = [
+        ('Gold', 'Gold'),
+        ('Silver', 'Silver'),
+        ('Bronze', 'Bronze'),
+
+    ]
     name = models.CharField(max_length=140, primary_key=True)
     team = models.ForeignKey(FS_Team, on_delete=models.CASCADE,
         default='Finger Lakes Wrestling Club/Titan Mercury Wrestling Club',
         related_name='team_name2')
     rating = models.IntegerField(default=1000)
+    #level = models.CharField(choices=LEVELS)
     slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
 
     class Meta:

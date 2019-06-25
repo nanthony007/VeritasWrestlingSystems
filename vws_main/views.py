@@ -7,8 +7,8 @@ from vws_main.filters import FS_RatingsFilter
 
 
 class Round(Func):
-  function = 'ROUND'
-  arity = 2
+    function = 'ROUND'
+    arity = 2
 
 
 class FS_ReportsDetailView(DetailView):
@@ -177,8 +177,10 @@ class FS_EventsDetailView(DetailView):
 
 
 class FS_RatingsFilterView(FilterView):
+    model = FS_Wrestler
     filterset_class = FS_RatingsFilter
     template_name = 'vws_main/fs_ratings.html'
+    paginate_by = 25
 
     def get_queryset(request):
         return FS_Wrestler.objects.annotate(
