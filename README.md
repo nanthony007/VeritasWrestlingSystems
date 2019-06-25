@@ -24,9 +24,11 @@ United World Wrestling (UWW) rules and language
 can be found [here(rules)](collection/uww_wrestling_rules.pdf) and [here(language)](collection/uww_basic_vocabulary.pdf).
   
 Run `$python3 FScollector.py`  
-This will write to the site database and the local files in the [stats](collection/stats) directory.  
+This will write to the site database.  
   
 Analysis can be found in the series of Jupyter Notebooks located in the [analysis](collection/analysis) directory.
+
+Use `sace_script.py` to save the current database instance to local files in [stats](collection/stats).
 
 ## Features
 #### In-Development
