@@ -4,8 +4,16 @@ import datetime
 import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
-from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Team, FS_Event
+from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Event
 pd.options.mode.chained_assignment = None
+
+"""
+This script extracts an instance of the database at runtime. 
+It transforms the data into a consumable medium and saves it as a csv file.
+Most data transformations will occur here while data filtering/cleaning will occur at the analysis stage.
+This is done to simplify and expedite analysis documents so they do not require loading django each runtime.
+
+"""
 
 # timeseries first
 ts = FS_TS.objects.values()
@@ -13,7 +21,7 @@ ts_df = pd.DataFrame(list(ts))
 # remove useless id column
 ts_df = ts_df.drop(columns=['id'])
 ts_df = ts_df[ts_df['matchID_id'].str.len()==4]
-# reassign time value to frational seconds not string
+# reassign time value to fractional seconds not string
 tt = []
 for i in ts_df['event_time']:
     m, s, ds = i.split(':')
