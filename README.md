@@ -28,7 +28,7 @@ This will write to the site database.
   
 Analysis can be found in the series of Jupyter Notebooks located in the [analysis](collection/analysis) directory.
 
-Use `sace_script.py` to save the current database instance to local files in [stats](collection/stats).
+Use `save_script.py` to save the current database instance to local files in [stats](collection/stats).
 
 ## Features
 #### In-Development
