@@ -27,7 +27,7 @@ ts_df.reset_index(drop=True, inplace=True)
 matches = FS_Match.objects.values()
 match_df = pd.DataFrame(list(matches))
 match_df['passive_dif'] = match_df.apply(lambda x: x.passive-x.opp_passive, axis=1)
-conditions = [match_df.result=='WinF', match_df.result=='WinTF', result=='WinD',
+conditions = [match_df.result=='WinF', match_df.result=='WinTF', match_df.result=='WinD',
     match_df.result=='LossD', match_df.result=='Loss TF', match_df.result=='LossF']
 choices = [1.75, 1.50, 1.10, 0.90, 0.50, 0.25]
 match_df['num_result'] = np.select(conditions, choices)
