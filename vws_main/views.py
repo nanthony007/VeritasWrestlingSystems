@@ -3,7 +3,7 @@ from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, F
 from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
-from vws_main.filters import FS_RatingsFilter
+from vws_main.filters import FS_RatingsFilter, FS_EventsFilter
 
 
 class Round(Func):

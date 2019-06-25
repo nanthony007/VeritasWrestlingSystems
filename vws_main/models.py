@@ -191,7 +191,7 @@ class FS_Wrestler(models.Model):
         default='Finger Lakes Wrestling Club/Titan Mercury Wrestling Club',
         related_name='team_name2')
     rating = models.IntegerField(default=1000)
-    #level = models.CharField(choices=LEVELS)
+    #level = models.CharField(choices=LEVELS, default=)
     slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
 
     class Meta:
