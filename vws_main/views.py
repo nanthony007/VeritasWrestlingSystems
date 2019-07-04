@@ -5,8 +5,6 @@ from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 from vws_main.filters import FS_RatingsFilter, FS_EventsFilter
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 
 class Round(Func):
