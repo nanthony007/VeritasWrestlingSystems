@@ -10,5 +10,5 @@ urlpatterns = [
     path('fs_events/', views.FS_EventsListView.as_view(), name='fs_events_list'),
     path('fs_events/<slug>/', views.FS_EventsDetailView.as_view(), name='fs_events_detail_view'),
     path('fs_ratings/', views.FS_RatingsFilterView.as_view(), name='fs_rating_view'),
-    path('reports/<slug>/', views.FS_ReportsDetailView.as_view(), name='report_detail_view'),
+    path('reports/<slug>/', views.FS_ReportsView.as_view(), name='report_detail_view'),
 ]

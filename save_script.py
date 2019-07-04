@@ -34,6 +34,12 @@ ts_df.reset_index(drop=True, inplace=True)
 # matches next
 matches = FS_Match.objects.values()
 match_df = pd.DataFrame(list(matches))
+ss = []
+for i in match_df['duration']:
+    m, s, ds = i.split(':')
+    t = int(m)*60 + int(s) + int(ds)/100
+    ss.append(t)
+match_df['duration'] = ss
 match_df['passive_dif'] = match_df.apply(lambda x: x.passive-x.opp_passive, axis=1)
 conditions = [match_df.result=='WinF', match_df.result=='WinTF', match_df.result=='WinD',
     match_df.result=='LossD', match_df.result=='Loss TF', match_df.result=='LossF']

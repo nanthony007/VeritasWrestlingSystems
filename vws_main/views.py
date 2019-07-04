@@ -4,6 +4,9 @@ from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
 from django.views.generic import DetailView, ListView
 from django_filters.views import FilterView
 from vws_main.filters import FS_RatingsFilter, FS_EventsFilter
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
 class Round(Func):
@@ -11,38 +14,72 @@ class Round(Func):
     arity = 2
 
 
-class FS_ReportsDetailView(DetailView):
+class FS_ReportsView(ListView):
     template_name = 'vws_main/reports_detail.html'
     slug_field = 'slug'
 
-    def get_queryset(request):
-        return FS_Wrestler.objects.all().annotate(
-            hi_rate=Avg('focus_wrestler2__hi_rate'),
-            ho_rate=Avg('focus_wrestler2__ho_rate'),
-            d_rate=Avg('focus_wrestler2__d_rate'),
-            ls_rate=Avg('focus_wrestler2__ls_rate'),
-            gb_rate=Avg('focus_wrestler2__gb_rate'),
-            t_rate=Avg('focus_wrestler2__t_rate'),
-            opp_hi_rate=Avg('focus_wrestler2__opp_hi_rate'),
-            opp_ho_rate=Avg('focus_wrestler2__opp_ho_rate'),
-            opp_d_rate=Avg('focus_wrestler2__opp_d_rate'),
-            opp_ls_rate=Avg('focus_wrestler2__opp_ls_rate'),
-            opp_gb_rate=Avg('focus_wrestler2__opp_gb_rate'),
-            opp_t_rate=Avg('focus_wrestler2__opp_t_rate'),
-            pin_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='WinF')),
-            tech_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='WinTF')),
-            win_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='WinD')),
-            loss_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='LossD')),
-            tech_loss_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='LossTF')),
-            fall_loss_count=Count('focus_wrestler2__result',
-                filter=Q(focus_wrestler2__result='LossF')),
-            match_count=Count('focus_wrestler2'),
-        )
+    def get_queryset(self):
+        return FS_Match.objects.filter(focus__slug=self.kwargs['slug']
+                                       ).exclude(duration='00:00:00')
+        #                                          ).annotate(
+        #     hi_rate=Avg('focus_wrestler2__hi_rate'),
+        #     ho_rate=Avg('focus_wrestler2__ho_rate'),
+        #     d_rate=Avg('focus_wrestler2__d_rate'),
+        #     ls_rate=Avg('focus_wrestler2__ls_rate'),
+        #     gb_rate=Avg('focus_wrestler2__gb_rate'),
+        #     t_rate=Avg('focus_wrestler2__t_rate'),
+        #     opp_hi_rate=Avg('focus_wrestler2__opp_hi_rate'),
+        #     opp_ho_rate=Avg('focus_wrestler2__opp_ho_rate'),
+        #     opp_d_rate=Avg('focus_wrestler2__opp_d_rate'),
+        #     opp_ls_rate=Avg('focus_wrestler2__opp_ls_rate'),
+        #     opp_gb_rate=Avg('focus_wrestler2__opp_gb_rate'),
+        #     opp_t_rate=Avg('focus_wrestler2__opp_t_rate'),
+        #     pin_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='WinF')),
+        #     tech_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='WinTF')),
+        #     win_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='WinD')),
+        #     loss_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='LossD')),
+        #     tech_loss_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='LossTF')),
+        #     fall_loss_count=Count('focus_wrestler2__result',
+        #         filter=Q(focus_wrestler2__result='LossF')),
+        #     match_count=Count('focus_wrestler2'),
+        # )
+
+    def find_result_types(self, row):
+        if row == 'WinF':
+            return 'Fall'
+        elif row == 'WinTF':
+            return 'Tech'
+        elif row == 'WinD':
+            return 'Decision'
+        elif row == 'LossD':
+            return 'Decision'
+        elif row == 'LossTF':
+            return 'Tech'
+        elif row == 'LossF':
+            return 'Fall'
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['firstname'] = self.kwargs['slug'].split('-')[0].capitalize()
+        data['lastname'] = self.kwargs['slug'].split('-')[1].capitalize()
+        matches = pd.read_csv('collection/stats/matchdata.csv')
+        matches['binary_result'] = ['Win' if row > 1 else 'Loss' for row in matches.num_result.values]
+        matches['result_type'] = [self.find_result_types(row) for row in matches.result.values]
+        matches = matches[matches.duration != 0]
+
+        sns.set_style('white')
+        sns.despine()
+
+        p1 = sns.catplot(x='result_type', hue='binary_result', kind='count', data=matches,
+                    palette=sns.diverging_palette(10, 240, n=2))
+        figure = p1.get_figure()
+        figure.savefig('p1f.png', dpi=400)
+        return data
 
 
 def home(request):

@@ -23,11 +23,13 @@
         <div class="col-sm-4">
           <h5>Avg. Result: </h5><p> {{object.avg_result|floatformat:2}}</p>
         </div>
+<!--
         <div class="col-sm-1">
           <button type="button" class="btn btn-lg btn-link btn-outline-secondary">
             <a href="/reports/{{object.slug}}">View Report</a>
           </button>
         </div>
+-->
       </div>
       <div class="row">
         <div class="col-sm-4">
@@ -41,33 +43,34 @@
   <hr id="base-stats-table" />
   <h3>Base Stats <small>(sum)</small>:</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
-          <th>HIa</th>
-          <th>HIc2</th>
-          <th>HIc4</th>
-          <th>HOa</th>
-          <th>HOc2</th>
-          <th>HOc4</th>
-          <th>Da</th>
-          <th>Dc2</th>
-          <th>Dc4</th>
-          <th>LSa</th>
-          <th>LSc2</th>
-          <th>LSc4</th>
-          <th>GBa</th>
-          <th>GBc2</th>
-          <th>Ta</th>
-          <th>Tc2</th>
-          <th>Tc4</th>
-          <th>Exposure</th>
-          <th>Gut</th>
-          <th>LegLace</th>
-          <th>Turn</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
+        </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>{{object.hia}}</td>
           <td>{{object.hic2}}</td>
           <td>{{object.hic4}}</td>
@@ -97,22 +100,25 @@
   <hr id="adv-stats-table" />
   <h3>Advanced Stats <small>(avg)</small>:</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
-          <th>HI%</th>
-          <th>HO%</th>
-          <th>D%</th>
-          <th>LS%</th>
-          <th>GB%</th>
-          <th>Throw%</th>
-          <th>NPF</th>
-          <th>APM</th>
-          <th>VS</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside Rate" data-content="(HIc2+HIc4)/HIa">HI%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside Rate" data-content="(HOc2+HOc4)/HOa">HO%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double Rate" data-content="(Dc2+Dc4)/Da">D%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot Rate" data-content="((LSc2+LSc4)/LSa">LS%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter Rate" data-content="GBc2/GBa">GB%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw Rate" data-content="(Tc2+Tc4)/Ta">T%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Neutral Pace Factor"
+                 data-content="(TD conversions/total TD conversions) + (TD attempts/total TD attempts)">NPF</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Action per Minute"
+                 data-content="(Defensive Action per Minute + Offensive Action per Minute) / Duration">APM</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Veritas Score"
+                 data-content="Weighted Result + (NPF * APM)">VS</a></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>{{object.hi_rate|floatformat:2}}</td>
           <td>{{object.ho_rate|floatformat:2}}</td>
           <td>{{object.d_rate|floatformat:2}}</td>
@@ -130,34 +136,34 @@
   <hr id="opp-base-stats-table" />
   <h3>Opponent Base Stats <small>(sum)</small>:</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
-          <th>oHIa</th>
-          <th>oHIc2</th>
-          <th>oHIc4</th>
-          <th>oHOa</th>
-          <th>oHOc2</th>
-          <th>oHOc4</th>
-          <th>oDa</th>
-          <th>oDc2</th>
-          <th>oDc4</th>
-          <th>oLSa</th>
-          <th>oLSc2</th>
-          <th>oLSc4</th>
-          <th>oGBa</th>
-          <th>oGBc2</th>
-          <th>oTa</th>
-          <th>oTc2</th>
-          <th>oTc4</th>
-          <th>oExposure</th>
-          <th>oGut</th>
-          <th>oLegLace</th>
-          <th>oTurn</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Attempts">oHIa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Conversions for 2">oHIc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Conversions for 4">oHIc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Opponent Attempts">oHOa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Opponent Conversions for 2">oHOc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Conversions for 4">oHOc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Attempts">oDa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Conversions for 2">oDc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Conversions for 4">oDc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Attempts">oLSa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Conversions for 2">oLSc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Conversions for 4">oLSc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter" data-content="Opponent Attempts">oGBa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter" data-content="Opponent Conversions for 2">oGBc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Attempts">oTa</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Conversions for 2">oTc2</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Conversions for 4">oTc4</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Exposure" data-content="Opponent Exposure from Counter">oExposure</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Gut" data-content="Opponent Gut Wrench turn">oGut</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Leg Lace" data-content="Opponent Leg Lace turn">oLegLace</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Turn" data-content="Opponent Other Turn">oTurn</a></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>{{object.opp_hia}}</td>
           <td>{{object.opp_hic2}}</td>
           <td>{{object.opp_hic4}}</td>
@@ -187,22 +193,25 @@
   <hr id="opp-adv-stats-table" />
   <h3>Opponent Advanced Stats <small>(avg)</small>:</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
-          <th>oHI%</th>
-          <th>oHO%</th>
-          <th>oD%</th>
-          <th>oLS%</th>
-          <th>oGB%</th>
-          <th>oThrow%</th>
-          <th>oNPF</th>
-          <th>oAPM</th>
-          <th>oVS</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside Rate" data-content="(oHIc2+oHIc4)/oHIa">oHI%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside Rate" data-content="(oHOc2+oHOc4)/oHOa">oHO%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double Rate" data-content="(oDc2+oDc4)/oDa">oD%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot Rate" data-content="((oLSc2+oLSc4)/oLSa">oLS%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter Rate" data-content="oGBc2/oGBa">oGB%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw Rate" data-content="(oTc2+oTc4)/oTa">oT%</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Neutral Pace Factor"
+                 data-content="(opp TD conversions/total TD conversions) + (opp TD attempts/total TD attempts)">oNPF</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Action per Minute"
+                 data-content="(opp Defensive Action per Minute + opp Offensive Action per Minute) / Duration">oAPM</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Veritas Score"
+                 data-content="oWeighted Result + (oNPF * oAPM)">oVS</a></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>{{object.opp_hi_rate|floatformat:2}}</td>
           <td>{{object.opp_ho_rate|floatformat:2}}</td>
           <td>{{object.opp_d_rate|floatformat:2}}</td>
@@ -219,23 +228,31 @@
   <hr id="misc-stats-table" />
   <h3>Misc: <small>(sum)</small></h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
-          <th>Points Earned</th>
-          <th>Points Allowed</th>
-          <th>Recovery</th>
-          <th>Pushout</th>
-          <th>Passive</th>
-          <th>Violation</th>
-          <th>oRecovery</th>
-          <th>oPushout</th>
-          <th>oPassive</th>
-          <th>oViolation</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Total Points Earned"
+                 data-content="Sum of all points earned">Points Earned</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Total Points Allowed"
+                 data-content="Sum of all opponent points earned">Points Allowed</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Recovery"
+                 data-content="Recovering a Takedown after allowing an exposure">Recovery</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Pushout" data-content="Pushout">Pushout</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Passive"
+                 data-content="Passivity call (includes warnings)">Passive</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Violations"
+                 data-content="Violations including illegal holds and shot-clock violations">Violations</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponnent Recovery"
+                 data-content="Opponent Recovering a Takedown after allowing an exposure">oRecovery</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Pushout" data-content="Opponent Pushout">oPushout</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Passive"
+                 data-content="Opponent Passivity call (includes warnings)">oPassive</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Violations"
+                 data-content="Opponent Violations including illegal holds and shot-clock violations">oViolations</a></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-light">
           <td>{{object.points_earned}}</td>
           <td>{{object.points_allowed}}</td>
           <td>{{object.recovery}}</td>
@@ -254,8 +271,8 @@
   <hr id="matches-table" />
   <h3>Matches: <small>({{object.match_count}})</small></h3>
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover table-sm">
-      <thead class="table-primary">
+    <table class="table table-bordered table-hover table-sm table-light">
+      <thead class="table-secondary">
         <tr>
           <th>MatchID</th>
           <th>Date</th>
@@ -284,4 +301,11 @@
     </table>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>
+
 {% endblock %}

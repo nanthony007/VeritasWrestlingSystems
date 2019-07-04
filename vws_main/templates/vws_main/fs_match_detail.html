@@ -93,7 +93,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="table-secondary">
         <td>{{object.matchID}}</td>
         <td>{{object.date}}</td>
         <td>{{object.weight}}</td>
@@ -185,11 +185,12 @@
       Blue: {{object.focus.name}} | Red: {{object.opponent.name}}</caption>
       <thead class="table-primary">
         <tr>
-          <th>Event_Num</th>
-          <th>Event_Label</th>
-          <th>Event_Time</th>
-          <th>Blue</th>
-          <th>Red</th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Event Number in Match" data-content="running total">Event_Num</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Event Label"
+                 data-content="b_ prefix indicates blue action, r_ prefix indicates red action">Event_Label</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Event Time" data-content="in seconds">Event_Time</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Blue Points" data-content="">Blue</a></th>
+          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Red Points" data-content="">Red</a></th>
         </tr>
       </thead>
       <tbody>
@@ -206,4 +207,11 @@
     </table>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>
+
 {% endblock %}
