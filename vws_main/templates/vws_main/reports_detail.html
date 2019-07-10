@@ -1,28 +1,19 @@
 {% extends "vws_main/header.html" %}
 
 {% block content %}
+{% load staticfiles %}
+
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 <div class="container">
   <div class="page-header">
-      <h2>Report for {{firstname}} {{lastname}}</h2>
+      <h2>Report for {{name}}</h2>
       <hr />
   </div>
   <p>Reports are generated based on selected athlete.</p>
   <br />
-  <div class="well">
-    <div class="row">
-      <p>{{matches}}</p>
-    </div>
-    <div class="row">
-      <div class="col">{{ name }}</div>
-    </div>
-    <div class="row">
-      <div class="col">{{ plot | safe }}</div>
-    </div>
-  </div>
-
+  <center><img src="/plot" width="1000px" height="600px" alt="No report"></center>
 </div>
 
 {% endblock %}

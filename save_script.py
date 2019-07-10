@@ -32,6 +32,20 @@ ts_df = ts_df.sort_values(['matchID_id', 'event_num'])
 ts_df.reset_index(drop=True, inplace=True)
 
 # matches next
+def find_result_types(row):
+    if row == 'WinF':
+        return 'Fall'
+    elif row == 'WinTF':
+        return 'Tech'
+    elif row == 'WinD':
+        return 'Decision'
+    elif row == 'LossD':
+        return 'Decision'
+    elif row == 'LossTF':
+        return 'Tech'
+    elif row == 'LossF':
+        return 'Fall'
+
 matches = FS_Match.objects.values()
 match_df = pd.DataFrame(list(matches))
 ss = []
@@ -45,6 +59,10 @@ conditions = [match_df.result=='WinF', match_df.result=='WinTF', match_df.result
     match_df.result=='LossD', match_df.result=='Loss TF', match_df.result=='LossF']
 choices = [1.75, 1.50, 1.10, 0.90, 0.50, 0.25]
 match_df['num_result'] = np.select(conditions, choices)
+match_df['binary_result'] = [1 if row > 1 else 0 for row in match_df.num_result.values]
+match_df['binary_result_text'] = ['Win' if row > 1 else 'Loss' for row in match_df.num_result.values]
+match_df['result_type'] = [find_result_types(row) for row in match_df.result.values]
+
 
 # then events
 events = FS_Event.objects.values()
@@ -53,6 +71,14 @@ events_df = pd.DataFrame(list(events))
 # wrestlers last
 wrestlers = FS_Wrestler.objects.values('name', 'team_id', 'rating')
 wrestlers_df = pd.DataFrame(list(wrestlers))
+# calculates effective wins and assigns row-wise
+for person in match_df.focus_id.unique():
+    group = match_df[match_df['focus_id']==person]
+    ew = group.num_result.mean() * len(group.index)
+    for i, row in wrestlers_df.iterrows():
+        if row['name'] == person:
+            wrestlers_df.at[i, 'ew'] = round(ew, 2)
+
 
 # write dataframes to csv files
 ts_df.to_csv('collection/stats/timeseries.csv', index=False)
