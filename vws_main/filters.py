@@ -55,14 +55,11 @@ class FS_RatingsFilter(django_filters.FilterSet):
         fields = ['name', 'team', 'tier', 'weight']
 
 
-class FS_EventsFilter(django_filters.FilterSet):
-    event = django_filters.ModelChoiceFilter(queryset=FS_Event.objects.values_list('name', flat=True),
-                                             lookup_expr='icontains', label='Event',
-                                             widget=TextInput(attrs={'placeholder': 'Event Name...'}))
-    wrestler = django_filters.CharFilter(field_name='matches__focus', lookup_expr='icontains', label="Name",
-                                         widget=TextInput(attrs={'placeholder': 'Wrestler Name...'}))
-    weight = django_filters.ChoiceFilter(field_name='matches__weight', choices=FREE_WEIGHTCLASSES, label='Weight (kgs)')
-
+class CompareFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains', label="Name",
+        widget=TextInput(attrs={'placeholder': 'Wrestler...'}))
+    name = django_filters.CharFilter(lookup_expr='icontains', label="Name",
+        widget=TextInput(attrs={'placeholder': 'Wrestler...'}))
     class Meta:
-        model = FS_Event
-        fields = ['wrestler', 'weight', 'event']
+        model = FS_Wrestler
+        fields = ['name',]
