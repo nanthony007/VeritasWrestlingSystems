@@ -253,7 +253,6 @@ class FS_Match(models.Model):
     opp_lsc4 = models.IntegerField(null=True)
     opp_gba = models.IntegerField(null=True)
     opp_gbc2 = models.IntegerField(null=True)
-    opp_gbc4 = models.IntegerField(null=True)
     opp_ta = models.IntegerField(null=True)
     opp_tc2 = models.IntegerField(null=True)
     opp_tc4 = models.IntegerField(null=True)

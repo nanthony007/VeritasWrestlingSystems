@@ -8,7 +8,7 @@ from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Event
 pd.options.mode.chained_assignment = None
 
 """
-This script extracts an instance of the database at runtime. 
+This script extracts an instance of the database at runtime.
 It transforms the data into a consumable medium and saves it as a csv file.
 Most data transformations will occur here while data filtering/cleaning will occur at the analysis stage.
 This is done to simplify and expedite analysis documents so they do not require loading django each runtime.
@@ -46,22 +46,35 @@ def find_result_types(row):
     elif row == 'LossF':
         return 'Fall'
 
+rawcolumns = ['APM', 'Drate', 'Da', 'Date', 'Dc2', 'Dc4', 'Duration',
+    'Exposure', 'Focus', 'FocusPoints', 'FocusTeam', 'GBrate', 'GBa', 'GBc2',
+    'Gut', 'HIrate', 'HIa', 'HIc2', 'HIc4', 'HOrate', 'HOa', 'HOc2', 'HOc4',
+    'LegLace', 'LSrate', 'LSa', 'LSc2', 'LSc4', 'MatchID', 'MoV', 'NPF', 'oAPM',
+    'oDrate', 'oDa', 'oDc2', 'oDc4', 'oExposure', 'oGBrate', 'oGBa', 'oGBc2',
+    'oGut', 'oHIrate', 'oHIa', 'oHIc2', 'oHIc4', 'oHOrate', 'oHOa', 'oHOc2', 'oHOc4',
+    'oLegLace', 'oLSrate', 'oLSa', 'oLSc2', 'oLSc4', 'oNPF', 'oPassive',
+    'oPushout', 'oRecovery', 'OppPoints', 'oTrate', 'oTa', 'oTc2', 'oTc4',
+    'OppTeam', 'oTurn', 'oViolation', 'oVS', 'Opponent', 'Passive', 'Pushout',
+    'Recovery', 'Result', 'Trate', 'Ta', 'Tc2', 'Tc4', 'Turn', 'Violation', 'VS',
+    'Weight']
+
 matches = FS_Match.objects.values()
 match_df = pd.DataFrame(list(matches))
+match_df.columns = rawcolumns
 ss = []
-for i in match_df['duration']:
+for i in match_df['Duration']:
     m, s, ds = i.split(':')
     t = int(m)*60 + int(s) + int(ds)/100
     ss.append(t)
-match_df['duration'] = ss
-match_df['passive_dif'] = match_df.apply(lambda x: x.passive-x.opp_passive, axis=1)
-conditions = [match_df.result=='WinF', match_df.result=='WinTF', match_df.result=='WinD',
-    match_df.result=='LossD', match_df.result=='Loss TF', match_df.result=='LossF']
+match_df['Duration'] = ss
+match_df['PassiveDiff'] = match_df.apply(lambda x: x.Passive-x.oPassive, axis=1)
+conditions = [match_df.Result=='WinF', match_df.Result=='WinTF', match_df.Result=='WinD',
+    match_df.Result=='LossD', match_df.Result=='Loss TF', match_df.Result=='LossF']
 choices = [1.75, 1.50, 1.10, 0.90, 0.50, 0.25]
-match_df['num_result'] = np.select(conditions, choices)
-match_df['binary_result'] = [1 if row > 1 else 0 for row in match_df.num_result.values]
-match_df['binary_result_text'] = ['Win' if row > 1 else 'Loss' for row in match_df.num_result.values]
-match_df['result_type'] = [find_result_types(row) for row in match_df.result.values]
+match_df['NumResult'] = np.select(conditions, choices)
+match_df[''] = [1 if row > 1 else 0 for row in match_df.NumResult.values]
+match_df['BinaryResultText'] = ['Win' if row > 1 else 'Loss' for row in match_df.NumResult.values]
+match_df['ResultType'] = [find_result_types(row) for row in match_df.Result.values]
 
 
 # then events
@@ -72,9 +85,9 @@ events_df = pd.DataFrame(list(events))
 wrestlers = FS_Wrestler.objects.values('name', 'team_id', 'rating')
 wrestlers_df = pd.DataFrame(list(wrestlers))
 # calculates effective wins and assigns row-wise
-for person in match_df.focus_id.unique():
-    group = match_df[match_df['focus_id']==person]
-    ew = group.num_result.mean() * len(group.index)
+for person in match_df.Focus.unique():
+    group = match_df[match_df['Focus']==person]
+    ew = group.NumResult.mean() * len(group.index)
     for i, row in wrestlers_df.iterrows():
         if row['name'] == person:
             wrestlers_df.at[i, 'ew'] = round(ew, 2)
