@@ -14,13 +14,13 @@
 	<title>Veritas Analytics</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
-	<link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
-	<script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'vws_main/js/popper.min.jss' %}"></script>
-	<script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+	<!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design for Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/css/mdb.min.css" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
 	<style type="text/css">
 		body {
@@ -28,53 +28,65 @@
 		}
 	</style>
 </head>
-
-<div class="container-fluid">
-		<!--Navbar-->
-	<nav class="navbar navbar-expand-lg navbar-dark primary-color">
-	  <!-- Navbar brand -->
-	  <a class="navbar-brand" href="/">Vertias Analytics</a>
-	  <!-- Collapse button -->
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-	    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-
-	  <!-- Collapsible content -->
-	  <div class="collapse navbar-collapse" id="basicExampleNav">
-	    <!-- Links -->
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="/">Home
-	          <span class="sr-only">(current)</span>
-	        </a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="/fs_ratings">Ratings</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="/compare">Versus</a>
-	      </li>
-			</ul>
-	    <!-- Links -->
-	  </div>
-	</nav>
-
-	<br />
-
-	<body>
-			{% block content %}
-			{% endblock %}
-	</body>
-	<br />
-
-	<footer class="page-footer font-small blue">
-		<div class="text-center">
-			Scientia potentia est. |
-	    Contact: nanthony007@gmail.com
-	  </div>
-	</footer>
-
-
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
+<!-- Navbar brand -->
+<a class="navbar-brand" href="/">Vertias Analytics</a>
+<!-- Collapse button -->
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<!-- Collapsible content -->
+<div class="collapse navbar-collapse" id="basicExampleNav">
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home
+        <span class="sr-only">(current)</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/fs_ratings">Ratings</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/compare">Versus</a>
+    </li>
+  </ul>
+  <!-- Links -->
 </div>
+</nav>
+
+<br />
+
+<body>
+	{% block content %}
+
+	{% endblock %}
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+	<!-- Material Design for Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
+
+	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+	<script>
+		new WOW().init();
+	</script>
+</body>
+
+<footer class="page-footer fixed-bottom font-small indigo">
+  <div class="text-center">
+    Scientia potentia est. |
+    Contact: nanthony007@gmail.com
+  </div>
+</footer>
+
 </html>

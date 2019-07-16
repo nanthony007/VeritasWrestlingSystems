@@ -260,11 +260,9 @@ class FS_EventsDetailView(DetailView):
         return FS_Event.objects.filter()
 
 
-class FS_RatingsFilterView(FilterView):
+class FS_RatingsFilterView(ListView):
     model = FS_Wrestler
-    filterset_class = FS_RatingsFilter
     template_name = 'vws_main/fs_ratings.html'
-    paginate_by = 25
 
     def get_queryset(request):
         return FS_Wrestler.objects.annotate(
@@ -362,4 +360,3 @@ def compare_view(request):
         "w2_stats": search2_stats,
     }
     return render(request, "vws_main/compare.html", context)
-
