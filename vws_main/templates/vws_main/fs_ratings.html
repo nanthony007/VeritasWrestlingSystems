@@ -62,11 +62,12 @@
 <br />
 
 <body>
-	<div class="container">
+	<div class="container" >
 	  <div class="page-header">
 	      <h2>Freestyle Ratings</h2>
 	      <hr class="yellow"/>
 				<p>There is a one match minimum requirement to be listed in the ratings.</p>
+	  </div>
 
 	  <br />
 
@@ -84,7 +85,7 @@
 	        {% for wrestler in object_list %}
 	          <tr>
 	            <td><a href="/fs_wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
-	            <td><a href="/fs_teams/{{wrestler.team.slug}}">{{ wrestler.team.abbreviation }}</a></td>
+	            <td>{{ wrestler.team.abbreviation }}</td>
 	            <td>{{ wrestler.rating }}</td>
 	            <td>{{ wrestler.match_count }}</td>
 	          </tr>
@@ -114,12 +115,14 @@
 
 </body>
 
-<br/ >
+<br />
 
 <footer class="page-footer fixed-bottom font-small indigo">
   <div class="text-center">
+      <h6>
     Scientia potentia est. |
     Contact: nanthony007@gmail.com
+      </h6>
   </div>
 </footer>
 

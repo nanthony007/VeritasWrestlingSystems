@@ -1,309 +1,580 @@
-{% extends "vws_main/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139393698-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<div class="container">
-    <div class="page-header">
-        <h2>{{object.name}}</h2>
-        <hr />
+    gtag('config', 'UA-139393698-1');
+    </script>
+    <title>Veritas Analytics</title>
+    <meta charset="utf-8" />
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'vws_main/css/addons/datatables.min.css' %}" rel="stylesheet">
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+    <style type="text/css">
+    body {
+      background-color: #f6f6f6;
+    }
+    </style>
+  </head>
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="/">Vertias Analytics</a>
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+    <a class="nav-link" href="/">Home
+    <span class="sr-only">(current)</span>
+    </a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="/fs_ratings">Ratings</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="/compare">Versus</a>
+    </li>
+    </ul>
+    <!-- Links -->
     </div>
-    <div class="well">
-      <div class="row">
-        <div class="col-sm-4">
-          <h5>Name: </h5><p> {{object.name}}</p>
+  </nav>
+  <br/>
+  <body>
+      <div class="container">
+          <div class="page-header">
+              <h2>{{object.name}} <small>Profile</small></h2>
+              <hr class="yellow" />
+          </div>
+          <div class="well">
+            <div class="row">
+              <div class="col-sm-4">
+                <h5>Name: </h5><p> {{object.name}}</p>
+              </div>
+              <div class="col-sm-4">
+                <h5>Team: </h5><p>{{object.team.abbreviation}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <h5><a href="#matches-table">Matches:</a></h5><p> {{object.match_count}}</p>
+              </div>
+              <div class="col-sm-4">
+                <h5>Avg. Result: </h5><p> {{object.avg_result|floatformat:2}}</p>
+              </div>
+              <div class="col-sm-4">
+                <h5>Elo Rating: </h5><p> {{object.rating}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <h5>Points Earned: </h5><p> {{object.points_earned|floatformat:2}}</p>
+              </div>
+              <div class="col-sm-4">
+                <h5>Points Allowed: </h5><p> {{object.points_allowed|floatformat:2}}</p>
+              </div>
+              <div class="col-sm-4">
+                <h5>Veritas Points: </h5><p> {{object.vs|floatformat:2}}</p>
+              </div>
+            </div>
+          </div>
+
+        <hr id="base-stats-table" class="yellow"/>
+        <div class="row">
+          <h3>Base Stats</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <caption>Cumulative counts</caption>
+              <thead class="indigo white-text">
+                <tr>
+                  <th></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
+                  <th><a data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="indigo white-text">Focus</td>
+                  <td>{{object.hia}}</td>
+                  <td>{{object.hic2}}</td>
+                  <td>{{object.hic4}}</td>
+                  <td>{{object.hoa}}</td>
+                  <td>{{object.hoc2}}</td>
+                  <td>{{object.hoc4}}</td>
+                  <td>{{object.da}}</td>
+                  <td>{{object.dc2}}</td>
+                  <td>{{object.dc4}}</td>
+                  <td>{{object.lsa}}</td>
+                  <td>{{object.lsc2}}</td>
+                  <td>{{object.lsc4}}</td>
+                  <td>{{object.gba}}</td>
+                  <td>{{object.gbc2}}</td>
+                  <td>{{object.ta}}</td>
+                  <td>{{object.tc2}}</td>
+                  <td>{{object.tc4}}</td>
+                  <td>{{object.exposure}}</td>
+                  <td>{{object.gut}}</td>
+                  <td>{{object.leg_lace}}</td>
+                  <td>{{object.turn}}</td>
+                </tr>
+                <tr>
+                  <td class="indigo white-text">Opponent</td>
+                  <td>{{object.opp_hia}}</td>
+                  <td>{{object.opp_hic2}}</td>
+                  <td>{{object.opp_hic4}}</td>
+                  <td>{{object.opp_hoa}}</td>
+                  <td>{{object.opp_hoc2}}</td>
+                  <td>{{object.opp_hoc4}}</td>
+                  <td>{{object.opp_da}}</td>
+                  <td>{{object.opp_dc2}}</td>
+                  <td>{{object.opp_dc4}}</td>
+                  <td>{{object.opp_lsa}}</td>
+                  <td>{{object.opp_lsc2}}</td>
+                  <td>{{object.opp_lsc4}}</td>
+                  <td>{{object.opp_gba}}</td>
+                  <td>{{object.opp_gbc2}}</td>
+                  <td>{{object.opp_ta}}</td>
+                  <td>{{object.opp_tc2}}</td>
+                  <td>{{object.opp_tc4}}</td>
+                  <td>{{object.opp_exposure}}</td>
+                  <td>{{object.opp_gut}}</td>
+                  <td>{{object.opp_leg_lace}}</td>
+                  <td>{{object.opp_turn}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="col-sm-4">
-          <h5>Team: </h5><p><a href="/fs_teams/{{object.team.slug}}/">{{object.team.abbreviation}}</a></p>
+        <div class="row">
+          <div class="col-sm">
+            <canvas id="resultchart"></canvas>
+          </div>
+          <div class="col-sm">
+            <canvas id="vslinechart"></canvas>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <h5><a href="#matches-table">Matches:</a></h5><p> {{object.match_count}}</p>
+
+        <hr id="adv-stats-table" class="yellow"/>
+        <h3>Advanced Stats</h3>
+        <div class="row">
+        <div class="col-3 text-center"><p><small></small></p></div>
+          <div class="col-5">
+            <div class="table-responsive text-center">
+              <table class="table table-sm table-hover">
+                <thead class="indigo white-text">
+                  <tr>
+                    <th>Focus</th>
+                    <th></th>
+                    <th>Opp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{object.npf|floatformat:2}}</td>
+                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor"
+                           data-content="(TD conversions/total TD conversions) + (TD attempts/total TD attempts)">NPF</a></td>
+                    <td>{{object.opp_npf|floatformat:2}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{object.apm|floatformat:2}}</td>
+                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
+                       data-content="(Defense + Offense) / Duration">APM</a></td>
+                    <td>{{object.opp_apm|floatformat:2}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{object.vs|floatformat:2}}</td>
+                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Veritas Score"
+                       data-content="Weighted Result + (NPF * APM)">VS</a></td>
+                    <td>{{object.opp_vs|floatformat:2}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <div class="col-3 text-center"><p><small></small></p></div>
         </div>
-        <div class="col-sm-4">
-          <h5>Avg. Result: </h5><p> {{object.avg_result|floatformat:2}}</p>
+        <div class="row">
+          <div class="col">
+            <canvas id="focusshotchart"></canvas>
+          </div>
+          <div class="col">
+            <canvas id="oppshotchart"></canvas>
+          </div>
         </div>
-        <div class="col-sm-1">
-          <button type="button" class="btn btn-lg btn-link btn-outline-secondary">
-            <a href="/reports/{{object.slug}}">View Report</a>
-          </button>
+
+        <hr class="yellow"/>
+        <h3>Correlations</h3>
+        <p>Top 10 actions related to winning (left) and Top 10 actions related to losing (right).</p>
+        <div class="row">
+          <div class="col">
+            <canvas id="goodstuff"></canvas>
+          </div>
+          <div class="col">
+            <canvas id="badstuff"></canvas>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <h5>Elo Rating: </h5><p> {{object.rating}}</p>
-        </div>
-        <div class="col-sm-4">
-          <h5>Veritas Points: </h5><p> {{object.vs|floatformat:2}}</p>
-        </div>
-      </div>
-    </div>
-  <hr id="base-stats-table" />
-  <h3>Base Stats <small>(sum)</small>:</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{object.hia}}</td>
-          <td>{{object.hic2}}</td>
-          <td>{{object.hic4}}</td>
-          <td>{{object.hoa}}</td>
-          <td>{{object.hoc2}}</td>
-          <td>{{object.hoc4}}</td>
-          <td>{{object.da}}</td>
-          <td>{{object.dc2}}</td>
-          <td>{{object.dc4}}</td>
-          <td>{{object.lsa}}</td>
-          <td>{{object.lsc2}}</td>
-          <td>{{object.lsc4}}</td>
-          <td>{{object.gba}}</td>
-          <td>{{object.gbc2}}</td>
-          <td>{{object.ta}}</td>
-          <td>{{object.tc2}}</td>
-          <td>{{object.tc4}}</td>
-          <td>{{object.exposure}}</td>
-          <td>{{object.gut}}</td>
-          <td>{{object.leg_lace}}</td>
-          <td>{{object.turn}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <br />
-  <hr id="adv-stats-table" />
-  <h3>Advanced Stats <small>(avg)</small>:</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Inside Rate" data-content="(HIc2+HIc4)/HIa">HI%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Head Outside Rate" data-content="(HOc2+HOc4)/HOa">HO%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Double Rate" data-content="(Dc2+Dc4)/Da">D%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Low Shot Rate" data-content="((LSc2+LSc4)/LSa">LS%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Counter Rate" data-content="GBc2/GBa">GB%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Throw Rate" data-content="(Tc2+Tc4)/Ta">T%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Neutral Pace Factor"
-                 data-content="(TD conversions/total TD conversions) + (TD attempts/total TD attempts)">NPF</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Action per Minute"
-                 data-content="(Defensive Action per Minute + Offensive Action per Minute) / Duration">APM</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Veritas Score"
-                 data-content="Weighted Result + (NPF * APM)">VS</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{object.hi_rate|floatformat:2}}</td>
-          <td>{{object.ho_rate|floatformat:2}}</td>
-          <td>{{object.d_rate|floatformat:2}}</td>
-          <td>{{object.ls_rate|floatformat:2}}</td>
-          <td>{{object.gb_rate|floatformat:2}}</td>
-          <td>{{object.t_rate|floatformat:2}}</td>
-          <td>{{object.npf|floatformat:2}}</td>
-          <td>{{object.apm|floatformat:2}}</td>
-          <td>{{object.vs|floatformat:2}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <br />
-  <hr id="opp-base-stats-table" />
-  <h3>Opponent Base Stats <small>(sum)</small>:</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Attempts">oHIa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Conversions for 2">oHIc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside" data-content="Opponent Conversions for 4">oHIc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Opponent Attempts">oHOa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Opponent Conversions for 2">oHOc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside" data-content="Conversions for 4">oHOc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Attempts">oDa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Conversions for 2">oDc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double" data-content="Opponent Conversions for 4">oDc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Attempts">oLSa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Conversions for 2">oLSc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot" data-content="Opponent Conversions for 4">oLSc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter" data-content="Opponent Attempts">oGBa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter" data-content="Opponent Conversions for 2">oGBc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Attempts">oTa</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Conversions for 2">oTc2</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw" data-content="Opponent Conversions for 4">oTc4</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Exposure" data-content="Opponent Exposure from Counter">oExposure</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Gut" data-content="Opponent Gut Wrench turn">oGut</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Leg Lace" data-content="Opponent Leg Lace turn">oLegLace</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Turn" data-content="Opponent Other Turn">oTurn</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{object.opp_hia}}</td>
-          <td>{{object.opp_hic2}}</td>
-          <td>{{object.opp_hic4}}</td>
-          <td>{{object.opp_hoa}}</td>
-          <td>{{object.opp_hoc2}}</td>
-          <td>{{object.opp_hoc4}}</td>
-          <td>{{object.opp_da}}</td>
-          <td>{{object.opp_dc2}}</td>
-          <td>{{object.opp_dc4}}</td>
-          <td>{{object.opp_lsa}}</td>
-          <td>{{object.opp_lsc2}}</td>
-          <td>{{object.opp_lsc4}}</td>
-          <td>{{object.opp_gba}}</td>
-          <td>{{object.opp_gbc2}}</td>
-          <td>{{object.opp_ta}}</td>
-          <td>{{object.opp_tc2}}</td>
-          <td>{{object.opp_tc4}}</td>
-          <td>{{object.opp_exposure}}</td>
-          <td>{{object.opp_gut}}</td>
-          <td>{{object.opp_leg_lace}}</td>
-          <td>{{object.opp_turn}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <br />
-  <hr id="opp-adv-stats-table" />
-  <h3>Opponent Advanced Stats <small>(avg)</small>:</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Inside Rate" data-content="(oHIc2+oHIc4)/oHIa">oHI%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Head Outside Rate" data-content="(oHOc2+oHOc4)/oHOa">oHO%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Double Rate" data-content="(oDc2+oDc4)/oDa">oD%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Low Shot Rate" data-content="((oLSc2+oLSc4)/oLSa">oLS%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Counter Rate" data-content="oGBc2/oGBa">oGB%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Throw Rate" data-content="(oTc2+oTc4)/oTa">oT%</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Neutral Pace Factor"
-                 data-content="(opp TD conversions/total TD conversions) + (opp TD attempts/total TD attempts)">oNPF</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Action per Minute"
-                 data-content="(opp Defensive Action per Minute + opp Offensive Action per Minute) / Duration">oAPM</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Veritas Score"
-                 data-content="oWeighted Result + (oNPF * oAPM)">oVS</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{object.opp_hi_rate|floatformat:2}}</td>
-          <td>{{object.opp_ho_rate|floatformat:2}}</td>
-          <td>{{object.opp_d_rate|floatformat:2}}</td>
-          <td>{{object.opp_ls_rate|floatformat:2}}</td>
-          <td>{{object.opp_gb_rate|floatformat:2}}</td>
-          <td>{{object.opp_t_rate|floatformat:2}}</td>
-          <td>{{object.opp_npf|floatformat:2}}</td>
-          <td>{{object.opp_apm|floatformat:2}}</td>
-          <td>{{object.opp_vs|floatformat:2}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <hr id="misc-stats-table" />
-  <h3>Misc: <small>(sum)</small></h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Total Points Earned"
-                 data-content="Sum of all points earned">Points Earned</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Total Points Allowed"
-                 data-content="Sum of all opponent points earned">Points Allowed</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Recovery"
-                 data-content="Recovering a Takedown after allowing an exposure">Recovery</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Pushout" data-content="Pushout">Pushout</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Passive"
-                 data-content="Passivity call (includes warnings)">Passive</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Violations"
-                 data-content="Violations including illegal holds and shot-clock violations">Violations</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponnent Recovery"
-                 data-content="Opponent Recovering a Takedown after allowing an exposure">oRecovery</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Pushout" data-content="Opponent Pushout">oPushout</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Passive"
-                 data-content="Opponent Passivity call (includes warnings)">oPassive</a></th>
-          <th><a href="#" data-toggle="popover" data-trigger="hover" title="Opponent Violations"
-                 data-content="Opponent Violations including illegal holds and shot-clock violations">oViolations</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-light">
-          <td>{{object.points_earned}}</td>
-          <td>{{object.points_allowed}}</td>
-          <td>{{object.recovery}}</td>
-          <td>{{object.pushout}}</td>
-          <td>{{object.passive}}</td>
-          <td>{{object.violation}}</td>
-          <td>{{object.opp_recovery}}</td>
-          <td>{{object.opp_pushout}}</td>
-          <td>{{object.opp_passive}}</td>
-          <td>{{object.opp_violation}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <br />
-  <hr id="matches-table" />
-  <h3>Matches: <small>({{object.match_count}})</small></h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover table-sm table-light">
-      <thead class="table-secondary">
-        <tr>
-          <th>MatchID</th>
-          <th>Date</th>
-          <th>Focus</th>
-          <th>Result</th>
-          <th>Opponnent</th>
-          <th>Focus Score</th>
-          <th>Opp Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for match in object.focus_wrestler2.all %}
-            <tr>
-              <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
-              {% for thing in match.events2.all %}
-              <td>{{thing.name}}</td>
+        <hr id="matches-table" class="yellow"/>
+        <h3>Matches <small>({{ object.match_count }})</small></h3>
+        <div class="table-responsive">
+          <table id="matchestable" class="table table-hover table-sm">
+            <thead class="indigo white-text">
+              <tr>
+                <th>MatchID</th>
+                <th>Date</th>
+                <th>Focus</th>
+                <th>Result</th>
+                <th>Opponent</th>
+                <th>Focus Score</th>
+                <th>Opp Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for match in object.focus_wrestler2.all %}
+                  <tr>
+                    <td><a href="/fs_matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
+                    {% for thing in match.events2.all %}
+                    <td>{{thing.name}}</td>
+                    {% endfor %}
+                    <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
+                    <td>{{match.result}}</td>
+                    <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
+                    <td>{{match.focus_score}}</td>
+                    <td>{{match.opp_score}}</td>
+                  </tr>
               {% endfor %}
-              <td><a href="/fs_wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
-              <td>{{match.result}}</td>
-              <td><a href="/fs_wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
-              <td>{{match.focus_score}}</td>
-              <td>{{match.opp_score}}</td>
-            </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
 
-<script>
-$(document).ready(function(){
-  $('[data-toggle="popover"]').popover();
-});
-</script>
+    <script type="text/javascript">
+    new WOW().init();
+    $('[data-toggle="popover"]').popover();
+    $('.popover-dismiss').popover({
+      trigger: 'focus'
+    });
+    $(document).ready(function () {
+      $('#matchestable').DataTable({
+        'paging':false,
+        'scrollY': '300px',
+        'scrollCollapse': true,
+      });
+      $('.dataTables_length').addClass('bs-select');
+    });
+      //bar
+    var resulthist = document.getElementById("resultchart").getContext('2d');
+    var myBarChart = new Chart(resulthist, {
+      type: 'bar',
+      data: {
+        labels: {{resulttypes | safe}},
+        datasets: [{
+          label: 'Result Type',
+          data: {{resulttypecounts | safe}},
+          backgroundColor: 'rgb(63, 81, 181, 0.8)',
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1.0
+            }
+          }]
+        },
+        title: {
+            display: true,
+            text: 'Results Distribution'
+        },
+        responsive: true,
+        animation: {
+          duration: 2000
+        }
+      }
+    });
+      //line
+    var vsline = document.getElementById("vslinechart").getContext('2d');
+    var myLineChart = new Chart(vsline, {
+      type: 'line',
+      data: {
+        labels: {{vsindex | safe}},
+        datasets: [{
+            label: "Veritas Score",
+            data: {{vsvalues | safe}},
+            borderColor: 'rgb(63, 81, 181)',
+            backgroundColor: 'rgb(63, 81, 181, 0.3)',
+            borderWidth: 2
+          },
+          {
+            label: "World Average",
+            data: {{worldvs | safe}},
+            borderColor: 'rgb(255, 235, 59)',
+            backgroundColor: 'rgb(255, 255, 255, 0.0)',
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 10.0
+            }
+          }]
+        },
+        title: {
+            display: true,
+            text: 'Veritas Score over Time'
+        },
+        responsive: true,
+        animation: {
+          'duration': 2000
+        }
+      }
+    });
+        //radar
+    var focusradar = document.getElementById("focusshotchart").getContext('2d');
+    var myRadarChart = new Chart(focusradar, {
+      type: 'radar',
+      data: {
+        labels: {{shot_labels | safe}},
+        datasets: [
+        {
+            label: "Effeciency (% of converted)",
+            data: {{rates | safe}},
+            backgroundColor: 'rgb(63, 81, 181, 0.5)',
+            borderColor: 'rgb(63, 81, 181)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(63, 81, 181)'
+          },
+        {
+            label: "Preference (% of total)",
+            data: {{prefs | safe}},
+            backgroundColor: 'rgb(255, 235, 59, 0.5)',
+            borderColor: 'rgb(255, 235, 59)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(255, 235, 59)'
+          }
+        ]
+      },
+      options: {
+        scale: {ticks: {
+                min:0,
+                }
+        },
+        scales: {
+            xAxes: [{
+                  display: false,
+                gridLines: {
+                    display:false
+                }
+            }],
+            yAxes: [{
+              display: false,
+                gridLines: {
+                    display:false
+                }
+            }]
+        },
+         title: {
+            display: true,
+            text: 'Focus Shot Distribution Chart'
+        },
+        responsive: true,
+        animation: {duration:2000}
+      }
+    });
+            //radar
+    var oppradar = document.getElementById("oppshotchart").getContext('2d');
+    var myRadarChart = new Chart(oppradar, {
+      type: 'radar',
+      data: {
+        labels: {{shot_labels | safe}},
+        datasets: [
+          {
+            label: "Effeciency (% of converted)",
+            data: {{orates | safe}},
+            backgroundColor: 'rgb(63, 81, 181, 0.5)',
+            borderColor: 'rgb(63, 81, 181)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(63, 81, 181)'
+          },
+          {
+            label: "Preference (% of total)",
+            data: {{oprefs | safe}},
+            backgroundColor: 'rgb(255, 235, 59, 0.5)',
+            borderColor: 'rgb(255, 235, 59)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgb(255, 235, 59)'
+          }
+        ]
+      },
+      options: {
+        scale: {ticks: {
+                min:0,
+                }
+        },
+        scales: {
+            xAxes: [{
+                  display: false,
+                gridLines: {
+                    display:false
+                }
+            }],
+            yAxes: [{
+              display: false,
+                gridLines: {
+                    display:false
+                }
+            }]
+        },
+         title: {
+            display: true,
+            text: 'Opp Shot Distribution Chart'
+        },
+        responsive: true,
+        animation: {duration:2000}
+      }
+    });
+         new Chart(document.getElementById("goodstuff"), {
+      "type": "horizontalBar",
+      "data": {
+        "labels": {{goodtitles | safe}},
+        "datasets": [{
+          "label": "Good Actions",
+          "data": {{goodvalues | safe}},
+          "fill": false,
+          "backgroundColor": ['rgb(63, 81, 181, 1.0)', 'rgb(63, 81, 181, 0.93)',
+                             'rgb(63, 81, 181, 0.86)', 'rgb(63, 81, 181, 0.79)',
+                             'rgb(63, 81, 181, 0.72)', 'rgb(63, 81, 181, 0.65)',
+                             'rgb(63, 81, 181, 0.58)', 'rgb(63, 81, 181, 0.51)',
+                             'rgb(63, 81, 181, 0.44)', 'rgb(63, 81, 181, 0.37)'],
+          "borderColor": 'rgb(63, 81, 181, 1.0)',
+        }],
+      },
+      "options": {
+        "scales": {
+          "xAxes": [{
+            scaleLabel: {
+              display: true,
+              labelString: "Correlation to Winning"
+            },
+            "ticks": {
+              "beginAtZero": true,
+              max: 1.0
+            }
+          }],
+          yAxes: [{
+            display: true,
+            gridLines: {
+              display:false
+            }
+          }],
+        },
+         title: {
+            display: true,
+            text: 'Top 10 Positive Actions'
+        },
+        responsive: true,
+        animation: {duration:2000}
+      }
+    });
+         new Chart(document.getElementById("badstuff"), {
+      "type": "horizontalBar",
+      "data": {
+        "labels": {{badtitles | safe}},
+        "datasets": [{
+          "label": "Bad Actions",
+          "data": {{badvalues | safe}},
+          "fill": false,
+          "backgroundColor": ['rgb(255, 235, 59, 1.0)', 'rgb(255, 235, 59, 0.93)',
+                             'rgb(255, 235, 59, 0.86)', 'rgb(255, 235, 59, 0.79)',
+                             'rgb(255, 235, 59, 0.72)', 'rgb(255, 235, 59, 0.65)',
+                             'rgb(255, 235, 59, 0.58)', 'rgb(255, 235, 59, 0.51)',
+                             'rgb(255, 235, 59, 0.44)', 'rgb(255, 235, 59, 0.37)'],
+          "borderColor": 'rgb(255, 235, 59, 1.0)',
+        }],
+      },
+      "options": {
+        "scales": {
+          "xAxes": [{
+            scaleLabel: {
+              display: true,
+              labelString: "Correlation to Winning"
+            },
+            "ticks": {
+              "beginAtZero": true
+            }
+          }],
+          yAxes: [{
+            display: true,
+            position: 'right',
+            gridLines: {
+              display:false
+            }
+          }],
+        },
+         title: {
+            display: true,
+            text: 'Top 10 Negative Actions'
+        },
+        responsive: true,
+        animation: {duration:2000}
+      }
+    });
+    </script>
+  </body>
 
-{% endblock %}
+  <br />
+
+  <footer class="page-footer fixed-bottom font-small indigo">
+    <div class="text-center">
+        <h6>
+      Scientia potentia est. |
+      Contact: nanthony007@gmail.com
+        </h6>
+    </div>
+  </footer>
+
+</html>
+

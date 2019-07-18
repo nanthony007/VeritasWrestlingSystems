@@ -72,7 +72,7 @@ conditions = [match_df.Result=='WinF', match_df.Result=='WinTF', match_df.Result
     match_df.Result=='LossD', match_df.Result=='Loss TF', match_df.Result=='LossF']
 choices = [1.75, 1.50, 1.10, 0.90, 0.50, 0.25]
 match_df['NumResult'] = np.select(conditions, choices)
-match_df[''] = [1 if row > 1 else 0 for row in match_df.NumResult.values]
+match_df['BinaryResult'] = [1 if row > 1 else 0 for row in match_df.NumResult.values]
 match_df['BinaryResultText'] = ['Win' if row > 1 else 'Loss' for row in match_df.NumResult.values]
 match_df['ResultType'] = [find_result_types(row) for row in match_df.Result.values]
 

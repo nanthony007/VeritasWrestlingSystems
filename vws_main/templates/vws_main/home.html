@@ -57,40 +57,69 @@
 
 <body>
 <!-- Full Page Intro -->
-  <div class="view" style="background-image: url({% static 'vws_main/img/funinternet.png' %});
-  background-repeat: no-repeat; background-size: cover;">
+  <div class="view">
+      <img src="{% static 'vws_main/img/funinternet.png' %}" class="img-fluid" alt="No Image" style="width:100%">
     <!-- Mask & flexbox options-->
-    <div class="rgba-black-light d-flex justify-content-left align-items-left">
+    <div class="mask rgba-black-strong d-flex justify-content-left align-items-left">
       <!-- Content -->
       <div class="white-text mx-5 wow fadeIn">
-        <div class="page-header text-center">
-            <p></p>
-            <h1>Welcome!</h1>
-            <hr class="yellow"/>
-        </div>
-        <div class="row" style="height:500px">
+        <div class="row">
           <div class="col col-sm-1">
           </div>
-          <div class="col col-lg-8">
-            <h6></h6>
-            <h6>Veritas Wrestling Systems is a dedicated open-source statistics provider for the sport of wrestling.</h6>
-            <h6>
-              You can find our website and distributable collector program on GitHub
-              <a href="https://github.com/nanthony007/VeritasAnalytics-Website", target="'_blank">
-                    <span class="indigo-text">here</span></a>
-            </h6>
-            <h6>There is an abbreviations file with explantions and formulas in the repository.</h6>
+          <div class="col col-lg-5">
+          <div class="page-header text-center">
+            <br />
+            <br />
+            <h1>Welcome</h1>
+            <hr class="yellow"/>
+          </div>
+          <br />
+            <h5>Veritas Analytics is a dedicated open-source statistics provider for the sport of wrestling.</h5>
+            <h5>
+              You can find all the content for this website and the GUI collector program on GitHub
+              <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="'_blank">
+                    <span class="blue-text">here.</span></a>
+            </h5>
+            <h5>There is a file with descriptions and formulas in the repository for your reference.</h5>
 
-            <h6>
+            <br />
+            <h6 class="text-right">
               Built using Python, Django, and Postgres | Powered by Heroku
             </h6>
-            <h6>
+            <h6 class="text-right">
               Developed and maintained by Nicholas Anthony
             </h6>
+          <br />
           </div>
         </div>
+          <div class="row">
+              <div class="col col-sm-1">
+              </div>
+              <div class="col col-lg-5">
+                  <div class="page-header text-center">
+                    <br />
+                    <h2 class="text-left">Developer's Corner</h2>
+                    <hr class="yellow"/>
+                  </div>
+                  <br />
+                  <h6>
+                      Wrestling is my passion.  It overflows into every other aspect of my life. <br /><br />
+                      It is interesting how wrestling is the oldest sport, yet it has struggled to emerge into the 21st century.
+                      Almost having been removed from the 2020 Olympic Games was a disaster and has prompted me
+                      to make efforts to marketize the sport myself.
+                      This site is dedicated to educating the new and experienced fan,
+                      and performance measurement for wrestler/coach evaluations,
+                      and to increase the general fan-base by providing a unified fantasy system.
+                  </h6>
+                   <h5 class="text-right">
+                       -Nick
+                   </h5>
+              <br />
+              </div>
+            </div>
     </div>
     <!-- Mask & flexbox options-->
+  </div>
   </div>
   <!-- Full Page Intro -->
   <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
@@ -102,8 +131,10 @@
 
 <footer class="page-footer fixed-bottom font-small indigo">
   <div class="text-center">
+      <h6>
     Scientia potentia est. |
     Contact: nanthony007@gmail.com
+      </h6>
   </div>
 </footer>
 

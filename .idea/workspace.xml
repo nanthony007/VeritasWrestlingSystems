@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" line="328" />
+    <bookmark url="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html" line="105" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collection/stats/matchdata.csv" beforeDir="false" afterPath="$PROJECT_DIR$/collection/stats/matchdata.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/compare.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/compare.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/views.py" afterDir="false" />
     </list>
+    <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,12 +28,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/header.html">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vws_main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1150">
-              <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+            <state relative-caret-position="245">
+              <caret line="255" column="10" lean-forward="true" selection-start-line="255" selection-start-column="10" selection-end-line="255" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -25,29 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mysite/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
-              <folding>
-                <element signature="e#307#316#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_events_detail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="255">
+              <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
             </state>
           </provider>
         </entry>
@@ -73,6 +71,13 @@
       <find>events</find>
       <find>2</find>
       <find>s</find>
+      <find>href=&quot;#&quot;</find>
+      <find>container</find>
+      <find>opp_</find>
+      <find>rgb(</find>
+      <find>63, 81, 181</find>
+      <find>NAN</find>
+      <find>Pat Downey</find>
     </findStrings>
     <replaceStrings>
       <replace>match2_obj</replace>
@@ -80,6 +85,8 @@
       <replace>match_df</replace>
       <replace>matches</replace>
       <replace>1</replace>
+      <replace>o</replace>
+      <replace>255, 235, 59</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -111,29 +118,30 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/vws_main/models.py" />
         <option value="$PROJECT_DIR$/vws_main/admin.py" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" />
-        <option value="$PROJECT_DIR$/save_script.py" />
         <option value="$PROJECT_DIR$/vws_main/graph.py" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/reports_detail.html" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html" />
         <option value="$PROJECT_DIR$/vws_main/filters.py" />
-        <option value="$PROJECT_DIR$/vws_main/urls.py" />
         <option value="$PROJECT_DIR$/vws_main/forms.py" />
         <option value="$PROJECT_DIR$/vws_main/templatetags/__init__.py" />
         <option value="$PROJECT_DIR$/vws_main/templatetags/subtract.py" />
-        <option value="$PROJECT_DIR$/vws_main/views.py" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/header.html" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/compare.html" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_events_detail.html" />
+        <option value="$PROJECT_DIR$/save_script.py" />
+        <option value="$PROJECT_DIR$/vws_main/urls.py" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/compare.html" />
+        <option value="$PROJECT_DIR$/vws_main/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="88" />
-    <option name="width" value="2400" />
-    <option name="height" value="1424" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="67" />
+    <option name="y" value="114" />
+    <option name="width" value="1843" />
+    <option name="height" value="789" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -146,28 +154,23 @@
         <subPane>
           <expand>
             <path>
-              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
+              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
-              <item name="mysite" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
+              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
               <item name="vws_main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
+              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
               <item name="vws_main" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="VeritasAnalytics-Website" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VeritasAnalytics-Website" type="462c0819:PsiDirectoryNode" />
+              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
               <item name="vws_main" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="vws_main" type="462c0819:PsiDirectoryNode" />
@@ -181,10 +184,13 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vws_main/templates/vws_main" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vws_main/templates/vws_main" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/collection/analysis" />
       <recent name="$PROJECT_DIR$/collection" />
@@ -344,22 +350,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="88" width="2400" height="1424" extended-state="0" />
+    <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4994233" visible="true" weight="0.16779661" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4994233" visible="true" weight="0.16666667" />
       <window_info id="Structure" order="1" sideWeight="0.5005767" side_tool="true" weight="0.16822034" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32827735" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.252809" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2519084" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32976973" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49957627" visible="true" weight="0.44382024" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5004237" side_tool="true" weight="0.30176565" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.37828946" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49957627" visible="true" weight="0.21810251" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50054646" side_tool="true" weight="0.2780807" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49945354" weight="0.2780807" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -387,10 +394,10 @@
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/collection/stats/analysis" />
+      <path value="$PROJECT_DIR$/collection/analysis" />
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/weight_classes.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/wrestler_table.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/events_table.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/matchdata_table.html" />
@@ -480,24 +487,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/collection/stats/events.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collection/stats/matchdata.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/collection/stats/wrestlers.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/collection/stats/events.csv" />
+    <entry file="file://$PROJECT_DIR$/collection/stats/wrestlers.csv" />
     <entry file="file://$PROJECT_DIR$/collection/analysis/Analysis.html" />
     <entry file="file://$PROJECT_DIR$/vws_main/admin.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -529,35 +520,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="95" column="20" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/save_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="909">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collection/analysis/reports.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="57" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/graph.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -576,29 +540,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/filters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="924">
           <caret line="61" column="63" selection-start-line="61" selection-start-column="63" selection-end-line="61" selection-end-column="63" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -626,34 +573,10 @@
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_team_detail.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="315" column="16" lean-forward="true" selection-start-line="315" selection-start-column="16" selection-end-line="315" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="306" column="9" lean-forward="true" selection-start-line="306" selection-start-column="9" selection-end-line="306" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1150">
           <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -671,6 +594,88 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="310" lean-forward="true" selection-start-line="310" selection-end-line="310" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/save_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="74" column="22" selection-start-line="74" selection-start-column="22" selection-end-line="74" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/collection/stats/matchdata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="82" column="150" selection-start-line="82" selection-start-column="150" selection-end-line="82" selection-end-column="150" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1890">
+          <caret line="126" column="9" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="106" column="81" selection-start-line="106" selection-start-column="81" selection-end-line="106" selection-end-column="81" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="101" column="40" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="255" column="10" lean-forward="true" selection-start-line="255" selection-start-column="10" selection-end-line="255" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
