@@ -20,8 +20,8 @@ def effective_counter_rate(x_wrestler):
     ts_df = pd.read_csv('collection/stats/timeseries.csv', engine='python')
     matches = matches[matches['Focus'] == x_wrestler]
     matchlist = matches.MatchID.tolist()
-    bluematches = [i[:4] for i in matchlist]
-    redmatches = [i for i in matchlist if len(i) > 4]
+    bluematches = [i for i in matchlist if len(i) == 4]
+    redmatches = [i[:-1] for i in matchlist if i.endswith('*')]
     blue_ts = ts_df[ts_df['matchID_id'].isin(bluematches)]
     red_ts = ts_df[ts_df['matchID_id'].isin(redmatches)]
     bluelabels = blue_ts.event_lab.tolist()
@@ -63,8 +63,8 @@ def effective_counter_rate(x_wrestler):
             if redlabels[i+1] == 'bexposure' or redlabels[i+1] == 'bgbc':
                 opp_counter_conv += 1
 
-    counter_rate = (counter_conv / counter_att) * 100
-    opp_counter_rate = (opp_counter_conv / opp_counter_att) * 100
+    counter_rate = safe_div(counter_conv, counter_att) * 100
+    opp_counter_rate = safe_div(opp_counter_conv, opp_counter_att) * 100
     print(matches.GBc2.sum(), matches.GBa.sum())
     print("LONG Go Behind Rate: " + str(round((matches.GBc2.sum() / matches.GBa.sum()) * 100, 2)) + "%")
     print("Go Behind Rate: " + str(round(matches.GBrate.mean(), 2)) + "%")
