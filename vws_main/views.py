@@ -191,8 +191,8 @@ class FS_WrestlerDetailView(DetailView):
 
         # correlations
         matches_inter = matches.select_dtypes(exclude=['object'])
-        matches_inter = matches_inter.drop(columns=['MoV', 'FocusPoints', 'OppPoints', 'NumResult', 'VS', 'oVS'])
-        corrs = matches_inter.corr()['BinaryResult'][:-1].dropna()
+        matches_inter = matches_inter.drop(columns=['MoV', 'FocusPoints', 'OppPoints', 'BinaryResult', 'VS', 'oVS'])
+        corrs = matches_inter.corr()['NumResult'][:-1].dropna()
         corrs = corrs[corrs > -1]
         corrs = corrs[corrs < 1]
         bad = corrs.sort_values(ascending=True)[:10]
