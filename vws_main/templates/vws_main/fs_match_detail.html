@@ -237,8 +237,13 @@
     <h3>Match Timeseries</h3>
       <div class="table-responsive">
         <table id="tstable" class="table table-hover table-sm">
-          <caption>Timeseries for match '{{object.matchID}}' <br />
+          {% if object.matchID|length_is:"4" %}
+            <caption>Timeseries for match '{{object.matchID}}' <br />
               Blue: {{object.focus.name}} | Red: {{object.opponent.name}}</caption>
+          {% else %}
+            <caption>Timeseries for match '{{object.matchID}}' <br />
+              Blue: {{object.opponent.name}} | Red: {{object.focus.name}}</caption>
+          {% endif %}
           <thead class="indigo white-text">
             <tr>
               <th><a data-toggle="popover" data-trigger="hover" title="Event Number" data-content="">Event Number</a></th>
