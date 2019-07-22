@@ -89,7 +89,7 @@
                 <h5>Points Allowed: </h5><p> {{object.points_allowed|floatformat:2}}</p>
               </div>
               <div class="col-sm-4">
-                <h5>Veritas Points: </h5><p> {{object.vs|floatformat:2}}</p>
+                <h5>Veritas Points: </h5><p> {{object.total_vs|floatformat:2}}</p>
               </div>
             </div>
           </div>
@@ -204,9 +204,15 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>{{focus_ecr}}</td>
+                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Effective Counter Rate"
+                           data-content="Conditional Counters including Exposures">ECR</a></td>
+                    <td>{{opp_ecr}}</td>
+                  </tr>
+                  <tr>
                     <td>{{object.npf|floatformat:2}}</td>
-                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor"
-                           data-content="(TD conversions/total TD conversions) + (TD attempts/total TD attempts)">NPF</a></td>
+                    <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor RATE"
+                           data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
                     <td>{{object.opp_npf|floatformat:2}}</td>
                   </tr>
                   <tr>

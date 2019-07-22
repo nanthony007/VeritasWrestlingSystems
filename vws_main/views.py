@@ -6,6 +6,7 @@ from vws_main.forms import Wrestler1ModelForm
 import pandas as pd
 import os
 from collections import Counter
+from .Ecounter import effective_counter_rate
 
 
 def safe_div(x, y):
@@ -109,6 +110,7 @@ class FS_WrestlerDetailView(DetailView):
         npf=Avg('focus_wrestler2__npf'),
         apm=Avg('focus_wrestler2__apm'),
         vs=Avg('focus_wrestler2__vs'),
+        total_vs=Sum('focus_wrestler2__vs'),
 
         # opp adv stats
         opp_hi_rate=Avg('focus_wrestler2__opp_hi_rate'),
@@ -189,7 +191,7 @@ class FS_WrestlerDetailView(DetailView):
 
         # correlations
         matches_inter = matches.select_dtypes(exclude=['object'])
-        matches_inter = matches_inter.drop(columns=['MoV', 'FocusPoints', 'OppPoints', 'NumResult'])
+        matches_inter = matches_inter.drop(columns=['MoV', 'FocusPoints', 'OppPoints', 'NumResult', 'VS', 'oVS'])
         corrs = matches_inter.corr()['BinaryResult'][:-1].dropna()
         corrs = corrs[corrs > -1]
         corrs = corrs[corrs < 1]
@@ -199,6 +201,9 @@ class FS_WrestlerDetailView(DetailView):
         data['badvalues'] = [round(i, 2) for i in bad]
         data['goodtitles'] = good.index.tolist()
         data['goodvalues'] = [round(i, 2) for i in good]
+        ECR = effective_counter_rate(wrestler)
+        data['focus_ecr'] = round(ECR[0], 2)
+        data['opp_ecr'] = round(ECR[1], 2)
         return data
 
 
