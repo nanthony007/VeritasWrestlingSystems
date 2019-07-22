@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" line="328" />
+    <bookmark url="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" line="332" />
     <bookmark url="file://$PROJECT_DIR$/vws_main/templates/vws_main/home.html" line="105" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Ecounter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/views.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/shelf/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,8 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vws_main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="860">
-              <caret line="188" selection-start-line="188" selection-end-line="188" />
+            <state relative-caret-position="345">
+              <caret line="173" column="87" lean-forward="true" selection-start-line="173" selection-start-column="87" selection-end-line="173" selection-end-column="87" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -31,19 +33,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Ecounter.py">
+        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="40" column="5" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
+            <state relative-caret-position="380">
+              <caret line="297" column="8" lean-forward="true" selection-start-line="297" selection-start-column="8" selection-end-line="297" selection-end-column="8" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
+        <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
+            <state relative-caret-position="3">
+              <caret line="256" column="25" selection-start-line="256" selection-start-column="25" selection-end-line="256" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -117,7 +119,6 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/vws_main/models.py" />
         <option value="$PROJECT_DIR$/vws_main/admin.py" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" />
         <option value="$PROJECT_DIR$/vws_main/graph.py" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/reports_detail.html" />
         <option value="$PROJECT_DIR$/vws_main/filters.py" />
@@ -129,11 +130,12 @@
         <option value="$PROJECT_DIR$/vws_main/urls.py" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_ratings.html" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" />
-        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" />
         <option value="$PROJECT_DIR$/vws_main/templates/vws_main/compare.html" />
         <option value="$PROJECT_DIR$/save_script.py" />
-        <option value="$PROJECT_DIR$/vws_main/views.py" />
         <option value="$PROJECT_DIR$/Ecounter.py" />
+        <option value="$PROJECT_DIR$/vws_main/views.py" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" />
+        <option value="$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html" />
       </list>
     </option>
   </component>
@@ -155,17 +157,6 @@
             <path>
               <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
               <item name="Veritas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
-              <item name="collection" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Veritas" type="462c0819:PsiDirectoryNode" />
-              <item name="collection" type="462c0819:PsiDirectoryNode" />
-              <item name="stats" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Veritas" type="b2602c69:ProjectViewProjectNode" />
@@ -362,8 +353,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4994233" visible="true" weight="0.16666667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4994233" visible="true" weight="0.16666667" />
       <window_info id="Structure" order="1" sideWeight="0.5005767" side_tool="true" weight="0.16822034" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -374,7 +366,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293348" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49957627" visible="true" weight="0.24427481" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49957627" visible="true" weight="0.24427481" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50054646" side_tool="true" weight="0.2780807" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49945354" weight="0.2780807" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -424,16 +416,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FScollector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="160" selection-start-line="160" selection-end-line="160" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collection/stats/video2.py" />
     <entry file="file://$PROJECT_DIR$/collection/video.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -450,13 +432,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
           <caret line="24" column="82" selection-start-line="24" selection-start-column="82" selection-end-line="24" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
@@ -603,13 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -637,22 +605,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="101" column="40" selection-start-line="101" selection-start-column="40" selection-end-line="101" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vws_main/management/commands/model2csv.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/save_script.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -672,46 +626,84 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collection/stats/timeseries.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider selected="true" editor-type-id="csv-text-editor">
         <state relative-caret-position="307">
           <caret line="63" column="6" selection-start-line="63" selection-start-column="2" selection-end-line="63" selection-end-column="6" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vws_main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="188" selection-start-line="188" selection-end-line="188" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collection/stats/match_dist.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ecounter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/compare.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="64" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/collection/stats/matchdata.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="376">
           <caret line="82" column="150" selection-start-line="82" selection-start-column="150" selection-end-line="82" selection-end-column="150" />
         </state>
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ecounter.py">
+    <entry file="file://$PROJECT_DIR$/FScollector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="5" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
+        <state relative-caret-position="240">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="173" column="87" lean-forward="true" selection-start-line="173" selection-start-column="87" selection-end-line="173" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="256" column="25" selection-start-line="256" selection-start-column="25" selection-end-line="256" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vws_main/templates/vws_main/fs_wrestler_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="297" column="8" lean-forward="true" selection-start-line="297" selection-start-column="8" selection-end-line="297" selection-end-column="8" />
         </state>
       </provider>
     </entry>

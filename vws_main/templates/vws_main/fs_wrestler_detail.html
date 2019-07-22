@@ -249,6 +249,7 @@
         </div>
         <hr id="matches-table" class="yellow"/>
         <h3>Matches <small>({{ object.match_count }})</small></h3>
+        <p>Click on a MatchID for more details.</p>
         <div class="table-responsive">
           <table id="matchestable" class="table table-hover table-sm">
             <thead class="indigo white-text">
@@ -294,6 +295,7 @@
     });
     $(document).ready(function () {
       $('#matchestable').DataTable({
+        'info': false,
         'paging':false,
         'scrollY': '300px',
         'scrollCollapse': true,
@@ -321,10 +323,12 @@
             }
           }]
         },
-        title: {
+         title: {
             display: true,
-            text: 'Results Distribution'
+            text: 'Result Distribution'
         },
+         legend: {
+            display: false},
         responsive: true,
         animation: {
           duration: 2000
@@ -481,7 +485,7 @@
       "data": {
         "labels": {{goodtitles | safe}},
         "datasets": [{
-          "label": "Good Actions",
+          "label": "Positive Actions",
           "data": {{goodvalues | safe}},
           "fill": false,
           "backgroundColor": ['rgb(63, 81, 181, 1.0)', 'rgb(63, 81, 181, 0.93)',
@@ -515,6 +519,8 @@
             display: true,
             text: 'Top 10 Positive Actions'
         },
+         legend: {
+            display: false},
         responsive: true,
         animation: {duration:2000}
       }
@@ -524,7 +530,7 @@
       "data": {
         "labels": {{badtitles | safe}},
         "datasets": [{
-          "label": "Bad Actions",
+          "label": "Negative Actions",
           "data": {{badvalues | safe}},
           "fill": false,
           "backgroundColor": ['rgb(255, 235, 59, 1.0)', 'rgb(255, 235, 59, 0.93)',
@@ -543,7 +549,8 @@
               labelString: "Correlation to Winning"
             },
             "ticks": {
-              "beginAtZero": true
+              "beginAtZero": true,
+              min: -1.0
             }
           }],
           yAxes: [{
@@ -558,6 +565,8 @@
             display: true,
             text: 'Top 10 Negative Actions'
         },
+         legend: {
+            display: false},
         responsive: true,
         animation: {duration:2000}
       }

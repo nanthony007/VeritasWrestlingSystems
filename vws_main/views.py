@@ -2,15 +2,22 @@ from django.shortcuts import render
 from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
 from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
 from django.views.generic import DetailView, ListView
-from django_filters.views import FilterView
-from vws_main.filters import FS_RatingsFilter
-from vws_main.forms import Wrestler1ModelForm, Wrestler2ModelForm
+from vws_main.forms import Wrestler1ModelForm
 import pandas as pd
-import matplotlib.pyplot as plt
-from django.http import HttpResponse
-import seaborn as sns
 import os
-import io
+from collections import Counter
+
+
+def safe_div(x, y):
+    """
+    Accepts two numeric parameters.
+    Safely divide first by second, even if second value is zero.
+    """
+    if y == 0:
+        return x / (y + 1)
+    else:
+        return x / y
+
 
 class Round(Func):
     function = 'ROUND'
@@ -135,40 +142,46 @@ class FS_WrestlerDetailView(DetailView):
         wrestler = self.object.name
         matches = matches[matches.Focus == wrestler]
         data['matches'] = matches[matches.Duration != 0]
-        resulttypecounts = matches['Result'].value_counts()
-        data['resulttypes'] = resulttypecounts.index.tolist()
-        data['resulttypecounts'] = resulttypecounts.tolist()
+        rtc = Counter(matches['Result'])
+        data['resulttypes'] = ['LossF', 'LossTF', 'LossD', 'WinD', 'WinTF', 'WinF']
+        data['resulttypecounts'] = [rtc[i] for i in ['LossF', 'LossTF', 'LossD', 'WinD', 'WinTF', 'WinF']]
         vs = matches.VS
-        data['vsindex'] = list(range(1, len(vs.index.tolist())+1))
+        data['vsindex'] = matches.MatchID.tolist()
         data['vsvalues'] = vs.tolist()
         data['worldvs'] = [17.66] * len(vs.index.tolist())
         # calculations
-        HIC = matches.HIa.sum()
-        HOC = matches.HOa.sum()
-        DC = matches.Da.sum()
-        LSC = matches.LSa.sum()
-        GBC = matches.GBa.sum()
-        TC = matches.Ta.sum()
+        HI = matches.HIa.sum()
+        HO = matches.HOa.sum()
+        D = matches.Da.sum()
+        LS = matches.LSa.sum()
+        GB = matches.GBa.sum()
+        T = matches.Ta.sum()
         totalTDA = matches.HIa.sum() + matches.HOa.sum() + matches.Da.sum() + matches.LSa.sum() + matches.GBa.sum() + matches.Ta.sum()
-        oHIC = matches.oHIa.sum()
-        oHOC = matches.oHOa.sum()
-        oDC = matches.oDa.sum()
-        oLSC = matches.oLSa.sum()
-        oGBC = matches.oGBa.sum()
-        oTC = matches.oTa.sum()
+        oHI = matches.oHIa.sum()
+        oHO = matches.oHOa.sum()
+        oD = matches.oDa.sum()
+        oLS = matches.oLSa.sum()
+        oGB = matches.oGBa.sum()
+        oT = matches.oTa.sum()
         ototalTDA = matches.oHIa.sum() + matches.oHOa.sum() + matches.oDa.sum() + matches.oLSa.sum() + matches.oGBa.sum() + matches.oTa.sum()
 
         data['shot_labels'] = ['Head Inside', 'Head Outside', 'Double', 'LowShot', 'Counter', 'Throw']
-        rates = [matches.HIrate.mean(), matches.HOrate.mean(), matches.Drate.mean(), matches.LSrate.mean(),
-                 matches.GBrate.mean(),
-                 matches.Trate.mean()]
-        orates = [matches.oHIrate.mean(), matches.oHOrate.mean(), matches.oDrate.mean(),
-                 matches.oLSrate.mean(),
-                 matches.oGBrate.mean(), matches.oTrate.mean()]
-        prefs = [(HIC / totalTDA) * 100, (HOC / totalTDA) * 100, (DC / totalTDA) * 100, (LSC / totalTDA) * 100,
-                 (GBC / totalTDA) * 100, (TC / totalTDA) * 100]
-        oprefs = [(oHIC / ototalTDA) * 100, (oHOC / ototalTDA) * 100, (oDC / ototalTDA) * 100, (oLSC / ototalTDA) * 100,
-                 (oGBC / ototalTDA) * 100, (oTC / ototalTDA) * 100]
+        rates = [safe_div(matches.HIc2.sum() + matches.HIc4.sum(), matches.HIa.sum()) * 100,
+                 safe_div(matches.HOc2.sum() + matches.HOc4.sum(), matches.HOa.sum()) * 100,
+                 safe_div(matches.Dc2.sum() + matches.Dc4.sum(), matches.Da.sum()) * 100,
+                 safe_div(matches.LSc2.sum() + matches.LSc4.sum(), matches.LSa.sum()) * 100,
+                 safe_div(matches.GBc2.sum(), matches.GBa.sum()) * 100,
+                 safe_div(matches.Tc2.sum() + matches.Tc4.sum(), matches.Ta.sum()) * 100]
+        orates = [safe_div(matches.oHIc2.sum() + matches.oHIc4.sum(), matches.oHIa.sum()) * 100,
+                  safe_div(matches.oHOc2.sum() + matches.oHOc4.sum(), matches.oHOa.sum()) * 100,
+                  safe_div(matches.oDc2.sum() + matches.oDc4.sum(), matches.oDa.sum()) * 100,
+                  safe_div(matches.oLSc2.sum() + matches.oLSc4.sum(), matches.oLSa.sum()) * 100,
+                  safe_div(matches.oGBc2.sum(), matches.oGBa.sum()) * 100,
+                  safe_div(matches.oTc2.sum() + matches.oTc4.sum(), matches.oTa.sum()) * 100]
+        prefs = [(HI / totalTDA) * 100, (HO / totalTDA) * 100, (D / totalTDA) * 100, (LS / totalTDA) * 100,
+                 (GB / totalTDA) * 100, (T / totalTDA) * 100]
+        oprefs = [(oHI / ototalTDA) * 100, (oHO / ototalTDA) * 100, (oD / ototalTDA) * 100, (oLS / ototalTDA) * 100,
+                 (oGB / ototalTDA) * 100, (oT / ototalTDA) * 100]
         data['rates'] = [round(i, 2) for i in rates]
         data['orates'] = [round(i, 2) for i in orates]
         data['prefs'] = [round(i, 2) for i in prefs]

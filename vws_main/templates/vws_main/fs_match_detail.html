@@ -64,7 +64,7 @@
 
     <h3>Match Stats</h3>
     <div class="table-responsive">
-      <table id="tstable" class="table table-bordered table-sm">
+      <table class="table table-bordered table-sm">
         <caption>Match info for match '{{object.matchID}}'</caption>
         <thead class="indigo white-text">
           <tr>
@@ -235,7 +235,7 @@
 
     <h3>Match Timeseries</h3>
       <div class="table-responsive">
-        <table class="table table-hover table-sm">
+        <table id="tstable" class="table table-hover table-sm">
           <caption>Timeseries for match '{{object.matchID}}' <br />
               Blue: {{object.focus.name}} | Red: {{object.opponent.name}}</caption>
           <thead class="indigo white-text">
@@ -283,5 +283,14 @@
   $('[data-toggle="popover"]').popover();
   $('.popover-dismiss').popover({
     trigger: 'focus'
+  });
+  $(document).ready(function () {
+    $('#tstable').DataTable({
+      'info': false,
+      'paging':false,
+      'scrollY': '500px',
+      'scrollCollapse': true,
+    });
+    $('.dataTables_length').addClass('bs-select');
   });
 </script>
