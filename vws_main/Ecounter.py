@@ -34,14 +34,14 @@ def effective_counter_rate(x_wrestler):
     # get focus nums
     for i, l in enumerate(bluelabels):
         if (i + 1) == len(bluelabels):
-            pass
+            continue
         if l == 'bgba':
             counter_att += 1
             if bluelabels[i+1] == 'bexposure' or bluelabels[i+1] == 'bgbc':
                 counter_conv += 1
     for i, l in enumerate(redlabels):
         if (i + 1) == len(redlabels):
-            pass
+            continue
         if l == 'rgba':
             counter_att += 1
             if redlabels[i+1] == 'rexposure' or redlabels[i+1] == 'rgbc':
@@ -49,7 +49,7 @@ def effective_counter_rate(x_wrestler):
     # get opp nums
     for i, l in enumerate(bluelabels):
         if (i + 1) == len(bluelabels):
-            pass
+            continue
         if l == 'rgba':
             opp_counter_att += 1
             if bluelabels[i + 1] == 'rexposure' or bluelabels[i + 1] == 'rgbc':
@@ -57,7 +57,7 @@ def effective_counter_rate(x_wrestler):
 
     for i, l in enumerate(redlabels):
         if (i + 1) == len(redlabels):
-            pass
+            continue
         if l == 'bgba':
             opp_counter_att += 1
             if redlabels[i+1] == 'bexposure' or redlabels[i+1] == 'bgbc':
@@ -66,9 +66,8 @@ def effective_counter_rate(x_wrestler):
     counter_rate = safe_div(counter_conv, counter_att) * 100
     opp_counter_rate = safe_div(opp_counter_conv, opp_counter_att) * 100
     print(matches.GBc2.sum(), matches.GBa.sum())
+    print(counter_conv, counter_att)
     print("LONG Go Behind Rate: " + str(round((matches.GBc2.sum() / matches.GBa.sum()) * 100, 2)) + "%")
-    print("Go Behind Rate: " + str(round(matches.GBrate.mean(), 2)) + "%")
     print("Go Behind Rate: " + str(round(counter_rate, 2)) + "%")
-    print("OPP Go Behind Rate: " + str(round(opp_counter_rate, 2)) + "%")
     return counter_rate, opp_counter_rate
 
