@@ -14,13 +14,11 @@
 	<title>Veritas Analytics</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
-	<!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- Bootstrap -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Material Design for Bootstrap -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/css/mdb.min.css" rel="stylesheet">
-	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
+	<link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'vws_main/css/addons/datatables.min.css' %}" rel="stylesheet">
 	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
 	<style type="text/css">
 		body {
@@ -59,29 +57,10 @@
 
 <br />
 
-<body>
 	{% block content %}
-
 	{% endblock %}
-	<!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<!-- Popper.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-
-	<!-- Bootstrap -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-
-	<!-- Material Design for Bootstrap -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/js/mdb.min.js"></script>
-
-	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-	<script>
-		new WOW().init();
-	</script>
-</body>
-
+<br />
 <footer class="page-footer fixed-bottom font-small indigo">
   <div class="text-center">
     Scientia potentia est. |

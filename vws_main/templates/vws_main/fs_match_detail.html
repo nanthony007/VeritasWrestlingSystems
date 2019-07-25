@@ -51,6 +51,10 @@
     <a class="nav-link" href="/compare">Versus</a>
     </li>
     </ul>
+    <ul class="nav navbar-nav ml-auto">
+     <li class="nav-item">
+       <a  class="nav-link" href="#">Profile</a>
+     </li>
     <!-- Links -->
     </div>
   </nav>
@@ -58,107 +62,83 @@
   <body>
     <div class="container">
       <div class="page-header">
-        <h2>Match {{object.matchID}}<small> Info: </small></h2>
+        <h2>Match {{object.matchID}}</h2>
       <hr class="yellow"/>
     </div>
 
-    <h3>Match Stats</h3>
-    <p>Click on a wrestler to see their profile.</p>
+  <div class="row">
+    <h3>Info</h3>
     <div class="table-responsive">
       <table class="table table-bordered table-sm">
-        <caption>Match info for match '{{object.matchID}}'</caption>
+        <caption>Results | Click on a wrestler to view their profile</caption>
         <thead class="indigo white-text">
           <tr>
-            <th>MatchID</th>
-            <th>Date</th>
-            <th>Weight</th>
-            <th>Focus</th>
-            <th>Result</th>
-            <th>Opponent</th>
-            <th>FocusScore</th>
-            <th>OppScore</th>
-            <th>Duration</th>
-            <th>HIa</th>
-            <th>HIc2</th>
-            <th>HIc4</th>
-            <th>HOa</th>
-            <th>HOc2</th>
-            <th>HOc4</th>
-            <th>Da</th>
-            <th>Dc2</th>
-            <th>Dc4</th>
-            <th>LSa</th>
-            <th>LSc2</th>
-            <th>LSc4</th>
-            <th>GBa</th>
-            <th>GBc2</th>
-            <th>Ta</th>
-            <th>Tc2</th>
-            <th>Tc4</th>
-            <th>Exposure</th>
-            <th>Gut</th>
-            <th>LegLace</th>
-            <th>Turn</th>
-            <th>Recovery</th>
-            <th>Pushout</th>
-            <th>Passive</th>
-            <th>Violation</th>
-            <th>oHIa</th>
-            <th>oHIc2</th>
-            <th>oHIc4</th>
-            <th>oHOa</th>
-            <th>oHOc2</th>
-            <th>oHOc4</th>
-            <th>oDa</th>
-            <th>oDc2</th>
-            <th>oDc4</th>
-            <th>oLSa</th>
-            <th>oLSc2</th>
-            <th>oLSc4</th>
-            <th>oGBa</th>
-            <th>oGBc2</th>
-            <th>oTa</th>
-            <th>oTc2</th>
-            <th>oTc4</th>
-            <th>oExposure</th>
-            <th>oGut</th>
-            <th>oLegLace</th>
-            <th>oTurn</th>
-            <th>oRecovery</th>
-            <th>oPushout</th>
-            <th>oPassive</th>
-            <th>oViolation</th>
-            <th>HI%</th>
-            <th>HO%</th>
-            <th>D%</th>
-            <th>LS%</th>
-            <th>GB%</th>
-            <th>Throw%</th>
-            <th>NPF</th>
-            <th>APM</th>
-            <th>VS</th>
-            <th>oHI%</th>
-            <th>oHO%</th>
-            <th>oD%</th>
-            <th>oLS%</th>
-            <th>oGB%</th>
-            <th>oThrow%</th>
-            <th>oNPF</th>
-            <th>oAPM</th>
-            <th>oVS</th>
+            <th><a data-toggle="popover" data-trigger="hover" title="MatchID" data-content="">MatchID</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Date" data-content="">Date</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Weight" data-content="">Weight</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Focus Wrestler" data-content="">Focus</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Result" data-content="">Result</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Opponent" data-content="">Opponent</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="FocusScore" data-content="">FocusScore</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="OppScore" data-content="">OpponentScore</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Match Length" data-content="">Duration</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{object.matchID}}</td>
+            <td>{{object.date}}</td>
+            <td>{{object.weight}}</td>
+            <td><a href="/fs_wrestlers/{{object.focus.slug}}/" class="primary-text">{{object.focus.name}}</a></td>
+            <td>{{object.result}}</td>
+            <td><a href="/fs_wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
+            <td>{{object.focus_score}}</td>
+            <td>{{object.opp_score}}</td>
+            <td>{{object.duration}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <canvas id="timeserieslinechart"></canvas>
+  </div>
+
+    <hr id="base-stats-table" class="yellow"/>
+    <div class="row">
+      <h3>Base Stats</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <caption>Cumulative counts</caption>
+          <thead class="indigo white-text">
+            <tr>
+              <th></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{{object.matchID}}</td>
-              <td>{{object.date}}</td>
-              <td>{{object.weight}}</td>
-              <td><a href="/fs_wrestlers/{{object.focus.slug}}/" class="primary-text">{{object.focus.name}}</a></td>
-              <td>{{object.result}}</td>
-              <td><a href="/fs_wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
-              <td>{{object.focus_score}}</td>
-              <td>{{object.opp_score}}</td>
-              <td>{{object.duration}}</td>
+              <td class="indigo white-text">Focus</td>
               <td>{{object.hia}}</td>
               <td>{{object.hic2}}</td>
               <td>{{object.hic4}}</td>
@@ -180,10 +160,9 @@
               <td>{{object.gut}}</td>
               <td>{{object.leg_lace}}</td>
               <td>{{object.turn}}</td>
-              <td>{{object.recovery}}</td>
-              <td>{{object.pushout}}</td>
-              <td>{{object.passive}}</td>
-              <td>{{object.violation}}</td>
+            </tr>
+            <tr>
+              <td class="indigo white-text">Opponent</td>
               <td>{{object.opp_hia}}</td>
               <td>{{object.opp_hic2}}</td>
               <td>{{object.opp_hic4}}</td>
@@ -205,35 +184,109 @@
               <td>{{object.opp_gut}}</td>
               <td>{{object.opp_leg_lace}}</td>
               <td>{{object.opp_turn}}</td>
-              <td>{{object.opp_recovery}}</td>
-              <td>{{object.opp_pushout}}</td>
-              <td>{{object.opp_passive}}</td>
-              <td>{{object.opp_violation}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr id="shot-chart-table" class="yellow"/>
+    <div class="row">
+      <h3>Shot Comparison</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <caption>Calculated (%)</caption>
+          <thead class="indigo white-text">
+            <tr>
+              <th></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="HI%" data-content="(HIc2+HIc4)/HIa">Head Inside Rate</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="HO%" data-content="(HOc2+HOc4)/HOa">Head Outside Rate</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="D%" data-content="(Dc2+Dc4)/Da">Double Rate</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="LS%" data-content="(LSc2+LSc4)/LSa">LowShot Rate</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Counter%" data-content="(GBc2+GBc4)/GBa">Counter Rate</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="T%" data-content="(Tc2+Tc4)/Ta">Throw Rate</a></th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="indigo white-text">Focus</td>
               <td>{{object.hi_rate}}</td>
               <td>{{object.ho_rate}}</td>
               <td>{{object.d_rate}}</td>
               <td>{{object.ls_rate}}</td>
               <td>{{object.gb_rate}}</td>
               <td>{{object.t_rate}}</td>
-              <td>{{object.npf}}</td>
-              <td>{{object.apm}}</td>
-              <td>{{object.vs}}</td>
+            </tr>
+            <tr>
+              <td class="indigo white-text">Opponent</td>
               <td>{{object.opp_hi_rate}}</td>
               <td>{{object.opp_ho_rate}}</td>
               <td>{{object.opp_d_rate}}</td>
               <td>{{object.opp_ls_rate}}</td>
               <td>{{object.opp_gb_rate}}</td>
               <td>{{object.opp_t_rate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr id="adv-stats-table" class="yellow"/>
+    <div class="row">
+      <h3>Advanced Stats and Misc.</h3>
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <caption>Composite</caption>
+          <thead class="indigo white-text">
+            <tr>
+              <th></th>
+              <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="NPF"
+                     data-content="(TD conv/match TD conv) + (TD att/match TD att)">Neutral Pace Factor</a></th>
+              <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="APM"
+                 data-content="(Defense + Offense) / Duration">Acton per Minute</a></th>
+              <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="VS"
+                 data-content="Weighted Result + (NPF * APM)">Veritas Score</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Recovery"
+                data-content="Scoring after allowing exposure or takedown">Recovery</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Pushout"
+                data-content="">Pushout</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Pasive"
+                data-content="Passive calls including warnings">Passive</a></th>
+              <th><a data-toggle="popover" data-trigger="hover" title="Violations"
+                data-content="Illegal holds, shot clock violation, cautions, etc.">Violations</a></th>
+
+              </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="indigo white-text">Focus</td>
+              <td>{{object.npf}}</td>
+              <td>{{object.apm}}</td>
+              <td>{{object.vs}}</td>
+              <td>{{object.recovery}}</td>
+              <td>{{object.pushout}}</td>
+              <td>{{object.passive}}</td>
+              <td>{{object.violation}}</td>
+            </tr>
+            <tr>
+              <td class="indigo white-text">Opponent</td>
               <td>{{object.opp_npf}}</td>
               <td>{{object.opp_apm}}</td>
               <td>{{object.opp_vs}}</td>
+              <td>{{object.opp_recovery}}</td>
+              <td>{{object.opp_pushout}}</td>
+              <td>{{object.opp_passive}}</td>
+              <td>{{object.opp_violation}}</td>
             </tr>
-            </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <br />
 
+
+    <hr id="matches-table-div" class="yellow"/>
+  <div class="row">
     <h3>Match Timeseries</h3>
       <div class="table-responsive">
         <table id="tstable" class="table table-hover table-sm">
@@ -268,6 +321,7 @@
         </table>
       </div>
     </div>
+  </div>
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
@@ -294,9 +348,55 @@
     $('#tstable').DataTable({
       'info': false,
       'paging':false,
-      'scrollY': '500px',
+      'scrollY': '300px',
       'scrollCollapse': true,
     });
     $('.dataTables_length').addClass('bs-select');
+  });
+  var tsline = document.getElementById("timeserieslinechart").getContext('2d');
+  var myLineChart = new Chart(tsline, {
+    type: 'line',
+    data: {
+      labels: [{% for row in object.actions2.all %}
+        "{{row.event_time}}",
+        {% endfor %}],
+      datasets: [{
+          label: "Blue",
+          data: [{% for row in object.actions2.all %}
+            {{row.blue}},
+            {% endfor %}],
+          borderColor: 'rgb(63, 81, 181)',
+          backgroundColor: 'rgb(255, 255, 255, 0.0)',
+          borderWidth: 2
+        },
+        {
+          label: "Red",
+          data: [{% for row in object.actions2.all %}
+            {{row.red}},
+            {% endfor %}],
+          borderColor: 'rgb(255, 235, 59)',
+          backgroundColor: 'rgb(255, 255, 255, 0.0)',
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      intersect: false,
+      title: {
+          display: true,
+          text: 'Timeseries'
+      },
+      responsive: true,
+      animation: {
+        'duration': 2000
+      }
+    }
   });
 </script>

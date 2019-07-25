@@ -15,6 +15,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
 from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Team
 from collection import backend
+import save_script
 pd.options.mode.chained_assignment = None
 
 # wrestlers = pd.read_csv("collection/stats/wrestlers.csv")
@@ -1113,6 +1114,9 @@ class ConfirmationPage(tk.Frame):
         # self.x.ts_df.to_csv('collection/stats/timeseries.csv', mode='a', header=False)
         # self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
         # self.textbox.insert(tk.END, '\n---------', 'center-tag')
+        self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
+        save_script.savecsv()
+        self.textbox.insert(tk.END, '\nCSVsave\n', 'center-tag')
         self.textbox.configure(state=tk.DISABLED)
 
 

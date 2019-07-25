@@ -2,64 +2,54 @@
 
 {% block content %}
 {% load widget_tweaks %}
+{% load staticfiles %}
+<body>
+	<div class="container" >
+	  <div class="page-header">
+	      <h2>Freestyle Ratings</h2>
+	      <hr class="yellow"/>
+				<p>There is a one match minimum requirement to be listed in the ratings.</p>
+	  </div>
 
-<div class="container">
-  <div class="page-header">
-      <h2>Freestyle Ratings</h2>
-      <hr class="yellow"/>
-  </div>
+	  <br />
 
-  <p>Use the navigation menu below to search/view athletes in each tier.<br />
-    There is a one match minimum requirement to be listed in the ratings. <br /></p>
-
-  <form method="GET">
-    <div class="container">
-      <div class="row">
-        <div class="form-group col-md-2">
-          {{ filter.form.name.label_tag }}
-          {% render_field filter.form.name class="form-control" %}
-        </div>
-        <div class="form-group col-md-2">
-          {{ filter.form.team.label_tag }}
-          {% render_field filter.form.team class="form-control" %}
-        </div>
-        <div class="form-group col-md-2">
-          {{ filter.form.tier.label_tag }}
-          {% render_field filter.form.tier class="form-control" %}
-        </div>
-        <div class="form-group col-md-2">
-          {{ filter.form.weight.label_tag }}
-          {% render_field filter.form.weight class="form-control" %}
-        </div>
-      </div>
-      <button type="submit" class="btn btn-yellow waves-effect">Search</button>
-    </div>
-  </form>
-
-  <br />
-
-  <div class="table-responsive">
-    <table id="ratingstable" class="table table-sm table-striped">
-      <thead class="table-primary">
-        <tr>
-          <th>Name</th>
-          <th>Team</th>
-          <th>Rating</th>
-          <th>Matches</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for wrestler in object_list %}
-          <tr>
-            <td><a href="/fs_wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
-            <td><a href="/fs_teams/{{wrestler.team.slug}}">{{ wrestler.team.abbreviation }}</a></td>
-            <td>{{ wrestler.rating }}</td>
-            <td>{{ wrestler.match_count }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
-
+	  <div class="table-responsive">
+	    <table id="ratingstable" class="table table-sm table-striped table-hover">
+	      <thead class="indigo white-text">
+	        <tr>
+	          <th>Name</th>
+	          <th>Team</th>
+	          <th>Rating</th>
+	          <th>Matches</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        {% for wrestler in object_list %}
+	          <tr>
+	            <td><a href="/fs_wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
+	            <td>{{ wrestler.team.abbreviation }}</td>
+	            <td>{{ wrestler.rating }}</td>
+	            <td>{{ wrestler.match_count }}</td>
+	          </tr>
+	        {% endfor %}
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+  <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+</body>
 {% endblock %}
+
+<script type="text/javascript">
+  new WOW().init();
+  $(document).ready(function () {
+    $('#ratingstable').DataTable({
+      "pagingType": "first_last_numbers", // "simple" option for 'Previous' and 'Next' buttons only
+      "order":[[2, "desc"]]
+    });
+  });
+</script>
