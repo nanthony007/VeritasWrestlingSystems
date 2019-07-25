@@ -30,10 +30,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
     'vws_main',
     'django_tables2',
     'widget_tweaks',
@@ -133,5 +133,8 @@ MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 django_heroku.settings(locals())

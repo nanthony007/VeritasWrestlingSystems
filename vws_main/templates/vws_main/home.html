@@ -47,15 +47,30 @@
     <li class="nav-item">
       <a class="nav-link" href="/fs_ratings">Ratings</a>
     </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+  {% if user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="/compare">Versus</a>
+      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+    </li>
+  {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'register' %}">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">Login</a>
+    </li>
+  {% endif %}
   </ul>
   <!-- Links -->
 </div>
 </nav>
 
 <body>
+
 <!-- Full Page Intro -->
   <div class="view">
       <img src="{% static 'vws_main/img/funinternet.png' %}" class="img-fluid" alt="No Image" style="width:100%">
@@ -63,6 +78,13 @@
     <div class="mask rgba-black-strong d-flex justify-content-left align-items-left">
       <!-- Content -->
       <div class="white-text mx-5 wow fadeIn">
+      {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+      {% endif %}
         <div class="row">
           <div class="col col-sm-1">
           </div>
@@ -90,8 +112,30 @@
               Developed and maintained by Nicholas Anthony
             </h6>
           <br />
+          <br />
           </div>
         </div>
+      {% if not user.is_authenticated %}
+      <div class="row">
+          <div class="col col-sm-1">
+          </div>
+          <div class="col col-lg-7">
+        <h3>Log In</h3>
+        <hr class="yellow"/>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn" type="submit">Login</button>
+            </form>
+            <div>
+                <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>
+            </div>
+        </div>
+          </div>
+      {% endif %}
+
+    </div>
     </div>
     <!-- Mask & flexbox options-->
   </div>
