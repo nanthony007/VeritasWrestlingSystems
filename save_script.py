@@ -78,7 +78,6 @@ def savecsv():
     match_df['BinaryResultText'] = ['Win' if row > 1 else 'Loss' for row in match_df.NumResult.values]
     match_df['ResultType'] = [find_result_types(row) for row in match_df.Result.values]
 
-
     # then events
     events = FS_Event.objects.values()
     events_df = pd.DataFrame(list(events))
