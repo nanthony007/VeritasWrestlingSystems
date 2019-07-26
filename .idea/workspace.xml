@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/users/templates/users/logout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/signals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/templates/vws_main/fs_match_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vws_main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vws_main/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,40 +25,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>match_obj</find>
-      <find>data1</find>
-      <find>excl</find>
-      <find>binary</find>
-      <find>fm</find>
-      <find>slug</find>
-      <find>events</find>
-      <find>2</find>
-      <find>s</find>
-      <find>href=&quot;#&quot;</find>
-      <find>container</find>
-      <find>opp_</find>
-      <find>rgb(</find>
-      <find>63, 81, 181</find>
-      <find>NAN</find>
-      <find>Pat Downey</find>
-      <find>bgbc</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>match2_obj</replace>
-      <replace>data2</replace>
-      <replace>match_df</replace>
-      <replace>matches</replace>
-      <replace>1</replace>
-      <replace>o</replace>
-      <replace>255, 235, 59</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="SYNC" />
@@ -63,6 +37,7 @@
   <component name="ProjectId" id="1OSuu9L5T7FIxmNLpdevqzGKP1Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />

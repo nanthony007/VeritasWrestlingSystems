@@ -52,8 +52,7 @@ class FS_WrestlerDetailView(DetailView):
             When(focus_wrestler2__result='LossD', then=Value(0.90)),
             When(focus_wrestler2__result='LossMD', then=Value(0.75)),
             When(focus_wrestler2__result='LossTF', then=Value(0.50)),
-            When(focus_wrestler2__result='LossF', then=Value(0.25)),
-                output_field=FloatField())),
+            When(focus_wrestler2__result='LossF', then=Value(0.25)), output_field=FloatField())),
         # focus base stats
         hia=Sum('focus_wrestler2__hia'),
         hic2=Sum('focus_wrestler2__hic2'),
@@ -270,7 +269,7 @@ def compare_view(request):
     search2_stats = ''
     prediction = ''
     if request.method == 'POST':
-        prediction = '44.62%'
+        prediction = '26.62%'
         form = Wrestler1ModelForm()
         search_name1 = request.POST.get('wrestler1')
         search1 = FS_Wrestler.objects.get(name=search_name1)

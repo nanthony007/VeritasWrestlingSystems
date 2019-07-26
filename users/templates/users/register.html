@@ -65,11 +65,13 @@
 {% endif %}
 <br />
 <div class="container">
-    <h3>Register</h3>
     <div>
         <form method="POST">
-            {% csrf_token %}
-             {{ form.as_p }}
+            <fieldset class="form-group">
+                <legend>Register Today</legend>
+                {% csrf_token %}
+                 {{ form.as_p }}
+            </fieldset>
             <button class="btn" type="submit">Sign Up</button>
         </form>
         <div>
