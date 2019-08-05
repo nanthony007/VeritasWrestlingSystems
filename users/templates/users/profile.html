@@ -28,100 +28,147 @@
 </head>
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-<!-- Navbar brand -->
-<a class="navbar-brand" href="/">Vertias Analytics</a>
-<!-- Collapse button -->
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<!-- Collapsible content -->
-<div class="collapse navbar-collapse" id="basicExampleNav">
-  <!-- Links -->
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="/">Home
-        <span class="sr-only">(current)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/fs_ratings">Ratings</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/compare">Versus</a>
-    </li>
-  </ul>
-  <!-- Links -->
-</div>
-</nav>
-
-<body>
-{% if messages %}
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="/">Vertias Analytics</a>
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/fs_ratings">Ratings</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+    {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+    {% endif %}
+    </ul>
+    <!-- Links -->
+  </div>
+  </nav>
+  <br />
+  <body>
+  {% if messages %}
     {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
+      <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+      </div>
     {% endfor %}
-{% endif %}
+  {% endif %}
     <!-- content here -->
     <div class="container">
-      <div>
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
-          <p class="text-secondary">{{ user.email }}</p>
-        </div>
+      <div class="container-fluid">
+        <h1>Your Profile</h1>
+        <p>Get started by adding your favorite wrestlers to your team to view their stats!</p>
+        <hr class="yellow"/>
+        <div class="page-header">
+          <h2>
+            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" 
+            style="width: 50px; height: 50px"> 
+            {{ user.username }} 
+            <br />
+            Email: <small>{{ user.email }}</small>
+          </h2>
+          <p>Update your profile <a href="update">here.</a></p>
+      </div>
       </div>
         <hr class="yellow">
+        <h2>Your Team: {{ user.profile.teamname }}</h2>
+        <p>Pick your team <a href="roster_update">here!</a></p>
+        <div class="row indigo">
+          <div class="col sm mx-auto my-auto text-white">
+              <h6>57 kilos</h6>
+          </div>
+          <div class="col sm mx-auto my-auto text-white">
+              <h6>61 kilos</h6>
+          </div>
+          <div class="col sm mx-auto my-auto text-white">
+              <h6>65 kilos</h6>
+          </div>
+          <div class="col sm mx-auto my-auto text-white">
+              <h6>70 kilos</h6>
+          </div>
+          <div class="col sm mx-auto my-auto text-white">
+              <h6>74 kilos</h6>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col sm mx-auto my-auto">
+                <h6><a href="/fs_wrestlers/{{user.profile.roster57.slug}}">{{user.profile.roster57.name}}</a></h6>
+            </div>
+            <div class="col sm mx-auto my-auto">
+                <h6><a href="/fs_wrestlers/{{user.profile.roster61.slug}}">{{user.profile.roster61.name}}</a></h6>
+            </div>
+            <div class="col sm mx-auto my-auto">
+                <h6><a href="/fs_wrestlers/{{user.profile.roster65.slug}}">{{user.profile.roster65.name}}</a></h6>
+            </div>
+            <div class="col sm mx-auto my-auto">
+                <h6><a href="/fs_wrestlers/{{user.profile.roster70.slug}}">{{user.profile.roster70.name}}</a></h6>
+            </div>
+            <div class="col sm mx-auto my-auto">
+                <h6><a href="/fs_wrestlers/{{user.profile.roster74.slug}}">{{user.profile.roster74.name}}</a></h6>
+            </div>
+          </div>
+          <div class="row indigo">
+              <div class="col sm mx-auto my-auto text-white">
+                  <h6>79 kilos</h6>
+              </div>
+              <div class="col sm mx-auto my-auto text-white">
+                  <h6>86 kilos</h6>
+              </div>
+              <div class="col sm mx-auto my-auto text-white">
+                  <h6>92 kilos</h6>
+              </div>
+              <div class="col sm mx-auto my-auto text-white">
+                  <h6>97 kilos</h6>
+              </div>
+              <div class="col sm mx-auto my-auto text-white">
+                  <h6>125 kilos</h6>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col sm mx-auto my-auto">
+                    <h6><a href="/fs_wrestlers/{{user.profile.roster79.slug}}">{{user.profile.roster79.name}}</a></h6>
+                </div>
+                <div class="col sm mx-auto my-auto">
+                    <h6><a href="/fs_wrestlers/{{user.profile.roster86.slug}}">{{user.profile.roster86.name}}</a></h6>
+                </div>
+                <div class="col sm mx-auto my-auto">
+                    <h6><a href="/fs_wrestlers/{{user.profile.roster92.slug}}">{{user.profile.roster92.name}}</a></h6>
+                </div>
+                <div class="col sm mx-auto my-auto">
+                    <h6><a href="/fs_wrestlers/{{user.profile.roster97.slug}}">{{user.profile.roster97.name}}</a></h6>
+                </div>
+                <div class="col sm mx-auto my-auto">
+                    <h6><a href="/fs_wrestlers/{{user.profile.roster125.slug}}">{{user.profile.roster125.name}}</a></h6>
+                </div>
+              </div>
+        <hr  class="yellow"/>
 
-        <div class="row">
-            <div class="col">
-                <p>57 kilos</p>
-                <p>{{ user.profile.roster57.name }}</p>
-            </div>
-                        <div class="col">
-                <p>61 kilos</p>
-                <p>{{ user.profile.roster61.name }}</p>
-            </div>
-                        <div class="col">
-                <p>65 kilos</p>
-                <p>{{ user.profile.roster65.name }}</p>
-            </div>
-                        <div class="col">
-                <p>70 kilos</p>
-                <p>{{ user.profile.roster70.name }}</p>
-            </div>
-                        <div class="col">
-                <p>74 kilos</p>
-                <p>{{ user.profile.roster74.name }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p>79 kilos</p>
-                <p>{{ user.profile.roster79.name }}</p>
-            </div>
-                        <div class="col">
-                <p>86 kilos</p>
-                <p>{{ user.profile.roster86.name }}</p>
-            </div>
-                        <div class="col">
-                <p>92 kilos</p>
-                <p>{{ user.profile.roster92.name }}</p>
-            </div>
-                        <div class="col">
-                <p>97 kilos</p>
-                <p>{{ user.profile.roster97.name }}</p>
-            </div>
-                        <div class="col">
-                <p>125 kilos</p>
-                <p>{{ user.profile.roster125.name }}</p>
-            </div>
-        </div>
-        <hr  class="yellow">
-  <div class="row">
-    <canvas id="rosterlinechart"></canvas>
-  </div>
+        <h2>{{ user.profile.teamname }} <small>Stats</small></h2>
+        <p>View their stats!</p>
 	<div class='tableauPlaceholder' id='viz1564518756083' style='position: relative'>
 		<noscript><a href='https:&#47;&#47;veritaswrestlingsystems.com'>
 			<img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;Maryland2018Evaluation&#47;VS&#47;1_rss.png' style='border: none' /></a>
@@ -139,37 +186,47 @@
 			<param name='display_spinner' value='yes' />
 			<param name='display_overlay' value='yes' />
 			<param name='display_count' value='yes' />
-			<param name='filter' value='Team=Princeton'
+			<param name='filter' value='Team1=Princeton' />
 		</object>
 	</div>
 
         <hr class="yellow">
     <div class="page-header">
         <h2><em>Versus!</em></h2>
-        <hr />
     </div>
 
-    <h3>Compare your favorite wrestlers and see who would win!</h3>
-    <h6>Be sure to enter athlete names as found on our <a href="/fs_ratings/">Ratings</a> page.</h6>
+    <h4>Compare your favorite wrestlers and see who would win!</h4>
+    <p>Be sure to enter athlete names as found on our <a href="/fs_ratings/">Ratings</a> page.</p>
 
-    <form method="POST">{% csrf_token %}
-      <!--<input type="text" name="wrestler1" value="Jason Nolf">-->
-			<select name="wrestler1">
-			  <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
-				<option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
-				<option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
-				<option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
-				<option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
-				<option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
-				<option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
-				<option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
-				<option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
-				<option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
-			</select>
-      <input type="text" name="wrestler2" value="">
-      <input type="submit" value="Submit" onclick="showhideFunction()">
-    </form>
-
+    <div class="col-md-6">
+      <form method="POST" action="/athlete-comparison/">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
+            <div class="col-sm-10">
+              <select class="custom-select" id="wrestler1" name="wrestler1">
+                  <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
+                  <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
+                  <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
+                  <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
+                  <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
+                  <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
+                  <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
+                  <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
+                  <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
+                  <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
+                </select>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Yianni Diakomihalis" value="Yianni Diakomihalis">
+            </div>
+          </div>
+          <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
+        </form>
+      </div>
     <br />
     <div class="row">
         <div class="col">
@@ -178,16 +235,6 @@
     </div>
 
     </div>
-<!--        <form method="POST" enctype="multipart/form-data">
-            <fieldset class="form-group">
-                <legend>Profile Info</legend>
-                {% csrf_token %}
-                 {{ u_form }}
-                 {{ p_form }}
-                {{ roster_form }}
-            </fieldset>
-            <button class="btn" type="submit">Update</button>
-        </form> -->
 
     <!-- stop content -->
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
@@ -212,126 +259,9 @@
 <script type="text/javascript">
 	var divElement = document.getElementById('viz1564518756083');
 	var vizElement = divElement.getElementsByTagName('object')[0];
-	vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+	vizElement.style.width='100%';
+  vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
 	var scriptElement = document.createElement('script');
 	scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
 	vizElement.parentNode.insertBefore(scriptElement, vizElement);
-
-  new WOW().init();
-  var rosterlines = document.getElementById("rosterlinechart").getContext('2d');
-  var myLineChart = new Chart(rosterlines, {
-    type: 'line',
-    data: {
-      labels: {{ length }},
-      datasets: [{
-          label: "{{ user.profile.roster57.name }}",
-          data: [{% for row in user.profile.roster57.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-          borderColor: 'yellow',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-        {
-          label: "{{ user.profile.roster61.name }}",
-          data: [{% for row in user.profile.roster61.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'blue',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-        {
-          label: "{{ user.profile.roster65.name }}",
-          data: [{% for row in user.profile.roster65.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'red',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster70.name }}",
-          data: [{% for row in user.profile.roster70.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'green',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster74.name }}",
-          data: [{% for row in user.profile.roster74.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'purple',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster79.name }}",
-          data: [{% for row in user.profile.roster79.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'orange',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster86.name }}",
-          data: [{% for row in user.profile.roster86.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'black',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster92.name }}",
-          data: [{% for row in user.profile.roster92.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'magenta',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster97.name }}",
-          data: [{% for row in user.profile.roster97.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'cyan',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-                {
-          label: "{{ user.profile.roster125.name }}",
-          data: [{% for row in user.profile.roster125.focus_wrestler2.all %}
-            {{row.vs}},
-            {% endfor %}],
-                    borderColor: 'lime',
-          backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
-        },
-    ]
-  },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true,
-          }
-        }]
-      },
-      intersect: false,
-      title: {
-          display: true,
-          text: 'Timeseries'
-      },
-      responsive: true,
-      animation: {
-        'duration': 2000
-      }
-    }
-  });
 </script>

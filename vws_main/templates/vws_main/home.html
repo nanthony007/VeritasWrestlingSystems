@@ -70,63 +70,52 @@
 </nav>
 
 <body>
-
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
 <!-- Full Page Intro -->
   <div class="view">
       <img src="{% static 'vws_main/img/funinternet.png' %}" class="img-fluid" alt="No Image" style="width:100%">
     <!-- Mask & flexbox options-->
-    <div class="mask rgba-black-strong d-flex justify-content-left align-items-left">
+    <div class="mask d-flex justify-content-left align-items-left">
       <!-- Content -->
       <div class="white-text mx-5 wow fadeIn">
-      {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-      {% endif %}
         <div class="row">
-          <div class="col col-sm-1">
-          </div>
-          <div class="col col-lg-7">
+          <div class="col col-lg-6">
           <div class="page-header text-center">
             <br />
-            <br />
-            <h1>Welcome</h1>
+            <h1 style="color: rgb(39, 15, 170)">Driving Performance with Advanced Statistics</h1>
             <hr class="yellow"/>
           </div>
-          <br />
-            <h5>Veritas Analytics is a dedicated open-source statistics provider for the sport of wrestling.</h5>
-            <h5>
-              You can find all the content for this website and the GUI collector program on GitHub
-              <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="'_blank">
-                    <span class="blue-text">here.</span></a>
-            </h5>
-            <h5>There is a file with descriptions and formulas in the repository for your reference.</h5>
-
-            <br />
-            <h6 class="text-right">
+            <h4 style="color: rgb(95, 94, 117)" class="text-center">
+              We breakdown and analyze every move wrestlers make to bring you the most up-to-date advanced statistics possible.</h4>
+              <br />
+            <p style="color: rgb(95, 94, 117)">
+              All our content is open-source. Available on 
+              <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">GitHub.</a> 
+            </p> 
+            <h6 style="color: rgb(95, 94, 117)" class="text-right">
               Built using Python, Django, and Postgres | Powered by Heroku
             </h6>
-            <h6 class="text-right">
+            <h6 style="color: rgb(95, 94, 117)" class="text-right">
               Developed and maintained by Nicholas Anthony
             </h6>
-          <br />
-          <br />
           </div>
         </div>
       {% if not user.is_authenticated %}
       <div class="row">
-          <div class="col col-sm-1">
-          </div>
           <div class="col col-lg-7">
-        <h3>Log In</h3>
+        <h3 style="color: rgb(39, 15, 170)">Log In</h3>
         <hr class="yellow"/>
         <div>
-            <form method="POST">
+            <form method="POST" style="color: rgb(95, 94, 117)">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn" type="submit">Login</button>
+                <button class="btn btn-indigo" type="submit">Login</button>
             </form>
             <div>
                 <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>

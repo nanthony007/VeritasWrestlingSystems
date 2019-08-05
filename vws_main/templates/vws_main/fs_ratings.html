@@ -32,41 +32,64 @@
 </head>
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-<!-- Navbar brand -->
-<a class="navbar-brand" href="/">Vertias Analytics</a>
-<!-- Collapse button -->
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<!-- Collapsible content -->
-<div class="collapse navbar-collapse" id="basicExampleNav">
-  <!-- Links -->
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="/">Home
-        <span class="sr-only">(current)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/fs_ratings">Ratings</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/compare">Versus</a>
-    </li>
-  </ul>
-  <!-- Links -->
-</div>
-</nav>
-
-<br />
-
-<body>
+	<!-- Navbar brand -->
+	<a class="navbar-brand" href="/">Vertias Analytics</a>
+	<!-- Collapse button -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+	  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<!-- Collapsible content -->
+	<div class="collapse navbar-collapse" id="basicExampleNav">
+	  <!-- Links -->
+	  <ul class="navbar-nav mr-auto">
+		<li class="nav-item">
+		  <a class="nav-link" href="/">Home
+			<span class="sr-only">(current)</span>
+		  </a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="/fs_ratings">Ratings</a>
+		</li>
+	  </ul>
+	  <ul class="navbar-nav ml-auto">
+	  {% if user.is_authenticated %}
+		<li class="nav-item">
+		  <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+		</li>
+	  {% else %}
+		<li class="nav-item">
+		  <a class="nav-link" href="{% url 'register' %}">Register</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="{% url 'login' %}">Login</a>
+		</li>
+	  {% endif %}
+	  </ul>
+	  <!-- Links -->
+	</div>
+	</nav>
+	<br />
+	<body>
+	{% if messages %}
+	  {% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">
+			{{ message }}
+		</div>
+	  {% endfor %}
+	{% endif %}
 	<div class="container" >
 	  <div class="page-header">
 	      <h2>Freestyle Ratings</h2>
 	      <hr class="yellow"/>
-				<p>There is a one match minimum requirement to be listed in the ratings.</p>
+				<p>
+					There is a one match minimum requirement to be listed in the ratings. <br />
+					Click on a wrestler's name to view their profile.
+				</p>
+
 	  </div>
 		
 	  <div class="table-responsive">

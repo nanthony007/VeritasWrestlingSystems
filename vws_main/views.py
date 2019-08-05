@@ -194,8 +194,8 @@ class FS_WrestlerDetailView(DetailView):
         corrs = matches_inter.corr()['NumResult'][:-1].dropna()
         corrs = corrs[corrs > -1]
         corrs = corrs[corrs < 1]
-        bad = corrs.sort_values(ascending=True)[:10]
-        good = corrs.sort_values(ascending=False)[:10]
+        bad = corrs.sort_values(ascending=True)[:5]
+        good = corrs.sort_values(ascending=False)[:5]
         data['badtitles'] = bad.index.tolist()
         data['badvalues'] = [round(i, 2) for i in bad]
         data['goodtitles'] = good.index.tolist()
@@ -261,70 +261,3 @@ class FS_RatingsFilterView(ListView):
             ).filter(match_count__gt=0).distinct().order_by('-rating')
 
 
-def compare_view(request):
-    form = Wrestler1ModelForm(request.POST or None)
-    search1 = ''
-    search1_stats = ''
-    search2 = ''
-    search2_stats = ''
-    prediction = ''
-    if request.method == 'POST':
-        prediction = '26.62%'
-        form = Wrestler1ModelForm()
-        search_name1 = request.POST.get('wrestler1')
-        search1 = FS_Wrestler.objects.get(name=search_name1)
-        search1_stats = search1.focus_wrestler2.exclude(duration='00:00:00').aggregate(
-            match_count=Count('result'),
-            result=Round(Avg(Case(
-                When(result='WinF', then=Value(1.75)),
-                When(result='WinTF', then=Value(1.50)),
-                When(result='WinMD', then=Value(1.25)),
-                When(result='WinD', then=Value(1.10)),
-                When(result='LossD', then=Value(0.90)),
-                When(result='LossMD', then=Value(0.75)),
-                When(result='LossTF', then=Value(0.50)),
-                When(result='LossF', then=Value(0.25)),
-                output_field=FloatField())), 2),
-            hi_rate=Round(Avg('hi_rate'), 2),
-            ho_rate=Round(Avg('ho_rate'), 2),
-            d_rate=Round(Avg('d_rate'), 2),
-            ls_rate=Round(Avg('ls_rate'), 2),
-            gb_rate=Round(Avg('gb_rate'), 2),
-            t_rate=Round(Avg('t_rate'), 2),
-            npf=Round(Avg('npf'), 2),
-            apm=Round(Avg('apm'), 2),
-            points=Round(Avg('focus_score'), 2)
-        )
-        search_name2 = request.POST.get('wrestler2')
-        search2 = FS_Wrestler.objects.get(name=search_name2)
-        search2_stats = search2.focus_wrestler2.exclude(duration='00:00:00').aggregate(
-            match_count=Count('result'),
-            result=Round(Avg(Case(
-                When(result='WinF', then=Value(1.75)),
-                When(result='WinTF', then=Value(1.50)),
-                When(result='WinMD', then=Value(1.25)),
-                When(result='WinD', then=Value(1.10)),
-                When(result='LossD', then=Value(0.90)),
-                When(result='LossMD', then=Value(0.75)),
-                When(result='LossTF', then=Value(0.50)),
-                When(result='LossF', then=Value(0.25)),
-                output_field=FloatField())), 2),
-            hi_rate=Round(Avg('hi_rate'), 2),
-            ho_rate=Round(Avg('ho_rate'), 2),
-            d_rate=Round(Avg('d_rate'), 2),
-            ls_rate=Round(Avg('ls_rate'), 2),
-            gb_rate=Round(Avg('gb_rate'), 2),
-            t_rate=Round(Avg('t_rate'), 2),
-            npf=Round(Avg('npf'), 2),
-            apm=Round(Avg('apm'), 2),
-            points=Round(Avg('focus_score'), 2)
-        )
-    context = {
-        'form': form,
-        "w1": search1,
-        "w1_stats": search1_stats,
-        "w2": search2,
-        "w2_stats": search2_stats,
-        'prediction': prediction,
-    }
-    return render(request, "vws_main/compare.html", context)

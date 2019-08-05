@@ -26,41 +26,57 @@
     }
     </style>
   </head>
-  <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-    <!-- Navbar brand -->
-    <a class="navbar-brand" href="/">Vertias Analytics</a>
-    <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="/">Vertias Analytics</a>
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
     aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-    </button>
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="basicExampleNav">
+  </button>
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-    <a class="nav-link" href="/">Home
-    <span class="sr-only">(current)</span>
-    </a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="/fs_ratings">Ratings</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="/compare">Versus</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/fs_ratings">Ratings</a>
+      </li>
     </ul>
-    <ul class="nav navbar-nav ml-auto">
-     <li class="nav-item">
-       <a  class="nav-link" href="#">Profile</a>
-     </li>
+    <ul class="navbar-nav ml-auto">
+    {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+      </li>
+    {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+    {% endif %}
     </ul>
     <!-- Links -->
-    </div>
+  </div>
   </nav>
-  <br/>
+  <br />
   <body>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
     <div class="container">
       <div class="page-header">
         <h2>Match {{object.matchID}}</h2>
@@ -359,7 +375,7 @@
     type: 'line',
     data: {
       labels: [{% for row in object.actions2.all %}
-        "{{row.event_time}}",
+          "{{row.event_time}}\n{{row.event_lab}}",
         {% endfor %}],
       datasets: [{
           label: "Blue",
@@ -368,21 +384,30 @@
             {% endfor %}],
           borderColor: 'rgb(63, 81, 181)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
+          borderWidth: 2,
+          lineTension: 0,
         },
         {
           label: "Red",
           data: [{% for row in object.actions2.all %}
             {{row.red}},
             {% endfor %}],
-          borderColor: 'rgb(255, 235, 59)',
+          borderColor: 'rgb(255,0,0)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
-          borderWidth: 2
+          borderWidth: 2,
+          lineTension: 0,
         }
       ]
     },
     options: {
       scales: {
+        xAxes: [{
+          ticks: {
+            callback:function(label){
+              return label.split("\n")[0];
+            }
+          }
+        }],
         yAxes: [{
           ticks: {
             beginAtZero: true,
@@ -397,7 +422,16 @@
       responsive: true,
       animation: {
         'duration': 2000
-      }
+      },
+      tooltips: {
+          enabled: true,
+          mode: 'index',
+          callbacks: {
+              title: function(tooltipItems, data) { 
+                return data.labels[tooltipItems[0].index];
+              }
+          }
+      },
     }
   });
 </script>

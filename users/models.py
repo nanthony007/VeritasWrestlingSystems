@@ -30,7 +30,7 @@ class Profile(models.Model):
                                  related_name='r125', default='Placeholder')
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return r'{self.user.username} Profile'
 
     def save(self):
         super().save()
@@ -41,4 +41,3 @@ class Profile(models.Model):
             output_size = (200, 200)
             img.thumbnail(output_size)
             img.save(self.image.path)
-
