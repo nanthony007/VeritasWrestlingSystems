@@ -5,53 +5,77 @@
 {% block content %}
     <!-- content here -->
   <div class="container">
-    <h2>Advanced Stats</h2>
+    <h1 class="text-center">Wrestler Comparison</h1>
     <hr class="yellow" />
       <div class="row">
-      <div class="col-3 text-center"><p><small></small></p></div>
-        <div class="col-5">
-          <div class="table-responsive text-center">
-            <table class="table table-sm table-hover">
+        <div class="col-sm-5 mx-auto">
+          <div class="table-responsive">
+            <table class="table table-hover table-borderless">
               <thead class="indigo white-text">
                 <tr>
-                  <th>{{w1_df.Focus.values.0}}</th>
-                  <th><em>vs.</em></th>
-                  <th>{{w2_df.Focus.values.0}}</th>
+                  <th class="text-right"><a class="text-white" style="text-decoration: underline" 
+                    href="wrestlers/{{w1_df.Focus.values.0}}">{{w1_df.Focus.values.0}}</a></th>
+                  <th class="text-center" style="text-decoration: underline" ><em>vs.</em></th>
+                  <th class="text-left"><a class="text-white" style="text-decoration: underline" 
+                    href="wrestlers/{{w2_df.Focus.values.0}}">{{w2_df.Focus.values.0}}</a></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{{w1_df.FocusPoints.sum}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Effective Counter Rate"
-                         data-content="Conditional Counters including Exposures">Points Earned</a></td>
-                  <td>{{w2_df.FocusPoints.sum}}</td>
+                  <td class="text-right">{{w1_df.MatchID.count}}</td>
+                  <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Match Count"
+                      data-content="">Matches</a></td>
+                  <td class="text-left">{{w2_df.MatchID.count}}</td>
                 </tr>
                 <tr>
-                  <td>{{w1_df.NPF.mean | floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor RATE"
+                  <td class="text-right">{{w1_df.NumResult.mean | floatformat:2}}</td>
+                  <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Average Result"
+                      data-content="WinF: 1.75 - WinTF: 1.50 - WinD: 1.10 - LossF: 0.25 - LossTF: 0.50 - LossD: 0.90">Avg. Result</a></td>
+                  <td class="text-left">{{w2_df.NumResult.mean | floatformat:2}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">{{w1_df.FocusPoints.sum}}</td>
+                  <td class="indigo text-white text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Points Earned"
+                         data-content="">Points Earned</a></td>
+                  <td class="text-left">{{w2_df.FocusPoints.sum}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">{{w1_df.OppPoints.sum}}</td>
+                  <td class="indigo text-white text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Points Allowed"
+                          data-content="">Points Allowed</a></td>
+                  <td class="text-left">{{w2_df.OppPoints.sum}}</td>
+                </tr>
+                <tr>
+                  <td class="text-right">{{w1_df.NPF.mean | floatformat:2}}</td>
+                  <td class="indigo text-white text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor"
                          data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
-                  <td>{{w2_df.NPF.mean | floatformat:2}}</td>
+                  <td class="text-left">{{w2_df.NPF.mean | floatformat:2}}</td>
                 </tr>
                 <tr>
-                  <td>{{w1_df.APM.mean | floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
+                  <td class="text-right">{{w1_df.APM.mean | floatformat:2}}</td>
+                  <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
                      data-content="(Defense + Offense) / Duration">APM</a></td>
-                  <td>{{w2_df.APM.mean | floatformat:2}}</td>
+                  <td class="text-left">{{w2_df.APM.mean | floatformat:2}}</td>
                 </tr>
                 <tr>
-                  <td>{{w1_df.NumResult.mean | floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Average Result"
-                     data-content="WinF: 1.75\nWinTF: 1.50">Avg. Result</a></td>
-                  <td>{{w2_df.NumResult.mean | floatformat:2}}</td>
-                </tr>
+                    <td class="text-right">{{w1_df.VS.sum | floatformat:2}}</td>
+                    <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Total Veritas Points"
+                       data-content="Weighted Result + (NPF * APM)">Veritas Points</a></td>
+                    <td class="text-left">{{w2_df.VS.sum | floatformat:2}}</td>
+                  </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <h1>
-            {{prediction}}
-        </h1>
-        <h1>{{w1_df.columns}}</h1>
+        <div class="col-sm-5 mx-auto text-center">
+          <h2 style="color: rgb(39, 15, 170)">Predicted result:</h2>
+            {% if prediction == 0 %}
+            <h3 style="color: rgb(95, 94, 117)">{{w2_df.Focus.values.0}} <em>def.</em> {{w1_df.Focus.values.0}}</h3>
+            {% elif prediction == 1 %}
+            <h3 style="color: rgb(95, 94, 117)">{{w1_df.Focus.values.0}} <em>def.</em> {{w2_df.Focus.values.0}}</h3>
+            {% endif %}
+        </div>
+      </div>
     </div>
     <!-- stop content -->
    
@@ -60,7 +84,7 @@
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
-    
+
     <script type="text/javascript">
       new WOW().init();
       new WOW().init();
