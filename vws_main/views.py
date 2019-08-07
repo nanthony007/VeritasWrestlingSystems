@@ -29,6 +29,10 @@ def home(request):
     return render(request, 'vws_main/home.html')
 
 
+def start(request):
+    return render(request, 'vws_main/start.html')
+
+
 class FS_MatchDetailView(DetailView):
     queryset = FS_Match.objects.all().filter()
     template_name = "vws_main/fs-match-detail.html"
