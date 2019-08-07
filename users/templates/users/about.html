@@ -1,0 +1,40 @@
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <!-- content here -->
+    <div class="container">
+        <div class="page-header text-center">
+            <br />
+            <h1 style="color: rgb(39, 15, 170)">About Me</h1>
+            <hr class="yellow"/>
+        </div>
+        <div class="row">
+            <p style="color: rgb(95, 94, 117)">
+                My name is Nicholas Anthony. <br />
+                Contact: nicholas.anthony@mg.thedataincubator.com <br />
+                Been wrestling for 20 years and coaching for 4 years.  <br /> 
+                Finished 5th at Greco-Roman World Team Trials 2018. <br />
+                Passionate about data-driven decision making. <br />
+                Open-source fan.
+
+            </p>
+        </div>
+    </div>
+
+
+    <!-- stop content -->
+   
+    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+
+{% endblock %}
+

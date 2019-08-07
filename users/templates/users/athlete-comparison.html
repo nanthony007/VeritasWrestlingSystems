@@ -1,113 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
 
-<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139393698-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'UA-139393698-1');
-	</script>
-	<title>Veritas Analytics</title>
-	<meta charset="utf-8" />
-	{% load staticfiles %}
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-	<link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/addons/datatables.min.css' %}" rel="stylesheet">
-	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
-	<style type="text/css">
-		body {
-			background-color: #f6f6f6;
-		}
-	</style>
-</head>
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-  <!-- Navbar brand -->
-  <a class="navbar-brand" href="/">Vertias Analytics</a>
-  <!-- Collapse button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/fs_ratings">Ratings</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-    {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-      </li>
-    {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
-    {% endif %}
-    </ul>
-    <!-- Links -->
-  </div>
-  </nav>
-  <br />
-  <body>
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">
-          {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
+{% block content %}
     <!-- content here -->
-    </div>
-    <div class="container">
-      <h1>W1</h1>
-        {{w1_stats}} 
-        <br>
-        <h1>w2</h1>
-        {{w2_stats}}
-        <br />
+  <div class="container">
+    <h2>Advanced Stats</h2>
+    <hr class="yellow" />
+      <div class="row">
+      <div class="col-3 text-center"><p><small></small></p></div>
+        <div class="col-5">
+          <div class="table-responsive text-center">
+            <table class="table table-sm table-hover">
+              <thead class="indigo white-text">
+                <tr>
+                  <th>{{w1_df.Focus.values.0}}</th>
+                  <th><em>vs.</em></th>
+                  <th>{{w2_df.Focus.values.0}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{w1_df.FocusPoints.sum}}</td>
+                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Effective Counter Rate"
+                         data-content="Conditional Counters including Exposures">Points Earned</a></td>
+                  <td>{{w2_df.FocusPoints.sum}}</td>
+                </tr>
+                <tr>
+                  <td>{{w1_df.NPF.mean | floatformat:2}}</td>
+                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor RATE"
+                         data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
+                  <td>{{w2_df.NPF.mean | floatformat:2}}</td>
+                </tr>
+                <tr>
+                  <td>{{w1_df.APM.mean | floatformat:2}}</td>
+                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
+                     data-content="(Defense + Offense) / Duration">APM</a></td>
+                  <td>{{w2_df.APM.mean | floatformat:2}}</td>
+                </tr>
+                <tr>
+                  <td>{{w1_df.NumResult.mean | floatformat:2}}</td>
+                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Average Result"
+                     data-content="WinF: 1.75\nWinTF: 1.50">Avg. Result</a></td>
+                  <td>{{w2_df.NumResult.mean | floatformat:2}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <h1>
             {{prediction}}
         </h1>
+        <h1>{{w1_df.columns}}</h1>
     </div>
-
-
     <!-- stop content -->
+   
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
-</body>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+    
+    <script type="text/javascript">
+      new WOW().init();
+      new WOW().init();
+      $('[data-toggle="popover"]').popover();
+      $('.popover-dismiss').popover({
+        trigger: 'focus'
+      });
+    </script>
+    
+{% endblock %}
 
-<br />
-<footer class="page-footer fixed-bottom font-small indigo">
-  <div class="text-center">
-      <h6>
-    Scientia potentia est. |
-    Contact: nanthony007@gmail.com
-      </h6>
-  </div>
-</footer>
-
-</html>

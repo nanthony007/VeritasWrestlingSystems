@@ -112,9 +112,12 @@ def athlete_comparison(request):
         return redirect('profile')
 
     context = {
-        "w1_stats": w1_df,
-        "w2_stats": w2_df,
+        "w1_df": w1_df,
+        "w2_df": w2_df,
         'prediction': pred,
     }
     return render(request, "users/athlete-comparison.html", context)
     
+
+def about(request):
+    return render(request, "users/about.html")
