@@ -1,0 +1,64 @@
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+<div class="container" >
+    <div class="page-header">
+        <h2>Freestyle Ratings</h2>
+        <hr class="yellow"/>
+                <p>
+                    There is a one match minimum requirement to be listed in the ratings. <br />
+                    Click on a wrestler's name to view their profile.
+                </p>
+
+    </div>
+        
+    <div class="table-responsive">
+        <table id="ratingstable" class="table table-sm table-striped table-hover">
+        <thead class="indigo white-text">
+            <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Rating</th>
+            <th>Matches</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for wrestler in object_list %}
+            <tr>
+                <td><a href="/wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
+                <td>{{ wrestler.team.abbreviation }}</td>
+                <td>{{ wrestler.rating }}</td>
+                <td>{{ wrestler.match_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    </div>
+  
+    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+
+    <script>
+    // Basic example
+    $(document).ready(function () {
+        $('#ratingstable').DataTable({
+            "pagingType": "first_last_numbers", // "simple" option for 'Previous' and 'Next' buttons only
+            "order":[[2, "desc"]]
+        });
+    });
+    </script>
+{% endblock %}
+
+
+
+<script type="text/javascript">
+  new WOW().init();
+</script>
+  

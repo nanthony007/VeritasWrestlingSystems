@@ -31,16 +31,16 @@ def home(request):
 
 class FS_MatchDetailView(DetailView):
     queryset = FS_Match.objects.all().filter()
-    template_name = "vws_main/fs_match_detail.html"
+    template_name = "vws_main/fs-match-detail.html"
 
 
-class FS_MatchTableView(ListView):
-    queryset = FS_Match.objects.exclude(matchID__endswith='*').values('matchID', 'date', 'focus', 'opponent', 'focus_score', 'opp_score', 'result').order_by('-date', 'matchID')
-    template_name = "vws_main/fs_matchdata_table.html"
+# class FS_MatchTableView(ListView):
+#     queryset = FS_Match.objects.exclude(matchID__endswith='*').values('matchID', 'date', 'focus', 'opponent', 'focus_score', 'opp_score', 'result').order_by('-date', 'matchID')
+#     template_name = "vws_main/fs_matchdata_table.html"
 
 
 class FS_WrestlerDetailView(DetailView):
-    template_name = "vws_main/fs_wrestler_detail.html"
+    template_name = "vws_main/fs-wrestler-detail.html"
     slug_field = 'slug'
     queryset = FS_Wrestler.objects.filter().annotate(
         match_count=Count('focus_wrestler2'),
@@ -206,28 +206,28 @@ class FS_WrestlerDetailView(DetailView):
         return data
 
 
-class FS_TeamDetailView(DetailView):
-    queryset = FS_Team.objects.all().order_by('-team_name.all.rating')
-    template_name = 'vws_main/fs_team_detail.html'
+# class FS_TeamDetailView(DetailView):
+#     queryset = FS_Team.objects.all().order_by('-team_name.all.rating')
+#     template_name = 'vws_main/fs_team_detail.html'
 
 
-class FS_EventsListView(ListView):
-    template_name = 'vws_main/fs_events_table.html'
+# class FS_EventsListView(ListView):
+#     template_name = 'vws_main/fs_events_table.html'
 
-    def get_queryset(self):
-        return FS_Event.objects.values('name', 'date').distinct().order_by('-date')
+#     def get_queryset(self):
+#         return FS_Event.objects.values('name', 'date').distinct().order_by('-date')
 
 
-class FS_EventsDetailView(DetailView):
-    template_name = 'vws_main/fs_events_detail.html'
+# class FS_EventsDetailView(DetailView):
+#     template_name = 'vws_main/fs_events_detail.html'
 
-    def get_queryset(self):
-        return FS_Event.objects.filter()
+#     def get_queryset(self):
+#         return FS_Event.objects.filter()
 
 
 class FS_RatingsFilterView(ListView):
     model = FS_Wrestler
-    template_name = 'vws_main/fs_ratings.html'
+    template_name = 'vws_main/fs-ratings.html'
 
     def get_queryset(request):
         return FS_Wrestler.objects.annotate(

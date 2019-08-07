@@ -3,7 +3,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
 import random
-from .forms import *
+from .forms import UserRegistrationForm, ProfileRosterUpdateForm, ProfileUpdateForm, UserUpdateForm
+import numpy as np
+import pandas as pd 
+import os
+from .modeling import focus_only_stats, deploy_model
 
 
 class Round(Func):
@@ -67,7 +71,7 @@ def profile_update(request):
         'u_form': u_form,
         'p_form': p_form,
     }
-    return render(request, 'users/profile_update.html', context)
+    return render(request, 'users/profile-update.html', context)
 
 
 @login_required
@@ -81,75 +85,36 @@ def roster_update(request):
     else:
         roster_form = ProfileRosterUpdateForm(instance=request.user.profile)
     
-    return render(request, 'users/roster_update.html', {'roster_form': roster_form})
+    return render(request, 'users/roster-update.html', {'roster_form': roster_form})
 
 
 @login_required
 def athlete_comparison(request):
-    length = [i for i in range(10)]
-    search1 = ''
-    search1_stats = ''
-    search2 = ''
-    search2_stats = ''
-    prediction = ''
     if request.method == 'POST':
-        prediction = str(random.randint(0, 100)) + '%'
         search_name1 = request.POST.get('wrestler1')
-        search1 = FS_Wrestler.objects.get(name=search_name1)
-        search1_stats = search1.focus_wrestler2.exclude(duration='00:00:00').aggregate(
-            match_count=Count('result'),
-            result=Round(Avg(Case(
-                When(result='WinF', then=Value(1.75)),
-                When(result='WinTF', then=Value(1.50)),
-                When(result='WinMD', then=Value(1.25)),
-                When(result='WinD', then=Value(1.10)),
-                When(result='LossD', then=Value(0.90)),
-                When(result='LossMD', then=Value(0.75)),
-                When(result='LossTF', then=Value(0.50)),
-                When(result='LossF', then=Value(0.25)),
-                output_field=FloatField())), 2),
-            hi_rate=Round(Avg('hi_rate'), 2),
-            ho_rate=Round(Avg('ho_rate'), 2),
-            d_rate=Round(Avg('d_rate'), 2),
-            ls_rate=Round(Avg('ls_rate'), 2),
-            gb_rate=Round(Avg('gb_rate'), 2),
-            t_rate=Round(Avg('t_rate'), 2),
-            npf=Round(Avg('npf'), 2),
-            apm=Round(Avg('apm'), 2),
-            points=Round(Avg('focus_score'), 2)
-        )
         search_name2 = request.POST.get('wrestler2')
-        search2 = FS_Wrestler.objects.get(name=search_name2)
-        search2_stats = search2.focus_wrestler2.exclude(duration='00:00:00').aggregate(
-            match_count=Count('result'),
-            result=Round(Avg(Case(
-                When(result='WinF', then=Value(1.75)),
-                When(result='WinTF', then=Value(1.50)),
-                When(result='WinMD', then=Value(1.25)),
-                When(result='WinD', then=Value(1.10)),
-                When(result='LossD', then=Value(0.90)),
-                When(result='LossMD', then=Value(0.75)),
-                When(result='LossTF', then=Value(0.50)),
-                When(result='LossF', then=Value(0.25)),
-                output_field=FloatField())), 2),
-            hi_rate=Round(Avg('hi_rate'), 2),
-            ho_rate=Round(Avg('ho_rate'), 2),
-            d_rate=Round(Avg('d_rate'), 2),
-            ls_rate=Round(Avg('ls_rate'), 2),
-            gb_rate=Round(Avg('gb_rate'), 2),
-            t_rate=Round(Avg('t_rate'), 2),
-            npf=Round(Avg('npf'), 2),
-            apm=Round(Avg('apm'), 2),
-            points=Round(Avg('focus_score'), 2)
-        )
+        cwd = os.getcwd()
+        df = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
+        w1_df = df[df['Focus']==search_name1]
+        w2_df = df[df['Focus']==search_name2]
+        w1_less = focus_only_stats(w1_df)
+        w2_less = focus_only_stats(w2_df)
+        w1_ewm = w1_less.ewm(alpha=0.5).mean().iloc[[-1]].values
+        w2_ewm = w2_less.ewm(alpha=0.5).mean().iloc[[-1]].values
+        loaded_model = deploy_model()
+        model = loaded_model[0]
+        support = loaded_model[1]
+        subbed = np.subtract(w1_ewm, w2_ewm)
+        pred = model.predict(subbed[:,support])[0]
+
+    else:
+        messages.warning(request, r'Invalid form request, please try again.')
+        return redirect('profile')
 
     context = {
-        "w1": search1,
-        "w1_stats": search1_stats,
-        "w2": search2,
-        "w2_stats": search2_stats,
-        'prediction': prediction,
-        'length': length,
+        "w1_stats": w1_df,
+        "w2_stats": w2_df,
+        'prediction': pred,
     }
-    return render(request, "users/athlete_comparison.html", context)
+    return render(request, "users/athlete-comparison.html", context)
     

@@ -5,10 +5,14 @@
 {% block content %}
 
 <div class="container">
-    <h3>You Are Logged Out</h3>
-    <div>
-        <p><a href="{% url 'login' %}">Log In Again</a></p>
-    </div>
+    <form method="POST" enctype="multipart/form-data">
+        <fieldset class="form-group">
+            <legend>Update Roster</legend>
+            {% csrf_token %}
+                {{ roster_form.as_p }}
+        </fieldset>
+        <button class="btn" type="submit">Update</button>
+    </form> 
 </div>
   
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
@@ -18,8 +22,6 @@
     <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
 
 {% endblock %}
-
-
 
 <script type="text/javascript">
   new WOW().init();

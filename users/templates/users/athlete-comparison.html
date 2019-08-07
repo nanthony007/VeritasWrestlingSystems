@@ -80,15 +80,15 @@
     <!-- content here -->
     </div>
     <div class="container">
-        <form method="POST" enctype="multipart/form-data">
-            <fieldset class="form-group">
-                <legend>Update Profile</legend>
-                {% csrf_token %}
-                    {{ u_form.as_p }}
-                    {{ p_form.as_p }}
-            </fieldset>
-            <button class="btn" type="submit">Update</button>
-        </form> 
+      <h1>W1</h1>
+        {{w1_stats}} 
+        <br>
+        <h1>w2</h1>
+        {{w2_stats}}
+        <br />
+        <h1>
+            {{prediction}}
+        </h1>
     </div>
 
 

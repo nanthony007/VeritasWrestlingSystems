@@ -45,11 +45,25 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/fs_ratings">Ratings</a>
+      <a class="nav-link" href="/ratings">Ratings</a>
+    </li>
+  </ul>
+  <ul class="navbar-nav ml-auto">
+  {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/compare">Versus</a>
+      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
     </li>
+  {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'register' %}">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'login' %}">Login</a>
+    </li>
+  {% endif %}
   </ul>
   <!-- Links -->
 </div>
@@ -57,15 +71,30 @@
 
 <br />
 
-	{% block content %}
-	{% endblock %}
+<body>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% block content %}
+{% endblock %}
+
+</body>
 
 <br />
+
 <footer class="page-footer fixed-bottom font-small indigo">
   <div class="text-center">
+      <h6>
     Scientia potentia est. |
     Contact: nanthony007@gmail.com
+      </h6>
   </div>
 </footer>
 
 </html>
+

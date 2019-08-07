@@ -65,9 +65,9 @@ def effective_counter_rate(x_wrestler):
 
     counter_rate = safe_div(counter_conv, counter_att) * 100
     opp_counter_rate = safe_div(opp_counter_conv, opp_counter_att) * 100
-    print(matches.GBc2.sum(), matches.GBa.sum())
-    print(counter_conv, counter_att)
-    print("LONG Go Behind Rate: " + str(round((matches.GBc2.sum() / matches.GBa.sum()) * 100, 2)) + "%")
-    print("Go Behind Rate: " + str(round(counter_rate, 2)) + "%")
+    #print(matches.GBc2.sum(), matches.GBa.sum())
+    #print(counter_conv, counter_att)
+    #print("LONG Go Behind Rate: " + str(round((matches.GBc2.sum() / matches.GBa.sum()) * 100, 2)) + "%")
+    #print("Go Behind Rate: " + str(round(counter_rate, 2)) + "%")
     return counter_rate, opp_counter_rate
 

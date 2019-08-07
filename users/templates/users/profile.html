@@ -1,267 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
 
-<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139393698-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'UA-139393698-1');
-	</script>
-	<title>Veritas Analytics</title>
-	<meta charset="utf-8" />
-	{% load staticfiles %}
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-	<link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/addons/datatables.min.css' %}" rel="stylesheet">
-	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
-	<style type="text/css">
-		body {
-			background-color: #f6f6f6;
-		}
-	</style>
-</head>
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-  <!-- Navbar brand -->
-  <a class="navbar-brand" href="/">Vertias Analytics</a>
-  <!-- Collapse button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <!-- Collapsible content -->
-  <div class="collapse navbar-collapse" id="basicExampleNav">
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/fs_ratings">Ratings</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-    {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-      </li>
-    {% else %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
-    {% endif %}
-    </ul>
-    <!-- Links -->
-  </div>
-  </nav>
-  <br />
-  <body>
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">
-          {{ message }}
+{% block content %}
+
+ <!-- content here -->
+ <div class="container">
+    <div class="container-fluid">
+      <h1>Your Profile</h1>
+      <p>Get started by adding your favorite wrestlers to your team to view their stats!</p>
+      <hr class="yellow"/>
+      <div class="page-header">
+        <h2>
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" 
+          style="width: 50px; height: 50px"> 
+          {{ user.username }} 
+          <br />
+          Email: <small>{{ user.email }}</small>
+        </h2>
+        <p>Update your profile <a href="update">here.</a></p>
+    </div>
+    </div>
+      <hr class="yellow">
+      <h2>Your Team: {{ user.profile.teamname }}</h2>
+      <p>Pick your team <a href="roster-update">here!</a></p>
+      <div class="row indigo">
+        <div class="col sm mx-auto my-auto text-white">
+            <h6>57 kilos</h6>
+        </div>
+        <div class="col sm mx-auto my-auto text-white">
+            <h6>61 kilos</h6>
+        </div>
+        <div class="col sm mx-auto my-auto text-white">
+            <h6>65 kilos</h6>
+        </div>
+        <div class="col sm mx-auto my-auto text-white">
+            <h6>70 kilos</h6>
+        </div>
+        <div class="col sm mx-auto my-auto text-white">
+            <h6>74 kilos</h6>
+        </div>
       </div>
-    {% endfor %}
-  {% endif %}
-    <!-- content here -->
-    <div class="container">
-      <div class="container-fluid">
-        <h1>Your Profile</h1>
-        <p>Get started by adding your favorite wrestlers to your team to view their stats!</p>
-        <hr class="yellow"/>
-        <div class="page-header">
-          <h2>
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" 
-            style="width: 50px; height: 50px"> 
-            {{ user.username }} 
-            <br />
-            Email: <small>{{ user.email }}</small>
-          </h2>
-          <p>Update your profile <a href="update">here.</a></p>
-      </div>
-      </div>
-        <hr class="yellow">
-        <h2>Your Team: {{ user.profile.teamname }}</h2>
-        <p>Pick your team <a href="roster_update">here!</a></p>
+      <div class="row">
+          <div class="col sm mx-auto my-auto">
+              <h6><a href="/wrestlers/{{user.profile.roster57.slug}}">{{user.profile.roster57.name}}</a></h6>
+          </div>
+          <div class="col sm mx-auto my-auto">
+              <h6><a href="/wrestlers/{{user.profile.roster61.slug}}">{{user.profile.roster61.name}}</a></h6>
+          </div>
+          <div class="col sm mx-auto my-auto">
+              <h6><a href="/wrestlers/{{user.profile.roster65.slug}}">{{user.profile.roster65.name}}</a></h6>
+          </div>
+          <div class="col sm mx-auto my-auto">
+              <h6><a href="/wrestlers/{{user.profile.roster70.slug}}">{{user.profile.roster70.name}}</a></h6>
+          </div>
+          <div class="col sm mx-auto my-auto">
+              <h6><a href="/wrestlers/{{user.profile.roster74.slug}}">{{user.profile.roster74.name}}</a></h6>
+          </div>
+        </div>
         <div class="row indigo">
-          <div class="col sm mx-auto my-auto text-white">
-              <h6>57 kilos</h6>
+            <div class="col sm mx-auto my-auto text-white">
+                <h6>79 kilos</h6>
+            </div>
+            <div class="col sm mx-auto my-auto text-white">
+                <h6>86 kilos</h6>
+            </div>
+            <div class="col sm mx-auto my-auto text-white">
+                <h6>92 kilos</h6>
+            </div>
+            <div class="col sm mx-auto my-auto text-white">
+                <h6>97 kilos</h6>
+            </div>
+            <div class="col sm mx-auto my-auto text-white">
+                <h6>125 kilos</h6>
+            </div>
           </div>
-          <div class="col sm mx-auto my-auto text-white">
-              <h6>61 kilos</h6>
-          </div>
-          <div class="col sm mx-auto my-auto text-white">
-              <h6>65 kilos</h6>
-          </div>
-          <div class="col sm mx-auto my-auto text-white">
-              <h6>70 kilos</h6>
-          </div>
-          <div class="col sm mx-auto my-auto text-white">
-              <h6>74 kilos</h6>
+          <div class="row">
+              <div class="col sm mx-auto my-auto">
+                  <h6><a href="/wrestlers/{{user.profile.roster79.slug}}">{{user.profile.roster79.name}}</a></h6>
+              </div>
+              <div class="col sm mx-auto my-auto">
+                  <h6><a href="/wrestlers/{{user.profile.roster86.slug}}">{{user.profile.roster86.name}}</a></h6>
+              </div>
+              <div class="col sm mx-auto my-auto">
+                  <h6><a href="/wrestlers/{{user.profile.roster92.slug}}">{{user.profile.roster92.name}}</a></h6>
+              </div>
+              <div class="col sm mx-auto my-auto">
+                  <h6><a href="/wrestlers/{{user.profile.roster97.slug}}">{{user.profile.roster97.name}}</a></h6>
+              </div>
+              <div class="col sm mx-auto my-auto">
+                  <h6><a href="/wrestlers/{{user.profile.roster125.slug}}">{{user.profile.roster125.name}}</a></h6>
+              </div>
+            </div>
+      <hr  class="yellow"/>
+
+      <h2>{{ user.profile.teamname }} <small>Stats</small></h2>
+      <p>View their stats!</p>
+  <div class='tableauPlaceholder' id='viz1564518756083' style='position: relative'>
+      <noscript><a href='https:&#47;&#47;veritaswrestlingsystems.com'>
+          <img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;Maryland2018Evaluation&#47;VS&#47;1_rss.png' style='border: none' /></a>
+      </noscript>
+      <object class='tableauViz'  style='display:none;'>
+          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+          <param name='embed_code_version' value='3' />
+          <param name='site_root' value='' />
+          <param name='name' value='Maryland2018Evaluation&#47;VS' />
+          <param name='tabs' value='yes' />
+          <param name='toolbar' value='yes' />
+          <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;Maryland2018Evaluation&#47;VS&#47;1.png' />
+          <param name='animate_transition' value='yes' />
+          <param name='display_static_image' value='yes' />
+          <param name='display_spinner' value='yes' />
+          <param name='display_overlay' value='yes' />
+          <param name='display_count' value='yes' />
+          <param name='filter' value='Team1=Princeton' />
+      </object>
+  </div>
+
+      <hr class="yellow">
+  <div class="page-header">
+      <h2><em>Versus!</em></h2>
+  </div>
+
+  <h4>Compare your favorite wrestlers and see who would win!</h4>
+  <p>Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.</p>
+
+  <div class="col-md-6">
+    <form method="POST" action="/athlete-comparison/">
+        {% csrf_token %}
+        <div class="form-group row">
+          <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
+          <div class="col-sm-10">
+            <select class="custom-select" id="wrestler1" name="wrestler1">
+                <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
+                <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
+                <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
+                <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
+                <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
+                <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
+                <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
+                <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
+                <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
+                <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
+              </select>
+            </div>
+        </div>
+        <div class="form-group row">
+          <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Yianni Diakomihalis" value="Yianni Diakomihalis">
           </div>
         </div>
-        <div class="row">
-            <div class="col sm mx-auto my-auto">
-                <h6><a href="/fs_wrestlers/{{user.profile.roster57.slug}}">{{user.profile.roster57.name}}</a></h6>
-            </div>
-            <div class="col sm mx-auto my-auto">
-                <h6><a href="/fs_wrestlers/{{user.profile.roster61.slug}}">{{user.profile.roster61.name}}</a></h6>
-            </div>
-            <div class="col sm mx-auto my-auto">
-                <h6><a href="/fs_wrestlers/{{user.profile.roster65.slug}}">{{user.profile.roster65.name}}</a></h6>
-            </div>
-            <div class="col sm mx-auto my-auto">
-                <h6><a href="/fs_wrestlers/{{user.profile.roster70.slug}}">{{user.profile.roster70.name}}</a></h6>
-            </div>
-            <div class="col sm mx-auto my-auto">
-                <h6><a href="/fs_wrestlers/{{user.profile.roster74.slug}}">{{user.profile.roster74.name}}</a></h6>
-            </div>
-          </div>
-          <div class="row indigo">
-              <div class="col sm mx-auto my-auto text-white">
-                  <h6>79 kilos</h6>
-              </div>
-              <div class="col sm mx-auto my-auto text-white">
-                  <h6>86 kilos</h6>
-              </div>
-              <div class="col sm mx-auto my-auto text-white">
-                  <h6>92 kilos</h6>
-              </div>
-              <div class="col sm mx-auto my-auto text-white">
-                  <h6>97 kilos</h6>
-              </div>
-              <div class="col sm mx-auto my-auto text-white">
-                  <h6>125 kilos</h6>
-              </div>
-            </div>
-            <div class="row">
-                <div class="col sm mx-auto my-auto">
-                    <h6><a href="/fs_wrestlers/{{user.profile.roster79.slug}}">{{user.profile.roster79.name}}</a></h6>
-                </div>
-                <div class="col sm mx-auto my-auto">
-                    <h6><a href="/fs_wrestlers/{{user.profile.roster86.slug}}">{{user.profile.roster86.name}}</a></h6>
-                </div>
-                <div class="col sm mx-auto my-auto">
-                    <h6><a href="/fs_wrestlers/{{user.profile.roster92.slug}}">{{user.profile.roster92.name}}</a></h6>
-                </div>
-                <div class="col sm mx-auto my-auto">
-                    <h6><a href="/fs_wrestlers/{{user.profile.roster97.slug}}">{{user.profile.roster97.name}}</a></h6>
-                </div>
-                <div class="col sm mx-auto my-auto">
-                    <h6><a href="/fs_wrestlers/{{user.profile.roster125.slug}}">{{user.profile.roster125.name}}</a></h6>
-                </div>
-              </div>
-        <hr  class="yellow"/>
-
-        <h2>{{ user.profile.teamname }} <small>Stats</small></h2>
-        <p>View their stats!</p>
-	<div class='tableauPlaceholder' id='viz1564518756083' style='position: relative'>
-		<noscript><a href='https:&#47;&#47;veritaswrestlingsystems.com'>
-			<img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;Maryland2018Evaluation&#47;VS&#47;1_rss.png' style='border: none' /></a>
-		</noscript>
-		<object class='tableauViz'  style='display:none;'>
-			<param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-			<param name='embed_code_version' value='3' />
-			<param name='site_root' value='' />
-			<param name='name' value='Maryland2018Evaluation&#47;VS' />
-			<param name='tabs' value='yes' />
-			<param name='toolbar' value='yes' />
-			<param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ma&#47;Maryland2018Evaluation&#47;VS&#47;1.png' />
-			<param name='animate_transition' value='yes' />
-			<param name='display_static_image' value='yes' />
-			<param name='display_spinner' value='yes' />
-			<param name='display_overlay' value='yes' />
-			<param name='display_count' value='yes' />
-			<param name='filter' value='Team1=Princeton' />
-		</object>
-	</div>
-
-        <hr class="yellow">
-    <div class="page-header">
-        <h2><em>Versus!</em></h2>
+        <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
+      </form>
     </div>
-
-    <h4>Compare your favorite wrestlers and see who would win!</h4>
-    <p>Be sure to enter athlete names as found on our <a href="/fs_ratings/">Ratings</a> page.</p>
-
-    <div class="col-md-6">
-      <form method="POST" action="/athlete-comparison/">
-          {% csrf_token %}
-          <div class="form-group row">
-            <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
-            <div class="col-sm-10">
-              <select class="custom-select" id="wrestler1" name="wrestler1">
-                  <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
-                  <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
-                  <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
-                  <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
-                  <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
-                  <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
-                  <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
-                  <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
-                  <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
-                  <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
-                </select>
-              </div>
-          </div>
-          <div class="form-group row">
-            <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Yianni Diakomihalis" value="Yianni Diakomihalis">
-            </div>
-          </div>
-          <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
-        </form>
+  <br />
+  <div class="row">
+      <div class="col">
+          {{prediction}}
       </div>
-    <br />
-    <div class="row">
-        <div class="col">
-            {{prediction}}
-        </div>
-    </div>
+  </div>
 
-    </div>
+  </div>
+      <!-- stop content -->
 
-    <!-- stop content -->
+  
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
-	<script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
-</body>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
 
-<br />
-<footer class="page-footer fixed-bottom font-small indigo">
-  <div class="text-center">
-      <h6>
-    Scientia potentia est. |
-    Contact: nanthony007@gmail.com
-      </h6>
-  </div>
-</footer>
+    <script type="text/javascript">
+        var divElement = document.getElementById('viz1564518756083');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+        vizElement.style.width='100%';
+        vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script>
 
-</html>
+{% endblock %}
+
+
 
 <script type="text/javascript">
-	var divElement = document.getElementById('viz1564518756083');
-	var vizElement = divElement.getElementsByTagName('object')[0];
-	vizElement.style.width='100%';
-  vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
-	var scriptElement = document.createElement('script');
-	scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-	vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  new WOW().init();
 </script>
+  
