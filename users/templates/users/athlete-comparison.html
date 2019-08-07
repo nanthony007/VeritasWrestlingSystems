@@ -47,14 +47,14 @@
                 </tr>
                 <tr>
                   <td class="text-right">{{w1_df.NPF.mean | floatformat:2}}</td>
-                  <td class="indigo text-white text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor"
-                         data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
+                  <td class="indigo text-white text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="NPF"
+                         data-content="(TD conv/match TD conv) + (TD att/match TD att)">Neutral Pace Factor</a></td>
                   <td class="text-left">{{w2_df.NPF.mean | floatformat:2}}</td>
                 </tr>
                 <tr>
                   <td class="text-right">{{w1_df.APM.mean | floatformat:2}}</td>
-                  <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
-                     data-content="(Defense + Offense) / Duration">APM</a></td>
+                  <td class="indigo white-text text-center"><a data-toggle="popover" data-placement="top" data-trigger="hover" title="APM"
+                     data-content="(Defense + Offense) / Duration">Action per Minute</a></td>
                   <td class="text-left">{{w2_df.APM.mean | floatformat:2}}</td>
                 </tr>
                 <tr>
@@ -72,7 +72,8 @@
             {% if prediction == 0 %}
             <h3 style="color: rgb(95, 94, 117)">{{w2_df.Focus.values.0}} <em>def.</em> {{w1_df.Focus.values.0}}</h3>
             {% elif prediction == 1 %}
-            <h3 style="color: rgb(95, 94, 117)">{{w1_df.Focus.values.0}} <em>def.</em> {{w2_df.Focus.values.0}}</h3>
+            <h3 style="color: rgb(95, 94, 117)">{{w1_df.Focus.values.0}} 
+              <em>def.</em> {{w2_df.Focus.values.0}}</h3>
             {% endif %}
         </div>
       </div>
