@@ -296,7 +296,12 @@
                 "{{row.event_time}}\n{{row.event_lab}}",
               {% endfor %}],
             datasets: [{
-                label: "Blue",
+                label:  
+                {% if object.matchID|length_is:"4" %}
+                  "{{object.focus.name}}"
+                {% else %}
+                  "{{object.opponent.name}}"
+                {% endif %},
                 data: [{% for row in object.actions2.all %}
                   {{row.blue}},
                   {% endfor %}],
@@ -306,7 +311,12 @@
                 lineTension: 0,
               },
               {
-                label: "Red",
+                label:  
+                {% if object.matchID|length_is:"4" %}
+                  "{{object.opponent.name}}"
+                {% else %}
+                  "{{object.focus.name}}"
+                {% endif %},
                 data: [{% for row in object.actions2.all %}
                   {{row.red}},
                   {% endfor %}],
