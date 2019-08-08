@@ -95,7 +95,44 @@
               </div>
             </div>
       <hr  class="yellow"/>
-
+      <div class="page-header">
+            <h2><em>Versus!</em></h2>
+        </div>
+      
+        <h4>Compare your favorite wrestlers and see who would win!</h4>
+        <p>Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.</p>
+      
+        <div class="col-md-6">
+          <form method="POST" action="/athlete-comparison/">
+              {% csrf_token %}
+              <div class="form-group row">
+                <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
+                <div class="col-sm-10">
+                  <select class="custom-select" id="wrestler1" name="wrestler1">
+                      <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
+                      <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
+                      <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
+                      <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
+                      <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
+                      <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
+                      <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
+                      <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
+                      <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
+                      <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="form-group row">
+                <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Type a wrestler's name" value="Zain Retherford">
+                </div>
+              </div>
+              <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
+            </form>
+          </div>
+        <br />
+        <hr class="yellow" />
       <h2>{{ user.profile.teamname }} <small>Stats</small></h2>
       <p>View their stats!</p>
   <div class='tableauPlaceholder' id='viz1564518756083' style='position: relative'>
@@ -118,7 +155,7 @@
           <param name='filter' value='Team1=Princeton' />
       </object>
   </div>
-
+<!--
       <hr class="yellow">
   <div class="page-header">
       <h2><em>Versus!</em></h2>
@@ -155,13 +192,9 @@
         </div>
         <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
       </form>
-    </div>
+    </div> 
+-->
   <br />
-  <div class="row">
-      <div class="col">
-          {{prediction}}
-      </div>
-  </div>
 
   </div>
       <!-- stop content -->
