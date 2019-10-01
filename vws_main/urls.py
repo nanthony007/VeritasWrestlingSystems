@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('start', views.start, name='start'),
     #path('fs_matchdata/', views.FS_MatchTableView.as_view(), name='fs_matchdata_table'),
     path('matchdata/<pk>/', views.FS_MatchDetailView.as_view(), name='fs_match_detail_view'),
     path('wrestlers/<slug>/', views.FS_WrestlerDetailView.as_view(), name='fs_wrestler_detail_view'),

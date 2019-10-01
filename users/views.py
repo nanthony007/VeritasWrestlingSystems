@@ -121,3 +121,6 @@ def athlete_comparison(request):
 
 def about(request):
     return render(request, "users/about.html")
+
+def analysis_feed(request):
+    return render(request, "users/analysis_feed.html")
