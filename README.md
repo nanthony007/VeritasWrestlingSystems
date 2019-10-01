@@ -28,6 +28,7 @@ United World Wrestling (UWW) rules and language
 can be found [here(rules)](collection/uww_wrestling_rules.pdf) and [here(language)](collection/uww_basic_vocabulary.pdf).
   
 Run `$python3 FScollector.py` to start collecting data. 
+
 This will write to the site database as you collect data.  
 
 Use `save_script.py` to save the current database instance to local files in [stats](collection/stats).

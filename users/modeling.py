@@ -33,11 +33,11 @@ def train_model():
     cwd = os.getcwd()
     matchdata = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
     matchdata = matchdata[matchdata['Duration'] != 0] # remove forfeits
-    nodupes = matchdata[matchdata['MatchID'].apply(lambda x: len(x) == 4)] # remove dupes 
+    nodupes = matchdata[matchdata['MatchID'].apply(lambda x: len(x) == 4)] # remove dupes
 
     # no weight or pasive diff or mov or duration (no points)
     # i.e. includes all advanced metrics and base stats (includes duration)
-    # removes focus/team, opp/team, date, matchid, all result types except binary 
+    # removes focus/team, opp/team, date, matchid, all result types except binary
     matches = nodupes[['APM', 'Drate', 'Da',  'Dc2', 'Dc4', 'Exposure',
            'GBrate', 'GBa', 'GBc2', 'Gut',
            'HIrate', 'HIa', 'HIc2', 'HIc4', 'HOrate', 'HOa', 'HOc2', 'HOc4',
@@ -97,7 +97,7 @@ def serialize_model(file_name):
 
     with gzip.open('support_array.dill.gz', 'wb') as f:
         dill.dump(support_array, f)
-          
+
 def deploy_model(file_name='freestyle_model.dill.gz'):
     """Return the loaded trained model.
 
@@ -124,4 +124,3 @@ def deploy_model(file_name='freestyle_model.dill.gz'):
         return deploy_model(file_name=file_name)
 
     return model, support
-
