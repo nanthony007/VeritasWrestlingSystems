@@ -30,5 +30,4 @@ class ProfileUpdateForm(forms.ModelForm):
 class ProfileRosterUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['roster57', 'roster61', 'roster65', 'roster70', 'roster74', 'roster79',
-                  'roster86', 'roster92', 'roster97', 'roster125']
+        fields = ['roster']

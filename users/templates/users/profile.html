@@ -16,89 +16,47 @@
         <h2>
           <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" 
           style="width: 50px; height: 50px"> 
-          {{ user.username }} 
-          <br />
-          <!-- Email: <small>{{ user.email }}</small> -->
-        </h2>
+          {{ user.username }} </h2>
+        <h4>
+          Email: <small>{{ user.email }}</small>
+        </h4>
         <p>Update your profile <a href="update">here.</a></p>
     </div>
     </div>
       <hr class="yellow">
       <h2>Your Team: {{ user.profile.teamname }}</h2>
-      <p>Pick your team <a href="roster-update">here!</a></p>
-      <div class="row indigo">
-        <div class="col sm mx-auto my-auto text-white">
-            <h6>57 kilos</h6>
-        </div>
-        <div class="col sm mx-auto my-auto text-white">
-            <h6>61 kilos</h6>
-        </div>
-        <div class="col sm mx-auto my-auto text-white">
-            <h6>65 kilos</h6>
-        </div>
-        <div class="col sm mx-auto my-auto text-white">
-            <h6>70 kilos</h6>
-        </div>
-        <div class="col sm mx-auto my-auto text-white">
-            <h6>74 kilos</h6>
-        </div>
-      </div>
+      <p>
+        Pick your team <a href="roster-update">here!</a>
+        Click on any wrestler's name to see their profile page.
+      </p>
       <div class="row">
-          <div class="col sm mx-auto my-auto">
-              <h6><a href="/wrestlers/{{user.profile.roster57.slug}}">{{user.profile.roster57.name}}</a></h6>
-          </div>
-          <div class="col sm mx-auto my-auto">
-              <h6><a href="/wrestlers/{{user.profile.roster61.slug}}">{{user.profile.roster61.name}}</a></h6>
-          </div>
-          <div class="col sm mx-auto my-auto">
-              <h6><a href="/wrestlers/{{user.profile.roster65.slug}}">{{user.profile.roster65.name}}</a></h6>
-          </div>
-          <div class="col sm mx-auto my-auto">
-              <h6><a href="/wrestlers/{{user.profile.roster70.slug}}">{{user.profile.roster70.name}}</a></h6>
-          </div>
-          <div class="col sm mx-auto my-auto">
-              <h6><a href="/wrestlers/{{user.profile.roster74.slug}}">{{user.profile.roster74.name}}</a></h6>
-          </div>
+        <div class="col col-sm">
+          <table id="rostertable" 
+          class="table table-small table-bordered text-center">
+            <thead class="indigo text-white">
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Rating</th>
+              <th>Match Count</th>
+            </thead>
+            <tbody>
+              {% for w in user.profile.roster.all %}
+              <tr>
+                <td><a style="color: darkblue" href="/wrestlers/{{w.name | slugify}}/">{{ w.name }}</a></td>
+                <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
+                <td>{{ w.rating }}</td>
+                <td>{{ w.focus_wrestler2.all|length }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-        <div class="row indigo">
-            <div class="col sm mx-auto my-auto text-white">
-                <h6>79 kilos</h6>
-            </div>
-            <div class="col sm mx-auto my-auto text-white">
-                <h6>86 kilos</h6>
-            </div>
-            <div class="col sm mx-auto my-auto text-white">
-                <h6>92 kilos</h6>
-            </div>
-            <div class="col sm mx-auto my-auto text-white">
-                <h6>97 kilos</h6>
-            </div>
-            <div class="col sm mx-auto my-auto text-white">
-                <h6>125 kilos</h6>
-            </div>
-          </div>
-          <div class="row">
-              <div class="col sm mx-auto my-auto">
-                  <h6><a href="/wrestlers/{{user.profile.roster79.slug}}">{{user.profile.roster79.name}}</a></h6>
-              </div>
-              <div class="col sm mx-auto my-auto">
-                  <h6><a href="/wrestlers/{{user.profile.roster86.slug}}">{{user.profile.roster86.name}}</a></h6>
-              </div>
-              <div class="col sm mx-auto my-auto">
-                  <h6><a href="/wrestlers/{{user.profile.roster92.slug}}">{{user.profile.roster92.name}}</a></h6>
-              </div>
-              <div class="col sm mx-auto my-auto">
-                  <h6><a href="/wrestlers/{{user.profile.roster97.slug}}">{{user.profile.roster97.name}}</a></h6>
-              </div>
-              <div class="col sm mx-auto my-auto">
-                  <h6><a href="/wrestlers/{{user.profile.roster125.slug}}">{{user.profile.roster125.name}}</a></h6>
-              </div>
-            </div>
+        <div class="col col-sm"></div>
+      </div>
       <hr  class="yellow"/>
       <div class="page-header">
             <h2><em>Versus!</em></h2>
         </div>
-      
         <h4>Compare your favorite wrestlers and see who would win!</h4>
         <p>Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.</p>
       
@@ -109,17 +67,10 @@
                 <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
                 <div class="col-sm-10">
                   <select class="custom-select" id="wrestler1" name="wrestler1">
-                      <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
-                      <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
-                      <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
-                      <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
-                      <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
-                      <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
-                      <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
-                      <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
-                      <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
-                      <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
-                    </select>
+                    {% for wrestler in user.profile.roster.all %}
+                    <option value="{{ wrestler.name }}">{{ wrestler.name }}</option>
+                    {% endfor %}
+                  </select>
                   </div>
               </div>
               <div class="form-group row">
@@ -133,6 +84,8 @@
           </div>
         <br />
         <hr class="yellow" />
+  <!--
+
       <h2>{{ user.profile.teamname }} <small>Stats</small></h2>
       <p>View their stats!</p>
   <div class='tableauPlaceholder' id='viz1564518756083' style='position: relative'>
@@ -155,51 +108,13 @@
           <param name='filter' value='Team1=Princeton' />
       </object>
   </div>
-<!--
-      <hr class="yellow">
-  <div class="page-header">
-      <h2><em>Versus!</em></h2>
-  </div>
-
-  <h4>Compare your favorite wrestlers and see who would win!</h4>
-  <p>Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.</p>
-
-  <div class="col-md-6">
-    <form method="POST" action="/athlete-comparison/">
-        {% csrf_token %}
-        <div class="form-group row">
-          <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
-          <div class="col-sm-10">
-            <select class="custom-select" id="wrestler1" name="wrestler1">
-                <option value="{{ user.profile.roster57.name }}">{{ user.profile.roster57.name }}</option>
-                <option value="{{ user.profile.roster61.name }}">{{ user.profile.roster61.name }}</option>
-                <option value="{{ user.profile.roster65.name }}">{{ user.profile.roster65.name }}</option>
-                <option value="{{ user.profile.roster70.name }}">{{ user.profile.roster70.name }}</option>
-                <option value="{{ user.profile.roster74.name }}">{{ user.profile.roster74.name }}</option>
-                <option value="{{ user.profile.roster79.name }}">{{ user.profile.roster79.name }}</option>
-                <option value="{{ user.profile.roster86.name }}">{{ user.profile.roster86.name }}</option>
-                <option value="{{ user.profile.roster92.name }}">{{ user.profile.roster92.name }}</option>
-                <option value="{{ user.profile.roster97.name }}">{{ user.profile.roster97.name }}</option>
-                <option value="{{ user.profile.roster125.name }}">{{ user.profile.roster125.name }}</option>
-              </select>
-            </div>
-        </div>
-        <div class="form-group row">
-          <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Darian Cruz" value="Darian Cruz">
-          </div>
-        </div>
-        <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
-      </form>
-    </div> 
 -->
+
   <br />
 
   </div>
       <!-- stop content -->
 
-  
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
@@ -208,6 +123,14 @@
 
     <script type="text/javascript">
         new WOW().init();
+        $(document).ready(function () {
+          $('#rostertable').DataTable({
+            'info': false,
+            'paging':false,
+            'scrollCollapse': true,
+          });
+          $('.dataTables_length').addClass('bs-select');
+        });
         var divElement = document.getElementById('viz1564518756083');
         var vizElement = divElement.getElementsByTagName('object')[0];
         vizElement.style.width='100%';

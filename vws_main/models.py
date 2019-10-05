@@ -197,6 +197,9 @@ class FS_Wrestler(models.Model):
     class Meta:
         verbose_name = 'FreeStyle Wrestler'
         verbose_name_plural = 'FreeStyle Wrestlers'
+    
+    def __str__(self):
+        return self.name
 
 
 class FS_Match(models.Model):
