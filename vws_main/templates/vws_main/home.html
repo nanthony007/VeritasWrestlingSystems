@@ -43,8 +43,11 @@
               {% csrf_token %}
               {{ form.as_p }}
               <button class="btn btn-indigo" type="submit">Login</button>
+              <small class="text-muted ml-2">
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
+              </small>
           </form>
-          <div>
+          <div class="border-top pt-3">
               <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>
           </div>
       </div>

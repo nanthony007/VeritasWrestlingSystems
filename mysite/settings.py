@@ -23,12 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mysecretkey007'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == "True")
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com', 'veritaswrestlingsystems.com']
 
 # Application definition
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'django_select2',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://ibpfcwfnmikxmw:5f6f81e84894399cc02a1ad09a6a663d21d448e9b4cbe2897d5fc75817818d3a@ec2-54-83-9-36.compute-1.amazonaws.com:5432/dfh945lu8avc08'
+        default=os.environ.get('DATABASE')
     )
 }
 
@@ -122,18 +123,19 @@ DATETIME_INPUT_FORMATS = ['%m/%d/%Y']
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-
-MEDIA_ROOT = 'media'
-
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 django_heroku.settings(locals())

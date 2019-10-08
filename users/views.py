@@ -3,11 +3,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
 import random
-from .forms import UserRegistrationForm, ProfileRosterUpdateForm, ProfileUpdateForm, UserUpdateForm
+from .forms import UserRegistrationForm, RosterUpdateForm, ProfileUpdateForm, UserUpdateForm
 import numpy as np
 import pandas as pd 
 import os
 from .modeling import focus_only_stats, deploy_model
+from django.forms import formset_factory
 
 
 class Round(Func):
@@ -21,7 +22,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, r'Account created for {username}!  You are now able to login.')
+            messages.success(request, 'Account created for ' + username + '!  You are now able to login.')
             return redirect('/')
     else:
         form = UserRegistrationForm()
@@ -31,9 +32,9 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        roster_form = ProfileRosterUpdateForm(request.POST, instance=request.user.profile)
+        u_form = UserUpdateForm(request.POST or None, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
+        roster_form = RosterUpdateForm(request.POST or None, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -43,7 +44,7 @@ def profile(request):
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-        roster_form = ProfileRosterUpdateForm(request.POST, instance=request.user.profile)
+        roster_form = RosterUpdateForm(instance=request.user.profile)
     
     context = {
         'u_form': u_form,
@@ -56,8 +57,8 @@ def profile(request):
 @login_required
 def profile_update(request):
     if request.method == 'POST':
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        u_form = UserUpdateForm(request.POST or None, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -77,13 +78,13 @@ def profile_update(request):
 @login_required
 def roster_update(request):
     if request.method == 'POST':
-        roster_form = ProfileRosterUpdateForm(request.POST, instance=request.user.profile)
+        roster_form = RosterUpdateForm(request.POST or None, instance=request.user.profile)
         if roster_form.is_valid():
             roster_form.save()
             messages.success(request, r'Your team has been updated!')
             return redirect('profile')
     else:
-        roster_form = ProfileRosterUpdateForm(instance=request.user.profile)
+        roster_form = RosterUpdateForm(instance=request.user.profile)
     
     return render(request, 'users/roster-update.html', {'roster_form': roster_form})
 

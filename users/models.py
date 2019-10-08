@@ -11,16 +11,12 @@ class Profile(models.Model):
     roster = models.ManyToManyField(FS_Wrestler, related_name='roster')
 
     def __str__(self):
-        return self.name
-    
-
-    def __str__(self):
         return r'{self.user.username} Profile'
 
-    def save(self):
+    def save(self, *args, **kwargs):
         super().save()
 
-        img = Image.open(self.image.path)
+        img = Image.open(self.image)
 
         if img.height > 200 or img.width > 200:
             output_size = (200, 200)

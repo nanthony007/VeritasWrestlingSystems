@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from vws_main.models import FS_Wrestler
+from django_select2.forms import ModelSelect2MultipleWidget
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -27,7 +28,20 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['teamname', 'image']
 
 
-class ProfileRosterUpdateForm(forms.ModelForm):
+class MyWidget(ModelSelect2MultipleWidget):
+    queryset = FS_Wrestler.objects.order_by('name')
+    search_fields = [
+        'name__icontains',
+    ]
+    max_results = 10
+
+
+class RosterUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['roster']
+        fields = ('roster',)
+        widgets = {
+            'roster': MyWidget,
+        }
+
+
