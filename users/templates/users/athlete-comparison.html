@@ -71,10 +71,9 @@
         <div class="col-sm-5 mx-auto text-center">
           <h2 style="color: rgb(39, 15, 170)">Predicted result:</h2>
             {% if prediction == 0 %}
-            <h3 style="color: rgb(95, 94, 117)">{{w2_df.Focus.values.0}} <em>def.</em> {{w1_df.Focus.values.0}}</h3>
+              <h3 style="color: rgb(95, 94, 117)">{{w2_df.Focus.values.0}} <em>def.</em> {{w1_df.Focus.values.0}}</h3>
             {% elif prediction == 1 %}
-            <h3 style="color: rgb(95, 94, 117)">{{w1_df.Focus.values.0}} 
-              <em>def.</em> {{w2_df.Focus.values.0}}</h3>
+              <h3 style="color: rgb(95, 94, 117)">{{w1_df.Focus.values.0}} <em>def.</em> {{w2_df.Focus.values.0}}</h3>
             {% endif %}
         </div>
       </div>

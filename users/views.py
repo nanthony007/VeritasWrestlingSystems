@@ -22,7 +22,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, 'Account created for ' + username + '!  You are now able to login.')
+            messages.success(request, 'Account created for ' + username + '.  You are now able to login.')
             return redirect('/')
     else:
         form = UserRegistrationForm()
@@ -106,7 +106,7 @@ def athlete_comparison(request):
         model = loaded_model[0]
         support = loaded_model[1]
         subbed = np.subtract(w1_ewm, w2_ewm)
-        pred = model.predict(subbed[:,support])[0]
+        pred = model.predict(subbed[:,support])
 
     else:
         messages.warning(request, r'Invalid form request, please try again.')
