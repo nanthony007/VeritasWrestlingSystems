@@ -34,28 +34,6 @@
             </h6>
           </div>
         </div>
-      {% if not user.is_authenticated %}
-      <div class="row">
-        <div class="col col-sm-6">
-          <h3 style="color: rgb(39, 15, 170)">Log In</h3>
-          <hr class="yellow"/>
-          <div>
-            <form method="POST" style="color: rgb(95, 94, 117)">
-              {% csrf_token %}
-              {{ form.as_p }}
-              <button class="btn btn-indigo" type="submit">Login</button>
-              <small class="text-muted ml-2">
-                <a href="{% url 'password_reset' %}">Forgot Password?</a>
-              </small>
-              </form>
-            <div class="border-top pt-3">
-              <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-
       </div>
     </div>
   </div>
