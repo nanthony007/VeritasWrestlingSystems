@@ -3,6 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('resources/', views.resources, name='resources'),
+    path('analysis/', views.ReportListView.as_view(), name='report_feed'),
+    path('analysis/<slug>/', views.ReportDetailView.as_view(), name='report_detail'),
     #path('fs_matchdata/', views.FS_MatchTableView.as_view(), name='fs_matchdata_table'),
     path('matchdata/<pk>/', views.FS_MatchDetailView.as_view(), name='fs_match_detail_view'),
     path('wrestlers/<slug>/', views.FS_WrestlerDetailView.as_view(), name='fs_wrestler_detail_view'),

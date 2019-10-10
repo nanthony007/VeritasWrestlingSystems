@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
-from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
+from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match, Report
 from django.views.generic import DetailView, ListView
 from vws_main.forms import Wrestler1ModelForm
 import pandas as pd
@@ -23,10 +23,6 @@ def safe_div(x, y):
 class Round(Func):
     function = 'ROUND'
     arity = 2
-
-
-def home(request):
-    return render(request, 'vws_main/home.html')
 
 
 class FS_MatchDetailView(DetailView):
@@ -261,3 +257,20 @@ class FS_RatingsFilterView(ListView):
             ).filter(match_count__gt=0).distinct().order_by('-rating')
 
 
+def home(request):
+    return render(request, 'vws_main/home.html')
+
+def about(request):
+    return render(request, "vws_main/about.html")
+
+def resources(request):
+    return render(request, "vws_main/resources.html")
+
+class ReportListView(ListView):
+    model = Report
+    template_name = 'vws_main/report_feed.html'
+
+
+class ReportDetailView(DetailView):
+    queryset = Report.objects.filter().order_by('-date')
+    template_name = "vws_main/report_detail.html"

@@ -1,5 +1,6 @@
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
+from django.core.files.storage import FileSystemStorage
 
 """Start of Folkstyle stuff, saved for potential later use...
 
@@ -323,3 +324,12 @@ class FS_Event(models.Model):
 
     def __str_(self):
         return self.name
+
+
+fs = FileSystemStorage(location='/media/reports/')
+
+class Report(models.Model):
+    report = models.FileField(storage=fs, upload_to="reports")
+    name = models.CharField(max_length=140)
+    date = models.DateField(null=True)
+    slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))

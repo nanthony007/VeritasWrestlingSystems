@@ -1,0 +1,52 @@
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+    <!-- content here -->
+    <div class="container">
+        <div class="page-header text-center">
+            <br />
+            <h1 style="color: rgb(39, 15, 170)">Resources</h1>
+            <hr class="yellow"/>
+        </div>
+        <p>
+            This page provides supplemental materials for the avid fan or for those needing 
+            further explanation/guidance than has been provided on the site.
+        </p>
+        <p>
+            For more information on abbreviations, click 
+            <a href="/media/resources/VWSabbreviations.xlsx" target="_blank">here</a>
+            to see detailed descriptions.
+        </p>
+        <p>
+            For more information on United World Wrestling (UWW) rules and key terms, click 
+            <a href="/media/resources/uww_wrestling_rules.pdf" target="_blank">here</a>
+            and 
+            <a href="/media/resources/uww_basic_vocabulary.pdf" target="_blank">here</a>.
+        </p>
+        <p>
+            For detailed steps on data collection get started by reading the  
+            <a href="/media/resources/Recording_Manual.docx" target="_blank">Recording Manual</a>.
+        </p>
+        <p>
+            Then visit the <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">GiHub repo</a>
+            and follow the directions to start recording your own matches.
+        </p>
+    </div>
+
+
+
+    <!-- stop content -->
+   
+    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+
+{% endblock %}

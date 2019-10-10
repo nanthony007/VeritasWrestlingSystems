@@ -119,9 +119,3 @@ def athlete_comparison(request):
     }
     return render(request, "users/athlete-comparison.html", context)
     
-
-def about(request):
-    return render(request, "users/about.html")
-
-def analysis_feed(request):
-    return render(request, "users/analysis_feed.html")

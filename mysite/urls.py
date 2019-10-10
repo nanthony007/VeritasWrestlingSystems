@@ -22,8 +22,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('about/', user_views.about, name='about'),
-    path('analysis-feed/', user_views.analysis_feed, name='analysis-feed'),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('profile/update/', user_views.profile_update, name='profile_update'),

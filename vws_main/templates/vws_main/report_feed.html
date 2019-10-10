@@ -19,11 +19,14 @@
         </p>
         <ol>
             <li>(pending...) World Championships 2019 (Nur Sultan)</li>
+            {% for report in object_list %}
+            <li>
+                <a href="/analysis/{{ report.slug }}">{{ report.name }}
+            </li>
+            {% endfor %}
         </ol>
-        <img src="{% static 'vws_main/img/USOC_project.html' %}" 
-            alt="No img available.">  
-            
     </div>
+
 
 
     <!-- stop content -->
