@@ -7,6 +7,7 @@ import pandas as pd
 import os
 from collections import Counter
 from .Ecounter import effective_counter_rate
+from .s3presign import create_presigned_url
 
 
 def safe_div(x, y):
@@ -264,7 +265,13 @@ def about(request):
     return render(request, "vws_main/about.html")
 
 def resources(request):
-    return render(request, "vws_main/resources.html")
+    recording_manual = create_presigned_url('vws-django-profilepics', 'resources/Recording_Manual.docx')
+    abbreviations = create_presigned_url('vws-django-profilepics', 'resources/VWSabbreviations.xlsx')
+    context = {
+        'recordingmanual': recording_manual,
+        'abbreviations': abbreviations,
+    }
+    return render(request, "vws_main/resources.html", context=context)
 
 class ReportListView(ListView):
     model = Report
