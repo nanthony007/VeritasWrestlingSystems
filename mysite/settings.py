@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_select2',
     'storages',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_plotly_dash.middleware.ExternalRedirectionMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
