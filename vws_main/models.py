@@ -326,10 +326,8 @@ class FS_Event(models.Model):
         return self.name
 
 
-fs = FileSystemStorage(location='/media/reports/')
-
 class Report(models.Model):
-    report = models.FileField(storage=fs, upload_to="reports")
+    report = models.FileField(upload_to="reports")
     name = models.CharField(max_length=140)
     date = models.DateField(null=True)
     slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
