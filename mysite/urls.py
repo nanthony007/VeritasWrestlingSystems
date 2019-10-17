@@ -44,6 +44,7 @@ urlpatterns = [
     path('', include('vws_main.urls')),
     path('select2/', include('django_select2.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    path('profile/dashboard/', user_views.dashboard, name="dashboard"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

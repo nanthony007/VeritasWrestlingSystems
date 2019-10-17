@@ -25,37 +25,40 @@
           Email: <small>{{ user.email }}</small>
         </h4>
         <p>Update your profile <a href="update">here.</a>  Set your team name and upload an image!</p>
+      </div>
     </div>
-    </div>
-      <hr class="yellow">
+    <hr class="yellow">
       <h2>Your Team: {{ user.profile.teamname }}</h2>
       <p>
         Pick your team <a href="roster-update">here!</a>
         Click on any wrestler's name to see their profile page.
       </p>
-      <div class="row">
-        <div class="col col-sm">
-          <table id="rostertable" 
-          class="table table-small table-bordered text-center">
-            <thead class="indigo text-white">
-              <th>Name</th>
-              <th>Weight</th>
-              <th>Rating</th>
-              <th>Match Count</th>
-            </thead>
-            <tbody>
-              {% for w in user.profile.roster.all %}
-              <tr>
-                <td><a style="color: darkblue" href="/wrestlers/{{w.name | slugify}}/">{{ w.name }}</a></td>
-                <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
-                <td>{{ w.rating }}</td>
-                <td>{{ w.focus_wrestler2.all|length }}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="col col-sm"></div>
+      <div class="col-sm-5 text-center">
+        <button class="btn btn-outline-indigo waves-effect"><a href="dashboard/" style="color:black">STATS DASHBOARD</a></button>
+      </div>
+    <div class="row">
+      <div class="col col-sm">
+        <table id="rostertable" 
+        class="table table-small table-bordered text-center">
+          <thead class="indigo text-white">
+            <th>Name</th>
+            <th>Weight</th>
+            <th>Rating</th>
+            <th>Match Count</th>
+          </thead>
+          <tbody>
+            {% for w in user.profile.roster.all %}
+            <tr>
+              <td><a style="color: darkblue" href="/wrestlers/{{w.name | slugify}}/">{{ w.name }}</a></td>
+              <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
+              <td>{{ w.rating }}</td>
+              <td>{{ w.focus_wrestler2.all|length }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="col col-sm"></div>
       </div>
       <hr  class="yellow"/>
       <div class="page-header">
@@ -82,12 +85,11 @@
                   <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Type a wrestler's name">
                 </div>
               </div>
-              <button class="btn btn-outline-indigo text-white" type="submit" value="Submit">Compare!</button>
+              <button class="btn btn-outline-indigo text-white waves-effect" type="submit" value="Submit">Compare!</button>
             </form>
           </div>
         <br />
         <hr class="yellow" />
-        <iframe src="https://vws-dash.herokuapp.com/" frameborder="0" width=100% height=1000px></iframe>
   <br />
 
   </div>

@@ -10,6 +10,18 @@ import os
 from .modeling import focus_only_stats, deploy_model
 from django.forms import formset_factory
 
+import dash
+import dash_core_components as dcc 
+import dash_html_components as html
+import plotly.graph_objs as go
+from dash.dependencies import Input, Output
+import dash_daq as daq
+from django_plotly_dash import DjangoDash
+
+from django.contrib.auth.models import User
+from vws_main.models import FS_Wrestler
+
+import dash101 
 
 class Round(Func):
     function = 'ROUND'
@@ -119,3 +131,6 @@ def athlete_comparison(request):
     }
     return render(request, "users/athlete-comparison.html", context)
     
+
+def dashboard(request):
+    return render(request, template_name="users/dashboard.html")
