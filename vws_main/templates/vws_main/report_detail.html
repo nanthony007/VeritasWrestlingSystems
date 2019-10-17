@@ -3,6 +3,23 @@
 
 
 {% block content %}
+
+    <style type="text/css">
+    .iframe-container {
+        overflow: hidden;
+        padding-top: 56.25%;
+        position: relative;
+        height: 100%;
+    }
+    .iframe-container iframe {
+        border: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    </style>
     <!-- content here -->
     <div class="container">
         <div class="page-header text-center">
@@ -11,7 +28,10 @@
             <hr class="yellow"/>
         </div>
         <p>To view independently in another tab, click <a href="{{ object.report.url }}" target="_blank">here</a>.</p>
-        <iframe src="{{ object.report.url }}" height="500px" width="100%"></iframe>
+
+        <div class="iframe-container">
+            <iframe src="{{ object.report.url }}" allowfullscreen></iframe>
+        </div>
     </div>
 
     <!-- stop content -->
