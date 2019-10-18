@@ -1,5 +1,5 @@
 from django.contrib import admin
-from vws_main.models import FS_Match, FS_TS, FS_Wrestler, FS_Team, FS_Event, Report
+from vws_main.models import FS_Match, FS_TS, FS_Wrestler, FS_Team, FS_Event
 
 
 # Register your models here.
@@ -24,13 +24,9 @@ class FS_EventAdmin(admin.ModelAdmin):
     list_display = ('name', 'date')
 
 
-class ReportAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date', 'report')
-
 
 admin.site.register(FS_Match, FS_MatchAdmin)
 admin.site.register(FS_TS, FS_TSAdmin)
 admin.site.register(FS_Wrestler, FS_WrestlerAdmin)
 admin.site.register(FS_Team, FS_TeamAdmin)
 admin.site.register(FS_Event, FS_EventAdmin)
-admin.site.register(Report, ReportAdmin)

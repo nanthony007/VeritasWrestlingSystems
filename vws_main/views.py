@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, FloatField, Func
-from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match, Report
+from vws_main.models import FS_Event, FS_Wrestler, FS_Team, FS_Match
 from django.views.generic import DetailView, ListView
 from vws_main.forms import Wrestler1ModelForm
 import pandas as pd
