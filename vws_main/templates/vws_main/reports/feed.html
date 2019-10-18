@@ -1,0 +1,43 @@
+{% extends "vws_main/header.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+ <!-- content here -->
+    <div class="container">
+        <div class="page-header text-center">
+            <br />
+            <h1 style="color: rgb(39, 15, 170)">Analysis Feed</h1>
+            <hr class="yellow"/>
+        </div>
+        <p>
+            This page will list each event that has been analyzed and provide a link 
+            to the analysis report page.  World Championships and Olympic Games will have 
+            more thorough examinations. 
+            <br />
+            The results are chronological with most recent events at the top.
+        </p>
+        <ol>
+            <li>
+                (pending) World Championships 2019 | Nur Sultan, KZT
+            </li>
+            <li>
+                <a href="/analysis/sample/">Sample</a> | Decatur, USA
+            </li>
+        </ol>
+    </div>
+      <!-- stop content -->
+
+    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+
+{% endblock %}

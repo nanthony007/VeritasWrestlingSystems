@@ -1,82 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139393698-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-139393698-1');
-	</script>
-	<title>Veritas Analytics</title>
-	<meta charset="utf-8" />
-	{% load staticfiles %}
-  {% load static %}
-  <link rel="icon" href="{% static 'vws_main/img/newlogo.jpg' %}" type="image/x-icon">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-	<link href="{% static 'vws_main/css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/mdb.min.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/style.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/jupyter.css' %}" rel="stylesheet">
-	<link href="{% static 'vws_main/css/addons/datatables.min.css' %}" rel="stylesheet">
-	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
-	<style type="text/css">
-		body {
-			background-color: #f6f6f6;
-		}
-	</style>
-</head>
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-<!-- Navbar brand -->
-<a class="navbar-brand" href="/">Vertias Wrestling Systems</a>
-<!-- Collapse button -->
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<!-- Collapsible content -->
-<div class="collapse navbar-collapse" id="basicExampleNav">
-  <!-- Links -->
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="/about">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/ratings">Ratings</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/analysis">Analysis Feed</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/resources">Resources</a>
-    </li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
-  {% if user.is_authenticated %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-    </li>
-  {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'register' %}">Register</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'login' %}">Login</a>
-    </li>
-  {% endif %}
-  </ul>
-  <!-- Links -->
-</div>
-</nav>
-
-<body>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -389,7 +311,7 @@ Enter wrestler: Zain Retherford
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/nanthony007/VeritasAnalytics-Website/venv/lib/python3.5/site-packages/pandas/core/indexing.py:543: SettingWithCopyWarning:
+<pre>/home/nanthony007/VeritasAnalytics-Website/venv/lib/python3.5/site-packages/pandas/core/indexing.py:543: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -414,7 +336,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <span class="n">LSC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">GBC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">TC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">totalTDA</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">hia</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">hoa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">da</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">totalTDA</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">hia</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">hoa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">da</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> 
 
 <span class="n">oHIC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hia</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">oHOC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hoa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -422,7 +344,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <span class="n">oLSC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">oGBC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">oTC</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">ototalTDA</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hia</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hoa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_da</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">ototalTDA</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hia</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_hoa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_da</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_lsa</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_gba</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="n">fm</span><span class="o">.</span><span class="n">opp_ta</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> 
 </pre></div>
 
     </div>
@@ -435,7 +357,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">shot_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Head Inside&#39;</span><span class="p">,</span> <span class="s1">&#39;Head Outside&#39;</span><span class="p">,</span> <span class="s1">&#39;Double&#39;</span><span class="p">,</span> <span class="s1">&#39;LowShot&#39;</span><span class="p">,</span> <span class="s1">&#39;Counter&#39;</span><span class="p">,</span> <span class="s1">&#39;Throw&#39;</span><span class="p">,</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">shot_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Head Inside&#39;</span><span class="p">,</span> <span class="s1">&#39;Head Outside&#39;</span><span class="p">,</span> <span class="s1">&#39;Double&#39;</span><span class="p">,</span> <span class="s1">&#39;LowShot&#39;</span><span class="p">,</span> <span class="s1">&#39;Counter&#39;</span><span class="p">,</span> <span class="s1">&#39;Throw&#39;</span><span class="p">,</span> 
                <span class="s1">&#39;Head Inside&#39;</span><span class="p">,</span> <span class="s1">&#39;Head Outside&#39;</span><span class="p">,</span> <span class="s1">&#39;Double&#39;</span><span class="p">,</span> <span class="s1">&#39;LowShot&#39;</span><span class="p">,</span> <span class="s1">&#39;Counter&#39;</span><span class="p">,</span> <span class="s1">&#39;Throw&#39;</span><span class="p">]</span>
 <span class="n">athlete</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Focus&#39;</span><span class="p">,</span> <span class="s1">&#39;Focus&#39;</span><span class="p">,</span> <span class="s1">&#39;Focus&#39;</span><span class="p">,</span> <span class="s1">&#39;Focus&#39;</span><span class="p">,</span> <span class="s1">&#39;Focus&#39;</span><span class="p">,</span> <span class="s1">&#39;Focus&#39;</span><span class="p">,</span>
           <span class="s1">&#39;Opponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Opponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Opponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Opponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Opponent&#39;</span><span class="p">,</span> <span class="s1">&#39;Opponent&#39;</span><span class="p">]</span>
@@ -504,7 +426,7 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">legend_</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<span class="n">g3</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pref&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;shottype&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;wrestler&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rate_df</span><span class="p">,</span>
+<span class="n">g3</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;pref&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;shottype&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;wrestler&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rate_df</span><span class="p">,</span>  
             <span class="n">palette</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">diverging_palette</span><span class="p">(</span><span class="mi">240</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Preference&#39;</span><span class="p">)</span>
 <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Preference (</span><span class="si">% o</span><span class="s2">f total shots)&quot;</span><span class="p">)</span>
@@ -613,7 +535,7 @@ Created with Jupyter, delivered by Fastly, rendered by Rackspace.
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
@@ -621,18 +543,5 @@ Created with Jupyter, delivered by Fastly, rendered by Rackspace.
 </div>
 
 </div>
+ 
 
-</body>
-
-<br />
-
-<footer class="page-footer fixed-bottom font-small indigo">
-  <div class="text-center">
-      <h6>
-    Scientia potentia est |
-    Contact: nanthony007@gmail.com
-      </h6>
-  </div>
-</footer>
-
-</html>

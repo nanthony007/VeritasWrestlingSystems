@@ -271,13 +271,13 @@ def resources(request):
         'recordingmanual': recording_manual,
         'abbreviations': abbreviations,
     }
-    return render(request, "vws_main/resources.html", context=context)
+    return render(request, "vws_main/Analysis.html", context=context)
 
-class ReportListView(ListView):
-    model = Report
-    template_name = 'vws_main/report_feed.html'
+def reportlist(request):
+    return render(request, "vws_main/reports/feed.html")
 
+def worldchampionships2019(request):
+    return render(request, "vws_main/reports/worlds2019.html")
 
-class ReportDetailView(DetailView):
-    queryset = Report.objects.filter().order_by('-date')
-    template_name = "vws_main/report_detail.html"
+def sample(request):
+    return render(request, "vws_main/reports/sample.html")
