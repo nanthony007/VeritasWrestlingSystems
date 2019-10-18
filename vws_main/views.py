@@ -271,7 +271,7 @@ def resources(request):
         'recordingmanual': recording_manual,
         'abbreviations': abbreviations,
     }
-    return render(request, "vws_main/Analysis.html", context=context)
+    return render(request, "vws_main/resources.html", context=context)
 
 def reportlist(request):
     return render(request, "vws_main/reports/feed.html")

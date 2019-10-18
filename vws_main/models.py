@@ -324,10 +324,3 @@ class FS_Event(models.Model):
 
     def __str_(self):
         return self.name
-
-
-class Report(models.Model):
-    report = models.FileField(upload_to="reports")
-    name = models.CharField(max_length=140)
-    date = models.DateField(null=True)
-    slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
