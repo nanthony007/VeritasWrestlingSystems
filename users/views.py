@@ -21,7 +21,6 @@ from django_plotly_dash import DjangoDash
 from django.contrib.auth.models import User
 from vws_main.models import FS_Wrestler
 
-import dash101 
 
 class Round(Func):
     function = 'ROUND'
