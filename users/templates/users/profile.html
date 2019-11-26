@@ -49,7 +49,7 @@
           <tbody>
             {% for w in user.profile.roster.all %}
             <tr>
-              <td><a style="color: darkblue" href="/wrestlers/{{w.name | slugify}}/">{{ w.name }}</a></td>
+              <td><a class="text-primary" href="/wrestlers/{{w.slug}}/"><strong>{{ w.name }}</strong></a></td>
               <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
               <td>{{ w.rating }}</td>
               <td>{{ w.focus_wrestler2.all|length }}</td>

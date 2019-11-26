@@ -29,7 +29,9 @@
         <tbody>
             {% for wrestler in object_list %}
             <tr>
-                <td><a href="/wrestlers/{{wrestler.slug}}">{{ wrestler.name }}</a></td>
+                <td><a class="text-primary" 
+                        href="/wrestlers/{{ wrestler.slug }}/">
+                            <strong>{{ wrestler.name }}</strong></a></td>
                 <td>{{ wrestler.team.abbreviation }}</td>
                 <td>{{ wrestler.rating }}</td>
                 <td>{{ wrestler.match_count }}</td>

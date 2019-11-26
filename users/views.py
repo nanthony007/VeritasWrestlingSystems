@@ -10,7 +10,7 @@ import os
 from .modeling import focus_only_stats, deploy_model
 from django.forms import formset_factory
 
-import dash
+import dash1
 import dash_core_components as dcc 
 import dash_html_components as html
 import plotly.graph_objs as go

@@ -219,13 +219,16 @@
           <tbody>
             {% for match in object.focus_wrestler2.all %}
                 <tr>
-                  <td><a href="/matchdata/{{match.matchID}}/">{{match.matchID}}</a></td>
+                  <td><a class="text-primary" href="/matchdata/{{ match.matchID }}/">
+                    <strong>{{ match.matchID }}</strong></a></td>
                   {% for thing in match.events2.all %}
-                  <td>{{thing.name}}</td>
+                  <td>{{thing.name}} -- {{match.date}}</td>
                   {% endfor %}
-                  <td><a href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
+                  <td><a class="text-primary" 
+                    href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
                   <td>{{match.result}}</td>
-                  <td><a href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
+                  <td><a class="text-primary" 
+                    href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
                   <td>{{match.focus_score}}</td>
                   <td>{{match.opp_score}}</td>
                 </tr>
@@ -253,6 +256,7 @@
       'paging':false,
       'scrollY': '300px',
       'scrollCollapse': true,
+      "order":[[1, "asc"]]
     });
     $('.dataTables_length').addClass('bs-select');
   });
