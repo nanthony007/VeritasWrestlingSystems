@@ -2,37 +2,35 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="jumbotron"
-  style="background: url({% static 'vws_main/img/VWShigh.png' %})
-    no-repeat;
-    background-size:100%;">
+
   <div class="container-fluid">
-    <div class="page-header text-center">
-      <br />
-      <h1 style="color: rgb(39, 15, 170)">
-        Driving Performance with Advanced Statistics
-      </h1>
-      <hr class="yellow" />
+    <div class="container">
+      <img src="{% static 'vws_main/img/VWShigh.png' %}" alt="No img" class="img-fluid mx-auto d-block">
     </div>
-    <h3 style="color: rgb(95, 94, 117)" class="text-center">
-      We breakdown and analyze every move wrestlers make to bring you the
-      most up-to-date advanced statistics possible.
-    </h3>
-    <br />
-    <p style="color: rgb(95, 94, 117)">
-      All our content is open-source. Available on
-      <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">
-        GitHub.
-      </a>
-    </p>
-    <h6 style="color: rgb(95, 94, 117)" class="text-right">
-      Built using Python, Django, and Postgres | Powered by Heroku
-    </h6>
-    <h6 style="color: rgb(95, 94, 117)" class="text-right">
-      Developed and maintained by Nicholas Anthony
-    </h6>
+    <div class="flex-center">
+      <div class="container">
+        <div class="page-header text-center">
+          <br />
+          <h1 style="color: rgb(39, 15, 170)">
+            Driving Performance with Advanced Statistics
+          </h1>
+          <hr class="yellow" />
+        </div>
+        <h3 style="color: rgb(95, 94, 117)" class="text-center">
+          We breakdown and analyze every move wrestlers make to bring you the
+          most up-to-date advanced statistics possible.
+        </h3>
+        <br />
+        <h6 style="color: rgb(95, 94, 117)" class="text-right">
+          Built using Python, Django, and Postgres | Powered by Heroku
+        </h6>
+        <h6 style="color: rgb(95, 94, 117)" class="text-right">
+          Developed and maintained by Nicholas Anthony
+        </h6>
+
+      </div>
   </div>
-</div>
+
 
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
