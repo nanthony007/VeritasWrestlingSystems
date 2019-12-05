@@ -5,40 +5,88 @@
     <!-- content here -->
 
     <div class="container">
-        <div class="page-header text-center">
-            <br />
-            <h1 style="color: rgb(39, 15, 170)">Resources</h1>
-            <hr class="yellow"/>
-        </div>
-        <p>
-            This page provides supplemental materials for the avid fan or for those needing
-            further explanation/guidance than has been provided on the site.
-        </p>
-        <p>
-            For more information on abbreviations, click
+      <div class="page-header text-center">
+          <br />
+          <h1 style="color: rgb(39, 15, 170)">Resources</h1>
+          <hr class="yellow"/>
+      </div>
+    <h6 class="text-center">
+        This page provides supplemental materials for the avid fan or for those needing
+        further explanation/guidance than has been provided on the site.
+    </h6>
+    <div class="card-deck my-5">
+      <div class="card card-image"
+        style="background: url({% static 'vws_main/img/jumbledletters.jpg' %})
+          center center no-repeat;
+          background-size:80%;">
+          <div class="card-body text-white text-center d-flex align-items-center rgba-black-strong py-4 px-4">
+          <h4 class="card-title">Abbreviations</h4>
+          <p class="card-text text-white">
+            For more information on abbreviations, download our spreadsheet
+            to see detailed descriptions:
             <a href="{{abbreviations}}"
-                target="_blank" download>here</a>
-            to see detailed descriptions.
-        </p>
-        <p>
-            For more information on United World Wrestling (UWW) rules and key terms, click
-            <a href="https://unitedworldwrestling.org/sites/default/files/2018-12/wrestling_rules.pdf"
-                target="_blank">here</a>
-            and
-            <a href="https://unitedworldwrestling.org/sites/default/files/media/document/basic_vocabulary.pdf"
-                target="_blank">here</a>.
-        </p>
-        <p>
-            For detailed steps on data collection get started by reading the
-            <a href="{{recordingmanual}}"
-                target="_blank" download>Recording Manual</a>.
-        </p>
-        <p>
-            Then visit the <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">GitHub repo</a>
-            and follow the directions to start recording your own matches.
-        </p>
+                target="_blank" class="btn btn-indigo" download>Click Here</a>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated: October 2019</small>
+        </div>
+      </div>
+      <div class="card card-image"
+        style="background: url({% static 'vws_main/img/uwwlogo.svg' %})
+          center center no-repeat;
+          background-size:60%;">
+          <div class="card-body text-white text-center d-flex align-items-center rgba-black-strong py-4 px-4">
+          <h5 class="card-title">UWW Rules and Regulations</h5>
+          <p class="card-text text-white">
+            More information on United World Wrestling:
+          <a href="https://unitedworldwrestling.org/sites/default/files/2018-12/wrestling_rules.pdf"
+            target="_blank" class="btn btn-indigo">Rules</a>
+          <a href="https://unitedworldwrestling.org/sites/default/files/media/document/basic_vocabulary.pdf"
+            target="_blank" class="btn btn-indigo">Key Terms</a>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated: January 2019</small>
+        </div>
+      </div>
+      </div>
+      <div class="card-deck my-5">
+        <div class="card card-image"
+          style="background: url({% static 'vws_main/img/checklist.png' %})
+            center center no-repeat;
+            background-size:100%;">
+        <div class="card-body text-white text-center d-flex align-items-center rgba-black-strong py-4 px-4">
+          <h4 class="card-title">Recording Manual</h4>
+          <p class="card-text text-white">
+            For detailed steps on data collection:
+            <a href="{{recordingmanual}}" class="btn btn-indigo"
+                target="_blank" download>Click Here</a>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated: October 2019</small>
+        </div>
+      </div>
+      <div class="card card-image"
+        style="background: url({% static 'vws_main/img/githubicon.jpg' %})
+          center center no-repeat;
+          background-size:75%%;">
+        <div class="card-body text-white text-center d-flex align-items-center rgba-black-strong py-4 px-4">
+          <h5 class="card-title">Open Source</h5>
+          <p class="card-text text-white">
+            For all our source code and a working collection program you can use
+            to collect data on your team visit our repository on GitHub:
+            <a href="https://github.com/nanthony007/VeritasAnalytics-Website"
+              target="_blank" class="btn btn-indigo">GitHub repo</a>
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated: October 2019</small>
+        </div>
+      </div>
     </div>
-
+    </div>
     <!-- stop content -->
 
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
