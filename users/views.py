@@ -5,13 +5,13 @@ from django.db.models import Q, Avg, Sum, Count, Case, When, CharField, Value, F
 import random
 from .forms import UserRegistrationForm, RosterUpdateForm, ProfileUpdateForm, UserUpdateForm
 import numpy as np
-import pandas as pd 
+import pandas as pd
 import os
 from .modeling import focus_only_stats, deploy_model
 from django.forms import formset_factory
 
 import dash1
-import dash_core_components as dcc 
+import dash_core_components as dcc
 import dash_html_components as html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
@@ -52,15 +52,36 @@ def profile(request):
             roster_form.save()
             messages.success(request, r'Your account has been updated!')
             return redirect('profile')
+        search_name1 = request.POST.get('wrestler1')
+        search_name2 = request.POST.get('wrestler2')
+        cwd = os.getcwd()
+        df = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
+        w1_df = df[df['Focus']==search_name1]
+        w2_df = df[df['Focus']==search_name2]
+        w1_less = focus_only_stats(w1_df)
+        w2_less = focus_only_stats(w2_df)
+        w1_ewm = w1_less.ewm(alpha=0.5).mean().iloc[[-1]].values
+        w2_ewm = w2_less.ewm(alpha=0.5).mean().iloc[[-1]].values
+        loaded_model = deploy_model()
+        model = loaded_model[0]
+        support = loaded_model[1]
+        subbed = np.subtract(w1_ewm, w2_ewm)
+        pred = model.predict(subbed[:,support])
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
         roster_form = RosterUpdateForm(instance=request.user.profile)
-    
+        pred = 2
+        w1_df = 'NA'
+        w2_df = 'NA'
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
         'roster_form': roster_form,
+        "w1_df": w1_df,
+        "w2_df": w2_df,
+        'prediction': pred,
     }
     return render(request, 'users/profile.html', context)
 
@@ -75,10 +96,11 @@ def profile_update(request):
             p_form.save()
             messages.success(request, r'Your account has been updated!')
             return redirect('profile')
+
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
-    
+
     context = {
         'u_form': u_form,
         'p_form': p_form,
@@ -96,7 +118,7 @@ def roster_update(request):
             return redirect('profile')
     else:
         roster_form = RosterUpdateForm(instance=request.user.profile)
-    
+
     return render(request, 'users/roster-update.html', {'roster_form': roster_form})
 
 
@@ -129,7 +151,7 @@ def athlete_comparison(request):
         'prediction': pred,
     }
     return render(request, "users/athlete-comparison.html", context)
-    
+
 
 def dashboard(request):
     return render(request, template_name="users/dashboard.html")
