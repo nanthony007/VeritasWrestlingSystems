@@ -4,92 +4,110 @@
 {% block content %}
     <!-- content here -->
     <div class="container">
-        <div class="page-header text-center">
-            <br />
-            <h1 style="color: rgb(39, 15, 170)">About Me</h1>
-            <hr class="yellow"/>
-        </div>
-        <div class="row">
-            <div class="col-md my-auto">
-                    <p>
-                        I have been wrestling for 20 of my 24 years on this planet and
-                        can say without a doubt it is the single most important, influential
-                        force in my life.  Wrestling and wrestlers have taught me everything
-                        from values to work ethic from humility to pride and from confidence to despair.
+      <div class="page-header text-center">
+        <br />
+        <h1 style="color: rgb(39, 15, 170)">About Me</h1>
+        <hr class="yellow" />
+      </div>
+      <p>
+        I have been wrestling for 20 of my 24 years on this planet and
+        can say without a doubt it is the single most important, influential
+        force in my life. Wrestling and wrestlers have taught me everything I
+        know from values to work ethic from humility to pride and
+        from confidence to despair.
+      </p>
+
+      <div class="card text-center my-4">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="background-tab" data-toggle="tab" href="#background" role="tab" aria-controls="background" aria-selected="false">Background</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="site-goals-tab" data-toggle="tab" href="#site-goals" role="tab" aria-controls="site-goals" aria-selected="false">Site Goals</a>
+          </li>
+        </ul>
+        <div class="container">
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <img src="{% static 'vws_main/img/brain.jpg' %}" alt="No img available." class="img-fluid img-thumbnail mx-auto d-block">
+                  </div>
+                  <div class="col-md my-auto">
+                    <p class="card-text">
+                      My pursuits through wrestling have guided me to degrees in Learning and Cognition
+                      and Computer Science. I hope to combine these fields and apply them to Perfomance Analysis
+                      (a type of Data Science). This is a niche field for studying human performance over time and,
+                      for me, wrestling seems like the obvious place to start.
                     </p>
+                  </div>
+                </div>
+
+              </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md my-auto">
-                <p>
-                    My pursuits through wrestling have guided me to degrees in Learning and Cognition
-                    and Computer Science.  I hope to combine these fields and apply them to Human-Computer
-                    Interactions and try to enhance what it means to be human.  Artificial Intelligence applications
-                    are also of interest in addition to, obviously, sports analytics.
+            <div class="tab-pane" id="background" role="tabpanel" aria-labelledby="background-tab">
+              <div class="card-body">
+                <div class="container" style="width:75%">
+                  <img src="{% static 'vws_main/img/ufwrestle.jpg' %}" alt="No img available." class="img-fluid img-thumbnail mx-auto d-block">
+                </div>
+                <hr class="yellow" />
+                <p class="card-text">
+                  I started my wrestling career at the age of 4 in central Pennsylvania.
+                  Continuing through middle school and high school in the Blue Mountain
+                  School District I enjoyed average success. My sophomore year my family moved
+                  to Florida where I finished my high school career in three years instead of four
+                  and continued wrestling for the last year. After graduating high school
+                  I attended the University of Florida where I wrestled in the NCWA for two years
+                  before transitioning to a coaching role.
+
+                  A quick tanget... this site currently supports only Freestyle wrestling so you will not
+                  find any collegiate or high school results here.  This is intentional and has nothing
+                  to do with capability but was simply a matter of personal preference... Freestyle > Folkstyle.
                 </p>
+              </div>
             </div>
-            <div class="col-md my-auto">
-                <img src="{% static 'vws_main/img/brain.jpg' %}"
-                    alt="No img available." class="img-thumbnail rounded mx-auto d-block">
-            </div>
-
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md my-auto">
-                <img src="{% static 'vws_main/img/ufwrestle.jpg' %}"
-                alt="No img available." class="img-thumbnail rounded mx-auto d-block">
-            </div>
-            <div class="col-md my-auto">
-                <p>
-                    I started my wrestling career at the age of 4 in central Pennsylvania.
-                    Continuing through middle school and high school in the Blue Mountain
-                    School District I enjoyed average success.  My sophomore year my family moved
-                    to Florida where I finished my high school career in three years instead of four
-                    and continued wrestling success for the last year.  AFter graduating high school
-                    I attended the University of Florida where I wrestled in the NCWA for two years
-                    before transitioning to a coaching role.  Wrestling is a part of who I am.
-
-                    Oh... and if you are wondering why there isn't college wrestling on this site, its
-                    not because I don't have the capability (I actually marketed an advanced analytics software
-                    to Divison 1 coaches) but instead that it is too time consuming to do as a hobby without pay.
-                    More importantly, though, Freestyle > Folkstyle.
-                </p>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md my-auto">
-                <p>
-                    My goals for this site are to provide some extra context for
-                    international Freestyle wrestling and wrestling in general.  I
-                    want to give the dedicated fan a place to really dig in and follow
-                    their favorite wrestlers and get in depth analysis of their matches
-                    and events.  I want to provide a launching ground so that one day wrestling
-                    will have the advanced analytics that other sports have.
-
-                    Key features of the site include:
-                    <ol>
-                        <li>User login interface to easily track your favorite wrestlers.</li>
-                        <li>Report Feed to keep track of analysis documents for each event.
-                            These should be standardized across all events except the World
-                            Championships and Olympic Games.</li>
-                        <li>Elo Rating system (adapted formula from chess).</li>
-                        <li>Wrestler profile pages to see your wrestlers stats at a glance.</li>
-                        <li>(pending...) Dashboard to view your "team" stats for each user.
-                            This could be expanded into a competitve system in the future.
-                        </li>
+            <div class="tab-pane" id="site-goals" role="tabpanel" aria-labelledby="site-goals-tab">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md">
+                    <p class="card-text">
+                      My goals for this site are to provide some extra context for
+                      international Freestyle wrestling and wrestling in general. I
+                      want to give the dedicated fan a place to really dig in and follow
+                      their favorite wrestlers and get in depth analysis of their matches
+                      and events. I want to provide a launching ground so that one day wrestling
+                      will have the advanced analytics that other sports have.
+                      <br />
+                      Key features of the site include:</p>
+                    <ol class="card-text text-left">
+                      <li>User login interface to easily track your favorite wrestlers.</li>
+                      <li>Report Feed to keep track of analysis documents for each event.</li>
+                      <li>Elo Rating system (adapted formula from chess).</li>
+                      <li>Wrestler profile pages to see your wrestlers stats at a glance.</li>
+                      <li>(pending...) Dashboard to view your "team" stats for each user.
+                        <ul>
+                          <li>This could be expanded into a competitve system in the future.</li>
+                        </ul>
+                      </li>
                     </ol>
-                </p>
+                  </div>
+                  <div class="col-md">
+                    <img style="max-height:400px" src="{% static 'vws_main/img/funinternet2.png' %}" alt="No img available." class="img-fluid img-thumbnail mx-auto d-block">
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div class="col-md my-auto">
-                <img src="{% static 'vws_main/img/funinternet2.png' %}"
-                alt="No img available." class="img-thumbnail rounded mx-auto d-block">
-            </div>
+          </div>
         </div>
-    </div>
-
-
+      </div>
     <!-- stop content -->
 
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
