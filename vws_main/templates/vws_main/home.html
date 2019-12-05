@@ -1,59 +1,38 @@
 {% extends "vws_main/header.html" %}
 {% load staticfiles %}
 
-
 {% block content %}
-
-<div class="container">
-  <!-- Content -->
-  <div class="row">
-    <div class="col-xs">
-      <img src="{% static 'vws_main/img/VWShigh.png' %}" class="img-fluid" alt="No Image" style="width:100%">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs">
-      <div class="page-header text-center">
-        <br />
-        <h1 style="color: rgb(39, 15, 170)">Driving Performance with Advanced Statistics</h1>
-        <hr class="yellow"/>
-      </div>
-      <h3 style="color: rgb(95, 94, 117)" class="text-center">
-        We breakdown and analyze every move wrestlers make to bring you the most up-to-date advanced statistics possible.
-      </h3>
+<div class="jumbotron"
+  style="background: url({% static 'vws_main/img/VWShigh.png' %})
+    no-repeat;
+    background-size:100%;">
+  <div class="container-fluid">
+    <div class="page-header text-center">
       <br />
-      <p style="color: rgb(95, 94, 117)">
-        All our content is open-source. Available on 
-        <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">GitHub.</a> 
-      </p> 
-      <h6 style="color: rgb(95, 94, 117)" class="text-right">
-        Built using Python, Django, and Postgres | Powered by Heroku
-      </h6>
-      <h6 style="color: rgb(95, 94, 117)" class="text-right">
-        Developed and maintained by Nicholas Anthony
-      </h6>
-      {% if not user.is_authenticated %}
-        <h3 style="color: rgb(39, 15, 170)">Log In</h3>
-        <hr class="yellow"/>
-        <div>
-          <form method="POST" style="color: rgb(95, 94, 117)">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-indigo" type="submit">Login</button>
-            <small class="text-muted ml-2">
-              <a href="{% url 'password_reset' %}">Forgot Password?</a>
-            </small>
-          </form>
-          <div class="border-top pt-3">
-            <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>
-          </div>        
-        </div>
-      {% endif %}
+      <h1 style="color: rgb(39, 15, 170)">
+        Driving Performance with Advanced Statistics
+      </h1>
+      <hr class="yellow" />
     </div>
+    <h3 style="color: rgb(95, 94, 117)" class="text-center">
+      We breakdown and analyze every move wrestlers make to bring you the
+      most up-to-date advanced statistics possible.
+    </h3>
+    <br />
+    <p style="color: rgb(95, 94, 117)">
+      All our content is open-source. Available on
+      <a href="https://github.com/nanthony007/VeritasAnalytics-Website" target="_blank">
+        GitHub.
+      </a>
+    </p>
+    <h6 style="color: rgb(95, 94, 117)" class="text-right">
+      Built using Python, Django, and Postgres | Powered by Heroku
+    </h6>
+    <h6 style="color: rgb(95, 94, 117)" class="text-right">
+      Developed and maintained by Nicholas Anthony
+    </h6>
   </div>
 </div>
-
-<!-- Mask & flexbox options-->
 
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
@@ -63,9 +42,6 @@
 
 {% endblock %}
 
-
-
 <script type="text/javascript">
   new WOW().init();
 </script>
-  

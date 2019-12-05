@@ -1,6 +1,6 @@
 {% extends "vws_main/header.html" %}
-
 {% load staticfiles %}
+
 {% block content %}
 <div class="container">
         <div class="page-header">
@@ -224,10 +224,10 @@
                   {% for thing in match.events2.all %}
                   <td>{{thing.name}} -- {{match.date}}</td>
                   {% endfor %}
-                  <td><a class="text-primary" 
+                  <td><a class="text-primary"
                     href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
                   <td>{{match.result}}</td>
-                  <td><a class="text-primary" 
+                  <td><a class="text-primary"
                     href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
                   <td>{{match.focus_score}}</td>
                   <td>{{match.opp_score}}</td>

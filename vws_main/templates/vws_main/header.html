@@ -29,54 +29,81 @@
 		}
 	</style>
 </head>
+
+{% block nav %}
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark indigo darken-2">
-<!-- Navbar brand -->
-<a class="navbar-brand" href="/">Vertias Wrestling Systems</a>
-<!-- Collapse button -->
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<!-- Collapsible content -->
-<div class="collapse navbar-collapse" id="basicExampleNav">
-  <!-- Links -->
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="/about">About</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/ratings">Ratings</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/analysis/feed/">Analysis Feed</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/resources">Resources</a>
-    </li>
-  </ul>
-  <ul class="navbar-nav ml-auto">
-  {% if user.is_authenticated %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-    </li>
-  {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'register' %}">Register</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'login' %}">Login</a>
-    </li>
-  {% endif %}
-  </ul>
-  <!-- Links -->
-</div>
+	<!-- Navbar brand -->
+	<a class="navbar-brand" href="/">Vertias Wrestling Systems</a>
+	<!-- Collapse button -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<!-- Collapsible content -->
+	<div class="collapse navbar-collapse" id="basicExampleNav">
+		<!-- Links -->
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/ratings">Ratings</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/analysis/feed/">Analysis Feed</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/resources">Resources</a>
+			</li>
+		</ul>
+			<ul class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'profile' %}">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+				</li>
+				{% else %}
+				<li class="nav-item dropleft">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">
+						Login/Register
+					</a>
+					<div class="dropdown-menu py-3 px-3">
+						<h3 style="color: rgb(39, 15, 170)" class="text-center">Log In</h3>
+					  <hr class="yellow"/>
+					    <form class="form"
+								method="POST" style="color: rgb(95, 94, 117)" action="{% url 'login' %}">
+					      {% csrf_token %}
+					      <div class="form-group">
+									<input class="form-control" type="text" name="username" placeholder="Username">
+					      </div>
+								<div class="from-group">
+									<input class="form-control" type="password" name="password" placeholder="Password">
+								</div>
+								<div class="text-center">
+									<button class="btn btn-indigo text-center" type="submit">Login</button>
+								</div>
+					    </form>
+							<div class="row">
+								<div class="col text-center my-auto">
+									<a href="{% url 'password_reset' %}">Forgot Password?</a>
+								</div>
+								<div class="col text-center my-auto">
+									<small class="text-muted">Need An Account?
+										<a href="{% url 'register' %}">Sign Up Now</a>
+									</small>
+								</div>
+							</div>
+
+					</div>
+				</li>
+				{% endif %}
+			</ul>
+	</div>
 </nav>
-
-
+{% endblock %}
 
 <body>
 {% if messages %}
@@ -105,4 +132,3 @@
 </footer>
 
 </html>
-

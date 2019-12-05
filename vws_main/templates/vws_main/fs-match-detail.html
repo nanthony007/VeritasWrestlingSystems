@@ -34,10 +34,10 @@
           <td>{{object.matchID}}</td>
           <td>{{object.date}}</td>
           <td>{{object.weight}}</td>
-          <td><a class="text-primary" 
+          <td><a class="text-primary"
             href="/wrestlers/{{object.focus.slug}}/" class="primary-text">{{object.focus.name}}</a></td>
           <td>{{object.result}}</td>
-          <td><a class="text-primary" 
+          <td><a class="text-primary"
             href="/wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
           <td>{{object.focus_score}}</td>
           <td>{{object.opp_score}}</td>
@@ -299,7 +299,7 @@
                 "{{row.event_time}}\n{{row.event_lab}}",
               {% endfor %}],
             datasets: [{
-                label:  
+                label:
                 {% if object.matchID|length_is:"4" %}
                   "{{object.focus.name}}"
                 {% else %}
@@ -314,7 +314,7 @@
                 lineTension: 0,
               },
               {
-                label:  
+                label:
                 {% if object.matchID|length_is:"4" %}
                   "{{object.opponent.name}}"
                 {% else %}
@@ -358,7 +358,7 @@
                 enabled: true,
                 mode: 'index',
                 callbacks: {
-                    title: function(tooltipItems, data) { 
+                    title: function(tooltipItems, data) {
                       return data.labels[tooltipItems[0].index];
                     }
                 }
@@ -366,8 +366,5 @@
           }
         });
       </script>
-      
+
 {% endblock %}
-
-
-  

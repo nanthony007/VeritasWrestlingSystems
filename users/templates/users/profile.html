@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% load static %}
 
-
 {% block content %}
 
  <!-- content here -->
@@ -18,8 +17,8 @@
       <hr class="yellow"/>
       <div class="page-header">
         <h2>
-          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" 
-          style="width: 50px; height: 50px"> 
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"
+          style="width: 50px; height: 50px">
           {{ user.username }} </h2>
         <h4>
           Email: <small>{{ user.email }}</small>
@@ -38,7 +37,7 @@
       </div>
     <div class="row">
       <div class="col col-sm">
-        <table id="rostertable" 
+        <table id="rostertable"
         class="table table-small table-bordered text-center">
           <thead class="indigo text-white">
             <th>Name</th>
@@ -69,7 +68,7 @@
           Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page. <br />
           Failure to do so will result in a system error.
         </p>
-      
+
         <div class="col-md-6">
           <form method="POST" action="/athlete-comparison/">
               {% csrf_token %}
@@ -114,5 +113,3 @@
     </script>
 
 {% endblock %}
-
-  

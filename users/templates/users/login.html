@@ -2,24 +2,18 @@
 {% load staticfiles %}
 
 {% block content %}
-{{ roster_form.media.css }}
-	<style type="text/css">
-		.django-select2 {
-			width: 50%;
-		}
-	</style>
 <br />
-<div class="container modal-body">
-    <form method="POST" enctype="multipart/form-data">
-    <legend>Update Roster</legend>
-    <p>Enter 'Space' twice to view all available wrestlers.</p>
-       {% csrf_token %}
-        <fieldset class="form-group">
-            {% csrf_token %}
-                {{ roster_form.as_p }}
-        </fieldset>
-        <button class="btn" type="submit">Update</button>
+<div class="container">
+  <h3>Login</h3>
+    <form method="POST" style="color: rgb(95, 94, 117)">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-indigo" type="submit">Login</button>
+      <small class="text-muted ml-2">
+        <a href="{% url 'password_reset' %}">Forgot Password?</a>
+      </small>
     </form>
+    <small class="text-muted">Need An Account? <a href="{% url 'register' %}">Sign Up Now</a></small>
 </div>
 
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
@@ -31,6 +25,5 @@
     <script type="text/javascript">
         new WOW().init();
     </script>
-    {{ roster_form.media.js }}
 
 {% endblock %}

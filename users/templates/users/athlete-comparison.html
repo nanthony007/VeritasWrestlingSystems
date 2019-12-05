@@ -1,7 +1,6 @@
 {% extends "vws_main/header.html" %}
 {% load staticfiles %}
 
-
 {% block content %}
     <!-- content here -->
   <div class="container">
@@ -14,10 +13,10 @@
             <table class="table table-hover table-borderless">
               <thead class="indigo white-text">
                 <tr>
-                  <th class="text-right"><a class="text-white" style="text-decoration: underline" 
+                  <th class="text-right"><a class="text-white" style="text-decoration: underline"
                     href="/wrestlers/{{w1_df.Focus.values.0 | slugify}}">{{w1_df.Focus.values.0}}</a></th>
                   <th class="text-center"><em>vs.</em></th>
-                  <th class="text-left"><a class="text-white" style="text-decoration: underline" 
+                  <th class="text-left"><a class="text-white" style="text-decoration: underline"
                     href="/wrestlers/{{w2_df.Focus.values.0 | slugify}}">{{w2_df.Focus.values.0}}</a></th>
                 </tr>
               </thead>
@@ -79,7 +78,7 @@
       </div>
     </div>
     <!-- stop content -->
-   
+
     <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
@@ -94,6 +93,5 @@
         trigger: 'focus'
       });
     </script>
-    
-{% endblock %}
 
+{% endblock %}
