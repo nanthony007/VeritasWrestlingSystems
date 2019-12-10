@@ -50,8 +50,8 @@
   </div>
 
   <hr id="base-stats-table" class="yellow" />
+  <h3>Base Stats</h3>
   <div class="row">
-    <h3>Base Stats</h3>
     <div class="table-responsive">
       <table class="table table-bordered table-sm">
         <caption>Cumulative counts</caption>
@@ -135,10 +135,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm">
+    <div class="col-md">
       <canvas id="resultchart"></canvas>
     </div>
-    <div class="col-sm">
+    <div class="col-md">
       <canvas id="vslinechart"></canvas>
     </div>
   </div>
@@ -146,10 +146,10 @@
   <hr id="adv-stats-table" class="yellow" />
   <h3>Advanced Stats</h3>
   <div class="row">
-    <div class="col-3 text-center">
+    <div class="col-md-3 text-center">
       <p><small></small></p>
     </div>
-    <div class="col-5">
+    <div class="col-md-5">
       <div class="table-responsive text-center">
         <table class="table table-sm table-hover">
           <thead class="indigo white-text">
@@ -184,15 +184,15 @@
         </table>
       </div>
     </div>
-    <div class="col-3 text-center">
+    <div class="col-md-3 text-center">
       <p><small></small></p>
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-md">
       <canvas id="focusshotchart"></canvas>
     </div>
-    <div class="col">
+    <div class="col-md">
       <canvas id="oppshotchart"></canvas>
     </div>
   </div>
@@ -201,10 +201,10 @@
   <h3>Correlations</h3>
   <p>Top 5 actions related to winning (left) and Top 5 actions related to losing (right).</p>
   <div class="row">
-    <div class="col">
+    <div class="col-md">
       <canvas id="goodstuff"></canvas>
     </div>
-    <div class="col">
+    <div class="col-md">
       <canvas id="badstuff"></canvas>
     </div>
   </div>
@@ -256,35 +256,25 @@
   $('.popover-dismiss').popover({
     trigger: 'focus'
   });
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#matchestable').DataTable({
       'info': false,
-      'paging': false,
+      'paging':false,
       'scrollY': '300px',
       'scrollCollapse': true,
-      "order": [
-        [1, "asc"]
-      ]
+      "order":[[1, "asc"]]
     });
     $('.dataTables_length').addClass('bs-select');
   });
-  //bar
+    //bar
   var resulthist = document.getElementById("resultchart").getContext('2d');
   var myBarChart = new Chart(resulthist, {
     type: 'bar',
     data: {
-      labels: {
-        {
-          resulttypes | safe
-        }
-      },
+      labels: {{resulttypes | safe}},
       datasets: [{
         label: 'Result Type',
-        data: {
-          {
-            resulttypecounts | safe
-          }
-        },
+        data: {{resulttypecounts | safe}},
         backgroundColor: 'rgb(63, 81, 181, 0.8)',
       }]
     },
@@ -297,47 +287,34 @@
           }
         }]
       },
-      title: {
-        display: true,
-        text: 'Result Distribution'
+       title: {
+          display: true,
+          text: 'Result Distribution'
       },
-      legend: {
-        display: false
-      },
+       legend: {
+          display: false},
       responsive: true,
       animation: {
         duration: 2000
       }
     }
   });
-  //line
+    //line
   var vsline = document.getElementById("vslinechart").getContext('2d');
   var myLineChart = new Chart(vsline, {
     type: 'line',
     data: {
-      labels: {
-        {
-          vsindex | safe
-        }
-      },
+      labels: {{vsindex | safe}},
       datasets: [{
           label: "World Average",
-          data: {
-            {
-              worldvs | safe
-            }
-          },
+          data: {{worldvs | safe}},
           borderColor: 'rgb(255, 235, 59)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
           borderWidth: 2
         },
         {
           label: "Veritas Score",
-          data: {
-            {
-              vsvalues | safe
-            }
-          },
+          data: {{vsvalues | safe}},
           borderColor: 'rgb(63, 81, 181)',
           backgroundColor: 'rgb(63, 81, 181, 0.3)',
           borderWidth: 2
@@ -354,8 +331,8 @@
         }]
       },
       title: {
-        display: true,
-        text: 'Veritas Score over Time'
+          display: true,
+          text: 'Veritas Score over Time'
       },
       responsive: true,
       animation: {
@@ -363,35 +340,24 @@
       }
     }
   });
-  //radar
+      //radar
   var focusradar = document.getElementById("focusshotchart").getContext('2d');
   var myRadarChart = new Chart(focusradar, {
     type: 'radar',
     data: {
-      labels: {
-        {
-          shot_labels | safe
-        }
-      },
-      datasets: [{
+      labels: {{shot_labels | safe}},
+      datasets: [
+      {
           label: "Effeciency (% of converted)",
-          data: {
-            {
-              rates | safe
-            }
-          },
+          data: {{rates | safe}},
           backgroundColor: 'rgb(63, 81, 181, 0.5)',
           borderColor: 'rgb(63, 81, 181)',
           borderWidth: 2,
           pointBackgroundColor: 'rgb(63, 81, 181)'
         },
-        {
+      {
           label: "Preference (% of total)",
-          data: {
-            {
-              prefs | safe
-            }
-          },
+          data: {{prefs | safe}},
           backgroundColor: 'rgb(255, 235, 59, 0.5)',
           borderColor: 'rgb(255, 235, 59)',
           borderWidth: 2,
@@ -400,52 +366,42 @@
       ]
     },
     options: {
-      scale: {
-        ticks: {
-          min: 0,
-        }
+      scale: {ticks: {
+              min:0,
+              }
       },
       scales: {
-        xAxes: [{
-          display: false,
-          gridLines: {
-            display: false
-          }
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: {
-            display: false
-          }
-        }]
+          xAxes: [{
+                display: false,
+              gridLines: {
+                  display:false
+              }
+          }],
+          yAxes: [{
+            display: false,
+              gridLines: {
+                  display:false
+              }
+          }]
       },
-      title: {
-        display: true,
-        text: 'Focus Shot Distribution Chart'
+       title: {
+          display: true,
+          text: 'Focus Shot Distribution Chart'
       },
       responsive: true,
-      animation: {
-        duration: 2000
-      }
+      animation: {duration:2000}
     }
   });
-  //radar
+          //radar
   var oppradar = document.getElementById("oppshotchart").getContext('2d');
   var myRadarChart = new Chart(oppradar, {
     type: 'radar',
     data: {
-      labels: {
+      labels: {{shot_labels | safe}},
+      datasets: [
         {
-          shot_labels | safe
-        }
-      },
-      datasets: [{
           label: "Effeciency (% converted)",
-          data: {
-            {
-              orates | safe
-            }
-          },
+          data: {{orates | safe}},
           backgroundColor: 'rgb(63, 81, 181, 0.5)',
           borderColor: 'rgb(63, 81, 181)',
           borderWidth: 2,
@@ -453,11 +409,7 @@
         },
         {
           label: "Preference (% of total)",
-          data: {
-            {
-              oprefs | safe
-            }
-          },
+          data: {{oprefs | safe}},
           backgroundColor: 'rgb(255, 235, 59, 0.5)',
           borderColor: 'rgb(255, 235, 59)',
           borderWidth: 2,
@@ -466,55 +418,43 @@
       ]
     },
     options: {
-      scale: {
-        ticks: {
-          min: 0,
-        }
+      scale: {ticks: {
+              min:0,
+              }
       },
       scales: {
-        xAxes: [{
-          display: false,
-          gridLines: {
-            display: false
-          }
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: {
-            display: false
-          }
-        }]
+          xAxes: [{
+                display: false,
+              gridLines: {
+                  display:false
+              }
+          }],
+          yAxes: [{
+            display: false,
+              gridLines: {
+                  display:false
+              }
+          }]
       },
-      title: {
-        display: true,
-        text: 'Opp Shot Distribution Chart'
+       title: {
+          display: true,
+          text: 'Opp Shot Distribution Chart'
       },
       responsive: true,
-      animation: {
-        duration: 2000
-      }
+      animation: {duration:2000}
     }
   });
-  new Chart(document.getElementById("goodstuff"), {
+       new Chart(document.getElementById("goodstuff"), {
     "type": "horizontalBar",
     "data": {
-      "labels": {
-        {
-          goodtitles | safe
-        }
-      },
+      "labels": {{goodtitles | safe}},
       "datasets": [{
         "label": "Positive Actions",
-        "data": {
-          {
-            goodvalues | safe
-          }
-        },
+        "data": {{goodvalues | safe}},
         "fill": false,
         "backgroundColor": ['rgb(63, 81, 181, 1.0)', 'rgb(63, 81, 181, 0.85)',
-          'rgb(63, 81, 181, 0.70)', 'rgb(63, 81, 181, 0.55)',
-          'rgb(63, 81, 181, 0.45)'
-        ],
+                           'rgb(63, 81, 181, 0.70)', 'rgb(63, 81, 181, 0.55)',
+                           'rgb(63, 81, 181, 0.45)'],
         "borderColor": 'rgb(63, 81, 181, 1.0)',
       }],
     },
@@ -533,43 +473,31 @@
         yAxes: [{
           display: true,
           gridLines: {
-            display: false
+            display:false
           }
         }],
       },
-      title: {
-        display: true,
-        text: 'Top 5 Positive Actions'
+       title: {
+          display: true,
+          text: 'Top 5 Positive Actions'
       },
-      legend: {
-        display: false
-      },
+       legend: {
+          display: false},
       responsive: true,
-      animation: {
-        duration: 2000
-      }
+      animation: {duration:2000}
     }
   });
-  new Chart(document.getElementById("badstuff"), {
+       new Chart(document.getElementById("badstuff"), {
     "type": "horizontalBar",
     "data": {
-      "labels": {
-        {
-          badtitles | safe
-        }
-      },
+      "labels": {{badtitles | safe}},
       "datasets": [{
         "label": "Negative Actions",
-        "data": {
-          {
-            badvalues | safe
-          }
-        },
+        "data": {{badvalues | safe}},
         "fill": false,
         "backgroundColor": ['rgb(255, 235, 59, 1.0)', 'rgb(255, 235, 59, 0.85)',
-          'rgb(255, 235, 59, 0.70)', 'rgb(255, 235, 59, 0.55)',
-          'rgb(255, 235, 59, 0.40)'
-        ],
+                           'rgb(255, 235, 59, 0.70)', 'rgb(255, 235, 59, 0.55)',
+                           'rgb(255, 235, 59, 0.40)'],
         "borderColor": 'rgb(255, 235, 59, 1.0)',
       }],
     },
@@ -589,21 +517,18 @@
           display: true,
           position: 'right',
           gridLines: {
-            display: false
+            display:false
           }
         }],
       },
-      title: {
-        display: true,
-        text: 'Top 5 Negative Actions'
+       title: {
+          display: true,
+          text: 'Top 5 Negative Actions'
       },
-      legend: {
-        display: false
-      },
+       legend: {
+          display: false},
       responsive: true,
-      animation: {
-        duration: 2000
-      }
+      animation: {duration:2000}
     }
   });
 </script>
