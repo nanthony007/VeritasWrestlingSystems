@@ -4,130 +4,128 @@
 
 {% block content %}
 
- <!-- content here -->
- <div class="container my-5">
-   <div class="row">
-     <div class="col-md">
-       <h1>Your Profile</h1>
-       <h6>
-         Get started by adding your favorite wrestlers to your team to view their stats! <br />
-         Then edit your profile to add an image and set your team name!
-       </h6>
-     </div>
-     <div class="col-md">
-       <div class="page-header">
-         <h2>
-           <img class="rounded-circle account-img" src="{{ user.profile.image.url }}"
-           style="width: 50px; height: 50px">
-           {{ user.username }} </h2>
-         <h4>
-           Email: <small>{{ user.email }}</small>
-         </h4>
-         <p>Update your profile <a href="update">here.</a>  Set your team name and upload an image!</p>
-       </div>
+<!-- content here -->
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md">
+      <h1>Your Profile</h1>
+      <h6>
+        Get started by adding your favorite wrestlers to your team to view their stats! <br />
+        Then edit your profile to add an image and set your team name!
+      </h6>
+    </div>
+    <div class="col-md">
+      <div class="page-header">
+        <h2>
+          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="width: 50px; height: 50px">
+          {{ user.username }} </h2>
+        <h4>
+          Email: <small>{{ user.email }}</small>
+        </h4>
+        <p>Update your profile <a href="update">here.</a> Set your team name and upload an image!</p>
       </div>
-     </div>
-     <hr class="yellow" />
-     <div class="row">
-       <div class="col-md">
-         <div class="my-5">
-           <h2>Your Team: {{ user.profile.teamname }}</h2>
-           <p>
-             Pick your team <a href="roster-update">here!</a>
-             Click on any wrestler's name to see their profile page.
-           </p>
-           <div class="col-md text-center">
-             <a class="btn btn-outline-indigo waves-effect"href="dashboard/" style="color:black">STATS DASHBOARD</a>
-           </div>
-         </div>
-         <div class="my-5">
-           <div class="page-header" id="result">
-               <h2 class="text-center"><em>Versus!</em></h2>
-           </div>
-           <h5>Compare your favorite wrestlers and see who would win!</h5>
-           <p>
-             Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.
-             <br />
-             Failure to do so will result in a system error.
-           </p>
-           <br />
-             <form method="POST" action="#result">
-                 {% csrf_token %}
-                 <div class="form-group row">
-                   <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
-                   <div class="col-sm-10">
-                     <input type="text" class="form-control" id="wrestler1" name="wrestler1" placeholder="Type a wrestler's name">
-                   </div>
-                 </div>
-                 <div class="form-group row">
-                   <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
-                   <div class="col-sm-10">
-                     <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Type a wrestler's name">
-                   </div>
-                 </div>
-                 <div class="text-center">
-                   <button class="btn btn-outline-indigo waves-effect" type="submit" value="Submit">Compare!</button>
-                 </div>
-              </form>
-              {% if prediction == 0 %}
-              <h4>Predicted Result:</h4>
-                <h5>
-                  <a target="_blank" href="/wrestlers/{{w2_df.Focus.values.0 | slugify}}">{{w2_df.Focus.values.0}}</a>
-                   <em>def.</em>
-                   <a target="_blank" href="/wrestlers/{{w1_df.Focus.values.0 | slugify}}">{{w1_df.Focus.values.0}}</a>
-                 </h5>
-              {% elif prediction == 1 %}
-              <h4>Predicted Result:</h4>
-              <h5>
-                <a target="_blank" href="/wrestlers/{{w1_df.Focus.values.0 | slugify}}">{{w1_df.Focus.values.0}}</a>
-                 <em>def.</em>
-                 <a target="_blank" href="/wrestlers/{{w2_df.Focus.values.0 | slugify}}">{{w2_df.Focus.values.0}}</a>
-               </h5>
-               {% endif %}
+    </div>
+  </div>
+  <hr class="yellow" />
+  <div class="row">
+    <div class="col-md">
+      <div class="my-5">
+        <h2>Your Team: {{ user.profile.teamname }}</h2>
+        <p>
+          Pick your team <a href="roster-update">here!</a>
+          Click on any wrestler's name to see their profile page.
+        </p>
+        <div class="col-md text-center">
+          <a class="btn btn-outline-indigo waves-effect" href="dashboard/" style="color:black">STATS DASHBOARD</a>
+        </div>
+      </div>
+      <div class="my-5">
+        <div class="page-header" id="result">
+          <h2 class="text-center"><em>Versus!</em></h2>
+        </div>
+        <h5>Compare your favorite wrestlers and see who would win!</h5>
+        <p>
+          Be sure to enter athlete names as found on our <a href="/ratings/">Ratings</a> page.
+          <br />
+          Failure to do so will result in a system error.
+        </p>
+        <br />
+        <form method="POST" action="#result">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="wrestler1" class="col-sm-2 col-form-label">Wrestler: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="wrestler1" name="wrestler1" placeholder="Type a wrestler's name">
             </div>
-         </div>
-       <div class="col-md">
-         <table id="rostertable"
-         class="table table-small table-bordered text-center">
-           <thead class="indigo text-white">
-             <th>Name</th>
-             <th>Weight</th>
-             <th>Rating</th>
-             <th>Match Count</th>
-           </thead>
-           <tbody>
-             {% for w in user.profile.roster.all %}
-             <tr>
-               <td><a class="text-primary" href="/wrestlers/{{w.slug}}/"><strong>{{ w.name }}</strong></a></td>
-               <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
-               <td>{{ w.rating }}</td>
-               <td>{{ w.focus_wrestler2.all|length }}</td>
-             </tr>
-             {% endfor %}
-           </tbody>
-         </table>
-       </div>
-       </div>
-     </div>
+          </div>
+          <div class="form-group row">
+            <label for="wrestler2" class="col-sm-2 col-form-label">Opponent: </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="wrestler2" name="wrestler2" placeholder="Type a wrestler's name">
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-outline-indigo waves-effect" type="submit" value="Submit">Compare!</button>
+          </div>
+        </form>
+        {% if prediction == 0 %}
+        <h4>Predicted Result:</h4>
+        <h5>
+          <a target="_blank" href="/wrestlers/{{w2_df.Focus.values.0 | slugify}}">{{w2_df.Focus.values.0}}</a>
+          <em>def.</em>
+          <a target="_blank" href="/wrestlers/{{w1_df.Focus.values.0 | slugify}}">{{w1_df.Focus.values.0}}</a>
+        </h5>
+        {% elif prediction == 1 %}
+        <h4>Predicted Result:</h4>
+        <h5>
+          <a target="_blank" href="/wrestlers/{{w1_df.Focus.values.0 | slugify}}">{{w1_df.Focus.values.0}}</a>
+          <em>def.</em>
+          <a target="_blank" href="/wrestlers/{{w2_df.Focus.values.0 | slugify}}">{{w2_df.Focus.values.0}}</a>
+        </h5>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md">
+      <table id="rostertable" class="table table-small table-bordered text-center">
+        <thead class="indigo text-white">
+          <th>Name</th>
+          <th>Weight</th>
+          <th>Rating</th>
+          <th>Match Count</th>
+        </thead>
+        <tbody>
+          {% for w in user.profile.roster.all %}
+          <tr>
+            <td><a class="text-primary" href="/wrestlers/{{w.slug}}/"><strong>{{ w.name }}</strong></a></td>
+            <td>{{ w.focus_wrestler2.first.weight }}kgs</td>
+            <td>{{ w.rating }}</td>
+            <td>{{ w.focus_wrestler2.all|length }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-      <!-- stop content -->
+<!-- stop content -->
 
-    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
 
-    <script type="text/javascript">
-        new WOW().init();
-        $(document).ready(function () {
-          $('#rostertable').DataTable({
-            'info': true,
-            'paging':true,
-            'scrollCollapse': true,
-          });
-          $('.dataTables_length').addClass('bs-select');
-        });
-    </script>
+<script type="text/javascript">
+  new WOW().init();
+  $(document).ready(function() {
+    $('#rostertable').DataTable({
+      'info': true,
+      'paging': true,
+      'scrollCollapse': true,
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>
 
 {% endblock %}

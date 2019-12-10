@@ -33,7 +33,8 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, 'Account created for ' + username + '.  You are now able to login.')
+            messages.success(request, 'Account created for ' +
+                             username + '.  You are now able to login.')
             return redirect('/')
     else:
         form = UserRegistrationForm()
@@ -44,8 +45,10 @@ def register(request):
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST or None, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
-        roster_form = RosterUpdateForm(request.POST or None, instance=request.user.profile)
+        p_form = ProfileUpdateForm(
+            request.POST or None, request.FILES, instance=request.user.profile)
+        roster_form = RosterUpdateForm(
+            request.POST or None, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -55,9 +58,10 @@ def profile(request):
         search_name1 = request.POST.get('wrestler1')
         search_name2 = request.POST.get('wrestler2')
         cwd = os.getcwd()
-        df = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
-        w1_df = df[df['Focus']==search_name1]
-        w2_df = df[df['Focus']==search_name2]
+        df = pd.read_csv(
+            cwd + '/collection/stats/matchdata.csv', engine='python')
+        w1_df = df[df['Focus'] == search_name1]
+        w2_df = df[df['Focus'] == search_name2]
         w1_less = focus_only_stats(w1_df)
         w2_less = focus_only_stats(w2_df)
         w1_ewm = w1_less.ewm(alpha=0.5).mean().iloc[[-1]].values
@@ -66,7 +70,7 @@ def profile(request):
         model = loaded_model[0]
         support = loaded_model[1]
         subbed = np.subtract(w1_ewm, w2_ewm)
-        pred = model.predict(subbed[:,support])
+        pred = model.predict(subbed[:, support])
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -90,7 +94,8 @@ def profile(request):
 def profile_update(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST or None, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
+        p_form = ProfileUpdateForm(
+            request.POST or None, request.FILES, instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -111,7 +116,8 @@ def profile_update(request):
 @login_required
 def roster_update(request):
     if request.method == 'POST':
-        roster_form = RosterUpdateForm(request.POST or None, instance=request.user.profile)
+        roster_form = RosterUpdateForm(
+            request.POST or None, instance=request.user.profile)
         if roster_form.is_valid():
             roster_form.save()
             messages.success(request, r'Your team has been updated!')
@@ -128,9 +134,10 @@ def athlete_comparison(request):
         search_name1 = request.POST.get('wrestler1')
         search_name2 = request.POST.get('wrestler2')
         cwd = os.getcwd()
-        df = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
-        w1_df = df[df['Focus']==search_name1]
-        w2_df = df[df['Focus']==search_name2]
+        df = pd.read_csv(
+            cwd + '/collection/stats/matchdata.csv', engine='python')
+        w1_df = df[df['Focus'] == search_name1]
+        w2_df = df[df['Focus'] == search_name2]
         w1_less = focus_only_stats(w1_df)
         w2_less = focus_only_stats(w2_df)
         w1_ewm = w1_less.ewm(alpha=0.5).mean().iloc[[-1]].values
@@ -139,7 +146,7 @@ def athlete_comparison(request):
         model = loaded_model[0]
         support = loaded_model[1]
         subbed = np.subtract(w1_ewm, w2_ewm)
-        pred = model.predict(subbed[:,support])
+        pred = model.predict(subbed[:, support])
 
     else:
         messages.warning(request, r'Invalid form request, please try again.')

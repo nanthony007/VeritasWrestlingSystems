@@ -44,6 +44,8 @@ class RosterUpdateForm(forms.ModelForm):
             'roster': MyWidget,
         }
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(label=('Username'))
-    password = forms.CharField(label=('Password'), widget=forms.PasswordInput(render_value=False))
+    password = forms.CharField(
+        label=('Password'), widget=forms.PasswordInput(render_value=False))

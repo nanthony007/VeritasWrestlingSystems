@@ -170,7 +170,7 @@ class FS_Team(models.Model):
     name = models.CharField(max_length=250, primary_key=True, unique=True)
     abbreviation = models.CharField(max_length=20)
     slug = AutoSlugField(('slug'), max_length=50, unique=True,
-        populate_from=('abbreviation',))
+                         populate_from=('abbreviation',))
 
     class Meta:
         verbose_name = 'FreeStyle Team'
@@ -189,16 +189,17 @@ class FS_Wrestler(models.Model):
     ]
     name = models.CharField(max_length=140, primary_key=True)
     team = models.ForeignKey(FS_Team, on_delete=models.CASCADE,
-        default='Finger Lakes Wrestling Club/Titan Mercury Wrestling Club',
-        related_name='team_name2')
+                             default='Finger Lakes Wrestling Club/Titan Mercury Wrestling Club',
+                             related_name='team_name2')
     rating = models.IntegerField(default=1000)
-    #level = models.CharField(choices=LEVELS, default=)
-    slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
+    # level = models.CharField(choices=LEVELS, default=)
+    slug = AutoSlugField(('slug'), max_length=50,
+                         unique=True, populate_from=('name',))
 
     class Meta:
         verbose_name = 'FreeStyle Wrestler'
         verbose_name_plural = 'FreeStyle Wrestlers'
-    
+
     def __str__(self):
         return self.name
 
@@ -206,10 +207,14 @@ class FS_Wrestler(models.Model):
 class FS_Match(models.Model):
     matchID = models.CharField(max_length=140, primary_key=True, unique=True)
     date = models.DateField(null=True)
-    focus = models.ForeignKey(FS_Wrestler, on_delete=models.CASCADE, related_name='focus_wrestler2', null=True)
-    focus_team = models.ForeignKey(FS_Team, on_delete=models.CASCADE, related_name='focus_team_name2', null=True)
-    opponent = models.ForeignKey(FS_Wrestler, on_delete=models.CASCADE, related_name='opp_wrestler2', null=True)
-    opp_team = models.ForeignKey(FS_Team, on_delete=models.CASCADE, related_name='opp_team_name2', null=True)
+    focus = models.ForeignKey(
+        FS_Wrestler, on_delete=models.CASCADE, related_name='focus_wrestler2', null=True)
+    focus_team = models.ForeignKey(
+        FS_Team, on_delete=models.CASCADE, related_name='focus_team_name2', null=True)
+    opponent = models.ForeignKey(
+        FS_Wrestler, on_delete=models.CASCADE, related_name='opp_wrestler2', null=True)
+    opp_team = models.ForeignKey(
+        FS_Team, on_delete=models.CASCADE, related_name='opp_team_name2', null=True)
     focus_score = models.IntegerField(null=True)
     opp_score = models.IntegerField(null=True)
     result = models.CharField(max_length=140, null=True)
@@ -278,12 +283,18 @@ class FS_Match(models.Model):
     npf = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     apm = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     vs = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_hi_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_ho_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_d_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_ls_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_gb_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
-    opp_t_rate = models.DecimalField(max_digits=15, decimal_places=2, null=True)
+    opp_hi_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
+    opp_ho_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
+    opp_d_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
+    opp_ls_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
+    opp_gb_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
+    opp_t_rate = models.DecimalField(
+        max_digits=15, decimal_places=2, null=True)
     opp_npf = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_apm = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     opp_vs = models.DecimalField(max_digits=15, decimal_places=2, null=True)
@@ -297,7 +308,8 @@ class FS_Match(models.Model):
 
 
 class FS_TS(models.Model):
-    matchID = models.ForeignKey(FS_Match, on_delete=models.CASCADE, related_name='actions2')
+    matchID = models.ForeignKey(
+        FS_Match, on_delete=models.CASCADE, related_name='actions2')
     event_num = models.IntegerField()
     event_lab = models.CharField(max_length=140)
     event_time = models.CharField(max_length=140)
@@ -316,7 +328,8 @@ class FS_Event(models.Model):
     name = models.CharField(max_length=140)
     matches = models.ManyToManyField(FS_Match, related_name='events2')
     date = models.DateField(null=True)
-    slug = AutoSlugField(('slug'), max_length=50, unique=True, populate_from=('name',))
+    slug = AutoSlugField(('slug'), max_length=50,
+                         unique=True, populate_from=('name',))
 
     class Meta:
         verbose_name = 'FreeStyle Event'

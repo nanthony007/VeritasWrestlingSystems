@@ -5,53 +5,51 @@
 {% block content %}
 
 <div class="container">
-    <div class="page-header">
-        <br />
-      <h2>Match {{object.matchID}}</h2>
-    <hr class="yellow"/>
+  <div class="page-header">
+    <br />
+    <h2>Match {{object.matchID}}</h2>
+    <hr class="yellow" />
   </div>
 
-<div class="row">
-  <h3>Info</h3>
-  <div class="table-responsive">
-    <table class="table table-bordered table-sm">
-      <caption>Results | Click on a wrestler to view their profile</caption>
-      <thead class="indigo white-text">
-        <tr>
-          <th><a data-toggle="popover" data-trigger="hover" title="MatchID" data-content="">MatchID</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Date" data-content="">Date</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Weight" data-content="">Weight</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Focus Wrestler" data-content="">Focus</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Result" data-content="">Result</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Opponent" data-content="">Opponent</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="FocusScore" data-content="">FocusScore</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="OppScore" data-content="">OpponentScore</a></th>
-          <th><a data-toggle="popover" data-trigger="hover" title="Match Length" data-content="">Duration</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{object.matchID}}</td>
-          <td>{{object.date}}</td>
-          <td>{{object.weight}}</td>
-          <td><a class="text-primary"
-            href="/wrestlers/{{object.focus.slug}}/" class="primary-text">{{object.focus.name}}</a></td>
-          <td>{{object.result}}</td>
-          <td><a class="text-primary"
-            href="/wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
-          <td>{{object.focus_score}}</td>
-          <td>{{object.opp_score}}</td>
-          <td>{{object.duration}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="row">
+    <h3>Info</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <caption>Results | Click on a wrestler to view their profile</caption>
+        <thead class="indigo white-text">
+          <tr>
+            <th><a data-toggle="popover" data-trigger="hover" title="MatchID" data-content="">MatchID</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Date" data-content="">Date</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Weight" data-content="">Weight</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Focus Wrestler" data-content="">Focus</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Result" data-content="">Result</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Opponent" data-content="">Opponent</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="FocusScore" data-content="">FocusScore</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="OppScore" data-content="">OpponentScore</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Match Length" data-content="">Duration</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{object.matchID}}</td>
+            <td>{{object.date}}</td>
+            <td>{{object.weight}}</td>
+            <td><a class="text-primary" href="/wrestlers/{{object.focus.slug}}/" class="primary-text">{{object.focus.name}}</a></td>
+            <td>{{object.result}}</td>
+            <td><a class="text-primary" href="/wrestlers/{{object.opponent.slug}}/">{{object.opponent.name}}</a></td>
+            <td>{{object.focus_score}}</td>
+            <td>{{object.opp_score}}</td>
+            <td>{{object.duration}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<div class="row">
-  <canvas id="timeserieslinechart"></canvas>
-</div>
+  <div class="row">
+    <canvas id="timeserieslinechart"></canvas>
+  </div>
 
-  <hr id="base-stats-table" class="yellow"/>
+  <hr id="base-stats-table" class="yellow" />
   <div class="row">
     <h3>Base Stats</h3>
     <div class="table-responsive">
@@ -137,7 +135,7 @@
     </div>
   </div>
 
-  <hr id="shot-chart-table" class="yellow"/>
+  <hr id="shot-chart-table" class="yellow" />
   <div class="row">
     <h3>Shot Comparison</h3>
     <div class="table-responsive">
@@ -152,7 +150,7 @@
             <th><a data-toggle="popover" data-trigger="hover" title="LS%" data-content="(LSc2+LSc4)/LSa">LowShot Rate</a></th>
             <th><a data-toggle="popover" data-trigger="hover" title="Counter%" data-content="(GBc2+GBc4)/GBa">Counter Rate</a></th>
             <th><a data-toggle="popover" data-trigger="hover" title="T%" data-content="(Tc2+Tc4)/Ta">Throw Rate</a></th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -178,7 +176,7 @@
     </div>
   </div>
 
-  <hr id="adv-stats-table" class="yellow"/>
+  <hr id="adv-stats-table" class="yellow" />
   <div class="row">
     <h3>Advanced Stats and Misc.</h3>
     <div class="table-responsive">
@@ -187,22 +185,15 @@
         <thead class="indigo white-text">
           <tr>
             <th></th>
-            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="NPF"
-                   data-content="(TD conv/match TD conv) + (TD att/match TD att)">Neutral Pace Factor</a></th>
-            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="APM"
-               data-content="(Defense + Offense) / Duration">Acton per Minute</a></th>
-            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="VS"
-               data-content="Weighted Result + (NPF * APM)">Veritas Score</a></th>
-            <th><a data-toggle="popover" data-trigger="hover" title="Recovery"
-              data-content="Scoring after allowing exposure or takedown">Recovery</a></th>
-            <th><a data-toggle="popover" data-trigger="hover" title="Pushout"
-              data-content="">Pushout</a></th>
-            <th><a data-toggle="popover" data-trigger="hover" title="Pasive"
-              data-content="Passive calls including warnings">Passive</a></th>
-            <th><a data-toggle="popover" data-trigger="hover" title="Violations"
-              data-content="Illegal holds, shot clock violation, cautions, etc.">Violations</a></th>
+            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="NPF" data-content="(TD conv/match TD conv) + (TD att/match TD att)">Neutral Pace Factor</a></th>
+            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="APM" data-content="(Defense + Offense) / Duration">Acton per Minute</a></th>
+            <th><a data-toggle="popover" data-placement="top" data-trigger="hover" title="VS" data-content="Weighted Result + (NPF * APM)">Veritas Score</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Recovery" data-content="Scoring after allowing exposure or takedown">Recovery</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Pushout" data-content="">Pushout</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Pasive" data-content="Passive calls including warnings">Passive</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Violations" data-content="Illegal holds, shot clock violation, cautions, etc.">Violations</a></th>
 
-            </tr>
+          </tr>
         </thead>
         <tbody>
           <tr>
@@ -232,30 +223,29 @@
 
 
 
-  <hr id="matches-table-div" class="yellow"/>
-<div class="row">
-  <h3>Match Timeseries</h3>
+  <hr id="matches-table-div" class="yellow" />
+  <div class="row">
+    <h3>Match Timeseries</h3>
     <div class="table-responsive">
       <table id="tstable" class="table table-hover table-sm">
         {% if object.matchID|length_is:"4" %}
-          <caption>Timeseries for match '{{object.matchID}}' <br />
-            Blue: {{object.focus.name}} | Red: {{object.opponent.name}}</caption>
+        <caption>Timeseries for match '{{object.matchID}}' <br />
+          Blue: {{object.focus.name}} | Red: {{object.opponent.name}}</caption>
         {% else %}
-          <caption>Timeseries for match '{{object.matchID}}' <br />
-            Blue: {{object.opponent.name}} | Red: {{object.focus.name}}</caption>
+        <caption>Timeseries for match '{{object.matchID}}' <br />
+          Blue: {{object.opponent.name}} | Red: {{object.focus.name}}</caption>
         {% endif %}
         <thead class="indigo white-text">
           <tr>
             <th><a data-toggle="popover" data-trigger="hover" title="Event Number" data-content="">Event Number</a></th>
-            <th><a data-toggle="popover" data-trigger="hover" title="Event Label"
-                data-content="b_ prefix = Blue  |  r_ prefix = Red">Event Label</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Event Label" data-content="b_ prefix = Blue  |  r_ prefix = Red">Event Label</a></th>
             <th><a data-toggle="popover" data-trigger="hover" title="Event Time" data-content="in seconds">Event_Time</a></th>
             <th><a data-toggle="popover" data-trigger="hover" title="Blue Points" data-content="">Blue</a></th>
             <th><a data-toggle="popover" data-trigger="hover" title="Red Points" data-content="">Red</a></th>
           </tr>
         </thead>
         <tbody>
-        {% for row in object.actions2.all %}
+          {% for row in object.actions2.all %}
           <tr>
             <td>{{row.event_num}}</td>
             <td>{{row.event_lab}}</td>
@@ -263,108 +253,142 @@
             <td>{{row.blue}}</td>
             <td>{{row.red}}</td>
           </tr>
-        {% endfor %}
+          {% endfor %}
         </tbody>
       </table>
     </div>
   </div>
 </div>
 
-    <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
 
-    <script type="text/javascript">
-        new WOW().init();
-        $('[data-toggle="popover"]').popover();
-        $('.popover-dismiss').popover({
-          trigger: 'focus'
-        });
-        $(document).ready(function () {
-          $('#tstable').DataTable({
-            'info': false,
-            'paging':false,
-            'scrollY': '300px',
-            'scrollCollapse': true,
-          });
-          $('.dataTables_length').addClass('bs-select');
-        });
-        var tsline = document.getElementById("timeserieslinechart").getContext('2d');
-        var myLineChart = new Chart(tsline, {
-          type: 'line',
-          data: {
-            labels: [{% for row in object.actions2.all %}
-                "{{row.event_time}}\n{{row.event_lab}}",
-              {% endfor %}],
-            datasets: [{
-                label:
-                {% if object.matchID|length_is:"4" %}
-                  "{{object.focus.name}}"
-                {% else %}
-                  "{{object.opponent.name}}"
-                {% endif %},
-                data: [{% for row in object.actions2.all %}
-                  {{row.blue}},
-                  {% endfor %}],
-                borderColor: 'rgb(63, 81, 181)',
-                backgroundColor: 'rgb(255, 255, 255, 0.0)',
-                borderWidth: 2,
-                lineTension: 0,
-              },
-              {
-                label:
-                {% if object.matchID|length_is:"4" %}
-                  "{{object.opponent.name}}"
-                {% else %}
-                  "{{object.focus.name}}"
-                {% endif %},
-                data: [{% for row in object.actions2.all %}
-                  {{row.red}},
-                  {% endfor %}],
-                borderColor: 'rgb(255,0,0)',
-                backgroundColor: 'rgb(255, 255, 255, 0.0)',
-                borderWidth: 2,
-                lineTension: 0,
-              }
-            ]
-          },
-          options: {
-            scales: {
-              xAxes: [{
-                ticks: {
-                  callback:function(label){
-                    return label.split("\n")[0];
-                  }
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                }
-              }]
-            },
-            intersect: false,
-            title: {
-                display: true,
-                text: 'Timeseries'
-            },
-            responsive: true,
-            animation: {
-              'duration': 2000
-            },
-            tooltips: {
-                enabled: true,
-                mode: 'index',
-                callbacks: {
-                    title: function(tooltipItems, data) {
-                      return data.labels[tooltipItems[0].index];
-                    }
-                }
-            },
+<script type="text/javascript">
+  new WOW().init();
+  $('[data-toggle="popover"]').popover();
+  $('.popover-dismiss').popover({
+    trigger: 'focus'
+  });
+  $(document).ready(function() {
+    $('#tstable').DataTable({
+      'info': false,
+      'paging': false,
+      'scrollY': '300px',
+      'scrollCollapse': true,
+    });
+    $('.dataTables_length').addClass('bs-select');
+  });
+  var tsline = document.getElementById("timeserieslinechart").getContext('2d');
+  var myLineChart = new Chart(tsline, {
+    type: 'line',
+    data: {
+      labels: [{
+          %
+          for row in object.actions2.all %
+        }
+        "{{row.event_time}}\n{{row.event_lab}}",
+        {
+          % endfor %
+        }
+      ],
+      datasets: [{
+          label: {
+            %
+            if object.matchID | length_is: "4" %
           }
-        });
-      </script>
+          "{{object.focus.name}}" {
+            %
+            else %
+          }
+          "{{object.opponent.name}}" {
+            % endif %
+          },
+          data: [{
+              %
+              for row in object.actions2.all %
+            } {
+              {
+                row.blue
+              }
+            },
+            {
+              % endfor %
+            }
+          ],
+          borderColor: 'rgb(63, 81, 181)',
+          backgroundColor: 'rgb(255, 255, 255, 0.0)',
+          borderWidth: 2,
+          lineTension: 0,
+        },
+        {
+          label: {
+            %
+            if object.matchID | length_is: "4" %
+          }
+          "{{object.opponent.name}}" {
+            %
+            else %
+          }
+          "{{object.focus.name}}" {
+            % endif %
+          },
+          data: [{
+              %
+              for row in object.actions2.all %
+            } {
+              {
+                row.red
+              }
+            },
+            {
+              % endfor %
+            }
+          ],
+          borderColor: 'rgb(255,0,0)',
+          backgroundColor: 'rgb(255, 255, 255, 0.0)',
+          borderWidth: 2,
+          lineTension: 0,
+        }
+      ]
+    },
+    options: {
+      scales: {
+        xAxes: [{
+          ticks: {
+            callback: function(label) {
+              return label.split("\n")[0];
+            }
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      intersect: false,
+      title: {
+        display: true,
+        text: 'Timeseries'
+      },
+      responsive: true,
+      animation: {
+        'duration': 2000
+      },
+      tooltips: {
+        enabled: true,
+        mode: 'index',
+        callbacks: {
+          title: function(tooltipItems, data) {
+            return data.labels[tooltipItems[0].index];
+          }
+        }
+      },
+    }
+  });
+</script>
 
 {% endblock %}

@@ -3,272 +3,288 @@
 
 {% block content %}
 <div class="container">
-        <div class="page-header">
-            <br />
-            <h2>{{object.name}} <small>Profile</small></h2>
-            <hr class="yellow" />
-        </div>
-        <div class="well">
-          <div class="row">
-            <div class="col-sm-4">
-              <h5>Name: </h5><p> {{object.name}}</p>
-            </div>
-            <div class="col-sm-4">
-              <h5>Team: </h5><p>{{object.team.abbreviation}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <h5><a href="#matches-table">Matches:</a></h5><p> {{object.match_count}}</p>
-            </div>
-            <div class="col-sm-4">
-              <h5>Avg. Result: </h5><p> {{object.avg_result|floatformat:2}}</p>
-            </div>
-            <div class="col-sm-4">
-              <h5>Elo Rating: </h5><p> {{object.rating}}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-4">
-              <h5>Points Earned: </h5><p> {{object.points_earned|floatformat:2}}</p>
-            </div>
-            <div class="col-sm-4">
-              <h5>Points Allowed: </h5><p> {{object.points_allowed|floatformat:2}}</p>
-            </div>
-            <div class="col-sm-4">
-              <h5>Veritas Points: </h5><p> {{object.total_vs|floatformat:2}}</p>
-            </div>
-          </div>
-        </div>
+  <div class="page-header">
+    <br />
+    <h2>{{object.name}} <small>Profile</small></h2>
+    <hr class="yellow" />
+  </div>
+  <div class="well">
+    <div class="row">
+      <div class="col-sm-4">
+        <h5>Name: </h5>
+        <p> {{object.name}}</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Team: </h5>
+        <p>{{object.team.abbreviation}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h5><a href="#matches-table">Matches:</a></h5>
+        <p> {{object.match_count}}</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Avg. Result: </h5>
+        <p> {{object.avg_result|floatformat:2}}</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Elo Rating: </h5>
+        <p> {{object.rating}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h5>Points Earned: </h5>
+        <p> {{object.points_earned|floatformat:2}}</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Points Allowed: </h5>
+        <p> {{object.points_allowed|floatformat:2}}</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Veritas Points: </h5>
+        <p> {{object.total_vs|floatformat:2}}</p>
+      </div>
+    </div>
+  </div>
 
-      <hr id="base-stats-table" class="yellow"/>
-      <div class="row">
-        <h3>Base Stats</h3>
-        <div class="table-responsive">
-          <table class="table table-bordered table-sm">
-            <caption>Cumulative counts</caption>
-            <thead class="indigo white-text">
-              <tr>
-                <th></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
-                <th><a data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="indigo white-text">Focus</td>
-                <td>{{object.hia}}</td>
-                <td>{{object.hic2}}</td>
-                <td>{{object.hic4}}</td>
-                <td>{{object.hoa}}</td>
-                <td>{{object.hoc2}}</td>
-                <td>{{object.hoc4}}</td>
-                <td>{{object.da}}</td>
-                <td>{{object.dc2}}</td>
-                <td>{{object.dc4}}</td>
-                <td>{{object.lsa}}</td>
-                <td>{{object.lsc2}}</td>
-                <td>{{object.lsc4}}</td>
-                <td>{{object.gba}}</td>
-                <td>{{object.gbc2}}</td>
-                <td>{{object.ta}}</td>
-                <td>{{object.tc2}}</td>
-                <td>{{object.tc4}}</td>
-                <td>{{object.exposure}}</td>
-                <td>{{object.gut}}</td>
-                <td>{{object.leg_lace}}</td>
-                <td>{{object.turn}}</td>
-              </tr>
-              <tr>
-                <td class="indigo white-text">Opponent</td>
-                <td>{{object.opp_hia}}</td>
-                <td>{{object.opp_hic2}}</td>
-                <td>{{object.opp_hic4}}</td>
-                <td>{{object.opp_hoa}}</td>
-                <td>{{object.opp_hoc2}}</td>
-                <td>{{object.opp_hoc4}}</td>
-                <td>{{object.opp_da}}</td>
-                <td>{{object.opp_dc2}}</td>
-                <td>{{object.opp_dc4}}</td>
-                <td>{{object.opp_lsa}}</td>
-                <td>{{object.opp_lsc2}}</td>
-                <td>{{object.opp_lsc4}}</td>
-                <td>{{object.opp_gba}}</td>
-                <td>{{object.opp_gbc2}}</td>
-                <td>{{object.opp_ta}}</td>
-                <td>{{object.opp_tc2}}</td>
-                <td>{{object.opp_tc4}}</td>
-                <td>{{object.opp_exposure}}</td>
-                <td>{{object.opp_gut}}</td>
-                <td>{{object.opp_leg_lace}}</td>
-                <td>{{object.opp_turn}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">
-          <canvas id="resultchart"></canvas>
-        </div>
-        <div class="col-sm">
-          <canvas id="vslinechart"></canvas>
-        </div>
-      </div>
+  <hr id="base-stats-table" class="yellow" />
+  <div class="row">
+    <h3>Base Stats</h3>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <caption>Cumulative counts</caption>
+        <thead class="indigo white-text">
+          <tr>
+            <th></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Attempts (count)">HIa</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 2 (count)">HIc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Inside" data-content="Conversions for 4 (count)">HIc4</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Attempts (count)">HOa</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 2 (count)">HOc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Head Outside" data-content="Conversions for 4 (count)">HOc4</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Attempts (count)">Da</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 2 (count)">Dc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Double" data-content="Conversions for 4 (count)">Dc4</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Attempts (count)">LSa</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 2 (count)">LSc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Low Shot" data-content="Conversions for 4 (count)">LSc4</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Attempts (count)">GBa</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Counter" data-content="Conversions for 2 (count)">GBc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Attempts (count)">Ta</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 2 (count)">Tc2</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Throw" data-content="Conversions for 4 (count)">Tc4</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Exposure" data-content="Exposure from Counter (count)">Exposure</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Gut" data-content="Gut Wrench turn (count)">Gut</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Leg Lace" data-content="Leg Lace turn (count)">Leg Lace</a></th>
+            <th><a data-toggle="popover" data-trigger="hover" title="Turn" data-content="Other Turn (count)">Turn</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="indigo white-text">Focus</td>
+            <td>{{object.hia}}</td>
+            <td>{{object.hic2}}</td>
+            <td>{{object.hic4}}</td>
+            <td>{{object.hoa}}</td>
+            <td>{{object.hoc2}}</td>
+            <td>{{object.hoc4}}</td>
+            <td>{{object.da}}</td>
+            <td>{{object.dc2}}</td>
+            <td>{{object.dc4}}</td>
+            <td>{{object.lsa}}</td>
+            <td>{{object.lsc2}}</td>
+            <td>{{object.lsc4}}</td>
+            <td>{{object.gba}}</td>
+            <td>{{object.gbc2}}</td>
+            <td>{{object.ta}}</td>
+            <td>{{object.tc2}}</td>
+            <td>{{object.tc4}}</td>
+            <td>{{object.exposure}}</td>
+            <td>{{object.gut}}</td>
+            <td>{{object.leg_lace}}</td>
+            <td>{{object.turn}}</td>
+          </tr>
+          <tr>
+            <td class="indigo white-text">Opponent</td>
+            <td>{{object.opp_hia}}</td>
+            <td>{{object.opp_hic2}}</td>
+            <td>{{object.opp_hic4}}</td>
+            <td>{{object.opp_hoa}}</td>
+            <td>{{object.opp_hoc2}}</td>
+            <td>{{object.opp_hoc4}}</td>
+            <td>{{object.opp_da}}</td>
+            <td>{{object.opp_dc2}}</td>
+            <td>{{object.opp_dc4}}</td>
+            <td>{{object.opp_lsa}}</td>
+            <td>{{object.opp_lsc2}}</td>
+            <td>{{object.opp_lsc4}}</td>
+            <td>{{object.opp_gba}}</td>
+            <td>{{object.opp_gbc2}}</td>
+            <td>{{object.opp_ta}}</td>
+            <td>{{object.opp_tc2}}</td>
+            <td>{{object.opp_tc4}}</td>
+            <td>{{object.opp_exposure}}</td>
+            <td>{{object.opp_gut}}</td>
+            <td>{{object.opp_leg_lace}}</td>
+            <td>{{object.opp_turn}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <canvas id="resultchart"></canvas>
+    </div>
+    <div class="col-sm">
+      <canvas id="vslinechart"></canvas>
+    </div>
+  </div>
 
-      <hr id="adv-stats-table" class="yellow"/>
-      <h3>Advanced Stats</h3>
-      <div class="row">
-      <div class="col-3 text-center"><p><small></small></p></div>
-        <div class="col-5">
-          <div class="table-responsive text-center">
-            <table class="table table-sm table-hover">
-              <thead class="indigo white-text">
-                <tr>
-                  <th>Focus</th>
-                  <th></th>
-                  <th>Opp</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{focus_ecr}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Effective Counter Rate"
-                         data-content="Conditional Counters including Exposures">ECR</a></td>
-                  <td>{{opp_ecr}}</td>
-                </tr>
-                <tr>
-                  <td>{{object.npf|floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor RATE"
-                         data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
-                  <td>{{object.opp_npf|floatformat:2}}</td>
-                </tr>
-                <tr>
-                  <td>{{object.apm|floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute"
-                     data-content="(Defense + Offense) / Duration">APM</a></td>
-                  <td>{{object.opp_apm|floatformat:2}}</td>
-                </tr>
-                <tr>
-                  <td>{{object.vs|floatformat:2}}</td>
-                  <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Veritas Score"
-                     data-content="Weighted Result + (NPF * APM)">VS</a></td>
-                  <td>{{object.opp_vs|floatformat:2}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      <div class="col-3 text-center"><p><small></small></p></div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <canvas id="focusshotchart"></canvas>
-        </div>
-        <div class="col">
-          <canvas id="oppshotchart"></canvas>
-        </div>
-      </div>
-
-      <hr class="yellow"/>
-      <h3>Correlations</h3>
-      <p>Top 5 actions related to winning (left) and Top 5 actions related to losing (right).</p>
-      <div class="row">
-        <div class="col">
-          <canvas id="goodstuff"></canvas>
-        </div>
-        <div class="col">
-          <canvas id="badstuff"></canvas>
-        </div>
-      </div>
-      <hr id="matches-table" class="yellow"/>
-      <h3>Matches <small>({{ object.match_count }})</small></h3>
-      <p>Click on a MatchID for more details.</p>
-      <div class="table-responsive">
-        <table id="matchestable" class="table table-hover table-sm">
+  <hr id="adv-stats-table" class="yellow" />
+  <h3>Advanced Stats</h3>
+  <div class="row">
+    <div class="col-3 text-center">
+      <p><small></small></p>
+    </div>
+    <div class="col-5">
+      <div class="table-responsive text-center">
+        <table class="table table-sm table-hover">
           <thead class="indigo white-text">
             <tr>
-              <th>MatchID</th>
-              <th>Date</th>
               <th>Focus</th>
-              <th>Result</th>
-              <th>Opponent</th>
-              <th>Focus Score</th>
-              <th>Opp Score</th>
+              <th></th>
+              <th>Opp</th>
             </tr>
           </thead>
           <tbody>
-            {% for match in object.focus_wrestler2.all %}
-                <tr>
-                  <td><a class="text-primary" href="/matchdata/{{ match.matchID }}/">
-                    <strong>{{ match.matchID }}</strong></a></td>
-                  {% for thing in match.events2.all %}
-                  <td>{{thing.name}} -- {{match.date}}</td>
-                  {% endfor %}
-                  <td><a class="text-primary"
-                    href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
-                  <td>{{match.result}}</td>
-                  <td><a class="text-primary"
-                    href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
-                  <td>{{match.focus_score}}</td>
-                  <td>{{match.opp_score}}</td>
-                </tr>
-            {% endfor %}
+            <tr>
+              <td>{{focus_ecr}}</td>
+              <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Effective Counter Rate" data-content="Conditional Counters including Exposures">ECR</a></td>
+              <td>{{opp_ecr}}</td>
+            </tr>
+            <tr>
+              <td>{{object.npf|floatformat:2}}</td>
+              <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Neutral Pace Factor RATE" data-content="(TD conv/match TD conv) + (TD att/match TD att)">NPF</a></td>
+              <td>{{object.opp_npf|floatformat:2}}</td>
+            </tr>
+            <tr>
+              <td>{{object.apm|floatformat:2}}</td>
+              <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Action per Minute" data-content="(Defense + Offense) / Duration">APM</a></td>
+              <td>{{object.opp_apm|floatformat:2}}</td>
+            </tr>
+            <tr>
+              <td>{{object.vs|floatformat:2}}</td>
+              <td><a data-toggle="popover" data-placement="top" data-trigger="hover" title="Veritas Score" data-content="Weighted Result + (NPF * APM)">VS</a></td>
+              <td>{{object.opp_vs|floatformat:2}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <br />
-  <script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+    <div class="col-3 text-center">
+      <p><small></small></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <canvas id="focusshotchart"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="oppshotchart"></canvas>
+    </div>
+  </div>
 
-  <script type="text/javascript">
+  <hr class="yellow" />
+  <h3>Correlations</h3>
+  <p>Top 5 actions related to winning (left) and Top 5 actions related to losing (right).</p>
+  <div class="row">
+    <div class="col">
+      <canvas id="goodstuff"></canvas>
+    </div>
+    <div class="col">
+      <canvas id="badstuff"></canvas>
+    </div>
+  </div>
+  <hr id="matches-table" class="yellow" />
+  <h3>Matches <small>({{ object.match_count }})</small></h3>
+  <p>Click on a MatchID for more details.</p>
+  <div class="table-responsive">
+    <table id="matchestable" class="table table-hover table-sm">
+      <thead class="indigo white-text">
+        <tr>
+          <th>MatchID</th>
+          <th>Date</th>
+          <th>Focus</th>
+          <th>Result</th>
+          <th>Opponent</th>
+          <th>Focus Score</th>
+          <th>Opp Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for match in object.focus_wrestler2.all %}
+        <tr>
+          <td><a class="text-primary" href="/matchdata/{{ match.matchID }}/">
+              <strong>{{ match.matchID }}</strong></a></td>
+          {% for thing in match.events2.all %}
+          <td>{{thing.name}} -- {{match.date}}</td>
+          {% endfor %}
+          <td><a class="text-primary" href="/wrestlers/{{match.focus.slug}}/">{{match.focus.name}}</a></td>
+          <td>{{match.result}}</td>
+          <td><a class="text-primary" href="/wrestlers/{{match.opponent.slug}}/">{{match.opponent.name}}</a></td>
+          <td>{{match.focus_score}}</td>
+          <td>{{match.opp_score}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<br />
+<script type="text/javascript" src="{% static 'vws_main/js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/mdb.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vws_main/js/addons/datatables.min.js' %}"></script>
+
+<script type="text/javascript">
   new WOW().init();
   $('[data-toggle="popover"]').popover();
   $('.popover-dismiss').popover({
     trigger: 'focus'
   });
-  $(document).ready(function () {
+  $(document).ready(function() {
     $('#matchestable').DataTable({
       'info': false,
-      'paging':false,
+      'paging': false,
       'scrollY': '300px',
       'scrollCollapse': true,
-      "order":[[1, "asc"]]
+      "order": [
+        [1, "asc"]
+      ]
     });
     $('.dataTables_length').addClass('bs-select');
   });
-    //bar
+  //bar
   var resulthist = document.getElementById("resultchart").getContext('2d');
   var myBarChart = new Chart(resulthist, {
     type: 'bar',
     data: {
-      labels: {{resulttypes | safe}},
+      labels: {
+        {
+          resulttypes | safe
+        }
+      },
       datasets: [{
         label: 'Result Type',
-        data: {{resulttypecounts | safe}},
+        data: {
+          {
+            resulttypecounts | safe
+          }
+        },
         backgroundColor: 'rgb(63, 81, 181, 0.8)',
       }]
     },
@@ -281,34 +297,47 @@
           }
         }]
       },
-       title: {
-          display: true,
-          text: 'Result Distribution'
+      title: {
+        display: true,
+        text: 'Result Distribution'
       },
-       legend: {
-          display: false},
+      legend: {
+        display: false
+      },
       responsive: true,
       animation: {
         duration: 2000
       }
     }
   });
-    //line
+  //line
   var vsline = document.getElementById("vslinechart").getContext('2d');
   var myLineChart = new Chart(vsline, {
     type: 'line',
     data: {
-      labels: {{vsindex | safe}},
+      labels: {
+        {
+          vsindex | safe
+        }
+      },
       datasets: [{
           label: "World Average",
-          data: {{worldvs | safe}},
+          data: {
+            {
+              worldvs | safe
+            }
+          },
           borderColor: 'rgb(255, 235, 59)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
           borderWidth: 2
         },
         {
           label: "Veritas Score",
-          data: {{vsvalues | safe}},
+          data: {
+            {
+              vsvalues | safe
+            }
+          },
           borderColor: 'rgb(63, 81, 181)',
           backgroundColor: 'rgb(63, 81, 181, 0.3)',
           borderWidth: 2
@@ -325,8 +354,8 @@
         }]
       },
       title: {
-          display: true,
-          text: 'Veritas Score over Time'
+        display: true,
+        text: 'Veritas Score over Time'
       },
       responsive: true,
       animation: {
@@ -334,24 +363,35 @@
       }
     }
   });
-      //radar
+  //radar
   var focusradar = document.getElementById("focusshotchart").getContext('2d');
   var myRadarChart = new Chart(focusradar, {
     type: 'radar',
     data: {
-      labels: {{shot_labels | safe}},
-      datasets: [
-      {
+      labels: {
+        {
+          shot_labels | safe
+        }
+      },
+      datasets: [{
           label: "Effeciency (% of converted)",
-          data: {{rates | safe}},
+          data: {
+            {
+              rates | safe
+            }
+          },
           backgroundColor: 'rgb(63, 81, 181, 0.5)',
           borderColor: 'rgb(63, 81, 181)',
           borderWidth: 2,
           pointBackgroundColor: 'rgb(63, 81, 181)'
         },
-      {
+        {
           label: "Preference (% of total)",
-          data: {{prefs | safe}},
+          data: {
+            {
+              prefs | safe
+            }
+          },
           backgroundColor: 'rgb(255, 235, 59, 0.5)',
           borderColor: 'rgb(255, 235, 59)',
           borderWidth: 2,
@@ -360,42 +400,52 @@
       ]
     },
     options: {
-      scale: {ticks: {
-              min:0,
-              }
+      scale: {
+        ticks: {
+          min: 0,
+        }
       },
       scales: {
-          xAxes: [{
-                display: false,
-              gridLines: {
-                  display:false
-              }
-          }],
-          yAxes: [{
-            display: false,
-              gridLines: {
-                  display:false
-              }
-          }]
+        xAxes: [{
+          display: false,
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          display: false,
+          gridLines: {
+            display: false
+          }
+        }]
       },
-       title: {
-          display: true,
-          text: 'Focus Shot Distribution Chart'
+      title: {
+        display: true,
+        text: 'Focus Shot Distribution Chart'
       },
       responsive: true,
-      animation: {duration:2000}
+      animation: {
+        duration: 2000
+      }
     }
   });
-          //radar
+  //radar
   var oppradar = document.getElementById("oppshotchart").getContext('2d');
   var myRadarChart = new Chart(oppradar, {
     type: 'radar',
     data: {
-      labels: {{shot_labels | safe}},
-      datasets: [
+      labels: {
         {
+          shot_labels | safe
+        }
+      },
+      datasets: [{
           label: "Effeciency (% converted)",
-          data: {{orates | safe}},
+          data: {
+            {
+              orates | safe
+            }
+          },
           backgroundColor: 'rgb(63, 81, 181, 0.5)',
           borderColor: 'rgb(63, 81, 181)',
           borderWidth: 2,
@@ -403,7 +453,11 @@
         },
         {
           label: "Preference (% of total)",
-          data: {{oprefs | safe}},
+          data: {
+            {
+              oprefs | safe
+            }
+          },
           backgroundColor: 'rgb(255, 235, 59, 0.5)',
           borderColor: 'rgb(255, 235, 59)',
           borderWidth: 2,
@@ -412,43 +466,55 @@
       ]
     },
     options: {
-      scale: {ticks: {
-              min:0,
-              }
+      scale: {
+        ticks: {
+          min: 0,
+        }
       },
       scales: {
-          xAxes: [{
-                display: false,
-              gridLines: {
-                  display:false
-              }
-          }],
-          yAxes: [{
-            display: false,
-              gridLines: {
-                  display:false
-              }
-          }]
+        xAxes: [{
+          display: false,
+          gridLines: {
+            display: false
+          }
+        }],
+        yAxes: [{
+          display: false,
+          gridLines: {
+            display: false
+          }
+        }]
       },
-       title: {
-          display: true,
-          text: 'Opp Shot Distribution Chart'
+      title: {
+        display: true,
+        text: 'Opp Shot Distribution Chart'
       },
       responsive: true,
-      animation: {duration:2000}
+      animation: {
+        duration: 2000
+      }
     }
   });
-       new Chart(document.getElementById("goodstuff"), {
+  new Chart(document.getElementById("goodstuff"), {
     "type": "horizontalBar",
     "data": {
-      "labels": {{goodtitles | safe}},
+      "labels": {
+        {
+          goodtitles | safe
+        }
+      },
       "datasets": [{
         "label": "Positive Actions",
-        "data": {{goodvalues | safe}},
+        "data": {
+          {
+            goodvalues | safe
+          }
+        },
         "fill": false,
         "backgroundColor": ['rgb(63, 81, 181, 1.0)', 'rgb(63, 81, 181, 0.85)',
-                           'rgb(63, 81, 181, 0.70)', 'rgb(63, 81, 181, 0.55)',
-                           'rgb(63, 81, 181, 0.45)'],
+          'rgb(63, 81, 181, 0.70)', 'rgb(63, 81, 181, 0.55)',
+          'rgb(63, 81, 181, 0.45)'
+        ],
         "borderColor": 'rgb(63, 81, 181, 1.0)',
       }],
     },
@@ -467,31 +533,43 @@
         yAxes: [{
           display: true,
           gridLines: {
-            display:false
+            display: false
           }
         }],
       },
-       title: {
-          display: true,
-          text: 'Top 5 Positive Actions'
+      title: {
+        display: true,
+        text: 'Top 5 Positive Actions'
       },
-       legend: {
-          display: false},
+      legend: {
+        display: false
+      },
       responsive: true,
-      animation: {duration:2000}
+      animation: {
+        duration: 2000
+      }
     }
   });
-       new Chart(document.getElementById("badstuff"), {
+  new Chart(document.getElementById("badstuff"), {
     "type": "horizontalBar",
     "data": {
-      "labels": {{badtitles | safe}},
+      "labels": {
+        {
+          badtitles | safe
+        }
+      },
       "datasets": [{
         "label": "Negative Actions",
-        "data": {{badvalues | safe}},
+        "data": {
+          {
+            badvalues | safe
+          }
+        },
         "fill": false,
         "backgroundColor": ['rgb(255, 235, 59, 1.0)', 'rgb(255, 235, 59, 0.85)',
-                           'rgb(255, 235, 59, 0.70)', 'rgb(255, 235, 59, 0.55)',
-                           'rgb(255, 235, 59, 0.40)'],
+          'rgb(255, 235, 59, 0.70)', 'rgb(255, 235, 59, 0.55)',
+          'rgb(255, 235, 59, 0.40)'
+        ],
         "borderColor": 'rgb(255, 235, 59, 1.0)',
       }],
     },
@@ -511,20 +589,23 @@
           display: true,
           position: 'right',
           gridLines: {
-            display:false
+            display: false
           }
         }],
       },
-       title: {
-          display: true,
-          text: 'Top 5 Negative Actions'
+      title: {
+        display: true,
+        text: 'Top 5 Negative Actions'
       },
-       legend: {
-          display: false},
+      legend: {
+        display: false
+      },
       responsive: true,
-      animation: {duration:2000}
+      animation: {
+        duration: 2000
+      }
     }
   });
-  </script>
+</script>
 
-  {% endblock %}
+{% endblock %}

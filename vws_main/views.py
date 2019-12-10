@@ -10,6 +10,7 @@ from .Ecounter import effective_counter_rate
 from .s3presign import create_presigned_url
 from users.forms import LoginForm
 
+
 def safe_div(x, y):
     """
     Accepts two numeric parameters.
@@ -131,18 +132,21 @@ class FS_WrestlerDetailView(DetailView):
         opp_passive=Sum('focus_wrestler2__opp_passive'),
         violation=Sum('focus_wrestler2__violation'),
         opp_violation=Sum('focus_wrestler2__opp_violation')
-        )
+    )
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         cwd = os.getcwd()
-        matches = pd.read_csv(cwd + '/collection/stats/matchdata.csv', engine='python')
+        matches = pd.read_csv(
+            cwd + '/collection/stats/matchdata.csv', engine='python')
         wrestler = self.object.name
         matches = matches[matches.Focus == wrestler]
         data['matches'] = matches[matches.Duration != 0]
         rtc = Counter(matches['Result'])
-        data['resulttypes'] = ['LossF', 'LossTF', 'LossD', 'WinD', 'WinTF', 'WinF']
-        data['resulttypecounts'] = [rtc[i] for i in ['LossF', 'LossTF', 'LossD', 'WinD', 'WinTF', 'WinF']]
+        data['resulttypes'] = ['LossF', 'LossTF',
+                               'LossD', 'WinD', 'WinTF', 'WinF']
+        data['resulttypecounts'] = [rtc[i]
+                                    for i in ['LossF', 'LossTF', 'LossD', 'WinD', 'WinTF', 'WinF']]
         vs = matches.VS
         data['vsindex'] = matches.MatchID.tolist()
         data['vsvalues'] = vs.tolist()
@@ -154,32 +158,41 @@ class FS_WrestlerDetailView(DetailView):
         LS = matches.LSa.sum()
         GB = matches.GBa.sum()
         T = matches.Ta.sum()
-        totalTDA = matches.HIa.sum() + matches.HOa.sum() + matches.Da.sum() + matches.LSa.sum() + matches.GBa.sum() + matches.Ta.sum()
+        totalTDA = matches.HIa.sum() + matches.HOa.sum() + matches.Da.sum() + \
+            matches.LSa.sum() + matches.GBa.sum() + matches.Ta.sum()
         oHI = matches.oHIa.sum()
         oHO = matches.oHOa.sum()
         oD = matches.oDa.sum()
         oLS = matches.oLSa.sum()
         oGB = matches.oGBa.sum()
         oT = matches.oTa.sum()
-        ototalTDA = matches.oHIa.sum() + matches.oHOa.sum() + matches.oDa.sum() + matches.oLSa.sum() + matches.oGBa.sum() + matches.oTa.sum()
+        ototalTDA = matches.oHIa.sum() + matches.oHOa.sum() + matches.oDa.sum() + \
+            matches.oLSa.sum() + matches.oGBa.sum() + matches.oTa.sum()
 
-        data['shot_labels'] = ['Head Inside', 'Head Outside', 'Double', 'LowShot', 'Counter', 'Throw']
+        data['shot_labels'] = ['Head Inside', 'Head Outside',
+                               'Double', 'LowShot', 'Counter', 'Throw']
         rates = [safe_div(matches.HIc2.sum() + matches.HIc4.sum(), matches.HIa.sum()) * 100,
-                 safe_div(matches.HOc2.sum() + matches.HOc4.sum(), matches.HOa.sum()) * 100,
-                 safe_div(matches.Dc2.sum() + matches.Dc4.sum(), matches.Da.sum()) * 100,
-                 safe_div(matches.LSc2.sum() + matches.LSc4.sum(), matches.LSa.sum()) * 100,
+                 safe_div(matches.HOc2.sum() + matches.HOc4.sum(),
+                          matches.HOa.sum()) * 100,
+                 safe_div(matches.Dc2.sum() + matches.Dc4.sum(),
+                          matches.Da.sum()) * 100,
+                 safe_div(matches.LSc2.sum() + matches.LSc4.sum(),
+                          matches.LSa.sum()) * 100,
                  safe_div(matches.GBc2.sum(), matches.GBa.sum()) * 100,
                  safe_div(matches.Tc2.sum() + matches.Tc4.sum(), matches.Ta.sum()) * 100]
         orates = [safe_div(matches.oHIc2.sum() + matches.oHIc4.sum(), matches.oHIa.sum()) * 100,
-                  safe_div(matches.oHOc2.sum() + matches.oHOc4.sum(), matches.oHOa.sum()) * 100,
-                  safe_div(matches.oDc2.sum() + matches.oDc4.sum(), matches.oDa.sum()) * 100,
-                  safe_div(matches.oLSc2.sum() + matches.oLSc4.sum(), matches.oLSa.sum()) * 100,
+                  safe_div(matches.oHOc2.sum() + matches.oHOc4.sum(),
+                           matches.oHOa.sum()) * 100,
+                  safe_div(matches.oDc2.sum() + matches.oDc4.sum(),
+                           matches.oDa.sum()) * 100,
+                  safe_div(matches.oLSc2.sum() + matches.oLSc4.sum(),
+                           matches.oLSa.sum()) * 100,
                   safe_div(matches.oGBc2.sum(), matches.oGBa.sum()) * 100,
                   safe_div(matches.oTc2.sum() + matches.oTc4.sum(), matches.oTa.sum()) * 100]
         prefs = [(HI / totalTDA) * 100, (HO / totalTDA) * 100, (D / totalTDA) * 100, (LS / totalTDA) * 100,
                  (GB / totalTDA) * 100, (T / totalTDA) * 100]
         oprefs = [(oHI / ototalTDA) * 100, (oHO / ototalTDA) * 100, (oD / ototalTDA) * 100, (oLS / ototalTDA) * 100,
-                 (oGB / ototalTDA) * 100, (oT / ototalTDA) * 100]
+                  (oGB / ototalTDA) * 100, (oT / ototalTDA) * 100]
         data['rates'] = [round(i, 2) for i in rates]
         data['orates'] = [round(i, 2) for i in orates]
         data['prefs'] = [round(i, 2) for i in prefs]
@@ -187,7 +200,8 @@ class FS_WrestlerDetailView(DetailView):
 
         # correlations
         matches_inter = matches.select_dtypes(exclude=['object'])
-        matches_inter = matches_inter.drop(columns=['MoV', 'FocusPoints', 'OppPoints', 'BinaryResult', 'VS', 'oVS'])
+        matches_inter = matches_inter.drop(
+            columns=['MoV', 'FocusPoints', 'OppPoints', 'BinaryResult', 'VS', 'oVS'])
         corrs = matches_inter.corr()['NumResult'][:-1].dropna()
         corrs = corrs[corrs > -1]
         corrs = corrs[corrs < 1]
@@ -228,56 +242,37 @@ class FS_RatingsFilterView(ListView):
 
     def get_queryset(request):
         return FS_Wrestler.objects.annotate(
-            tier=Case(
-                When(rating__gte=2500, then=Value('Grandmaster')),
-                When(Q(rating__lt=2500) & Q(rating__gte=2300), then=Value('Master')),
-                When(Q(rating__lt=2300) & Q(rating__gte=2000), then=Value('Expert')),
-                When(Q(rating__lt=2000) & Q(rating__gte=1800), then=Value('Class A')),
-                When(Q(rating__lt=1800) & Q(rating__gte=1600), then=Value('Class B')),
-                When(Q(rating__lt=1600) & Q(rating__gte=1400), then=Value('Class C')),
-                When(Q(rating__lt=1400) & Q(rating__gte=1200), then=Value('Class D')),
-                When(Q(rating__lt=1200) & Q(rating__gte=1000), then=Value('Class E')),
-                When(Q(rating__lt=1000) & Q(rating__gte=700), then=Value('Amateur')),
-                When(rating__lt=700, then=Value('Novice')),
-                output_field=CharField(),
-            ),
-            weight=Case(
-                When(focus_wrestler2__weight=57, then=Value(57)),
-                When(focus_wrestler2__weight=61, then=Value(61)),
-                When(focus_wrestler2__weight=65, then=Value(65)),
-                When(focus_wrestler2__weight=70, then=Value(70)),
-                When(focus_wrestler2__weight=74, then=Value(74)),
-                When(focus_wrestler2__weight=79, then=Value(79)),
-                When(focus_wrestler2__weight=86, then=Value(86)),
-                When(focus_wrestler2__weight=92, then=Value(92)),
-                When(focus_wrestler2__weight=97, then=Value(97)),
-                When(focus_wrestler2__weight=125, then=Value(125)),
-                output_field=FloatField(),
-            ),
             match_count=Count('focus_wrestler2__matchID')
-            ).filter(match_count__gt=0).distinct().order_by('-rating')
+        ).filter(match_count__gt=0).distinct().order_by('-rating')
 
 
 def home(request):
     return render(request, 'vws_main/home.html')
 
+
 def about(request):
     return render(request, "vws_main/about.html")
 
+
 def resources(request):
-    recording_manual = create_presigned_url('vws-django-profilepics', 'resources/Recording_Manual.docx')
-    abbreviations = create_presigned_url('vws-django-profilepics', 'resources/VWSabbreviations.xlsx')
+    recording_manual = create_presigned_url(
+        'vws-django-profilepics', 'resources/Recording_Manual.docx')
+    abbreviations = create_presigned_url(
+        'vws-django-profilepics', 'resources/VWSabbreviations.xlsx')
     context = {
         'recordingmanual': recording_manual,
         'abbreviations': abbreviations,
     }
     return render(request, "vws_main/resources.html", context=context)
 
+
 def reportlist(request):
     return render(request, "vws_main/reports/feed.html")
 
+
 def worldchampionships2019(request):
     return render(request, "vws_main/reports/worlds2019.html")
+
 
 def sample(request):
     return render(request, "vws_main/reports/sample.html")
