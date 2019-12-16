@@ -285,67 +285,38 @@
   var myLineChart = new Chart(tsline, {
     type: 'line',
     data: {
-      labels: [{
-          %
-          for row in object.actions2.all %
-        }
-        "{{row.event_time}}\n{{row.event_lab}}",
-        {
-          % endfor %
-        }
+      labels: [
+        {% for row in object.actions2.all %}
+          "{{row.event_time}}\n{{row.event_lab}}",
+        {% endfor %}
       ],
       datasets: [{
-          label: {
-            %
-            if object.matchID | length_is: "4" %
-          }
-          "{{object.focus.name}}" {
-            %
-            else %
-          }
-          "{{object.opponent.name}}" {
-            % endif %
-          },
-          data: [{
-              %
-              for row in object.actions2.all %
-            } {
-              {
-                row.blue
-              }
-            },
-            {
-              % endfor %
-            }
+          label: 
+            {% if object.matchID|length == 4 %}
+              "{{object.focus.name}}" 
+            {% else %}
+              "{{object.opponent.name}}" 
+            {% endif %},
+          data: [
+            {% for row in object.actions2.all %} 
+              {{ row.blue }},
+            {% endfor %}
           ],
           borderColor: 'rgb(63, 81, 181)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
           borderWidth: 2,
           lineTension: 0,
         },
-        {
-          label: {
-            %
-            if object.matchID | length_is: "4" %
-          }
-          "{{object.opponent.name}}" {
-            %
-            else %
-          }
-          "{{object.focus.name}}" {
-            % endif %
-          },
-          data: [{
-              %
-              for row in object.actions2.all %
-            } {
-              {
-                row.red
-              }
-            },
-            {
-              % endfor %
-            }
+        {label: 
+          {% if object.matchID|length == 4 %}
+            "{{object.opponent.name}}" 
+          {% else %}
+            "{{object.focus.name}}" 
+          {% endif %},
+          data: [
+            {% for row in object.actions2.all %} 
+              {{ row.red }},
+          {% endfor %}
           ],
           borderColor: 'rgb(255,0,0)',
           backgroundColor: 'rgb(255, 255, 255, 0.0)',
