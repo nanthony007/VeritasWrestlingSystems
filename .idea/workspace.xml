@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b0415fe-ad37-4c8c-84de-2ea029432a54" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dash.py" beforeDir="false" afterPath="$PROJECT_DIR$/dash1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FScollector.py" beforeDir="false" afterPath="$PROJECT_DIR$/FScollector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_script.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,13 +28,19 @@
   </component>
   <component name="ProjectId" id="1OSuu9L5T7FIxmNLpdevqzGKP1Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../UFC" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -51,18 +53,6 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/vws_main/templates/vws_main" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Python.Ecounter">
     <configuration name="Ecounter" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -219,6 +209,8 @@
       <updated>1551255886042</updated>
       <workItem from="1571852196754" duration="1485000" />
       <workItem from="1571853696070" duration="21000" />
+      <workItem from="1580418965261" duration="212000" />
+      <workItem from="1580419502643" duration="261000" />
     </task>
     <servers />
   </component>
@@ -252,5 +244,19 @@
       <path value="$PROJECT_DIR$/collection/stats/analysis" />
       <path value="$PROJECT_DIR$/collection/analysis" />
     </ignored-roots>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="777" y="299" width="432" height="521" key="FileChooserDialogImpl" timestamp="1580419725387">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="777" y="299" width="432" height="521" key="FileChooserDialogImpl/70.27.1850.1053/1920.180.1600.900@70.27.1850.1053" timestamp="1580419725387" />
+    <state x="476" y="188" width="1037" height="737" key="SettingsEditor" timestamp="1580419761154">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="476" y="188" width="1037" height="737" key="SettingsEditor/70.27.1850.1053/1920.180.1600.900@70.27.1850.1053" timestamp="1580419761154" />
+    <state x="643" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1580419506300">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="643" y="380" key="com.intellij.ide.util.TipDialog/70.27.1850.1053/1920.180.1600.900@70.27.1850.1053" timestamp="1580419506300" />
   </component>
 </project>

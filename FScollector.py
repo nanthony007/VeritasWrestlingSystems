@@ -242,7 +242,7 @@ class StartPage(tk.Frame):
     def create_widgets(self):
         self.blue_search = tk.StringVar()
         self.blue_search.trace("w", lambda name, index,
-                               mode: self.update_list_blue())
+                                           mode: self.update_list_blue())
         self.blue_entry = tk.Entry(
             self.blue_frame, textvariable=self.blue_search, font='Helvetica 16')
         self.blue_lbox = tk.Listbox(self.blue_frame, font='Helvetica 14')
@@ -1286,7 +1286,7 @@ class ConfirmationPage(tk.Frame):
         # self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
         # self.textbox.insert(tk.END, '\n---------', 'center-tag')
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
-        save_script.savecsv()
+        #save_script.savecsv()
         self.textbox.insert(tk.END, '\nCSVsave\n', 'center-tag')
         self.textbox.configure(state=tk.DISABLED)
 

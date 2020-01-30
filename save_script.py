@@ -1,4 +1,3 @@
-from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Event
 import pandas as pd
 import os
 import numpy as np
@@ -6,7 +5,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
 pd.options.mode.chained_assignment = None
-
+from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Event
 
 def savecsv():
     """
