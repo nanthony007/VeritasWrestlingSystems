@@ -1286,7 +1286,7 @@ class ConfirmationPage(tk.Frame):
         # self.textbox.insert(tk.END, 'Timeseries saved to csv', 'center-tag')
         # self.textbox.insert(tk.END, '\n---------', 'center-tag')
         self.textbox.insert(tk.END, '\n---------\n', 'center-tag')
-        #save_script.savecsv()
+        save_script.savecsv()
         self.textbox.insert(tk.END, '\nCSVsave\n', 'center-tag')
         self.textbox.configure(state=tk.DISABLED)
 

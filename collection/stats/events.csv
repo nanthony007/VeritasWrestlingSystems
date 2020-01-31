@@ -1,3 +1,4 @@
-date,id,name,slug
-2019-04-26,2,US Open,us-open
-2019-05-17,3,World Team Trials,world-team-trials
+id,name,date,slug
+2,US Open,2019-04-26,us-open
+3,World Team Trials,2019-05-17,world-team-trials
+4,Final X,2019-06-14,final-x

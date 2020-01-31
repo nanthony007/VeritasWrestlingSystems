@@ -7,6 +7,7 @@ django.setup()
 pd.options.mode.chained_assignment = None
 from vws_main.models import FS_Wrestler, FS_Match, FS_TS, FS_Event
 
+
 def savecsv():
     """
     This script extracts an instance of the database at runtime.
@@ -60,7 +61,10 @@ def savecsv():
                   'Weight']
 
     matches = FS_Match.objects.values()
+    print(matches[0])
+
     match_df = pd.DataFrame(list(matches))
+    match_df = match_df.reindex(sorted(match_df.columns), axis=1)
     match_df.columns = rawcolumns
     ss = []
     for i in match_df['Duration']:
