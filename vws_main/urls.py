@@ -6,6 +6,7 @@ report_urls = [
     path('world-championships-2019/',
          views.worldchampionships2019, name="worlds2019"),
     path('sample/', views.sample, name='sample'),
+    path('usopen/', views.usopen, name='usopen')
 ]
 
 

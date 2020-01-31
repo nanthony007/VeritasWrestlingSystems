@@ -276,3 +276,6 @@ def worldchampionships2019(request):
 
 def sample(request):
     return render(request, "vws_main/reports/sample.html")
+
+def usopen(request):
+    return render(request, "vws_main/reports/usopen.html")
