@@ -267,7 +267,12 @@ def resources(request):
 
 
 def reportlist(request):
-    return render(request, "vws_main/reports/feed.html")
+    usopen = create_presigned_url(
+        'vws-django-profilepics', 'reports/USOpen2019.html')
+    context = {
+        'usopen': usopen
+    }
+    return render(request, "vws_main/reports/feed.html", context=context)
 
 
 def worldchampionships2019(request):
