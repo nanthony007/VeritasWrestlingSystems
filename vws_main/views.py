@@ -274,13 +274,3 @@ def reportlist(request):
     }
     return render(request, "vws_main/reports/feed.html", context=context)
 
-
-def worldchampionships2019(request):
-    return render(request, "vws_main/reports/worlds2019.html")
-
-
-def sample(request):
-    return render(request, "vws_main/reports/sample.html")
-
-def usopen(request):
-    return render(request, "vws_main/reports/usopen.html")
