@@ -1,7 +1,7 @@
 name: vws_main
 channels:
-  - anaconda
   - conda-forge
+  - anaconda
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -165,5 +165,5 @@ dependencies:
     - dpd-components==0.1.0
     - future==0.18.2
     - whitenoise==5.0.1
-prefix: /home/nick/miniconda3/envs/vws_main
+prefix: /home/thedoctor/anaconda3/envs/vws_main
 
