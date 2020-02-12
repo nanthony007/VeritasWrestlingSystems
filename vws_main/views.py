@@ -267,10 +267,16 @@ def resources(request):
 
 
 def reportlist(request):
-    usopen = create_presigned_url(
+    usopen2019 = create_presigned_url(
         'vws-django-profilepics', 'reports/USOpen2019.html')
+    wtt2019 = create_presigned_url(
+        'vws-django-profilepics', 'reports/WorldTeamTrials2019.html')
+    finalx2019 = create_presigned_url(
+        'vws-django-profilepics', 'reports/FinalX2019.html')
     context = {
-        'usopen': usopen
+        'usopen2019': usopen2019,
+        'wtt2019': wtt2019,
+        'finalx2019':  finalx2019
     }
     return render(request, "vws_main/reports/feed.html", context=context)
 
