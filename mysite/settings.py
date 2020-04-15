@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritasanalytics.herokuapp.com', 'veritaswrestlingsystems.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'veritaswrestlingsystems.herokuapp.com', 'veritaswrestlingsystems.com']
 
 # Application definition
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_select2',
     'storages',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +153,36 @@ AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+PWA_APP_NAME = 'Veritas Analytics'
+PWA_APP_DESCRIPTION = "Freestyle wrestling statistics."
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        'src': STATIC_URL + 'vws_main/img/newlogo.jpg',
+        'sizes': '300x300'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': STATIC_URL + 'vws_main/img/newlogo.jpg',
+        'sizes': '300x300'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': STATIC_URL + 'vws_main/img/newlogo.jpg',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+PWA_SERVICE_WORKER_PATH = 'vws_main/static/vws_main/js/serviceworker.js'
+PWA_APP_DEBUG_MODE = True
 
 django_heroku.settings(locals())
