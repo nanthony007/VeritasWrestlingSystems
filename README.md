@@ -14,20 +14,20 @@ The website serves the first open source database for statistics in the sport an
 Fantasy sport components will be implemented to increase marketability.
 
 ## Usage
-Clone the repository: `$git clone https://github.com/nanthony007/VeritasAnalytics-Website.git`  
+Clone the repository: `git clone https://github.com/nanthony007/VeritasAnalytics-Website.git`  
 It is recommended to activate a virtual environment using 
 [virtualenv](https://virtualenv.pypa.io/en/latest/) `$virtualenv venv`  
   
 Activate venv `$source venv/bin/activate`.
 
-Install requirements with `$pip3 install -r requirements.txt`  
+Install requirements with `pip install -r requirements.txt`  
 
 Utilize the [Abbreviations file](collection/VWSabbreviations.xlsx)
 to familiarize yourself with Veritas data abbreviations.
 United World Wrestling (UWW) rules and language 
 can be found [here(rules)](collection/uww_wrestling_rules.pdf) and [here(language)](collection/uww_basic_vocabulary.pdf).
   
-Run `$python3 FScollector.py` to start collecting data. 
+Run `$python FScollector.py` to start collecting data. 
 
 This will write to the site database as you collect data.  
 
@@ -35,10 +35,10 @@ Use `save_script.py` to save the current database instance to local files in [st
 
 ## Features
 #### In-Development
+- [ ] Graphs in coaches portal
 - [ ] Fantasy user app (building on coaches portal)
 - [ ] Fantasy draft
 - [ ] Network graph for predicted match sequence
-- [ ] Predict type of result and score
 
 #### Released
 - [x] Interactive page to compare wrestlers AND predict winner
@@ -48,6 +48,8 @@ Use `save_script.py` to save the current database instance to local files in [st
 - [x] Sortable tables
 - [x] Events Result field
 - [x] Wrestlers Reports
+- [x] Predict type of result and score
+
 
 ## Abandoned-Features
 1. Blog/articles app that utilizes .ipynb files
@@ -66,3 +68,4 @@ Use `save_script.py` to save the current database instance to local files in [st
 9. Tableau embedding
 10. Logistic Regression modeling
 11. Feature Engineering
+12. Plotly
