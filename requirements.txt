@@ -96,7 +96,7 @@ psycopg2==2.8.4
 ptyprocess==0.6.0
 pycodestyle==2.5.0
 pycparser==2.19
-Pygments==2.4.2
+Pygments==2.7.4
 pylint==2.4.3
 pylint-django==2.0.13
 pylint-plugin-utils==0.6
